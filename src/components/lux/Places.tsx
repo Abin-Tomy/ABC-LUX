@@ -1,0 +1,539 @@
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import threshold from "@/assets/image-3.jpeg";
+import back from "@/assets/image-2.jpeg";
+import hall from "@/assets/image-1.jpeg";
+import loft from "@/assets/image-4.jpeg";
+import victorian from "@/assets/image-5.jpeg";
+import bright from "@/assets/image-6.jpeg";
+import place1 from "@/assets/image-7.jpeg";
+import TitleReveal from "../ui/TitleReveal";
+
+const SHOWCASE = [
+  { img: hall, title: "Designer Chandeliers" },
+  { img: back, title: "Designer Chandeliers" },
+  { img: threshold, title: "Designer Chandeliers" },
+  { img: loft, title: "Designer Chandeliers" },
+  { img: victorian, title: "Designer Chandeliers" },
+  { img: bright, title: "Designer Chandeliers" },
+  { img: place1, title: "Designer Chandeliers" },
+];
+
+export function Places() {
+  const root = useRef<HTMLElement | null>(null);
+  const showcaseRef = useRef<HTMLDivElement | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const gridContainerRef = useRef<HTMLDivElement | null>(null);
+  const leftTopRef = useRef<HTMLElement | null>(null);
+  const leftBottomRef = useRef<HTMLElement | null>(null);
+  const rightTop1Ref = useRef<HTMLElement | null>(null);
+  const rightTop2Ref = useRef<HTMLElement | null>(null);
+  const rightBottomRef = useRef<HTMLElement | null>(null);
+  const centerBottomRef = useRef<HTMLElement | null>(null);
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // Headline reveal
+      gsap.fromTo(
+        ".lux-places-line",
+        { yPercent: 110, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "expo.out",
+          stagger: 0.1,
+          scrollTrigger: { trigger: ".lux-places-headline", start: "top 75%" },
+        },
+      );
+
+      gsap.fromTo(
+        ".lux-places-caption",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          delay: 0.4,
+          scrollTrigger: { trigger: ".lux-places-headline", start: "top 65%" },
+        },
+      );
+
+      // Tile reveals (clipPath) - all tiles
+      gsap.utils.toArray<HTMLElement>(".lux-place-tile").forEach((tile) => {
+        gsap.fromTo(
+          tile,
+          { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)" },
+          {
+            clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)",
+            duration: 1.4,
+            ease: "expo.out",
+            scrollTrigger: { trigger: tile, start: "top 92%" },
+          },
+        );
+      });
+
+      // Parallax effect ONLY for center tiles (not side tiles)
+      gsap.utils.toArray<HTMLElement>(".lux-place-tile[data-parallax]").forEach((tile) => {
+        const speed = Number(tile.dataset.speed || -10);
+        const inner = tile.querySelector(".lux-place-img") as HTMLElement;
+
+        gsap.to(tile, {
+          yPercent: speed,
+          ease: "none",
+          scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: true },
+        });
+        if (inner) {
+          gsap.fromTo(
+            inner,
+            { scale: 1.25 },
+            {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: true },
+            },
+          );
+        }
+      });
+
+      // Warm cap
+      gsap.fromTo(
+        ".lux-places-cap",
+        { yPercent: -30, opacity: 0.6 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top top",
+            end: "+=60%",
+            scrub: true,
+          },
+        },
+      );
+
+      // ===== SOPHISTICATED SCROLL-DRIVEN ANIMATION =====
+      // Phase 1: Center expands from center, side images move in their directions
+      // Phase 2: Card shrinks to compact with tombstone border radius
+      // Phase 3: Objects section emerges
+
+      const showcase = showcaseRef.current;
+      const centerCard = showcase?.querySelector('.center-card-inner') as HTMLElement;
+
+      if (showcase && centerCard && scrollContainerRef.current) {
+        // Set transform origin to center for proper expansion
+        gsap.set(centerCard, { transformOrigin: 'center center' });
+
+        // Compute scale that leaves exactly 35 px gap on every side (responsive)
+        const gap = 35;
+        const scaleX = (window.innerWidth - gap * 2) / centerCard.offsetWidth;
+        const scaleY = (window.innerHeight - gap * 2) / centerCard.offsetHeight;
+        const fillScale = Math.min(scaleX, scaleY);
+
+        // Compute yOffset via offsetParent traversal — stable at any scroll position.
+        // getBoundingClientRect() fails here because the card is below the fold at
+        // mount time; offsetTop accumulation is document-position based (no scroll bias).
+        const scrollEl = scrollContainerRef.current!;
+        let node: HTMLElement | null = centerCard;
+        let topFromContainer = 0;
+        while (node && node !== scrollEl) {
+          topFromContainer += node.offsetTop;
+          node = node.offsetParent as HTMLElement | null;
+        }
+        // Center of card relative to scroll container top
+        const cardCenterFromTop = topFromContainer + centerCard.offsetHeight / 2;
+        // When pinned, scroll container top = viewport top, so 50vh = viewport center
+        const yOffset = window.innerHeight / 2 - cardCenterFromTop;
+
+        // Create master timeline for scroll-driven animation
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: scrollContainerRef.current,
+            start: "top top",
+            end: "+=500%",     // extra room so outro completes before unpin
+            scrub: 1,          // smooth scrubbing
+            pin: true,
+            pinSpacing: true,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Disable on mobile to reduce scroll distance and complexity
+        if (window.innerWidth < 768) {
+          scrollTl.scrollTrigger?.kill();
+        }
+
+        // Phase 1 (0% – 45%): card expands with 15 px gap, centered in viewport
+        scrollTl.to(centerCard, {
+          scale: fillScale,
+          y: yOffset,         // shift down to align with viewport center
+          borderRadius: '16px',
+          ease: 'power2.inOut',
+          duration: 45,
+        }, 0);
+
+        // Side images exit in their directions
+        if (leftTopRef.current) scrollTl.to(leftTopRef.current, { x: -400, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
+        if (leftBottomRef.current) scrollTl.to(leftBottomRef.current, { x: -400, y: 200, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
+        if (rightTop1Ref.current) scrollTl.to(rightTop1Ref.current, { y: -400, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
+        if (rightTop2Ref.current) scrollTl.to(rightTop2Ref.current, { x: 400, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
+        if (centerBottomRef.current) scrollTl.to(centerBottomRef.current, { y: 400, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
+        if (rightBottomRef.current) scrollTl.to(rightBottomRef.current, { y: 400, x: 200, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
+
+        // Phase 2 (45% – 100%): shrink to tombstone — width/height change aspect ratio to portrait
+        // y continues smoothly from Phase 1's yOffset; no left/xPercent (card is already centered via className).
+        scrollTl.to(centerCard, {
+          scale: 1,
+          width: '22vw',
+          height: '60vh',
+          y: yOffset + window.innerHeight * 0.06,  // slightly above center
+          borderRadius: '999px 999px 12px 12px',   // tombstone arch
+          ease: 'power2.inOut',
+          duration: 55,
+        }, 45);
+      }
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Animate showcase image swap
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.fromTo(
+      ".lux-showcase-img",
+      { scale: 1.08, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 1.1, ease: "expo.out" },
+    );
+    gsap.fromTo(
+      ".lux-showcase-title",
+      { yPercent: 80, opacity: 0 },
+      { yPercent: 0, opacity: 1, duration: 0.9, ease: "expo.out", delay: 0.1 },
+    );
+  }, [idx]);
+
+  const next = () => setIdx((i) => (i + 1) % SHOWCASE.length);
+  const prev = () => setIdx((i) => (i - 1 + SHOWCASE.length) % SHOWCASE.length);
+  const current = SHOWCASE[idx];
+
+  return (
+    <section
+      ref={root}
+      id="collections"
+      className="relative z-[10] w-full overflow-visible bg-transparent"
+    >
+      {/* Solid background starting below headline area */}
+      <div
+        className="absolute inset-x-0 bottom-0 top-[60vh] z-0 bg-[#0E0D0E]"
+      />
+
+      {/* Gradient to blend with hero section above */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[80vh]"
+        style={{
+          background: "linear-gradient(180deg, transparent 0%, #0E0D0E 70%)",
+        }}
+      />
+
+      {/* Decorative SVG path */}
+      <svg
+        className="pointer-events-none absolute inset-x-0 z-[1] w-full -top-24 md:-top-32"
+        style={{ aspectRatio: '1440 / 1080' }}
+        viewBox="0 0 1440 1080"
+        preserveAspectRatio="none"
+        aria-hidden
+      >
+        <linearGradient id="spaces-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#15141500" />
+          <stop offset=".5" stopColor="#7b5136" />
+          <stop offset="1" stopColor="#15141500" />
+        </linearGradient>
+        <path
+          fill="none"
+          stroke="url(#spaces-grad)"
+          strokeWidth="1"
+          d="M517.1,0c246,127,804.3,132.3,752,234-27.9,54.4-412.5,84.1-649,16-228.9-65.9-467.4-48.1-462-27,15.1,59.1,394-184,527-73C924.7,350,14.1,621,250.1,1000"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+
+      {/* Headline block */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col px-6 pt-[12vh] md:pt-[22vh] md:px-12">
+        <div className="lux-places-headline relative">
+          <h2 className="text-center leading-[0.88] tracking-[-0.045em]" style={{ fontFamily: "'Runalto', serif" }}>
+            <span className="block overflow-hidden">
+              <TitleReveal
+                text="Explore"
+                className="block text-[12vw] font-medium text-[#F1EBDD] md:text-[10vw] justify-center"
+              />
+            </span>
+            <span className="block overflow-hidden">
+              <TitleReveal
+                text="Collections"
+                className="block text-[14vw] font-medium md:text-[12vw] justify-center"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(180deg, #F1EBDD 0%, #C9C0B0 35%, #5A5550 70%, #1A1819 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  paddingBottom: "0.05em",
+                }}
+              />
+            </span>
+          </h2>
+
+          <div className="lux-places-caption font-serif mt-8 text-center text-[clamp(20px,2.4vw,40px)] leading-[1.05] text-[#E8E1D2]">
+            <span className="block">Where</span>
+            <span className="block">Light Defines</span>
+            <span className="block">Space</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll Container for sophisticated animation */}
+      <div ref={scrollContainerRef} className="scroll-container relative h-screen overflow-hidden">
+        <div className="sticky-scene relative h-full">
+          {/* MOBILE VIEW: Single grave-shaped image (Hidden on desktop) */}
+          <div className="flex md:hidden flex-col items-center justify-center px-4 pt-[4vh] pb-[12vh] w-full">
+            <div
+              className="relative w-full max-w-[380px] aspect-[2/3] overflow-hidden"
+              style={{ borderRadius: '250px 250px 0 0' }}
+            >
+              <img
+                key={current.img}
+                src={current.img}
+                alt={current.title}
+                className="lux-showcase-img absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+
+              {/* Title Over Image */}
+              <div className="absolute inset-0 flex items-center justify-center p-8">
+                <h3
+                  key={`mt-${idx}`}
+                  className="lux-showcase-title text-center text-[8vw] leading-tight text-white"
+                  style={{ fontFamily: "'Runalto', serif" }}
+                >
+                  {current.title}
+                </h3>
+              </div>
+
+              {/* Navigation Buttons Over Image */}
+              <div className="absolute inset-x-0 bottom-12 flex items-center justify-center gap-8">
+                <button
+                  onClick={prev}
+                  className="grid h-16 w-16 place-items-center rounded-full bg-black text-white transition-transform active:scale-90"
+                >
+                  <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
+                    <path d="M21 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                </button>
+                <button
+                  onClick={next}
+                  className="grid h-16 w-16 place-items-center rounded-full bg-black text-white transition-transform active:scale-90"
+                >
+                  <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
+                    <path d="M1 7H21M21 7L15 1M21 7L15 13" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* DESKTOP VIEW: Original Masonry Grid Layout (Hidden on mobile) */}
+          <div ref={gridContainerRef} className="hidden md:block relative z-10 mx-auto pt-[16vh] w-full max-w-[1600px] px-4 md:px-8">
+            <div
+              className="grid w-full gap-4 md:gap-8"
+              style={{
+                gridTemplateColumns: 'repeat(12, 1fr)',
+                gridTemplateRows: 'auto auto auto',
+              }}
+            >
+              {/* === LEFT COLUMN === */}
+              {/* LEFT TOP — Large card (cols 1-3, row 1) */}
+              <figure
+                ref={leftTopRef}
+                className="lux-place-tile relative z-10"
+                data-cursor="VIEW"
+                data-static="true"
+                style={{ gridColumn: '1 / 4', gridRow: '1', marginTop: '-7vh' }}
+              >
+                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '3/4', maxHeight: '280px' }}>
+                  <img
+                    src={hall}
+                    alt="Designer Chandeliers"
+                    loading="lazy"
+                    className="lux-place-img absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+              </figure>
+
+              {/* LEFT BOTTOM — Small card (cols 1-3, row 3) */}
+              <figure
+                ref={leftBottomRef}
+                className="lux-place-tile relative z-10"
+                data-cursor="VIEW"
+                data-static="true"
+                style={{ gridColumn: '1 / 4', gridRow: '3', marginTop: '-2vh' }}
+              >
+                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '16/9' }}>
+                  <img
+                    src={place1}
+                    alt="Designer Chandeliers"
+                    loading="lazy"
+                    className="lux-place-img absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+              </figure>
+
+              {/* === CENTER COLUMN === */}
+              {/* CENTER HERO — Large static rectangle (cols 4-10, spans all 3 rows) */}
+              <div
+                ref={showcaseRef}
+                data-static="true"
+                className="relative z-20"
+                style={{ gridColumn: '4 / 10', gridRow: '1 / 4', marginTop: '4vh' }}
+              >
+                {/* Wrapper to hold the grid space so animating the card doesn't reflow the DOM and break the pin-spacer */}
+                <div className="relative w-full" style={{ aspectRatio: '21/9', minHeight: '40vh' }}>
+                  <div className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden rounded-lg bg-black origin-center">
+                    <img
+                      key={current.img}
+                      src={current.img}
+                      alt={current.title}
+                      className="lux-showcase-img absolute inset-0 h-full w-full object-cover"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
+
+                    {/* Title */}
+                    <div className="absolute left-8 top-1/2 -translate-y-1/2 md:left-12">
+                      <h3
+                        key={`t-${idx}`}
+                        className="lux-showcase-title text-[4vw] md:text-[1.8vw] leading-none text-white"
+                        style={{ fontFamily: "'Runalto', serif" }}
+                      >
+                        {current.title}
+                      </h3>
+                    </div>
+
+                    {/* Counter */}
+                    <div className="absolute bottom-8 right-8 text-white text-xl md:text-2xl">
+                      <span>{String(idx + 1).padStart(1, "0")}</span>
+                      <span className="opacity-50">/{SHOWCASE.length}</span>
+                    </div>
+
+                    {/* Navigation */}
+                    <div className="absolute inset-x-0 bottom-8 flex items-center justify-center gap-6">
+                      <button
+                        onClick={prev}
+                        data-cursor="PREV"
+                        aria-label="Previous"
+                        className="grid h-14 w-14 place-items-center rounded-full bg-black/80 text-white backdrop-blur-sm transition-transform hover:scale-105 md:h-16 md:w-16"
+                      >
+                        <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
+                          <path d="M21 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" strokeWidth="1.5" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={next}
+                        data-cursor="NEXT"
+                        aria-label="Next"
+                        className="grid h-14 w-14 place-items-center rounded-full bg-black/80 text-white backdrop-blur-sm transition-transform hover:scale-105 md:h-16 md:w-16"
+                      >
+                        <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
+                          <path d="M1 7H21M21 7L15 1M21 7L15 13" stroke="currentColor" strokeWidth="1.5" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* === RIGHT COLUMN === */}
+              {/* RIGHT TOP — Extra small card filling the gap (cols 8-10, row 1) */}
+              <figure
+                ref={rightTop1Ref}
+                className="lux-place-tile relative z-10"
+                data-cursor="VIEW"
+                data-static="true"
+                style={{ gridColumn: '8 / 10', gridRow: '1', marginLeft: '2vw', marginTop: '-18vh' }}
+              >
+                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '4/3' }}>
+                  <img
+                    src={back}
+                    alt="Designer Chandeliers"
+                    loading="lazy"
+                    className="lux-place-img absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+              </figure>
+
+              {/* RIGHT TOP — Small wide card (cols 10-13, row 1) */}
+              <figure
+                ref={rightTop2Ref}
+                className="lux-place-tile relative z-10"
+                data-cursor="VIEW"
+                data-static="true"
+                style={{ gridColumn: '10 / 13', gridRow: '1', marginLeft: '1vw' }}
+              >
+                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '16/9', minHeight: '170px' }}>
+                  <img
+                    src={loft}
+                    alt="Designer Chandeliers"
+                    loading="lazy"
+                    className="lux-place-img absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+              </figure>
+
+              {/* CENTER BOTTOM — New card in marked area (cols 5-9, row 3) */}
+              <figure
+                ref={centerBottomRef}
+                className="lux-place-tile relative z-10"
+                data-cursor="VIEW"
+                data-static="true"
+                style={{ gridColumn: '5 / 9', gridRow: '3', marginTop: '12vh', marginLeft: '-120px' }}
+              >
+                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '16/9', minHeight: '140px', maxWidth: '320px' }}>
+                  <img
+                    src={threshold}
+                    alt="Designer Chandeliers"
+                    loading="lazy"
+                    className="lux-place-img absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+              </figure>
+
+              {/* RIGHT BOTTOM — Large card (cols 10-12, row 3) */}
+              <figure
+                ref={rightBottomRef}
+                className="lux-place-tile relative z-10"
+                data-cursor="VIEW"
+                data-static="true"
+                style={{ gridColumn: '10 / 13', gridRow: '3', marginTop: '-8vh', marginLeft: '2vw' }}
+              >
+                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '4/3', minHeight: '200px' }}>
+                  <img
+                    src={bright}
+                    alt="Designer Chandeliers"
+                    loading="lazy"
+                    className="lux-place-img absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  );
+}
