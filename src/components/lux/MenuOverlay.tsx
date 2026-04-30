@@ -99,11 +99,11 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         {/* Top Header Row */}
         <div className="flex items-start justify-end">
           {/* Brand Logo inside Absolute Container */}
-        <div className="absolute left-6 -top-12 z-20 pointer-events-none">
+        <div className="lux-menu-logo-wrap absolute left-6 -top-12 z-20 pointer-events-none">
           <img 
             src={logoUrl} 
             alt="ABC LUX" 
-            className="h-48 w-auto object-contain brightness-0 invert opacity-90"
+            className="lux-menu-logo h-48 w-auto object-contain brightness-0 invert opacity-90"
           />
         </div>
 
@@ -112,7 +112,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
           <button
             onClick={onClose}
             data-cursor="CLOSE"
-            className="relative h-24 w-24 group transition-transform hover:scale-105"
+            className="lux-close-btn relative h-24 w-24 group transition-transform hover:scale-105"
             aria-label="Close menu"
           >
             <span 
@@ -127,7 +127,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         {/* Scattered Menu Links */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           {/* This wrapper acts as the single bounding box for the whole group. You can add margins or transforms to this div to move the entire constellation at once. */}
-          <div className="relative w-full max-w-[1000px] h-[500px] pointer-events-auto mt-12 md:mt-0 translate-x-8 md:translate-x-16">
+          <div className="lux-menu-item-wrapper relative w-full max-w-[1000px] h-[500px] pointer-events-auto mt-12 md:mt-0 translate-x-8 md:translate-x-16">
             {ITEMS.map((it) => (
               <div
                 key={it.label}

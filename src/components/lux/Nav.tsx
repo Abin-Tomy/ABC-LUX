@@ -15,8 +15,8 @@ export function Nav() {
 
   return (
     <>
-      <header ref={ref} className="pointer-events-none fixed inset-x-0 top-0 z-[120] px-6 py-5">
-        <div className="mx-auto flex w-full max-w-[1600px] items-start justify-between gap-4">
+      <header ref={ref} className="lux-site-header pointer-events-none fixed inset-x-0 top-0 z-[120] px-6 py-5">
+        <div className="lux-nav-inner mx-auto flex w-full max-w-[1600px] items-start justify-between gap-4">
           {/* Logo */}
           <a
             href="#top"
@@ -32,13 +32,13 @@ export function Nav() {
               alt="ABC LUX"
               width={600}
               height={180}
-              className="h-60 w-auto select-none object-contain md:h-64 -mt-28 -ml-4 relative z-10"
+              className="lux-logo-img h-60 w-auto select-none object-contain md:h-64 -mt-28 -ml-4 relative z-10"
             />
           </a>
 
           {/* Center nav */}
           <nav
-            className="pointer-events-auto absolute left-1/2 top-5 hidden -translate-x-1/2 items-center gap-6 md:flex"
+            className="lux-center-nav pointer-events-auto absolute left-1/2 top-5 hidden -translate-x-1/2 items-center gap-6 md:flex"
           >
             <a
               href="#places"
@@ -63,7 +63,7 @@ export function Nav() {
               onClick={() => setOpen(true)}
               data-cursor="OPEN"
               aria-label="Open menu"
-              className="lux-eyebrow group flex w-[180px] md:w-[220px] items-center justify-between rounded-[10px] border px-4 md:px-6 py-2.5 backdrop-blur-md transition-colors"
+              className="lux-menu-btn lux-eyebrow group flex w-[180px] md:w-[220px] items-center justify-between rounded-[10px] border px-4 md:px-6 py-2.5 backdrop-blur-md transition-colors"
               style={{
                 background: "rgba(255,255,255,0.85)",
                 color: "var(--obsidian)",

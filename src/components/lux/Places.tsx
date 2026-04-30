@@ -35,6 +35,7 @@ export function Places() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(max-width: 767px)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -164,11 +165,6 @@ export function Places() {
             invalidateOnRefresh: true,
           },
         });
-
-        // Disable on mobile to reduce scroll distance and complexity
-        if (window.innerWidth < 768) {
-          scrollTl.scrollTrigger?.kill();
-        }
 
         // Phase 1 (0% – 45%): card expands with 15 px gap, centered in viewport
         scrollTl.to(centerCard, {
