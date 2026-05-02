@@ -1,24 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import threshold from "@/assets/image-3.jpeg";
-import back from "@/assets/image-2.jpeg";
-import hall from "@/assets/image-1.jpeg";
-import loft from "@/assets/image-4.jpeg";
-import victorian from "@/assets/image-5.jpeg";
-import bright from "@/assets/image-6.jpeg";
-import place1 from "@/assets/image-7.jpeg";
+import dc1 from "@/assets/Designer-Chandeliers-1.webp";
+import dc2 from "@/assets/Designer-Chandeliers-2.webp";
+import dc3 from "@/assets/Designer-Chandeliers-3.webp";
+import dc4 from "@/assets/Designer-Chandeliers-4.webp";
+import dc5 from "@/assets/Designer-Chandeliers-5.webp";
+import dc6 from "@/assets/Designer-Chandeliers-6.webp";
+import dc7 from "@/assets/Designer-Chandeliers-7.webp";
 import TitleReveal from "../ui/TitleReveal";
 
 const SHOWCASE = [
-  { img: hall, title: "Designer Chandeliers" },
-  { img: back, title: "Designer Chandeliers" },
-  { img: threshold, title: "Designer Chandeliers" },
-  { img: loft, title: "Designer Chandeliers" },
-  { img: victorian, title: "Designer Chandeliers" },
-  { img: bright, title: "Designer Chandeliers" },
-  { img: place1, title: "Designer Chandeliers" },
+  { img: dc1, title: "Designer Chandeliers" },
+  { img: dc2, title: "Designer Chandeliers" },
+  { img: dc3, title: "Designer Chandeliers" },
+  { img: dc4, title: "Designer Chandeliers" },
+  { img: dc5, title: "Designer Chandeliers" },
+  { img: dc6, title: "Designer Chandeliers" },
+  { img: dc7, title: "Designer Chandeliers" },
 ];
+
 
 export function Places() {
   const root = useRef<HTMLElement | null>(null);
@@ -33,9 +34,11 @@ export function Places() {
   const centerBottomRef = useRef<HTMLElement | null>(null);
   const [idx, setIdx] = useState(0);
 
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (window.matchMedia("(max-width: 767px)").matches) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -68,6 +71,7 @@ export function Places() {
 
       // Tile reveals (clipPath) - all tiles
       gsap.utils.toArray<HTMLElement>(".lux-place-tile").forEach((tile) => {
+        gsap.set(tile, { willChange: "transform, clip-path" });
         gsap.fromTo(
           tile,
           { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)" },
@@ -85,10 +89,14 @@ export function Places() {
         const speed = Number(tile.dataset.speed || -10);
         const inner = tile.querySelector(".lux-place-img") as HTMLElement;
 
+        if (inner) {
+          gsap.set(inner, { willChange: "transform" });
+        }
+
         gsap.to(tile, {
           yPercent: speed,
           ease: "none",
-          scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: true },
+          scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: 1 },
         });
         if (inner) {
           gsap.fromTo(
@@ -97,7 +105,7 @@ export function Places() {
             {
               scale: 1,
               ease: "none",
-              scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: true },
+              scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: 1 },
             },
           );
         }
@@ -215,9 +223,11 @@ export function Places() {
     );
   }, [idx]);
 
-  const next = () => setIdx((i) => (i + 1) % SHOWCASE.length);
-  const prev = () => setIdx((i) => (i - 1 + SHOWCASE.length) % SHOWCASE.length);
+  const next = () => { setIdx((i) => (i + 1) % SHOWCASE.length); };
+  const prev = () => { setIdx((i) => (i - 1 + SHOWCASE.length) % SHOWCASE.length); };
   const current = SHOWCASE[idx];
+
+
 
   return (
     <section
@@ -225,6 +235,8 @@ export function Places() {
       id="collections"
       className="relative z-[10] w-full overflow-visible bg-transparent"
     >
+
+      
       {/* Solid background starting below headline area */}
       <div
         className="absolute inset-x-0 bottom-0 top-[60vh] z-0 bg-[#0E0D0E]"
@@ -322,7 +334,7 @@ export function Places() {
                 </h3>
               </div>
 
-              {/* Navigation Buttons Over Image */}
+              {/* Navigation Buttons Over Image (mobile) */}
               <div className="absolute inset-x-0 bottom-12 flex items-center justify-center gap-8">
                 <button
                   onClick={prev}
@@ -332,14 +344,16 @@ export function Places() {
                     <path d="M21 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" strokeWidth="2" />
                   </svg>
                 </button>
-                <button
-                  onClick={next}
-                  className="grid h-16 w-16 place-items-center rounded-full bg-black text-white transition-transform active:scale-90"
-                >
-                  <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
-                    <path d="M1 7H21M21 7L15 1M21 7L15 13" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                </button>
+                <div style={{ position: "relative", display: "inline-flex" }}>
+                  <button
+                    onClick={next}
+                    className="grid h-16 w-16 place-items-center rounded-full bg-black text-white transition-transform active:scale-90"
+                  >
+                    <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
+                      <path d="M1 7H21M21 7L15 1M21 7L15 13" stroke="currentColor" strokeWidth="2" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -364,9 +378,10 @@ export function Places() {
               >
                 <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '3/4', maxHeight: '280px' }}>
                   <img
-                    src={hall}
+                    src={dc1}
                     alt="Designer Chandeliers"
                     loading="lazy"
+                    decoding="async"
                     className="lux-place-img absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
@@ -382,9 +397,10 @@ export function Places() {
               >
                 <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '16/9' }}>
                   <img
-                    src={place1}
+                    src={dc7}
                     alt="Designer Chandeliers"
                     loading="lazy"
+                    decoding="async"
                     className="lux-place-img absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
@@ -400,12 +416,16 @@ export function Places() {
               >
                 {/* Wrapper to hold the grid space so animating the card doesn't reflow the DOM and break the pin-spacer */}
                 <div className="relative w-full" style={{ aspectRatio: '21/9', minHeight: '40vh' }}>
-                  <div className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden rounded-lg bg-black origin-center">
+                  <div 
+                    className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden rounded-lg bg-black origin-center"
+                    style={{ willChange: 'width, height, transform, border-radius' }}
+                  >
                     <img
                       key={current.img}
                       src={current.img}
                       alt={current.title}
                       className="lux-showcase-img absolute inset-0 h-full w-full object-cover"
+                      style={{ willChange: 'transform' }}
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
 
@@ -426,28 +446,30 @@ export function Places() {
                       <span className="opacity-50">/{SHOWCASE.length}</span>
                     </div>
 
-                    {/* Navigation */}
+                    {/* Navigation (desktop) */}
                     <div className="absolute inset-x-0 bottom-8 flex items-center justify-center gap-6">
                       <button
                         onClick={prev}
                         data-cursor="PREV"
                         aria-label="Previous"
-                        className="grid h-14 w-14 place-items-center rounded-full bg-black/80 text-white backdrop-blur-sm transition-transform hover:scale-105 md:h-16 md:w-16"
+                        className="grid h-14 w-14 place-items-center rounded-full bg-black/80 text-white transition-transform hover:scale-105 md:h-16 md:w-16"
                       >
                         <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
                           <path d="M21 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" strokeWidth="1.5" />
                         </svg>
                       </button>
-                      <button
-                        onClick={next}
-                        data-cursor="NEXT"
-                        aria-label="Next"
-                        className="grid h-14 w-14 place-items-center rounded-full bg-black/80 text-white backdrop-blur-sm transition-transform hover:scale-105 md:h-16 md:w-16"
-                      >
-                        <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
-                          <path d="M1 7H21M21 7L15 1M21 7L15 13" stroke="currentColor" strokeWidth="1.5" />
-                        </svg>
-                      </button>
+                      <div style={{ position: "relative", display: "inline-flex" }}>
+                        <button
+                          onClick={next}
+                          data-cursor="NEXT"
+                          aria-label="Next"
+                          className="grid h-14 w-14 place-items-center rounded-full bg-black/80 text-white transition-transform hover:scale-105 md:h-16 md:w-16"
+                        >
+                          <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
+                            <path d="M1 7H21M21 7L15 1M21 7L15 13" stroke="currentColor" strokeWidth="1.5" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -464,9 +486,10 @@ export function Places() {
               >
                 <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '4/3' }}>
                   <img
-                    src={back}
+                    src={dc2}
                     alt="Designer Chandeliers"
                     loading="lazy"
+                    decoding="async"
                     className="lux-place-img absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
@@ -482,9 +505,10 @@ export function Places() {
               >
                 <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '16/9', minHeight: '170px' }}>
                   <img
-                    src={loft}
+                    src={dc4}
                     alt="Designer Chandeliers"
                     loading="lazy"
+                    decoding="async"
                     className="lux-place-img absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
@@ -500,9 +524,10 @@ export function Places() {
               >
                 <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '16/9', minHeight: '140px', maxWidth: '320px' }}>
                   <img
-                    src={threshold}
+                    src={dc3}
                     alt="Designer Chandeliers"
                     loading="lazy"
+                    decoding="async"
                     className="lux-place-img absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
@@ -518,7 +543,7 @@ export function Places() {
               >
                 <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '4/3', minHeight: '200px' }}>
                   <img
-                    src={bright}
+                    src={dc5}
                     alt="Designer Chandeliers"
                     loading="lazy"
                     className="lux-place-img absolute inset-0 h-full w-full object-cover"
@@ -530,6 +555,13 @@ export function Places() {
         </div>
       </div>
 
-    </section>
+        {/* Star mask at bottom-center of Places (division line above Testimonials) */}
+        <div className="absolute bottom-0 left-1/2 z-60 w-24 h-24 -translate-x-1/2 translate-y-1/2 pointer-events-none text-[#0E0D0E]">
+          <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full">
+            <path d="M50,0c0,27.6,22.4,50,50,50-27.6,0-50,22.4-50,50,0-27.6-22.4-50-50-50,27.6,0,50-22.4,50-50Z" />
+          </svg>
+        </div>
+
+      </section>
   );
 }

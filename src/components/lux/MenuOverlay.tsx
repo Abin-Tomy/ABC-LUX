@@ -20,7 +20,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
     if (open) {
       gsap.killTweensOf([".lux-menu-scrim", ".lux-menu-item", ".lux-menu-meta", root.current]);
       gsap.set(root.current, { display: "block", opacity: 1 });
-      
+
       gsap.fromTo(
         ".lux-menu-scrim",
         { opacity: 0 },
@@ -46,7 +46,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
       );
     } else {
       gsap.killTweensOf([".lux-menu-scrim", ".lux-menu-item", ".lux-menu-meta", root.current]);
-      
+
       // Fast exit animations
       gsap.to(".lux-menu-item", {
         opacity: 0,
@@ -62,7 +62,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         duration: 0.2,
         ease: "power2.in"
       });
-      
+
       // Fade out the entire container quickly to prevent ghosting of logos or cross icons
       gsap.to(root.current, {
         opacity: 0,
@@ -87,7 +87,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         onClick={onClose}
       >
         {/* Dark radial center */}
-        <div 
+        <div
           className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,15,15,1)_0%,rgba(20,20,20,0.95)_30%,rgba(0,0,0,0)_70%)]"
         />
         {/* Subtle noise/texture overlay */}
@@ -95,17 +95,17 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
       </div>
 
       <div className="relative z-10 h-full w-full px-6 py-6 md:px-12 md:py-8">
-        
+
         {/* Top Header Row */}
         <div className="flex items-start justify-end">
           {/* Brand Logo inside Absolute Container */}
-        <div className="lux-menu-logo-wrap absolute left-6 -top-12 z-20 pointer-events-none">
-          <img 
-            src={logoUrl} 
-            alt="ABC LUX" 
-            className="lux-menu-logo h-48 w-auto object-contain brightness-0 invert opacity-90"
-          />
-        </div>
+          <div className="lux-menu-logo-wrap absolute left-6 -top-12 z-20 pointer-events-none">
+            <img
+              src={logoUrl}
+              alt="ABC LUX"
+              className="lux-menu-logo h-48 w-auto object-contain brightness-0 invert opacity-90"
+            />
+          </div>
 
 
           {/* Thin Cross Icon */}
@@ -115,11 +115,11 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
             className="lux-close-btn relative h-24 w-24 group transition-transform hover:scale-105"
             aria-label="Close menu"
           >
-            <span 
-              className={`cross-line-1 absolute left-1/2 top-1/2 h-[1px] w-20 bg-white/80 origin-center ${open ? 'open' : 'closed'}`} 
+            <span
+              className={`cross-line-1 absolute left-1/2 top-1/2 h-[1px] w-20 bg-white/80 origin-center ${open ? 'open' : 'closed'}`}
             />
-            <span 
-              className={`cross-line-2 absolute left-1/2 top-1/2 h-[1px] w-20 bg-white/80 origin-center ${open ? 'open' : 'closed'}`} 
+            <span
+              className={`cross-line-2 absolute left-1/2 top-1/2 h-[1px] w-20 bg-white/80 origin-center ${open ? 'open' : 'closed'}`}
             />
           </button>
         </div>
@@ -149,7 +149,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
             ))}
           </div>
         </div>
-        
+
         {/* Contact/Meta Info at bottom right to balance the close pill */}
         <div className="lux-menu-meta absolute bottom-12 right-12 hidden text-right md:block">
           <div className="mb-4">

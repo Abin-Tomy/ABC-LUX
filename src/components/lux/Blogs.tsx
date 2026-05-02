@@ -1,11 +1,10 @@
 import { useState, useRef } from "react";
+import { Link } from "@tanstack/react-router";
 import TitleReveal from "../ui/TitleReveal";
 
-import img1 from "@/assets/lux-1.jpg";
-import img2 from "@/assets/image-1.jpeg";
-import img3 from "@/assets/image-3.jpeg";
-import img4 from "@/assets/image-5.jpeg";
-import img5 from "@/assets/image-2.jpeg";
+import img1 from "@/assets/Abc-Lights-Qatar.webp";
+import img2 from "@/assets/Outdoor-Lights-in-Qatar.webp";
+import img3 from "@/assets/modern-lights-in-qatar.webp";
 
 // ─── Brand colours (same as WhyChooseUs) ─────────────────────────────────────
 const BG   = "#D3C8B6";
@@ -17,34 +16,28 @@ const GOLD = "#C9A962";
 interface Slide {
   img: string;
   label: string;
+  href: string;
   meta: { label: string; value: string };
 }
 
 const SLIDES: Slide[] = [
   {
     img: img1,
-    label: "A Complete Guide to LED Lighting",
+    label: "A Complete Guide to LED Lighting: Benefits, Types, & Applications",
+    href: "/article-1",
     meta: { label: "Article", value: "Benefits, Types, & Applications" },
   },
   {
     img: img2,
-    label: "Outdoor Lighting Essentials",
+    label: "Outdoor Lighting Essentials: Types, Features, and Installation Tips",
+    href: "/article-2",
     meta: { label: "Article", value: "Types, Features, and Installation Tips" },
   },
   {
     img: img3,
-    label: "Lighting for Modern Homes",
+    label: "Lighting for Modern Homes: Trends and Smart Solutions",
+    href: "/article-3",
     meta: { label: "Article", value: "Trends and Smart Solutions" },
-  },
-  {
-    img: img4,
-    label: "Interior Accent Lighting",
-    meta: { label: "Article", value: "Decorative Tips for Your Space" },
-  },
-  {
-    img: img5,
-    label: "Sustainable Lighting",
-    meta: { label: "Article", value: "Energy-Efficient Future Solutions" },
   },
 ];
 
@@ -137,7 +130,28 @@ export function Blogs() {
   ];
 
   return (
-    <section style={{ background: BG, color: FG }}>
+    <section style={{ background: BG, color: FG, position: "relative" }}>
+      {/* Decorative SVG path */}
+      <svg
+        className="pointer-events-none absolute inset-x-0 z-[1] w-full top-0"
+        style={{ aspectRatio: '1440 / 1080', opacity: 0.35 }}
+        viewBox="0 0 1440 1080"
+        preserveAspectRatio="none"
+        aria-hidden
+      >
+        <linearGradient id="blogs-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#15141500" />
+          <stop offset=".5" stopColor="#c07a20" />
+          <stop offset="1" stopColor="#15141500" />
+        </linearGradient>
+        <path
+          fill="none"
+          stroke="url(#blogs-grad)"
+          strokeWidth="1.5"
+          d="M517.1,0c246,127,804.3,132.3,752,234-27.9,54.4-412.5,84.1-649,16-228.9-65.9-467.4-48.1-462-27,15.1,59.1,394-184,527-73C924.7,350,14.1,621,250.1,1000"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
 
       {/* Scoped styles — prefix blg- to avoid clashes */}
       <style>{`
@@ -171,20 +185,18 @@ export function Blogs() {
           left: 14px;
           z-index: 5;
           font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 300;
           letter-spacing: 0.18em;
           text-transform: uppercase;
           color: rgba(245,240,232,0.85);
           opacity: 0;
           transform: translateY(6px);
-          transition: opacity 0.35s ease, transform 0.35s ease;
           pointer-events: none;
           text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-        }
-        .blg-card:hover .blg-slide-label {
-          opacity: 1;
-          transform: translateY(0);
+          width: calc(100% - 28px);
+          white-space: normal;
+          line-height: 1.35;
         }
 
         /* Dark bottom gradient for label legibility */
@@ -202,9 +214,9 @@ export function Blogs() {
         .blg-arrow-btn {
           position: absolute;
           top: 50%;
-          width: 58px; height: 58px;
+          width: 54px; height: 54px;
           border-radius: 50%;
-          border: 1.5px solid rgba(201,169,98,0.65);
+          border: 1.5px solid rgba(201,169,98,0.85);
           background: transparent;
           display: flex; align-items: center; justify-content: center;
           cursor: pointer;
@@ -214,8 +226,8 @@ export function Blogs() {
         }
         .blg-arrow-btn:hover { border-color: #C9A962; }
         .blg-arrow-btn svg {
-          width: 24px; height: 24px;
-          stroke: #C9A962;
+          width: 22px; height: 22px;
+          stroke: rgba(201,169,98,0.95);
           fill: none;
           stroke-width: 1.8;
           stroke-linecap: round; stroke-linejoin: round;
@@ -235,37 +247,69 @@ export function Blogs() {
         }
         .blg-meta-value {
           font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 12px;
+          font-size: 14px;
           font-weight: 400;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           color: ${FG};
+          display: block;
+        }
+        .blg-read-more {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 14px;
+          padding: 8px 18px;
+          border-radius: 9999px;
+          border: 1px solid rgba(26,24,25,0.55);
+          background: transparent;
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: 11px;
+          font-weight: 400;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: ${FG};
+          cursor: pointer;
+          transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+        .blg-read-more:hover {
+          border-color: ${GOLD};
+          color: ${GOLD};
+          transform: translateY(-1px);
         }
       `}</style>
 
-      <div style={{ maxWidth: 1300, margin: "0 auto", padding: "90px 60px" }}>
+      <div style={{ maxWidth: 1300, margin: "0 auto", padding: "90px 60px", position: "relative", zIndex: 10 }}>
 
         {/* ── Header (same pattern as the rest of the site) ─────────────── */}
         <div style={{
           display: "flex",
           flexDirection: "column" as const,
-          alignItems: "flex-start",
+          alignItems: "center",
           justifyContent: "space-between",
           gap: 32,
           marginBottom: 56,
         }}>
-          <div>
-            <p style={{
+          <div style={{ textAlign: "center" }}>
+            <span style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              marginBottom: "1rem",
+              padding: "0.375rem 1rem",
+              borderRadius: "9999px",
+              border: "0.5px solid rgba(201,169,98,0.4)",
+              background: "rgba(201,169,98,0.07)",
+              fontSize: "0.65rem",
               fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 10,
               fontWeight: 300,
               letterSpacing: "0.22em",
               textTransform: "uppercase" as const,
-              color: "rgba(26,24,25,.55)",
-              marginBottom: 14,
+              color: FG,
             }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: GOLD, display: "inline-block" }} />
               Blog & News
-            </p>
+            </span>
             <h2 style={{
               fontFamily: "'Playfair Display', Georgia, serif",
               fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
@@ -362,10 +406,8 @@ export function Blogs() {
                     className="blg-arrow-btn"
                     style={{
                       left: 10,
-                      transform: isHov
-                        ? "translateY(-50%) translateX(0)"
-                        : "translateY(-50%) translateX(-14px)",
-                      opacity: isHov ? 1 : 0,
+                      transform: "translateY(-50%) translateX(0)",
+                      opacity: 1,
                     }}
                     onClick={() => navigate("left")}
                     aria-label="Previous"
@@ -382,10 +424,8 @@ export function Blogs() {
                     className="blg-arrow-btn"
                     style={{
                       right: 10,
-                      transform: isHov
-                        ? "translateY(-50%) translateX(0)"
-                        : "translateY(-50%) translateX(14px)",
-                      opacity: isHov ? 1 : 0,
+                      transform: "translateY(-50%) translateX(0)",
+                      opacity: 1,
                     }}
                     onClick={() => navigate("right")}
                     aria-label="Next"
@@ -410,45 +450,29 @@ export function Blogs() {
         }}>
           {slots.map(({ slot, isCenter }) => {
             const slide = SLIDES[cards[slot].slideIdx];
+            const parts = slide.label.split(":");
             return (
               <div
                 key={slot}
                 style={{
                   width: isCenter ? 540 : 360,
                   flexShrink: 0,
+                  textAlign: "center",
                 }}
               >
                 <span className="blg-meta-label">{slide.meta.label}</span>
-                <span className="blg-meta-value">{slide.meta.value}</span>
+                <span className="blg-meta-value">
+                  {parts[0]}:<br />
+                  {parts[1]}
+                </span>
+                <Link className="blg-read-more" to={slide.href}>
+                  Read More
+                </Link>
               </div>
             );
           })}
         </div>
 
-        {/* ── View all link ────────────────────────────────────────────────── */}
-        <div style={{ marginTop: 40, display: "flex", justifyContent: "flex-end" }}>
-          <button
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 10,
-              fontWeight: 300,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase" as const,
-              color: FG,
-              background: "none",
-              border: "none",
-              borderBottom: `0.5px solid rgba(26,24,25,.2)`,
-              paddingBottom: 6,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              transition: "border-color 0.2s",
-            }}
-          >
-            View All Stories <span style={{ fontSize: 14 }}>→</span>
-          </button>
-        </div>
       </div>
     </section>
   );

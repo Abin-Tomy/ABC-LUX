@@ -256,8 +256,8 @@ body {
   }
 
   .wcu-word {
-    font-size: clamp(42px, 15vw, 72px) !important;
-    white-space: normal !important;
+    font-size: clamp(38px, 14vw, 72px) !important;
+    white-space: nowrap !important;
     text-align: center !important;
   }
 
@@ -281,6 +281,22 @@ body {
   .wcu-ticker {
     bottom: 1rem !important;
   }
+
+  /* ── "Driven by Excellence, Powered by Trust" subtitle ─────── */
+  /* .wcu-text-row is position:absolute on mobile, so the subtitle
+     floats to the top of .wcu-title-wrapper. Push it down past
+     both stacked words (~2 × ~65px word height + gaps) */
+  .wcu-subtitle {
+    font-size: 9px !important;
+    letter-spacing: 0.16em !important;
+    text-align: center !important;
+    white-space: normal !important;
+    max-width: 80vw !important;
+    line-height: 1.8 !important;
+    padding: 0 8px !important;
+    margin-top: 160px !important;  /* clears "Why" + "Choose Us" */
+    z-index: 5 !important;
+  }
 }
 
 /* Tablet: reduce huge word size slightly */
@@ -292,6 +308,12 @@ body {
   .wcu-panel-left,
   .wcu-panel-right {
     width: 160px !important;
+  }
+
+  .wcu-subtitle {
+    font-size: 11px !important;
+    letter-spacing: 0.18em !important;
+    text-align: center !important;
   }
 }
 
@@ -388,50 +410,305 @@ body {
     height: 200px !important;
   }
 
-  /* Meta label width */
+  /* Meta label container: centered and full width on mobile */
   section[style*="background: #D3C8B6"] > div > div[style*="marginTop: 20"] > div {
-    width: auto !important;
+    width: 100% !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .blg-meta-value {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    max-width: 80vw !important;
+    margin: 0 auto !important;
+    white-space: normal !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Increase padding at the bottom of the section to prevent clipping */
+  section[style*="background: #D3C8B6"] > div[style*="padding"] {
+    padding-bottom: 80px !important;
+  }
+
+  /* ── Arrow buttons: pull out of hidden side cards & float over center card ── */
+
+  /* The gallery row becomes a position context */
+  section[style*="background: #D3C8B6"] > div > div[style*="display: flex"][style*="alignItems: center"][style*="gap: 56"] {
+    position: relative !important;
+  }
+
+  /* Side cards: hidden but still in DOM so arrows can be absolutely placed */
+  .blg-card.blg-card-side {
+    position: static !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* Arrow buttons break out of their zero-size parents */
+  .blg-card.blg-card-side .blg-arrow-btn {
+    visibility: visible !important;
+    position: fixed !important; /* use fixed so it escapes the 0x0 parent */
+    opacity: 0 !important; /* hidden by default — we'll re-show below */
+  }
+
+  /* Actually: simpler approach — make the arrows absolute relative to
+     the gallery row, positioned on the center card edges */
+  .blg-arrow-btn {
+    position: absolute !important;
+    top: 55% !important; /* Nudged down more for perfect visual centering */
+    opacity: 1 !important;
+    z-index: 20 !important;
+    width: 44px !important;
+    height: 44px !important;
+    transform: translateY(-50%) !important;
+  }
+
+  /* Left arrow: hug the left edge of the center card.
+     Center card is ~90vw wide, centered. So left edge = 5vw */
+  .blg-card.blg-card-side:first-of-type .blg-arrow-btn,
+  .blg-card-side:first-child .blg-arrow-btn {
+    left: calc(5vw + 8px) !important;
+    right: auto !important;
+    position: absolute !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Right arrow: hug the right edge of the center card */
+  .blg-card.blg-card-side:last-of-type .blg-arrow-btn,
+  .blg-card-side:last-child .blg-arrow-btn {
+    right: calc(5vw + 8px) !important;
+    left: auto !important;
+    position: absolute !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
 
 /* ──────────────────────────────────────────────────────────────────
-   ▌ FEEDBACK / TESTIMONIALS (Swiper)
+   ▌ FEEDBACK / TESTIMONIALS  — Bubble avatars + Swiper card
    ────────────────────────────────────────────────────────────────── */
 
-@media (max-width: 767px) {
-  /* Feedback outer padding */
-  section[style*="overflow: hidden"] > div[style*="padding: 90px 60px"] {
-    padding: 56px 20px !important;
-    max-width: 100% !important;
+/* ── Shared: section outer padding ─────────────────────────────── */
+@media (max-width: 1023px) {
+  /* Section vertical rhythm */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"] {
+    padding: 60px 16px !important;
   }
 
-  /* Nav + Swiper row: stack buttons above/below on very small screens */
-  section[style*="overflow: hidden"] > div > div[style*="display: flex"][style*="gap: 16"] {
-    gap: 8px !important;
+  /* Thin orbit rings — scale them down proportionally */
+  .ts-center-ring[style*="width: 480"] {
+    width: 320px !important;
+    height: 320px !important;
   }
-
-  /* Reduce Swiper slide padding */
-  .fbk-swiper .swiper-slide > div {
-    padding: 10px 12px 20px !important;
-  }
-
-  /* Slide body: slightly smaller on phones */
-  .fbk-slide-body {
-    font-size: 14px !important;
-    line-height: 1.7 !important;
-    max-width: 100% !important;
-  }
-
-  .fbk-slide-title {
-    font-size: 16px !important;
-  }
-
-  /* Quote mark: smaller */
-  .fbk-quote-mark {
-    font-size: 52px !important;
-    margin-bottom: 12px !important;
+  .ts-center-ring[style*="width: 320"] {
+    width: 200px !important;
+    height: 200px !important;
   }
 }
+
+/* ── Mobile (≤ 640 px) ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+
+  /* Section outer padding — tight on small screens */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"] {
+    padding: 48px 12px 56px !important;
+  }
+
+  /* ── Orbit bubble avatars: hide large ones, keep tiny hints ─── */
+  /* Hide all orbit avatars by default on mobile */
+  .ts-orbit-avatar {
+    display: none !important;
+  }
+  /* Show only 4 smallest hints at corners for decoration */
+  .ts-orbit-avatar:nth-child(1),
+  .ts-orbit-avatar:nth-child(3),
+  .ts-orbit-avatar:nth-child(5),
+  .ts-orbit-avatar:nth-child(7) {
+    display: block !important;
+    width: 32px !important;
+    height: 32px !important;
+    opacity: 0.45 !important;
+  }
+  /* Reposition them to safe corner zones */
+  .ts-orbit-avatar:nth-child(1) { top: 6% !important;  left: 4% !important;  }
+  .ts-orbit-avatar:nth-child(3) { top: 6% !important;  left: 80% !important; }
+  .ts-orbit-avatar:nth-child(5) { top: 82% !important; left: 4% !important;  }
+  .ts-orbit-avatar:nth-child(7) { top: 82% !important; left: 80% !important; }
+
+  /* ── Decorative orbit rings ─────────────────────────────────── */
+  .ts-center-ring[style*="width: 480"] {
+    width: 260px !important;
+    height: 260px !important;
+    animation-duration: 60s !important; /* slow down — less distraction */
+  }
+  .ts-center-ring[style*="width: 320"] {
+    width: 160px !important;
+    height: 160px !important;
+    animation-duration: 45s !important;
+  }
+
+  /* ── Main content wrapper ───────────────────────────────────── */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"]
+    > div[style*="maxWidth: 860"] {
+    padding: 40px 16px 40px !important;
+    max-width: 100% !important;
+  }
+
+  /* ── Heading block ──────────────────────────────────────────── */
+  /* "TESTIMONIALS" pill badge */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"] span[style*="letterSpacing"] {
+    font-size: 0.6rem !important;
+    padding: 0.3rem 0.75rem !important;
+  }
+
+  /* Main heading — prevent viewport-unit overflow */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"] h2 {
+    font-size: clamp(2rem, 11vw, 3rem) !important;
+    line-height: 1 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  /* ── Central avatar ─────────────────────────────────────────── */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"]
+    > div[style*="maxWidth: 860"] > div[style*="position: relative"] {
+    margin-bottom: 20px !important;
+  }
+
+  /* Avatar outer glow ring — scale down */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"]
+    > div[style*="maxWidth: 860"] > div[style*="position: relative"] > div[style*="inset: -6"] {
+    inset: -4px !important;
+  }
+
+  /* Avatar circle itself — shrink from 96px → 72px */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"]
+    > div[style*="maxWidth: 860"] > div[style*="position: relative"]
+    > div[style*="width: 96"] {
+    width: 72px !important;
+    height: 72px !important;
+    font-size: 26px !important;
+  }
+
+  /* ── Swiper container — full width with no arrows ─────────── */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"]
+    > div[style*="maxWidth: 860"]
+    > div[style*="display: flex"][style*="gap: 12"] {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Give the swiper full width */
+  .ts-swiper {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide nav buttons on mobile as requested for a cleaner look */
+  .ts-nav-btn {
+    display: none !important;
+  }
+
+  /* Ensure the swiper div takes priority */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"]
+    > div[style*="maxWidth: 860"]
+    > div[style*="display: flex"][style*="gap: 12"]
+    > div.ts-swiper {
+    order: 1 !important;
+  }
+
+  /* ── Testimonial card body — professional text arrangement ─── */
+  .ts-body {
+    font-size: 17px !important;
+    line-height: 1.8 !important;
+    max-width: 100% !important;
+    padding: 0 10px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .ts-name {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+  }
+
+  .ts-quote-icon {
+    font-size: 44px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .ts-testimonial-card {
+    padding: 0 8px 16px !important;
+  }
+
+  /* ── Swiper pagination dots ─────────────────────────────────── */
+  .ts-swiper .swiper-pagination {
+    margin-top: 16px !important;
+  }
+}
+
+/* ── Tablet (641 px – 1023 px) ──────────────────────────────────── */
+@media (min-width: 641px) and (max-width: 1023px) {
+
+  /* ── Orbit avatars: show all but clip sizes ─────────────────── */
+  .ts-orbit-avatar:nth-child(1) { width: 44px  !important; height: 44px  !important; }
+  .ts-orbit-avatar:nth-child(2) { width: 56px  !important; height: 56px  !important; }
+  .ts-orbit-avatar:nth-child(3) { width: 36px  !important; height: 36px  !important; }
+  .ts-orbit-avatar:nth-child(4) { width: 42px  !important; height: 42px  !important; }
+  .ts-orbit-avatar:nth-child(5) { width: 40px  !important; height: 40px  !important; }
+  .ts-orbit-avatar:nth-child(6) { width: 52px  !important; height: 52px  !important; }
+  .ts-orbit-avatar:nth-child(7) { width: 36px  !important; height: 36px  !important; }
+  .ts-orbit-avatar:nth-child(8) { width: 44px  !important; height: 44px  !important; }
+
+  /* Reposition avatars inward so they don't bleed off tablets */
+  .ts-orbit-avatar:nth-child(1) { left: 5%  !important; }
+  .ts-orbit-avatar:nth-child(2) { left: 10% !important; }
+  .ts-orbit-avatar:nth-child(3) { left: 4%  !important; }
+  .ts-orbit-avatar:nth-child(4) { left: 14% !important; }
+  .ts-orbit-avatar:nth-child(5) { left: 65% !important; }
+  .ts-orbit-avatar:nth-child(6) { left: 78% !important; }
+  .ts-orbit-avatar:nth-child(7) { left: 82% !important; }
+  .ts-orbit-avatar:nth-child(8) { left: 72% !important; }
+
+  /* Main content wrapper */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"]
+    > div[style*="maxWidth: 860"] {
+    padding: 60px 32px 60px !important;
+  }
+
+  /* Heading: clamp for tablets */
+  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"] h2 {
+    font-size: clamp(2.4rem, 7vw, 3.8rem) !important;
+  }
+
+  /* Body text */
+  .ts-body {
+    font-size: 16px !important;
+    max-width: 400px !important;
+  }
+}
+
+/* ── Reduced motion: respect user preference ────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ts-orbit-avatar {
+    animation: none !important;
+  }
+  .ts-center-ring {
+    animation: none !important;
+  }
+}
+
 
 /* ──────────────────────────────────────────────────────────────────
    ▌ PRODUCTS SECTION (Testimonials.tsx — horizontal scroll)
@@ -588,6 +865,36 @@ body {
     translate: none !important;
     transform: none !important;
     width: 100% !important;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ▌ LIGHTING EXPERIENCE — Dark mode toggle grid
+   ────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* Container padding and spacing */
+  #products > div[style*="maxWidth: 72rem"] {
+    padding: 3rem 1rem !important;
+  }
+
+  /* Paragraph width */
+  #products p[style*="maxWidth: 500px"] {
+    max-width: 90% !important;
+    font-size: 1rem !important;
+  }
+
+  /* Grid: Switch from 4-col to 2-col */
+  #products div[style*="display: grid"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    padding: 12px !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide empty placeholders on mobile to avoid grid gaps */
+  #products div[style*="display: grid"] > div:empty {
+    display: none !important;
   }
 }
 

@@ -41,19 +41,20 @@ export function Nav() {
             className="lux-center-nav pointer-events-auto absolute left-1/2 top-5 hidden -translate-x-1/2 items-center gap-6 md:flex"
           >
             <a
-              href="#places"
+              href="#products"
               data-cursor="VIEW"
               className="lux-eyebrow rounded-[10px] bg-white/10 px-20 py-2.5 text-white/95 text-[13px] font-bold tracking-[0.1em] backdrop-blur-md transition-all hover:bg-white/20"
             >
-              PLACES
+              PRODUCTS
             </a>
             <span className="h-10 w-[1px] bg-[#1a1a1a]/60" />
             <a
-              href="#objects"
+              href="#"
+              onClick={(e) => e.preventDefault()}
               data-cursor="VIEW"
               className="lux-eyebrow rounded-[10px] bg-white/10 px-20 py-2.5 text-white/95 text-[13px] font-bold tracking-[0.1em] backdrop-blur-md transition-all hover:bg-white/20"
             >
-              OBJECTS
+              BRANDS
             </a>
           </nav>
 

@@ -2,12 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useLenis } from "@/hooks/useLenis";
 import { Nav } from "@/components/lux/Nav";
 import { Hero } from "@/components/lux/Hero";
-import { Places } from "@/components/lux/Places";
+import { Places } from "@/components/lux/collections";
 import { WhyChooseUs } from "@/components/lux/WhyChooseUs";
-import { Testimonials } from "@/components/lux/Testimonials";
-import { Feedback } from "@/components/lux/Feedback";
+import { Testimonials } from "@/components/lux/products";
+import Products from "@/components/lux/light-dark";
+import { Feedback } from "@/components/lux/testimonials";
 import { Blogs } from "@/components/lux/Blogs";
-import { Admission } from "@/components/lux/Admission";
+import { Admission } from "@/components/lux/contact";
 import { Footer } from "@/components/lux/Footer";
 
 export const Route = createFileRoute("/")({
@@ -39,6 +40,7 @@ function Index() {
       <Hero />
       <Places />
       <Testimonials />
+      <Products />
       <WhyChooseUs />
       <Feedback />
       <Blogs />

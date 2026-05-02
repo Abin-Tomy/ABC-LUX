@@ -1,667 +1,508 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useRef, useState } from "react";
+import type { Swiper as SwiperType } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import TitleReveal from "../ui/TitleReveal";
+import "swiper/css";
+import "swiper/css/pagination";
+import imgAjmal from "@/assets/ajmal-roshan-k.png";
+import imgUmer  from "@/assets/umer-hayat.png";
 
-import tImg1 from "@/assets/lux-1.jpg";
-import tImg2 from "@/assets/lux-2.jpg";
-import tImg3 from "@/assets/lux-3.jpg";
-import tImg4 from "@/assets/lux-4.jpg";
-import tImg5 from "@/assets/lux-5.jpg";
-import tImg6 from "@/assets/lux-6.jpg";
+// ─── Palette ──────────────────────────────────────────────────────────────────
+const BG   = "#D3C8B6";   // warm sand
+const FG   = "#1A1819";   // near-black
+const ACC  = "#C9A962";   // gold accent
+const SUB  = "rgba(26,24,25,.6)";   // muted label text
+const STAR = "#C9A962";   // star gold
 
-// ─── Data ────────────────────────────────────────────────────────────────────
-
-type Testimonial = {
-  id: number;
+// ─── Data ─────────────────────────────────────────────────────────────────────
+interface TestimonialItem {
+  initial: string;
   name: string;
   role: string;
-  company: string;
-  quote: string;
-  excerpt: string;
-  hue: number;
-  initials: string;
-  img: string;
-};
+  body: string;
+  stars: number;
+  size: "large" | "medium" | "small";
+  position: { top: string; left: string };
+  bg: string;
+  textColor: string;
+  img?: string;  // optional real photo
+}
 
-const TESTIMONIALS: Testimonial[] = [
+const ITEMS: TestimonialItem[] = [
   {
-    id: 1, name: "LED Strip Lights", role: "", company: "",
-    excerpt: "Professional Illumination",
-    quote: "Professional grade LED strips designed for seamless architectural integration. High CRI, uniform brightness, and exceptional longevity for premium residential and commercial spaces.",
-    hue: 38, initials: "LS", img: tImg1,
+    initial: "A",
+    name: "Ajmal Roshan K",
+    role: "Client",
+    body: "Found the perfect chandelier for my living room. Great quality, reasonable pricing, and excellent support from the ABC Lights team.",
+    stars: 5,
+    size: "large",
+    position: { top: "50%", left: "50%" },
+    bg: "#1A2436", textColor: "#C9A962",
+    img: imgAjmal,
   },
   {
-    id: 2, name: "Magnetic Profile Lights", role: "", company: "",
-    excerpt: "Modular Flexibility",
-    quote: "Our magnetic track system offers ultimate flexibility. Easily move, swap, and adjust lighting modules without tools, creating a dynamic lighting environment that evolves with your space.",
-    hue: 200, initials: "MP", img: tImg2,
+    initial: "U",
+    name: "Umer Hayat",
+    role: "Client",
+    body: "Professional service, trendy designs, and quick delivery. ABC Lights made lighting selection easy and enjoyable for our entire office space.",
+    stars: 5,
+    size: "medium",
+    position: { top: "15%", left: "32%" },
+    bg: "#4A1525", textColor: "#F5F0E8",
+    img: imgUmer,
   },
   {
-    id: 3, name: "Modern Pendant Light", role: "", company: "",
-    excerpt: "Artistic Elegance",
-    quote: "A statement of elegance. Our modern pendants combine hand-blown glass with precision-machined metals to create a focal point that is both a light source and a work of art.",
-    hue: 280, initials: "PL", img: tImg3,
+    initial: "S",
+    name: "Suhaila K",
+    role: "Client",
+    body: "Visited many stores, but ABC Lights stood out. Unique pieces, helpful staff, great value, and amazing overall experience. Truly satisfied with my purchase",
+    stars: 5,
+    size: "small",
+    position: { top: "20%", left: "60%" },
+    bg: "#1B3B36", textColor: "#C9A962", // Emerald
   },
   {
-    id: 4, name: "Ceiling Lights", role: "", company: "",
-    excerpt: "Ambient Sophistication",
-    quote: "Sophisticated surface and recessed ceiling solutions. Designed to provide beautiful ambient light while maintaining a clean, minimalist aesthetic across any interior architecture.",
-    hue: 140, initials: "CL", img: tImg4,
+    initial: "M",
+    name: "Marcus Chen",
+    role: "Client",
+    body: "Professional, reliable, and creative. The work was delivered beyond expectations.",
+    stars: 5,
+    size: "medium",
+    position: { top: "70%", left: "22%" },
+    bg: "#1A1819", textColor: "#C9A962", // Obsidian
   },
   {
-    id: 5, name: "Designer Chandeliers", role: "", company: "",
-    excerpt: "Grand Installations",
-    quote: "The pinnacle of luxury illumination. Our bespoke chandeliers are engineered to transform grand spaces with breathtaking light patterns and timeless craftsmanship.",
-    hue: 18, initials: "DC", img: tImg5,
-  },
-  {
-    id: 6, name: "Outdoor Lights", role: "", company: "",
-    excerpt: "Exterior Excellence",
-    quote: "Weather-resistant elegance. Our outdoor series brings the same level of design sophistication to your exterior spaces, combining durability with premium light quality.",
-    hue: 260, initials: "OL", img: tImg6,
+    initial: "J",
+    name: "James Whitfield",
+    role: "Client",
+    body: "Brilliant experience throughout. The team communicated clearly and delivered perfectly.",
+    stars: 5,
+    size: "small",
+    position: { top: "65%", left: "72%" },
+    bg: "#5A4D41", textColor: "#F5F0E8", // Bronze
   },
 ];
 
-// ─── Pure-scroll progress hook (identical pattern to WhyChooseUs) ─────────────
-// Uses window scroll events only — NO GSAP ScrollTrigger, NO spacer divs.
+// Orbiting avatars for background decoration (not center)
+const ORBIT_AVATARS = [
+  { initial: "A", size: 56, top: "12%",  left: "8%",  bg: "#1A2436", color: "#C9A962" }, // Midnight Navy
+  { initial: "M", size: 76, top: "30%",  left: "14%", bg: "#4A1525", color: "#F5F0E8" }, // Deep Burgundy
+  { initial: "S", size: 44, top: "68%",  left: "6%",  bg: "#1B3B36", color: "#C9A962" }, // Emerald
+  { initial: "J", size: 52, top: "80%",  left: "22%", bg: "#A68A56", color: "#1A1819" }, // Ochre
+  { initial: "R", size: 48, top: "10%",  left: "70%", bg: "#3D4044", color: "#F5F0E8" }, // Slate
+  { initial: "T", size: 68, top: "18%",  left: "84%", bg: "#3E273A", color: "#C9A962" }, // Plum
+  { initial: "K", size: 44, top: "58%",  left: "88%", bg: "#1A1819", color: "#C9A962" }, // Obsidian
+  { initial: "L", size: 56, top: "78%",  left: "78%", bg: "#5A4D41", color: "#F5F0E8" }, // Bronze
+];
 
-function useScrollProgress(ref: React.RefObject<HTMLDivElement | null>) {
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const onScroll = () => {
-      const rect = el.getBoundingClientRect();
-      const total = el.offsetHeight - window.innerHeight;
-      if (total <= 0) return;
-      setProgress(Math.min(1, Math.max(0, -rect.top / total)));
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [ref]);
-  return progress;
+// ─── Stars ─────────────────────────────────────────────────────────────────────
+function Stars({ count }: { count: number }) {
+  return (
+    <div style={{ display: "flex", gap: 3, justifyContent: "center" }}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg key={i} width="13" height="13" viewBox="0 0 24 24"
+          fill={i < count ? STAR : "rgba(26,24,25,0.1)"}
+          stroke={i < count ? STAR : "rgba(26,24,25,0.15)"}
+          strokeWidth="1">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      ))}
+    </div>
+  );
 }
 
-// ─── Component ────────────────────────────────────────────────────────────────
-
-export function Testimonials() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLButtonElement | null)[]>([]);
-
-  // Track horizontal scroll distance (measured once after mount)
-  const [trackScroll, setTrackScroll] = useState(0);
-
-  useLayoutEffect(() => {
-    const measure = () => {
-      if (!trackRef.current) return;
-      setTrackScroll(
-        Math.max(0, trackRef.current.scrollWidth - window.innerWidth + 120)
-      );
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
-  // Section height: viewport + horizontal travel distance
-  // This is the same technique WhyChooseUs uses (900vh style) but data-driven.
-  const sectionH = `calc(100vh + ${trackScroll}px)`;
-
-  // Scroll progress drives horizontal translation
-  const progress = useScrollProgress(containerRef);
-  const trackX = -(progress * trackScroll);
-
-  // Revealed-card set — each index added once when it enters the visual viewport
-  const revealedRef = useRef(new Set<number>());
-
-
-  // ── 3D tilt + sheen (mouse events, attached once after trackScroll is known) ──
-  useEffect(() => {
-    if (trackScroll === 0) return;
-    const cards = cardsRef.current.filter(Boolean) as HTMLButtonElement[];
-    const CARD_STEP = 412; // 380px card + 32px gap
-    const PAD_LEFT  = window.innerWidth * 0.1;
-
-    const handlers: Array<{
-      card: HTMLButtonElement;
-      enter: () => void;
-      leave: () => void;
-      move: (e: MouseEvent) => void;
-    }> = [];
-
-    cards.forEach((card, i) => {
-      // Only hide cards that start fully off-screen to the right.
-      const cardLeft = PAD_LEFT + i * CARD_STEP;
-      const startsVisible = cardLeft < window.innerWidth;
-      if (!startsVisible && !revealedRef.current.has(i)) {
-        gsap.set(card, {
-          opacity: 0,
-          y: 48,
-          rotate: i % 2 === 0 ? -4 : 4,
-          scale: 0.92,
-          transformOrigin: "center bottom",
-        });
-      }
-
-      const inner = card.querySelector(".card-inner") as HTMLElement | null;
-      const sheen = card.querySelector(".card-sheen") as HTMLElement | null;
-      if (!inner || !sheen) return;
-
-      const enter = () =>
-        gsap.to(inner, { y: -10, rotateX: 6, rotateY: -6, duration: 0.5, ease: "power3.out" });
-      const leave = () => {
-        gsap.to(inner, { y: 0, rotateX: 0, rotateY: 0, duration: 0.6, ease: "power3.out" });
-        gsap.to(sheen, { opacity: 0, duration: 0.4 });
-      };
-      const move = (e: MouseEvent) => {
-        const r = card.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width) * 100;
-        const y = ((e.clientY - r.top) / r.height) * 100;
-        gsap.to(sheen, {
-          opacity: 1,
-          background: `radial-gradient(circle at ${x}% ${y}%, hsla(0,0%,100%,0.28), transparent 55%)`,
-          duration: 0.3,
-        });
-      };
-      card.addEventListener("mouseenter", enter);
-      card.addEventListener("mouseleave", leave);
-      card.addEventListener("mousemove", move);
-      handlers.push({ card, enter, leave, move });
-    });
-
-    return () => {
-      handlers.forEach(({ card, enter, leave, move }) => {
-        card.removeEventListener("mouseenter", enter);
-        card.removeEventListener("mouseleave", leave);
-        card.removeEventListener("mousemove", move);
-      });
-    };
-  }, [trackScroll]);
-
-  // ── Scroll-progress reveal — fires each time progress changes ─────────────
-  useEffect(() => {
-    if (trackScroll === 0) return;
-    const cards = cardsRef.current.filter(Boolean) as HTMLButtonElement[];
-    const CARD_STEP = 412;
-    const PAD_LEFT  = window.innerWidth * 0.1;
-    const curTrackX = -(progress * trackScroll);
-
-    cards.forEach((card, i) => {
-      if (revealedRef.current.has(i)) return;
-      const cardLeft   = PAD_LEFT + i * CARD_STEP;
-      const visualLeft = curTrackX + cardLeft; // pixel position of card's left edge on screen
-      // Trigger when the card's left edge is within 80px of the right viewport edge
-      if (visualLeft < window.innerWidth - 80) {
-        revealedRef.current.add(i);
-        gsap.to(card, {
-          opacity: 1,
-          y: 0,
-          rotate: 0,
-          scale: 1,
-          duration: 0.85,
-          ease: "power3.out",
-          clearProps: "rotate,scale,y",
-        });
-      }
-    });
-  }, [progress, trackScroll]);
-
-
-  const [active, setActive] = useState<number | null>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const overlayCardRef = useRef<HTMLDivElement>(null);
-  const overlayBgRef = useRef<HTMLDivElement>(null);
-  const overlayQuoteRef = useRef<HTMLParagraphElement>(null);
-  const overlayMetaRef = useRef<HTMLDivElement>(null);
-  const overlayMarkRef = useRef<HTMLDivElement>(null);
-
-  // GSAP used ONLY for the overlay FLIP + hover effects — no ScrollTrigger at all.
-  useEffect(() => {
-    if (active === null) return;
-    const cardEl = cardsRef.current[active];
-    const overlay = overlayRef.current;
-    const overlayCard = overlayCardRef.current;
-    if (!cardEl || !overlay || !overlayCard) return;
-
-    const first = cardEl.getBoundingClientRect();
-    overlay.style.pointerEvents = "auto";
-
-    gsap.set(overlay, { autoAlpha: 1 });
-    gsap.set(overlayBgRef.current, { autoAlpha: 0 });
-    gsap.set(overlayCard, {
-      position: "fixed",
-      top: first.top,
-      left: first.left,
-      width: first.width,
-      height: first.height,
-      borderRadius: 24,
-      xPercent: 0,
-      yPercent: 0,
-    });
-    gsap.set(
-      [overlayQuoteRef.current, overlayMetaRef.current, overlayMarkRef.current],
-      { autoAlpha: 0, y: 30 }
-    );
-
-    const tl = gsap.timeline();
-    tl.to(overlayBgRef.current, { autoAlpha: 1, duration: 0.5, ease: "power2.out" }, 0)
-      .to(
-        overlayCard,
-        {
-          top: window.innerHeight / 2,
-          left: window.innerWidth / 2,
-          xPercent: -50,
-          yPercent: -50,
-          width: Math.min(720, window.innerWidth - 48),
-          height: Math.min(560, window.innerHeight - 80),
-          borderRadius: 32,
-          duration: 0.9,
-          ease: "expo.inOut",
-        },
-        0,
-      )
-      .to(overlayMarkRef.current, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.45)
-      .to(overlayQuoteRef.current, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.55)
-      .to(overlayMetaRef.current, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.65);
-
-    gsap.to(cardEl, { autoAlpha: 0, duration: 0.2 });
-  }, [active]);
-
-  const closeOverlay = () => {
-    if (active === null) return;
-    const cardEl = cardsRef.current[active];
-    const overlay = overlayRef.current;
-    const overlayCard = overlayCardRef.current;
-    if (!cardEl || !overlay || !overlayCard) return;
-
-    const target = cardEl.getBoundingClientRect();
-
-    const tl = gsap.timeline({
-      onComplete: () => {
-        gsap.set(overlay, { autoAlpha: 0 });
-        gsap.set(cardEl, { autoAlpha: 1 });
-        overlay.style.pointerEvents = "none";
-        setActive(null);
-      },
-    });
-    tl.to(
-      [overlayQuoteRef.current, overlayMetaRef.current, overlayMarkRef.current],
-      { autoAlpha: 0, y: 20, duration: 0.25, ease: "power2.in" },
-      0,
-    )
-      .to(
-        overlayCard,
-        {
-          top: target.top,
-          left: target.left,
-          xPercent: 0,
-          yPercent: 0,
-          width: target.width,
-          height: target.height,
-          borderRadius: 24,
-          duration: 0.7,
-          ease: "expo.inOut",
-        },
-        0.1,
-      )
-      .to(overlayBgRef.current, { autoAlpha: 0, duration: 0.4, ease: "power2.in" }, 0.3);
-  };
-
-  const activeT = active !== null ? TESTIMONIALS[active] : null;
-
-  // ── Render ─────────────────────────────────────────────────────────────────
+// ─── Avatar placeholder ────────────────────────────────────────────────────────
+function Avatar({
+  initial,
+  size,
+  bg,
+  border,
+  fontSize,
+  color,
+  img,
+}: {
+  initial: string;
+  size: number;
+  bg?: string;
+  border?: string;
+  fontSize?: number;
+  color?: string;
+  img?: string;
+}) {
   return (
-    <section style={{ position: "relative", background: "#0E0D0E", color: "#F5F0E8" }}>
-      {/* ── Outer scrollable container — height = 100vh + trackScroll ────── */}
-      <div ref={containerRef} style={{ height: sectionH, position: "relative" }}>
+    <div
+      style={{
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        background: img ? "transparent" : (bg ?? "rgba(201,169,98,0.12)"),
+        border: border ?? "1.5px solid rgba(201,169,98,0.3)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Playfair Display', Georgia, serif",
+        fontWeight: 700,
+        fontSize: fontSize ?? size * 0.38,
+        color: color ?? FG,
+        flexShrink: 0,
+        boxShadow: "0 2px 12px rgba(26,24,25,0.06)",
+        userSelect: "none",
+        overflow: "hidden",
+      }}
+    >
+      {img ? (
+        <img src={img} alt={initial} style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }} />
+      ) : (
+        initial
+      )}
+    </div>
+  );
+}
 
-        {/* ── Sticky stage (same technique as WhyChooseUs) ─────────────── */}
+// ─── Main component ────────────────────────────────────────────────────────────
+export function Feedback() {
+  const swiperRef = useRef<SwiperType | null>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const active = ITEMS[activeIdx % ITEMS.length];
+
+  return (
+    <section
+      className="relative w-full overflow-hidden"
+      style={{
+        background: "#D3C8B6",
+        padding: "80px 20px",
+        fontFamily: "'Cormorant Garamond', Georgia, serif",
+      }}
+    >
+      {/* Decorative SVG path */}
+      <svg
+        className="pointer-events-none absolute inset-x-0 z-[1] w-full top-0"
+        style={{ aspectRatio: '1440 / 1080', opacity: 0.35 }}
+        viewBox="0 0 1440 1080"
+        preserveAspectRatio="none"
+        aria-hidden
+      >
+        <linearGradient id="feed-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#15141500" />
+          <stop offset=".5" stopColor="#c07a20" />
+          <stop offset="1" stopColor="#15141500" />
+        </linearGradient>
+        <path
+          fill="none"
+          stroke="url(#feed-grad)"
+          strokeWidth="1.5"
+          d="M517.1,0c246,127,804.3,132.3,752,234-27.9,54.4-412.5,84.1-649,16-228.9-65.9-467.4-48.1-462-27,15.1,59.1,394-184,527-73C924.7,350,14.1,621,250.1,1000"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+      <style>{`
+        .ts-nav-btn {
+          width: 42px;
+          height: 42px;
+          border-radius: 50%;
+          border: 1.5px solid rgba(26,24,25,0.15);
+          background: transparent;
+          color: ${FG};
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s, border-color 0.2s, transform 0.2s;
+          box-shadow: 0 2px 8px rgba(26,24,25,0.04);
+          flex-shrink: 0;
+          z-index: 10;
+          margin-top: -30px;
+        }
+        .ts-nav-btn:hover {
+          background: ${ACC};
+          border-color: ${ACC};
+          color: #F5F0E8;
+          transform: scale(1.08);
+        }
+
+        .ts-swiper { overflow: visible; }
+        .ts-swiper .swiper-pagination {
+          position: static !important;
+          display: flex !important;
+          justify-content: center;
+          align-items: center;
+          gap: 6px;
+          margin-top: 24px !important;
+          padding-bottom: 8px !important;
+        }
+        .ts-swiper .swiper-pagination-bullet {
+          width: 8px !important;
+          height: 8px !important;
+          background: rgba(26,24,25,0.20) !important;
+          opacity: 1 !important;
+          border-radius: 50% !important;
+          transition: all 0.3s ease !important;
+          margin: 0 4px !important;
+        }
+        .ts-swiper .swiper-pagination-bullet-active {
+          background: ${ACC} !important;
+          width: 24px !important;
+          border-radius: 4px !important;
+          transform: none !important;
+        }
+
+        .ts-orbit-avatar {
+          position: absolute;
+          border-radius: 50%;
+          box-shadow: 0 4px 16px rgba(26,24,25,0.06);
+          pointer-events: none;
+        }
+
+        @keyframes ts-float-a {
+          0%,100% { transform: translateY(0px) translateX(0px); }
+          33%      { transform: translateY(-12px) translateX(5px); }
+          66%      { transform: translateY(-5px) translateX(-6px); }
+        }
+        @keyframes ts-float-b {
+          0%,100% { transform: translateY(0px) translateX(0px); }
+          33%      { transform: translateY(8px) translateX(-7px); }
+          66%      { transform: translateY(-10px) translateX(4px); }
+        }
+        @keyframes ts-float-c {
+          0%,100% { transform: translateY(0px) translateX(0px); }
+          50%      { transform: translateY(-14px) translateX(8px); }
+        }
+        @keyframes ts-float-d {
+          0%,100% { transform: translateY(0px) translateX(0px); }
+          40%      { transform: translateY(10px) translateX(-5px); }
+          80%      { transform: translateY(-8px) translateX(6px); }
+        }
+
+        .ts-orbit-avatar:nth-child(1) { animation: ts-float-a 6.0s ease-in-out infinite; }
+        .ts-orbit-avatar:nth-child(2) { animation: ts-float-b 7.2s ease-in-out infinite; animation-delay: -1.5s; }
+        .ts-orbit-avatar:nth-child(3) { animation: ts-float-c 5.5s ease-in-out infinite; animation-delay: -3.0s; }
+        .ts-orbit-avatar:nth-child(4) { animation: ts-float-d 8.0s ease-in-out infinite; animation-delay: -0.8s; }
+        .ts-orbit-avatar:nth-child(5) { animation: ts-float-a 6.8s ease-in-out infinite; animation-delay: -2.2s; }
+        .ts-orbit-avatar:nth-child(6) { animation: ts-float-b 5.8s ease-in-out infinite; animation-delay: -4.0s; }
+        .ts-orbit-avatar:nth-child(7) { animation: ts-float-c 7.5s ease-in-out infinite; animation-delay: -1.0s; }
+        .ts-orbit-avatar:nth-child(8) { animation: ts-float-d 6.3s ease-in-out infinite; animation-delay: -3.5s; }
+
+        .ts-center-ring {
+          position: absolute;
+          border-radius: 50%;
+          border: 1px dashed rgba(201,169,98,0.4);
+          pointer-events: none;
+          animation: ts-spin 22s linear infinite;
+        }
+        @keyframes ts-spin {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to   { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .ts-quote-icon {
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: 56px;
+          line-height: 0.8;
+          color: ${ACC};
+          opacity: 0.55;
+          display: block;
+          text-align: center;
+          margin-bottom: 10px;
+          user-select: none;
+        }
+
+        .ts-testimonial-card {
+          text-align: center;
+          padding: 0 16px 24px;
+        }
+        .ts-body {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: 17px;
+          line-height: 1.85;
+          color: ${SUB};
+          max-width: 440px;
+          margin: 0 auto 18px;
+        }
+        .ts-name {
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: 19px;
+          font-weight: 400;
+          color: ${FG};
+          margin-bottom: 3px;
+        }
+      `}</style>
+
+      {/* ── Decorative orbit rings ─────────────────────────────────────── */}
+      <div className="ts-center-ring" style={{ width: 320, height: 320, top: "50%", left: "50%", animationDuration: "28s" }} />
+      <div className="ts-center-ring" style={{ width: 480, height: 480, top: "50%", left: "50%", animationDuration: "40s", animationDirection: "reverse" }} />
+
+      {/* ── Orbiting avatar decorations ───────────────────────────────── */}
+      {ORBIT_AVATARS.map((av, i) => (
         <div
+          key={i}
+          className="ts-orbit-avatar"
           style={{
-            position: "sticky",
-            top: 0,
-            height: "100vh",
-            overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            top: av.top,
+            left: av.left,
+            width: av.size,
+            height: av.size,
           }}
         >
-          {/* Header */}
-          <div
-            style={{
-              position: "relative",
-              zIndex: 10,
-              maxWidth: "72rem",
-              margin: "0 auto",
-              padding: "0 1.5rem 2rem",
-              width: "100%",
-            }}
-          >
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                marginBottom: "1rem",
-                padding: "0.375rem 1rem",
-                borderRadius: "9999px",
-                border: "0.5px solid rgba(201,169,98,0.4)",
-                background: "rgba(201,169,98,0.07)",
-                fontSize: "0.65rem",
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontWeight: 300,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase" as const,
-                color: "#C9A962",
-              }}
-            >
-              <span
-                style={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: "50%",
-                  background: "#C9A962",
-                  display: "inline-block",
-                }}
-              />
-              Our Products
-            </span>
-            <h2
-              style={{
-                fontFamily: "'Runalto', 'Playfair Display', Georgia, serif",
-                fontSize: "clamp(2rem, 5vw, 4rem)",
-                fontWeight: 400,
-                lineHeight: 0.95,
-                letterSpacing: "-0.03em",
-                color: "#F5F0E8",
-                margin: 0,
-              }}
-            >
-              Light Styles to Match Every Space
-            </h2>
-            {/* Description removed */}
-          </div>
-
-          {/* Horizontal card track — driven by scroll progress, NO GSAP pin */}
-          <div
-            style={{
-              position: "relative",
-              zIndex: 10,
-              overflow: "hidden",
-              width: "100%",
-            }}
-          >
-            <div
-              ref={trackRef}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "2rem",
-                paddingLeft: "10vw",
-                paddingRight: "10vw",
-                willChange: "transform",
-                transform: `translateX(${trackX}px)`,
-                transition: "transform 0.05s linear",
-              }}
-            >
-              {TESTIMONIALS.map((t, i) => {
-                return (
-                  <button
-                    key={t.id}
-                    ref={(el) => {
-                      cardsRef.current[i] = el;
-                    }}
-                    onClick={() => setActive(i)}
-                    style={{
-                      flexShrink: 0,
-                      cursor: "pointer",
-                      textAlign: "left" as const,
-                      background: "none",
-                      border: "none",
-                      padding: 0,
-                      width: "clamp(260px, 26vw, 360px)",
-                      height: "clamp(340px, 44vh, 440px)",
-                      perspective: "1200px",
-                      position: "relative",
-                    }}
-                  >
-                    {/* card-inner — 3D tilt target */}
-                    <div
-                      className="card-inner"
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        height: "100%",
-                        transformStyle: "preserve-3d",
-                      }}
-                    >
-                    <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        height: "100%",
-                        overflow: "hidden",
-                        borderRadius: "1.5rem",
-                        border: "0.5px solid rgba(245,240,232,0.1)",
-                        backgroundImage: `url(${t.img})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        boxShadow:
-                          "0 30px 60px -20px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.03)",
-                      }}
-                    >
-                      {/* Dark scrim for text legibility */}
-                      <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", borderRadius: "1.5rem", zIndex: 1 }} />
-                      {/* Sheen layer */}
-                      <div
-                        className="card-sheen"
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          borderRadius: "1.5rem",
-                          zIndex: 5,
-                          pointerEvents: "none",
-                          opacity: 0,
-                        }}
-                      />
-                      {/* Number */}
-                        {/* Counter removed */}
-
-                      {/* Quote mark removed */}
-
-                      {/* Card content */}
-                      <div
-                        style={{
-                          position: "absolute",
-                          left: "1.5rem",
-                          right: "1.5rem",
-                          bottom: "1.5rem",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "1rem",
-                          color: "#F5F0E8",
-                          zIndex: 2,
-                        }}
-                      >
-                        {/* Excerpt removed */}
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "0.75rem",
-                            borderTop: "0.5px solid rgba(245,240,232,0.1)",
-                            paddingTop: "0.875rem",
-                          }}
-                        >
-                          <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-                            <span
-                              style={{
-                                fontSize: "1.2rem",
-                                fontWeight: 500,
-                                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                color: "#F5F0E8",
-                              }}
-                            >
-                              {t.name}
-                            </span>
-                          </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              width: "1.75rem",
-                              height: "1.75rem",
-                              borderRadius: "50%",
-                              background: "rgba(245,240,232,0.07)",
-                              flexShrink: 0,
-                            }}
-                          >
-                            <svg
-                              width="11"
-                              height="11"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                            >
-                              <path d="M7 17L17 7M9 7h8v8" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    </div>{/* end card-inner */}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          <Avatar initial={av.initial} size={av.size} bg={av.bg} color={av.color} border="1.5px solid rgba(201,169,98,0.3)" />
         </div>
-        {/* end sticky stage */}
-      </div>
-      {/* end outer container */}
+      ))}
 
-      {/* ── Overlay (fixed, z-9999, pure GSAP tweens — no ScrollTrigger) ── */}
+      {/* ── Main content ──────────────────────────────────────────────── */}
       <div
-        ref={overlayRef}
         style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 9999,
-          opacity: 0,
-          visibility: "hidden",
-          pointerEvents: "none",
+          position: "relative",
+          zIndex: 5,
+          maxWidth: 860,
+          margin: "0 auto",
+          padding: "80px 40px 80px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <div
-          ref={overlayBgRef}
-          onClick={closeOverlay}
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(0,0,0,0.8)",
-            backdropFilter: "blur(12px)",
-          }}
-        />
-        {activeT && (
-          <div
-            ref={overlayCardRef}
+        {/* Heading */}
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <span
             style={{
-              overflow: "hidden",
-              border: "0.5px solid rgba(245,240,232,0.1)",
-              boxShadow: "0 40px 80px rgba(0,0,0,0.6)",
-              background: `linear-gradient(155deg, hsl(${activeT.hue}, 28%, 16%) 0%, hsl(${activeT.hue}, 18%, 9%) 100%)`,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              marginBottom: "1rem",
+              padding: "0.375rem 1rem",
+              borderRadius: "9999px",
+              border: "0.5px solid rgba(201,169,98,0.4)",
+              background: "rgba(201,169,98,0.07)",
+              fontSize: "0.65rem",
+              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              fontWeight: 300,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: FG,
             }}
           >
-            <button
-              onClick={closeOverlay}
-              style={{
-                position: "absolute",
-                right: "1.25rem",
-                top: "1.25rem",
-                zIndex: 10,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "2.25rem",
-                height: "2.25rem",
-                borderRadius: "50%",
-                background: "rgba(245,240,232,0.1)",
-                border: "none",
-                cursor: "pointer",
-                color: "#F5F0E8",
-              }}
-              aria-label="Close"
-            >
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M6 6l12 12M18 6L6 18" />
-              </svg>
-            </button>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: ACC, display: "inline-block" }} />
+            Testimonials
+          </span>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: "100%",
-                padding: "2.5rem",
-                color: "#F5F0E8",
-              }}
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
+              fontWeight: 400,
+              lineHeight: 0.95,
+              letterSpacing: "-0.03em",
+              color: FG,
+              margin: "0 0 20px",
+            }}
+          >
+            <TitleReveal text="What" className="inline-block" style={{ color: FG }} />{" "}
+            <TitleReveal text="Our Clients" className="inline-block italic" style={{ color: FG }} />{" "}
+            <TitleReveal text="Say" className="inline-block" style={{ color: FG }} />
+          </h2>
+
+          <div
+            style={{
+              width: 48,
+              height: 2.5,
+              background: ACC,
+              borderRadius: 2,
+              margin: "0 auto",
+            }}
+          />
+        </div>
+
+        {/* Central large avatar */}
+        <div
+          style={{
+            position: "relative",
+            marginBottom: 28,
+          }}
+        >
+          {/* Glow ring */}
+          <div
+            style={{
+              position: "absolute",
+              inset: -6,
+              borderRadius: "50%",
+              border: `1.5px dashed ${ACC}`,
+              opacity: 0.4,
+            }}
+          />
+          <Avatar
+            initial={active.initial}
+            size={96}
+            bg={active.bg}
+            color={active.textColor}
+            border={`1.5px solid ${ACC}`}
+            fontSize={36}
+            img={active.img}
+          />
+        </div>
+
+        {/* Swiper */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            width: "100%",
+            maxWidth: 620,
+          }}
+        >
+          {/* Prev */}
+          <button
+            className="ts-nav-btn"
+            aria-label="Previous"
+            onClick={() => swiperRef.current?.slidePrev()}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          {/* Swiper */}
+          <div className="ts-swiper" style={{ flex: 1, minWidth: 0 }}>
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              loop
+              speed={550}
+              autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+              pagination={{ el: ".ts-pagination", clickable: true }}
+              onSwiper={(s) => { swiperRef.current = s; }}
+              onSlideChange={(s) => setActiveIdx(s.realIndex)}
             >
-              {/* Quote mark removed */}
-              <p
-                ref={overlayQuoteRef}
-                style={{
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: "clamp(1.05rem, 2.2vw, 1.4rem)",
-                  fontWeight: 400,
-                  lineHeight: 1.7,
-                  margin: 0,
-                }}
-              >
-                {activeT.quote}
-              </p>
-              <div
-                ref={overlayMetaRef}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  borderTop: "0.5px solid rgba(245,240,232,0.1)",
-                  paddingTop: "1.25rem",
-                }}
-              >
-                <div>
-                  <div
-                    style={{
-                      fontFamily: "'Cormorant Garamond', Georgia, serif",
-                      fontSize: "1.8rem",
-                      fontWeight: 600,
-                      color: "#F5F0E8",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {activeT.name}
+              {ITEMS.map((item, i) => (
+                <SwiperSlide key={i}>
+                  <div className="ts-testimonial-card">
+                    <span className="ts-quote-icon">&ldquo;</span>
+                    <p className="ts-body">&ldquo;{item.body}&rdquo;</p>
+                    <p className="ts-name">{item.name}</p>
+                    <div style={{ marginTop: 8 }}>
+                      <Stars count={item.stars} />
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                </SwiperSlide>
+              ))}
+
+              <div className="ts-pagination swiper-pagination" />
+            </Swiper>
           </div>
-        )}
+
+          {/* Next */}
+          <button
+            className="ts-nav-btn"
+            aria-label="Next"
+            onClick={() => swiperRef.current?.slideNext()}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );
 }
+
+export default Feedback;

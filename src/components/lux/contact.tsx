@@ -71,12 +71,33 @@ export function Admission() {
         </svg>
       </div>
       <div className="mx-auto max-w-[1400px] px-8">
-        <div className="lux-eyebrow mb-12 text-muted-foreground">— Contact</div>
+        <span
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            marginBottom: "3rem",
+            padding: "0.375rem 1rem",
+            borderRadius: "9999px",
+            border: "0.5px solid rgba(201,169,98,0.4)",
+            background: "rgba(201,169,98,0.07)",
+            fontSize: "0.65rem",
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontWeight: 300,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: "#C9A962",
+          }}
+        >
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#C9A962", display: "inline-block" }} />
+          Contact
+        </span>
 
         <div className="grid grid-cols-1 gap-16 md:grid-cols-[0.9fr_1.1fr]">
           <div>
             <h2 className="font-serif text-[12vw] leading-[0.92] tracking-[-0.03em] md:text-[6vw]">
-              <TitleReveal text="Feel Free To Keep" className="mr-[0.25em]" />
+              <TitleReveal text="Feel Free To" className="mr-[0.25em]" />
+              <TitleReveal text="Keep" className="mr-[0.35em] whitespace-nowrap" />
               <TitleReveal text="In Touch With Us" className="font-light italic text-[var(--ember)]" />
             </h2>
             <p className="mt-8 max-w-sm text-sm leading-relaxed text-muted-foreground">

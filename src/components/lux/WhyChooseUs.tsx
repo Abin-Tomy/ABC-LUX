@@ -52,7 +52,7 @@ export function WhyChooseUs() {
   const raw = useScrollProgress(containerRef);
 
   const splitP    = phase(raw, 0.08, 0.30);
-  const textFadeP = phase(raw, 0.28, 0.46);
+  const textFadeP = phase(raw, 0.08, 0.26);
   const diagP     = phase(raw, 0.38, 0.54);
   const convergeP = phase(raw, 0.48, 0.68);
 
@@ -73,9 +73,9 @@ export function WhyChooseUs() {
 
   const deckRaw = remap(raw, 0.68, 1.00);
   const inDeck = deckRaw > 0;
-  const deckIndex = (2 + Math.min(N - 1, Math.floor(deckRaw * N))) % N;
+  const deckIndex = Math.min(N - 1, Math.floor(deckRaw * N));
 
-  const panelOp = eio(remap(raw, 0.72, 0.82));
+  const panelOp = eio(remap(raw, 0.60, 0.68));
   const heroCard = CARDS[deckIndex];
 
   const getRoleForCard = (i: number) => {
@@ -84,10 +84,10 @@ export function WhyChooseUs() {
   };
 
   const CONVERGE_TARGETS = [
-    ROLE_BY_DIFF[((0 - 2) % N + N) % N],
-    ROLE_BY_DIFF[((1 - 2) % N + N) % N],
-    ROLE_BY_DIFF[((2 - 2) % N + N) % N],
-    ROLE_BY_DIFF[((3 - 2) % N + N) % N],
+    ROLE_BY_DIFF[0],
+    ROLE_BY_DIFF[1],
+    ROLE_BY_DIFF[2],
+    ROLE_BY_DIFF[3],
   ];
 
   // Cards start at INITIAL_SCALE (small) and grow to full deck scale as they converge
@@ -118,15 +118,14 @@ export function WhyChooseUs() {
 
   return (
     <section className="relative" style={{ background: "#D3C8B6", color: "#1A1819" }}>
+
       {/* Star Mask at the junction with the previous section */}
-      <div className="absolute top-0 left-1/2 z-50 w-24 h-24 -translate-x-1/2 -translate-y-1/2 pointer-events-none text-[#0E0D0E]">
-        <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full">
-          <path d="M50,0c0,27.6,22.4,50,50,50-27.6,0-50,22.4-50,50,0-27.6-22.4-50-50-50,27.6,0,50-22.4,50-50Z" />
-        </svg>
-      </div>
+      
       <style>{`
         .wcu-stage{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-        .wcu-text-row{position:absolute;display:flex;flex-direction:row;align-items:baseline;gap:0.5em;pointer-events:none;z-index:4}
+        .wcu-title-wrapper{position:absolute;display:flex;flex-direction:column;align-items:center;gap:24px;z-index:4;pointer-events:none}
+        .wcu-text-row{display:flex;flex-direction:row;align-items:baseline;gap:0.5em}
+        .wcu-subtitle{font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:#1A1819}
         .wcu-word-container {
           display: block;
           overflow: hidden;
@@ -148,40 +147,65 @@ export function WhyChooseUs() {
         .wcu-card-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:36px 32px;text-align:center;}
         .wcu-card-numeral{font-family:'Playfair Display',Georgia,serif;font-size:13px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;opacity:.45;margin-bottom:24px;}
         .wcu-card-title{font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:400;line-height:1.2;letter-spacing:-.01em;margin-bottom:14px;}
-        .wcu-card-desc{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:300;line-height:1.6;letter-spacing:.01em;opacity:.85;max-width:280px;}
+        .wcu-card-desc{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:400;line-height:1.6;letter-spacing:.01em;max-width:280px;}
+        .wcu-card-bg-numeral{position:absolute;bottom:-32px;right:-16px;font-family:'Inter',system-ui,sans-serif;font-size:240px;font-weight:800;line-height:1;color:#1A1819;opacity:0.04;pointer-events:none;z-index:1;user-select:none;letter-spacing:-0.05em;}
         .wcu-card-line{width:32px;height:1.5px;margin-bottom:20px;opacity:.6;}
         .wcu-label{position:absolute;left:50%;font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:400;font-style:italic;letter-spacing:.01em;white-space:nowrap;pointer-events:none;z-index:35;color:#1A1819;transform:translateX(-50%)}
         .wcu-panel-left{position:absolute;left:52px;top:0;bottom:0;width:230px;display:flex;flex-direction:column;justify-content:center;pointer-events:none;z-index:11}
         .wcu-panel-right{position:absolute;right:52px;top:0;bottom:0;width:230px;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;pointer-events:none;z-index:11}
-        .wcu-eyebrow{font-family:'Cormorant Garamond',Georgia,serif;font-size:10px;font-weight:300;letter-spacing:.22em;text-transform:uppercase;line-height:1.75;margin-bottom:40px;opacity:.75;color:#1A1819}
-        .wcu-body{font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;font-weight:300;line-height:1.75;opacity:.65;color:#1A1819}
+        .wcu-eyebrow{font-family:'Cormorant Garamond',Georgia,serif;font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;line-height:1.75;margin-bottom:40px;color:#1A1819}
+        .wcu-body{font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;font-weight:400;line-height:1.75;color:#1A1819}
         .wcu-counter-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:16px}
-        .wcu-counter{font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:-.02em;opacity:.45;position:relative;width:76px;height:76px;display:flex;align-items:center;justify-content:center;color:#1A1819}
+        .wcu-counter{font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:-.02em;position:relative;width:76px;height:76px;display:flex;align-items:center;justify-content:center;color:#1A1819}
         .wcu-counter::before{content:'';position:absolute;inset:0;border:.5px solid rgba(26,24,25,.2);border-radius:50%}
         .wcu-cta{font-family:'Cormorant Garamond',Georgia,serif;font-size:10px;font-weight:300;letter-spacing:.22em;text-transform:uppercase;border:.5px solid rgba(26,24,25,.3);padding:13px 20px;display:flex;align-items:center;gap:36px;cursor:pointer;pointer-events:auto;background:transparent;color:#1A1819;transition:background .2s}
         .wcu-cta:hover{background:rgba(26,24,25,.05)}
         .wcu-ticker{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:30;font-family:'Cormorant Garamond',Georgia,serif;font-size:9px;letter-spacing:.32em;text-transform:uppercase;background:rgba(26,24,25,.07);color:#1A1819;border:.5px solid rgba(26,24,25,.13);padding:4px 14px;white-space:nowrap}
-        @media(max-width:768px){.wcu-panel-left,.wcu-panel-right{display:none}.wcu-word{font-size:clamp(42px,12vw,72px)}}
+        @media(max-width:768px){.wcu-panel-left,.wcu-panel-right{display:none}.wcu-word{font-size:clamp(42px,12vw,72px)}.wcu-subtitle{font-size:12px;gap:16px;}}
       `}</style>
 
       <div ref={containerRef} style={{ height: "900vh", position: "relative" }}>
         <div className="wcu-stage">
-
-          <div className="wcu-text-row" style={{ opacity: textOpacity, transform: `scale(${textScale})` }}>
-            <span className="wcu-word-container" style={{ transform: `translateX(${whyPush}vw)` }}>
-              <TitleReveal 
-                text="Why" 
-                className="wcu-word" 
-                style={{ color: "#1A1819" }}
-              />
-            </span>
-            <span className="wcu-word-container" style={{ transform: `translateX(${choosePush}vw)` }}>
-              <TitleReveal 
-                text="Choose Us" 
-                className="wcu-word"
-                style={{ color: "#1A1819" }}
-              />
-            </span>
+          {/* Decorative SVG path inside sticky stage */}
+          <svg
+            className="pointer-events-none absolute inset-x-0 z-[1] w-full top-0"
+            style={{ aspectRatio: '1440 / 1080', opacity: 0.25 }}
+            viewBox="0 0 1440 1080"
+            preserveAspectRatio="none"
+            aria-hidden
+          >
+            <linearGradient id="why-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#15141500" />
+              <stop offset=".5" stopColor="#c07a20" />
+              <stop offset="1" stopColor="#15141500" />
+            </linearGradient>
+            <path
+              fill="none"
+              stroke="url(#why-grad)"
+              strokeWidth="1.5"
+              d="M517.1,0c246,127,804.3,132.3,752,234-27.9,54.4-412.5,84.1-649,16-228.9-65.9-467.4-48.1-462-27,15.1,59.1,394-184,527-73C924.7,350,14.1,621,250.1,1000"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>          <div className="wcu-title-wrapper">
+            <div className="wcu-text-row" style={{ opacity: textOpacity, transform: `scale(${textScale})` }}>
+              <span className="wcu-word-container" style={{ transform: `translateX(${whyPush}vw)` }}>
+                <TitleReveal 
+                  text="Why" 
+                  className="wcu-word" 
+                  style={{ color: "#1A1819" }}
+                />
+              </span>
+              <span className="wcu-word-container" style={{ transform: `translateX(${choosePush}vw)` }}>
+                <TitleReveal 
+                  text="Choose Us" 
+                  className="wcu-word"
+                  style={{ color: "#1A1819" }}
+                />
+              </span>
+            </div>
+            <div className="wcu-subtitle" style={{ opacity: textOpacity }}>
+              Driven by Excellence, Powered by Trust
+            </div>
           </div>
 
           {CARDS.map((card, i) => {
@@ -199,7 +223,8 @@ export function WhyChooseUs() {
                 }}
               >
                 <div style={{ position: "absolute", inset: 0, background: card.accent, opacity: 0.12 }} />
-                <div className="wcu-card-inner" style={{ color: "#1A1819" }}>
+                <div className="wcu-card-bg-numeral">{card.id}</div>
+                <div className="wcu-card-inner" style={{ color: "#1A1819", zIndex: 2 }}>
                   <span className="wcu-card-numeral">— {card.id}</span>
                   <div className="wcu-card-line" style={{ background: card.accent }} />
                   <h3 className="wcu-card-title">{card.name}</h3>
@@ -219,7 +244,7 @@ export function WhyChooseUs() {
             <p className="wcu-body">{heroCard.description}</p>
           </div>
           <div className="wcu-panel-right" style={{ opacity: panelOp }}>
-            <p className="wcu-eyebrow" style={{ textAlign: "right" }}>Available exclusively<br />by appointment.<br />No two pieces alike.</p>
+            <p className="wcu-eyebrow" style={{ textAlign: "right" }}>Form meets illumination.<br />Designed to define spaces.</p>
             <div className="wcu-counter-wrap">
               <div className="wcu-counter">{deckIndex + 1}/{N}</div>
               <button className="wcu-cta">
@@ -229,7 +254,7 @@ export function WhyChooseUs() {
             </div>
           </div>
 
-          <div className="wcu-ticker" style={{ opacity: Math.max(0.35, panelOp * 0.7) }}>Why Choose Us</div>
+          <div className="wcu-ticker" style={{ opacity: panelOp }}>Why Choose Us</div>
         </div>
       </div>
     </section>

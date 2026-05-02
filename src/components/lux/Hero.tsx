@@ -31,17 +31,24 @@ export function Hero() {
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: "+=140%",
+          end: "+=80%",
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true,
         },
       });
 
-      tl.to(".lux-hero-floor", { yPercent: -85, ease: "none" }, 0)
-        .to(".lux-hero-rock", { scale: 1.25, ease: "none" }, 0)
-        .to(".lux-hero-meta", { opacity: 0, ease: "none" }, 0.1)
-        .to(".lux-hero-bg", { backgroundColor: "#0E0D0E", ease: "none" }, 0.55);
+      tl
+        .to(".lux-hero-floor", {
+          yPercent: -72,
+          ease: "none",
+          duration: 1,
+        }, 0)
+        .to(".lux-hero-rock", { scale: 1.25, ease: "none", duration: 1 }, 0)
+        .to(".lux-hero-headline", { y: "-45vh", opacity: 0, ease: "none", duration: 0.4 }, 0)
+        .to(".lux-hero-cta", { y: "-120vh", ease: "none", duration: 1 }, 0)
+        .to(".lux-hero-meta", { opacity: 0, ease: "none", duration: 0.3 }, 0)
+        .to(".lux-hero-bg", { backgroundColor: "#0E0D0E", ease: "none", duration: 0.5 }, 0.3);
     }, root);
 
     return () => ctx.revert();
@@ -169,7 +176,7 @@ export function Hero() {
       </div>
 
       {/* SEEK ADMISSION pill */}
-      <div className="absolute left-1/2 top-[96vh] md:top-[94vh] z-50 -translate-x-1/2 w-max">
+      <div className="lux-hero-cta absolute left-1/2 top-[96vh] md:top-[94vh] z-50 -translate-x-1/2 w-max">
         <a
           href="#admission"
           data-cursor="ENTER"
@@ -180,13 +187,13 @@ export function Hero() {
         </a>
       </div>
 
-      {/* Black floor — seamlessly bleeds into the next section */}
+      {/* Black curved floor — sweeps up on scroll with warm-to-obsidian blend */}
       <div
-        className="lux-hero-floor pointer-events-none absolute inset-x-[-40%] bottom-[-130vh] z-[15] h-[140vh]"
+        className="lux-hero-floor pointer-events-none absolute inset-x-[-60%] bottom-[-120vh] z-[15] h-[130vh]"
         style={{
           background: "#0E0D0E",
-          borderTopLeftRadius: "60% 100%",
-          borderTopRightRadius: "60% 100%",
+          borderTopLeftRadius: "50% 100%",
+          borderTopRightRadius: "50% 100%",
         }}
       />
 
