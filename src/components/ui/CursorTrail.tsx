@@ -105,12 +105,6 @@ const CursorTrail: React.FC = () => {
       ctx.lineWidth = 8;
       ctx.stroke();
 
-      // Cursor dot
-      ctx.beginPath();
-      ctx.arc(points[0].x, points[0].y, 4, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(198, 167, 106, 0.9)';
-      ctx.fill();
-
       animationIdRef.current = requestAnimationFrame(animate);
     };
 
@@ -120,14 +114,10 @@ const CursorTrail: React.FC = () => {
     window.addEventListener('resize', resize, { passive: true });
     animationIdRef.current = requestAnimationFrame(animate);
 
-    // Hide native cursor
-    document.documentElement.classList.add('lux-cursor');
-
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', resize);
       if (animationIdRef.current) cancelAnimationFrame(animationIdRef.current);
-      document.documentElement.classList.remove('lux-cursor');
     };
   }, []);
 

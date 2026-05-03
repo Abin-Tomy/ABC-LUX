@@ -299,7 +299,7 @@ export function Places() {
       </div>
 
       {/* Scroll Container for sophisticated animation */}
-      <div ref={scrollContainerRef} className="scroll-container relative h-screen overflow-hidden">
+      <div ref={scrollContainerRef} className="scroll-container relative z-20 h-screen overflow-hidden">
         <div className="sticky-scene relative h-full">
           {/* MOBILE VIEW: Single grave-shaped image (Hidden on desktop) */}
           <div className="flex md:hidden flex-col items-center justify-center px-4 pt-[4vh] pb-[12vh] w-full">
@@ -586,7 +586,7 @@ export function Places() {
       </div>
 
         {/* Star mask at bottom-center of Places (division line above Testimonials) */}
-        <div className="absolute bottom-0 left-1/2 z-60 w-24 h-24 -translate-x-1/2 translate-y-1/2 pointer-events-none text-[#0E0D0E]">
+        <div className="absolute bottom-0 left-1/2 z-10 w-24 h-24 -translate-x-1/2 translate-y-1/2 pointer-events-none text-[#0E0D0E]">
           <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full">
             <path d="M50,0c0,27.6,22.4,50,50,50-27.6,0-50,22.4-50,50,0-27.6-22.4-50-50-50,27.6,0,50-22.4,50-50Z" />
           </svg>

@@ -87,15 +87,15 @@ body {
   }
 
   .lux-nav-inner {
-    align-items: flex-start !important;
+    align-items: center !important;
     gap: 12px !important;
   }
 
     .lux-logo-img {
-    height: 88px !important;
-    margin-top: -48px !important;
-    margin-left: -14px !important;
-    transform: scale(1.5) !important;
+    height: 30px !important;
+    margin-top: 0 !important;
+    margin-left: -4px !important;
+    transform: scale(1) !important;
     transform-origin: left top !important;
   }
 
@@ -782,14 +782,14 @@ body {
 @media (max-width: 767px) {
   .lux-menu-logo-wrap {
     left: 16px !important;
-    top: 14px !important;
+    top: 19px !important;
   }
 
   .lux-menu-logo {
-    height: 88px !important;
-    margin-top: -48px !important;
-    margin-left: -14px !important;
-    transform: scale(1.5) !important;
+    height: 30px !important;
+    margin-top: 0 !important;
+    margin-left: -4px !important;
+    transform: scale(1) !important;
     transform-origin: left top !important;
   }
 

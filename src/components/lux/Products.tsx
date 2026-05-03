@@ -478,7 +478,7 @@ export function Testimonials() {
                 display: "flex",
                 alignItems: "center",
                 gap: "2rem",
-                paddingLeft: "10vw",
+                paddingLeft: "16vw",
                 paddingRight: "10vw",
                 willChange: "transform",
                 transform: `translateX(${trackX}px)`,
@@ -532,8 +532,7 @@ export function Testimonials() {
                           "0 30px 60px -20px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.03)",
                       }}
                     >
-                      {/* Dark scrim for text legibility */}
-                      <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", borderRadius: "1.5rem", zIndex: 1 }} />
+                      {/* Dark scrim for text legibility removed */}
                       {/* Sheen layer */}
                       <div
                         className="card-sheen"
@@ -550,6 +549,24 @@ export function Testimonials() {
                         {/* Counter removed */}
 
                       {/* Quote mark removed */}
+
+                      {/* Soft gradient blur behind text (no rigid box) */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          height: "140px",
+                          background: "linear-gradient(to top, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%)",
+                          backdropFilter: "blur(4px)",
+                          WebkitBackdropFilter: "blur(4px)",
+                          maskImage: "linear-gradient(to top, black 40%, transparent 100%)",
+                          WebkitMaskImage: "linear-gradient(to top, black 40%, transparent 100%)",
+                          zIndex: 1,
+                          pointerEvents: "none",
+                        }}
+                      />
 
                       {/* Card content */}
                       <div
@@ -571,7 +588,7 @@ export function Testimonials() {
                             display: "flex",
                             alignItems: "center",
                             gap: "0.75rem",
-                            borderTop: "0.5px solid rgba(245,240,232,0.1)",
+                            borderTop: "0.5px solid rgba(245,240,232,0.2)",
                             paddingTop: "0.875rem",
                           }}
                         >
@@ -598,6 +615,7 @@ export function Testimonials() {
                               height: "1.75rem",
                               borderRadius: "50%",
                               background: "rgba(245,240,232,0.07)",
+                              border: "1px solid rgba(245,240,232,0.3)",
                               flexShrink: 0,
                             }}
                           >
