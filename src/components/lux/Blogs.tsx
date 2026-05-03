@@ -130,7 +130,7 @@ export function Blogs() {
   ];
 
   return (
-    <section style={{ background: BG, color: FG, position: "relative" }}>
+    <section id="blogs" style={{ background: BG, color: FG, position: "relative" }}>
       {/* Decorative SVG path */}
       <svg
         className="pointer-events-none absolute inset-x-0 z-[1] w-full top-0"

@@ -189,6 +189,7 @@ export function Hero() {
 
       {/* Black curved floor — sweeps up on scroll with warm-to-obsidian blend */}
       <div
+        id="hero-curve"
         className="lux-hero-floor pointer-events-none absolute inset-x-[-60%] bottom-[-120vh] z-[15] h-[130vh]"
         style={{
           background: "#0E0D0E",

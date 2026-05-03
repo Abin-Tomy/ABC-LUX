@@ -12,6 +12,9 @@ export function useLenis() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    // Prevent browser scroll restoration from fighting Lenis
+    history.scrollRestoration = "manual";
+
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
@@ -37,8 +40,9 @@ export function useLenis() {
     const handleLoad = () => ScrollTrigger.refresh();
     window.addEventListener("load", handleLoad);
     // Staggered refreshes to catch late-loading images / layout reflows
-    const timer1 = setTimeout(() => ScrollTrigger.refresh(), 200);
-    const timer2 = setTimeout(() => ScrollTrigger.refresh(), 1000);
+    // Fire after preloader finishes (~2600ms total) not during it
+    const timer1 = setTimeout(() => ScrollTrigger.refresh(), 2400);
+    const timer2 = setTimeout(() => ScrollTrigger.refresh(), 3200);
 
     return () => {
       gsap.ticker.remove(tickerCb);
@@ -47,6 +51,7 @@ export function useLenis() {
       window.removeEventListener("load", handleLoad);
       clearTimeout(timer1);
       clearTimeout(timer2);
+      history.scrollRestoration = "auto";
     };
   }, []);
 }

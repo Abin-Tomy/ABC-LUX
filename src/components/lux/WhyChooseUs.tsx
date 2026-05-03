@@ -116,7 +116,7 @@ export function WhyChooseUs() {
   };
 
   return (
-    <section className="relative" style={{ background: "#D3C8B6", color: "#1A1819" }}>
+    <section id="why-choose-us" className="relative" style={{ background: "#D3C8B6", color: "#1A1819" }}>
 
       {/* Star Mask at the junction with the previous section */}
       

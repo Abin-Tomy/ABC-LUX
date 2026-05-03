@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden bg-[var(--obsidian)] pt-24">
+    <footer id="footer" className="relative w-full overflow-hidden bg-[var(--obsidian)] pt-24">
       <div className="mx-auto max-w-[1400px] px-8 pb-16">
         <div className="grid grid-cols-1 gap-12 border-t border-white/10 pt-12 md:grid-cols-4">
           {/* Company Info & Socials */}

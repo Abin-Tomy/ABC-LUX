@@ -168,6 +168,7 @@ export function Feedback() {
 
   return (
     <section
+      id="feedback"
       className="relative w-full overflow-hidden"
       style={{
         background: "#D3C8B6",

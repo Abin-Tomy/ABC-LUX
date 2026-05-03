@@ -95,19 +95,9 @@ export function Places() {
         gsap.to(tile, {
           yPercent: speed,
           ease: "none",
-          scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: 1 },
+          scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: true },
         });
-        if (inner) {
-          gsap.fromTo(
-            inner,
-            { scale: 1.25 },
-            {
-              scale: 1,
-              ease: "none",
-              scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: 1 },
-            },
-          );
-        }
+
       });
 
       // Warm cap
@@ -122,7 +112,7 @@ export function Places() {
             trigger: root.current,
             start: "top top",
             end: "+=60%",
-            scrub: 1.5,
+            scrub: true,
           },
         },
       );
@@ -166,7 +156,7 @@ export function Places() {
             trigger: scrollContainerRef.current,
             start: "top top",
             end: "+=500%",     // extra room so outro completes before unpin
-            scrub: 1,          // smooth scrubbing
+            scrub: true,          // smooth scrubbing
             pin: true,
             pinSpacing: true,
             invalidateOnRefresh: true,
@@ -213,8 +203,8 @@ export function Places() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".lux-showcase-img",
-        { scale: 1.08, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.1, ease: "expo.out" },
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8, ease: "expo.out" },
       );
       gsap.fromTo(
         ".lux-showcase-title",
@@ -430,15 +420,33 @@ export function Places() {
                     className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden rounded-lg bg-black origin-center"
                     style={{ willChange: 'width, height, transform, border-radius' }}
                   >
-                    <img
-                      key={current.img}
-                      src={current.img}
-                      alt={current.title}
-                      width={4320}
-                      height={5400}
-                      className="lux-showcase-img absolute inset-0 h-full w-full object-cover"
-                      style={{ willChange: 'transform' }}
-                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        overflow: 'hidden',
+                      }}
+                    >
+                      <img
+                        key={current.img}
+                        src={current.img}
+                        alt={current.title}
+                        width={4320}
+                        height={5400}
+                        className="lux-showcase-img"
+                        style={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          objectPosition: 'center',
+                          willChange: 'transform',
+                        }}
+                      />
+                    </div>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
 
                     {/* Title */}

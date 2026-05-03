@@ -367,7 +367,7 @@ export function Testimonials() {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <section style={{ position: "relative", background: "#D3C8B6", color: "#1A1819" }}>
+    <section id="our-products" style={{ position: "relative", background: "#D3C8B6", color: "#1A1819" }}>
 
       {/* ── Outer scrollable container — height = 100vh + trackScroll ────── */}
       <div ref={containerRef} style={{ height: sectionH, position: "relative" }}>
