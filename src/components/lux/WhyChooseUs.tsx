@@ -48,6 +48,17 @@ function useScrollProgress(ref: React.RefObject<HTMLDivElement | null>) {
 
 export function WhyChooseUs() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const cardW = isMobile ? 280 : CW;
+  const cardH = isMobile ? 380 : CH;
+
   const raw = useScrollProgress(containerRef);
 
   const splitP    = phase(raw, 0.08, 0.30);
@@ -60,14 +71,14 @@ export function WhyChooseUs() {
   const textOpacity = 1 - textFadeP;
   const textScale   = lerp(1, 0.4, textFadeP);
 
-  const INITIAL_SCALE = 0.5;
+  const INITIAL_SCALE = isMobile ? 0.7 : 0.5;
 
   const GAP = 12;
   // Use effective card width at initial scale so cards sit close together
-  const effectiveCW = CW * INITIAL_SCALE;
+  const effectiveCW = cardW * INITIAL_SCALE;
   const totalW = N * effectiveCW + (N - 1) * GAP;
-  const flatX = [0, 1, 2, 3].map(i => -totalW / 2 + i * (effectiveCW + GAP) + effectiveCW / 2);
-  const STEP = 60;
+  const flatX = [0, 1, 2, 3].map(i => isMobile ? 0 : (-totalW / 2 + i * (effectiveCW + GAP) + effectiveCW / 2));
+  const STEP = isMobile ? 40 : 60;
   const stairY = [-1.5 * STEP, -0.5 * STEP, 0.5 * STEP, 1.5 * STEP];
 
   const deckRaw = remap(raw, 0.68, 1.00);
@@ -140,7 +151,7 @@ export function WhyChooseUs() {
           display:inline-block;
           color:#1A1819;
         }
-        .wcu-card{position:absolute;left:50%;top:50%;width:${CW}px;height:${CH}px;border-radius:8px;overflow:hidden;will-change:transform,opacity;background:#EDE6D8}
+        .wcu-card{position:absolute;left:50%;top:50%;width:${cardW}px;height:${cardH}px;border-radius:8px;overflow:hidden;will-change:transform,opacity;background:#EDE6D8}
         .wcu-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
         .wcu-card-sheen{position:absolute;inset:0;background:linear-gradient(155deg,rgba(26,24,25,.06) 0%,transparent 55%);pointer-events:none}
         .wcu-card-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:36px 32px;text-align:center;}
@@ -160,6 +171,24 @@ export function WhyChooseUs() {
         .wcu-cta{font-family:'Cormorant Garamond',Georgia,serif;font-size:10px;font-weight:300;letter-spacing:.22em;text-transform:uppercase;border:.5px solid rgba(26,24,25,.3);padding:13px 20px;display:flex;align-items:center;gap:36px;cursor:pointer;pointer-events:auto;background:transparent;color:#1A1819;transition:background .2s}
         .wcu-cta:hover{background:rgba(26,24,25,.05)}
         .wcu-ticker{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:30;font-family:'Cormorant Garamond',Georgia,serif;font-size:9px;letter-spacing:.32em;text-transform:uppercase;background:rgba(26,24,25,.07);color:#1A1819;border:.5px solid rgba(26,24,25,.13);padding:4px 14px;white-space:nowrap}
+
+        @media (max-width: 768px) {
+          .wcu-panel-left, .wcu-panel-right {
+             left: 20px; right: 20px; width: auto;
+             background: rgba(211, 200, 182, 0.8);
+             backdrop-filter: blur(8px);
+             padding: 20px;
+             border-radius: 12px;
+             height: auto;
+             top: auto;
+             bottom: 12vh;
+          }
+          .wcu-panel-left { display: none; }
+          .wcu-panel-right { bottom: 8vh; align-items: center; }
+          .wcu-counter-wrap { align-items: center; }
+          .wcu-eyebrow { margin-bottom: 20px; text-align: center; }
+          .wcu-cta { gap: 16px; padding: 10px 16px; }
+        }
       `}</style>
 
       <div ref={containerRef} style={{ height: "900vh", position: "relative" }}>

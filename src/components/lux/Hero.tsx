@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/utils/gsap-setup";
 import TitleReveal from "../ui/TitleReveal";
 import { usePreloader } from "@/hooks/usePreloader";
-import chandelierUrl from "@/assets/Pendant-Light-33212-25-D800xH780-Gold.png";
+import chandelierUrl from "@/assets/Pendant-Light-33212-25-D800xH780-Gold.webp";
 import wBg from "@/assets/w-bg.webp";
 
 export function Hero() {

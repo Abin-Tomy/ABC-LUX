@@ -135,11 +135,11 @@ body {
   }
 
     .lux-hero-rock img {
-    height: 46vh !important;
+    height: 62vh !important;
   }
 
     .lux-hero-bg > .pointer-events-none.absolute.inset-x-0.z-40.flex.items-start.justify-center {
-    top: -1vh !important;
+    top: -8vh !important;
   }
 
     .lux-hero-headline {
@@ -782,13 +782,13 @@ body {
 @media (max-width: 767px) {
   .lux-menu-logo-wrap {
     left: 16px !important;
-    top: 19px !important;
+    top: 12px !important;
   }
 
   .lux-menu-logo {
-    height: 30px !important;
-    margin-top: 0 !important;
-    margin-left: -4px !important;
+    height: 160px !important;
+    margin-top: -62px !important;
+    margin-left: -22px !important;
     transform: scale(1) !important;
     transform-origin: left top !important;
   }
