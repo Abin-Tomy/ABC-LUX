@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { getLenis } from "@/hooks/useLenis";
 
 import imgLedStrip        from "@/assets/led-strip-lights.webp";
 import imgMagneticProfile from "@/assets/magnetic-profile-light.webp";
@@ -165,25 +166,26 @@ export function Testimonials() {
   const revealedRef = useRef(new Set<number>());
 
 
-  // ── 3D tilt + sheen (mouse events, attached once after trackScroll is known) ──
+  // ── Card Initialization (runs once after trackScroll is known) ──
   useEffect(() => {
     if (trackScroll === 0) return;
     const cards = cardsRef.current.filter(Boolean) as HTMLButtonElement[];
-    const CARD_STEP = 412; // 380px card + 32px gap
-    const PAD_LEFT  = window.innerWidth * 0.1;
-
-    const handlers: Array<{
-      card: HTMLButtonElement;
-      enter: () => void;
-      leave: () => void;
-      move: (e: MouseEvent) => void;
-    }> = [];
+    const firstCard = cardsRef.current.find(Boolean) as HTMLButtonElement | null;
+    const CARD_STEP = firstCard
+      ? firstCard.getBoundingClientRect().width + 32
+      : 412;
+    const trackEl = trackRef.current;
+    const PAD_LEFT = trackEl
+      ? parseFloat(getComputedStyle(trackEl).paddingLeft)
+      : window.innerWidth * 0.1;
 
     cards.forEach((card, i) => {
       // Only hide cards that start fully off-screen to the right.
       const cardLeft = PAD_LEFT + i * CARD_STEP;
       const startsVisible = cardLeft < window.innerWidth;
-      if (!startsVisible && !revealedRef.current.has(i)) {
+      const alreadyRevealed = revealedRef.current.has(i);
+
+      if (!startsVisible && !alreadyRevealed) {
         gsap.set(card, {
           opacity: 0,
           y: 48,
@@ -191,57 +193,33 @@ export function Testimonials() {
           scale: 0.92,
           transformOrigin: "center bottom",
         });
+      } else if (startsVisible && !alreadyRevealed) {
+        revealedRef.current.add(i);
+        gsap.set(card, { opacity: 1, y: 0, rotate: 0, scale: 1 });
       }
-
-      const inner = card.querySelector(".card-inner") as HTMLElement | null;
-      const sheen = card.querySelector(".card-sheen") as HTMLElement | null;
-      if (!inner || !sheen) return;
-
-      const enter = () =>
-        gsap.to(inner, { y: -10, rotateX: 6, rotateY: -6, duration: 0.5, ease: "power3.out" });
-      const leave = () => {
-        gsap.to(inner, { y: 0, rotateX: 0, rotateY: 0, duration: 0.6, ease: "power3.out" });
-        gsap.to(sheen, { opacity: 0, duration: 0.4 });
-      };
-      const move = (e: MouseEvent) => {
-        const r = card.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width) * 100;
-        const y = ((e.clientY - r.top) / r.height) * 100;
-        gsap.to(sheen, {
-          opacity: 1,
-          background: `radial-gradient(circle at ${x}% ${y}%, hsla(0,0%,100%,0.28), transparent 55%)`,
-          duration: 0.3,
-        });
-      };
-      card.addEventListener("mouseenter", enter);
-      card.addEventListener("mouseleave", leave);
-      card.addEventListener("mousemove", move);
-      handlers.push({ card, enter, leave, move });
     });
-
-    return () => {
-      handlers.forEach(({ card, enter, leave, move }) => {
-        card.removeEventListener("mouseenter", enter);
-        card.removeEventListener("mouseleave", leave);
-        card.removeEventListener("mousemove", move);
-      });
-    };
-  }, [trackScroll]);
+  }, [trackScroll, batchBShown]);
 
   // ── Scroll-progress reveal — fires each time progress changes ─────────────
   useEffect(() => {
     if (trackScroll === 0) return;
     const cards = cardsRef.current.filter(Boolean) as HTMLButtonElement[];
-    const CARD_STEP = 412;
-    const PAD_LEFT  = window.innerWidth * 0.1;
+    const firstCard = cardsRef.current.find(Boolean) as HTMLButtonElement | null;
+    const CARD_STEP = firstCard
+      ? firstCard.getBoundingClientRect().width + 32
+      : 412;
+    const trackEl = trackRef.current;
+    const PAD_LEFT = trackEl
+      ? parseFloat(getComputedStyle(trackEl).paddingLeft)
+      : window.innerWidth * 0.1;
     const curTrackX = -(progress * trackScroll);
 
     cards.forEach((card, i) => {
       if (revealedRef.current.has(i)) return;
       const cardLeft   = PAD_LEFT + i * CARD_STEP;
       const visualLeft = curTrackX + cardLeft; // pixel position of card's left edge on screen
-      // Trigger when the card's left edge is within 80px of the right viewport edge
-      if (visualLeft < window.innerWidth - 80) {
+      // Trigger when the card's left edge is within half a card-width of the right viewport edge
+      if (visualLeft < window.innerWidth + CARD_STEP * 0.5) {
         revealedRef.current.add(i);
         gsap.to(card, {
           opacity: 1,
@@ -255,7 +233,7 @@ export function Testimonials() {
         });
       }
     });
-  }, [progress, trackScroll]);
+  }, [progress, trackScroll, batchBShown]);
 
 
   const [active, setActive] = useState<number | null>(null);
@@ -651,7 +629,40 @@ export function Testimonials() {
                 >
                   <button
                     type="button"
-                    onClick={() => setBatchBShown(BATCH_B.length)}
+                    onClick={() => {
+                      const container = containerRef.current;
+                      const track = trackRef.current;
+                      if (!container || !track) {
+                        setBatchBShown(BATCH_B.length);
+                        return;
+                      }
+
+                      // Capture current trackX position in pixels before adding cards
+                      const currentSectionTop = container.getBoundingClientRect().top + window.scrollY;
+                      const currentTrackX = trackX; // current pixel offset of the track
+
+                      setBatchBShown(BATCH_B.length);
+
+                      requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                          // New section is taller — find the scrollY that produces the same trackX
+                          const newSectionHeight = container.offsetHeight;
+                          const newTrackScroll = Math.max(0, track.scrollWidth - window.innerWidth + 120);
+                          if (newTrackScroll === 0) return;
+
+                          // trackX = -(progress * newTrackScroll)
+                          // so progress = -trackX / newTrackScroll
+                          const targetProgress = Math.min(1, Math.max(0, -currentTrackX / newTrackScroll));
+                          const targetScrollY = currentSectionTop + targetProgress * (newSectionHeight - window.innerHeight);
+                          const lenis = getLenis();
+                          if (lenis) {
+                            lenis.scrollTo(targetScrollY, { immediate: true });
+                          } else {
+                            window.scrollTo({ top: targetScrollY, behavior: 'instant' });
+                          }
+                        });
+                      });
+                    }}
                     style={{
                       padding: "10px 20px",
                       borderRadius: "9999px",

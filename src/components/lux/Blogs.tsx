@@ -329,7 +329,7 @@ export function Blogs() {
         </div>
 
         {/* ── Gallery row ───────────────────────────────────────────────── */}
-        <div style={{
+        <div className="blg-gallery-row" style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -443,7 +443,7 @@ export function Blogs() {
         </div>
 
         {/* ── Meta labels row ─────────────────────────────────────────────── */}
-        <div style={{
+        <div className="blg-meta-row" style={{
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "center",
@@ -456,6 +456,7 @@ export function Blogs() {
             return (
               <div
                 key={slot}
+                className={`blg-meta-item ${isCenter ? "blg-meta-item-center" : "blg-meta-item-side"}`}
                 style={{
                   width: isCenter ? 540 : 360,
                   flexShrink: 0,

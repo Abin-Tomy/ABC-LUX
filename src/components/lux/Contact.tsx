@@ -128,7 +128,7 @@ export function Admission() {
               e.preventDefault();
               setSubmitted(true);
             }}
-            className="border-y border-white/10"
+            className="border-y border-white/10 pb-12"
           >
             <Field label="Your Name" name="name" />
             <Field label="Your Email" name="email" type="email" />

@@ -386,10 +386,27 @@ body {
     width: 160px !important;
   }
 
+  /* Push title words down on tablet */
+  .wcu-text-row {
+    transform: translateY(80px) !important;
+  }
+
   .wcu-subtitle {
     font-size: 11px !important;
     letter-spacing: 0.18em !important;
     text-align: center !important;
+    transform: translateY(-60px) !important;
+  }
+
+  /* Force label and ticker down on tablet with high specificity */
+  .wcu-stage .wcu-label {
+    top: auto !important;
+    bottom: 28px !important;
+    transform: translateX(-50%) translateY(0) !important;
+  }
+  .wcu-stage .wcu-ticker {
+    bottom: 0px !important;
+    transform: translateX(-50%) !important;
   }
 }
 
@@ -412,16 +429,68 @@ body {
 }
 
 @media (min-width: 768px) and (max-width: 1100px) {
+  /* Tighten vertical gaps */
+  #feedback {
+    padding-bottom: 40px !important;
+  }
+
+  #feedback > div[style*="maxWidth: 860"] {
+    padding-bottom: 30px !important;
+  }
+
+  /* Reduce outer padding */
+  #blogs > div:first-of-type {
+    padding-top: 40px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .blg-gallery-row,
+  .blg-meta-row {
+    gap: 32px !important;
+  }
+
+  .blg-card-side,
+  .blg-meta-item-side {
+    width: 180px !important;
+  }
+
   .blg-card-side {
-    width: 240px !important;
-    height: 180px !important;
+    height: 180px !important; /* Square */
+  }
+
+  .blg-card-center,
+  .blg-meta-item-center {
+    width: 320px !important;
   }
 
   .blg-card-center {
-    width: 340px !important;
-    height: 240px !important;
+    height: 220px !important;
   }
 
+  .blg-meta-item {
+    flex-shrink: 0 !important;
+  }
+
+  .blg-meta-value {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+  }
+
+  .blg-meta-item-center .blg-meta-value {
+    font-size: 13px !important;
+  }
+
+  /* Hide specific decorative avatars (S and K) */
+  .ts-orbit-avatar:nth-child(3),
+  .ts-orbit-avatar:nth-child(7) {
+    display: none !important;
+  }
+
+  .blg-read-more {
+    padding: 6px 14px !important;
+    font-size: 10px !important;
+  }
 }
 
 /*
@@ -432,8 +501,11 @@ body {
 @media (max-width: 767px) {
 
   /* Blogs outer padding fix — targets the inline maxWidth container */
-  section[style*="background: #D3C8B6"]>div[style*="padding"] {
-    padding: 56px 20px !important;
+  #blogs > div[style*="padding"] {
+    padding-top: 16px !important;
+    padding-bottom: 56px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
     max-width: 100% !important;
   }
 
@@ -513,8 +585,7 @@ body {
      the gallery row, positioned on the center card edges */
   .blg-arrow-btn {
     position: absolute !important;
-    top: 55% !important;
-    /* Nudged down more for perfect visual centering */
+    top: 50% !important; /* Moved back up to true center */
     opacity: 1 !important;
     z-index: 20 !important;
     width: 44px !important;
@@ -564,49 +635,31 @@ body {
     width: 200px !important;
     height: 200px !important;
   }
+
+  /* Prevent background SVG lines from squashing and move behind content */
+  #feedback svg.absolute,
+  #blogs svg.absolute,
+  .ts-center-ring {
+    aspect-ratio: auto !important;
+    height: 120% !important;
+    min-height: 600px !important;
+    top: -10% !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
 }
 
 /* ── Mobile (≤ 640 px) ──────────────────────────────────────────── */
 @media (max-width: 640px) {
 
   /* Section outer padding — tight on small screens */
-  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"] {
-    padding: 48px 12px 56px !important;
+  #feedback {
+    padding: 48px 12px 16px !important;
   }
 
-  /* ── Orbit bubble avatars: hide large ones, keep tiny hints ─── */
+  /* ── Orbit bubble avatars: hide completely on mobile ───────── */
   .ts-orbit-avatar {
     display: none !important;
-  }
-
-  .ts-orbit-avatar:nth-child(1),
-  .ts-orbit-avatar:nth-child(3),
-  .ts-orbit-avatar:nth-child(5),
-  .ts-orbit-avatar:nth-child(7) {
-    display: block !important;
-    width: 32px !important;
-    height: 32px !important;
-    opacity: 0.45 !important;
-  }
-
-  .ts-orbit-avatar:nth-child(1) {
-    top: 6% !important;
-    left: 4% !important;
-  }
-
-  .ts-orbit-avatar:nth-child(3) {
-    top: 6% !important;
-    left: 80% !important;
-  }
-
-  .ts-orbit-avatar:nth-child(5) {
-    top: 82% !important;
-    left: 4% !important;
-  }
-
-  .ts-orbit-avatar:nth-child(7) {
-    top: 82% !important;
-    left: 80% !important;
   }
 
   /* ── Decorative orbit rings ─────────────────────────────────── */
@@ -624,8 +677,8 @@ body {
   }
 
   /* ── Main content wrapper ───────────────────────────────────── */
-  section.relative.w-full.overflow-hidden[style*="background: #D3C8B6"]>div[style*="maxWidth: 860"] {
-    padding: 40px 16px 40px !important;
+  #feedback > div[style*="maxWidth: 860"] {
+    padding: 40px 16px 12px !important;
     max-width: 100% !important;
   }
 
@@ -825,7 +878,7 @@ body {
 @media (max-width: 640px) {
 
   /* fragile: targets GSAP inline style — replace with class in future refactor */
-  [style*="paddingLeft: 10vw"][style*="display: flex"][style*="gap: 2rem"] {
+  [style*="paddingLeft: 16vw"][style*="display: flex"] {
     padding-left: 5vw !important;
     padding-right: 5vw !important;
     gap: 1rem !important;
@@ -875,6 +928,12 @@ body {
     gap: 1.25rem !important;
     align-items: flex-start !important;
   }
+
+  #contact button[type="submit"] {
+    padding: 10px 24px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.15em !important;
+  }
 }
 
 /* ──────────────────────────────────────────────────────────────────
@@ -888,15 +947,45 @@ body {
 
   footer .grid {
     grid-template-columns: 1fr !important;
-    gap: 2rem !important;
+    gap: 3rem !important;
   }
 
-  footer .grid>div:first-child {
+  footer .grid > div {
     text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
 
   footer .flex.gap-4 {
     justify-content: center !important;
+  }
+
+  footer ul {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  footer p {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* — Fix social icons being ovals on tablet/mobile — */
+@media (max-width: 1200px) {
+  footer .flex.gap-4 a {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    aspect-ratio: 1 / 1 !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
   }
 }
 
@@ -981,7 +1070,7 @@ body {
    ▌ LIGHTING EXPERIENCE — Dark mode toggle grid
    ────────────────────────────────────────────────────────────────── */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #products>div[style*="maxWidth: 72rem"] {
     padding: 3rem 1rem !important;
   }
@@ -1000,6 +1089,35 @@ body {
 
   #products div[style*="display: grid"]>div:empty {
     display: none !important;
+  }
+}
+
+/* Tablet: 3-column, 4-row grid (10 cards = 3+3+3+1) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #products>div[style*="maxWidth: 72rem"] {
+    padding: 2.5rem 1rem !important;
+  }
+
+  #products p[style*="maxWidth: 500px"] {
+    max-width: 90% !important;
+    font-size: 1rem !important;
+  }
+
+  #products div[style*="display: grid"] {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    padding: 12px !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide the 2 empty placeholder slots so only 10 cards show (3+3+3+1) */
+  #products div[style*="display: grid"]>div:empty {
+    display: none !important;
+  }
+
+  /* Center the lone last-row card in the middle (2nd) column */
+  #products div[style*="display: grid"]>*:nth-child(11) {
+    grid-column: 2;
   }
 }
 

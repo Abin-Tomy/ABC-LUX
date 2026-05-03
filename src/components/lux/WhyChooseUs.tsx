@@ -74,18 +74,20 @@ export function WhyChooseUs() {
   const INITIAL_SCALE = isMobile ? 0.7 : 0.5;
 
   const GAP = 12;
-  // Use effective card width at initial scale so cards sit close together
   const effectiveCW = cardW * INITIAL_SCALE;
   const totalW = N * effectiveCW + (N - 1) * GAP;
   const flatX = [0, 1, 2, 3].map(i => isMobile ? 0 : (-totalW / 2 + i * (effectiveCW + GAP) + effectiveCW / 2));
   const STEP = isMobile ? 40 : 60;
   const stairY = [-1.5 * STEP, -0.5 * STEP, 0.5 * STEP, 1.5 * STEP];
-
-  const deckRaw = remap(raw, 0.68, 1.00);
+  
+  const deckStart = isMobile ? 0.32 : 0.68;
+  const deckRaw = remap(raw, deckStart, 1.00);
   const inDeck = deckRaw > 0;
   const deckIndex = Math.min(N - 1, Math.floor(deckRaw * N));
 
-  const panelOp = eio(remap(raw, 0.60, 0.68));
+  const panelStart = isMobile ? 0.30 : 0.60;
+  const panelEnd = isMobile ? 0.38 : 0.68;
+  const panelOp = eio(remap(raw, panelStart, panelEnd));
   const heroCard = CARDS[deckIndex];
 
   const getRoleForCard = (i: number) => {
@@ -100,16 +102,19 @@ export function WhyChooseUs() {
     ROLE_BY_DIFF[3],
   ];
 
-  // Cards start at INITIAL_SCALE (small) and grow to full deck scale as they converge
-
   const getCardProps = (i: number) => {
-    const appearStarts = [0.08, 0.14, 0.20, 0.26];
-    const appearEnds = [0.17, 0.23, 0.29, 0.35];
+    // On mobile, start appearance immediately as the title begins splitting (0.08)
+    const appearStarts = isMobile ? [0.08, 0.12, 0.16, 0.20] : [0.08, 0.14, 0.20, 0.26];
+    const appearEnds   = isMobile ? [0.20, 0.24, 0.28, 0.32] : [0.17, 0.23, 0.29, 0.35];
     const appear = phase(raw, appearStarts[i], appearEnds[i]);
 
-    if (inDeck) {
+    if (inDeck || (isMobile && raw > 0.08)) {
       const role = getRoleForCard(i);
-      return { tx: 0, ty: role.y, scale: role.scale, opacity: role.opacity, zIndex: role.z, useTransition: true };
+      // On mobile, use appear as a scale/opacity multiplier so they fade/scale in gracefully into the stack
+      const finalOp = isMobile ? (role.opacity * appear) : role.opacity;
+      const finalScale = isMobile ? (role.scale * lerp(0.8, 1, appear)) : role.scale;
+      
+      return { tx: 0, ty: role.y, scale: finalScale, opacity: finalOp, zIndex: role.z, useTransition: true };
     }
 
     const target = CONVERGE_TARGETS[i];
@@ -118,7 +123,6 @@ export function WhyChooseUs() {
 
     const tx    = lerp(preX, 0, convergeP);
     const ty    = lerp(preY, target.y, convergeP);
-    // Scale: starts small (INITIAL_SCALE), grows to full deck role scale as convergeP → 1
     const scale = lerp(INITIAL_SCALE, target.scale, convergeP);
     const op    = lerp(appear * 0.85, target.opacity, convergeP);
     const z     = convergeP > 0.3 ? target.z : (i + 1);
@@ -188,10 +192,38 @@ export function WhyChooseUs() {
           .wcu-counter-wrap { align-items: center; }
           .wcu-eyebrow { margin-bottom: 20px; text-align: center; }
           .wcu-cta { gap: 16px; padding: 10px 16px; }
+
+          /* Increase Title Size on Mobile */
+          .wcu-word {
+             font-size: clamp(68px, 15vw, 84px) !important;
+             letter-spacing: -0.05em !important;
+          }
+          .wcu-subtitle {
+             font-size: 13px !important;
+             letter-spacing: 0.15em !important;
+             margin-top: 150px !important;
+          }
+          .wcu-title-wrapper {
+             transform: translateY(10px) !important;
+          }
+
+          /* Mobile Label and Ticker positioning */
+          .wcu-label {
+             top: auto !important;
+             bottom: 60px !important;
+             font-size: 16px !important;
+             font-family: 'Playfair Display', serif !important;
+          }
+          .wcu-ticker {
+             bottom: 24px !important;
+             font-size: 10px !important;
+             padding: 6px 16px !important;
+             background: rgba(26,24,25,0.04) !important;
+          }
         }
       `}</style>
 
-      <div ref={containerRef} style={{ height: "900vh", position: "relative" }}>
+      <div ref={containerRef} style={{ height: isMobile ? "450vh" : "900vh", position: "relative" }}>
         <div className="wcu-stage">
           {/* Decorative SVG path inside sticky stage */}
           <svg
