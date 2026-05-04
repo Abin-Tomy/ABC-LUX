@@ -13,6 +13,7 @@
    1.  Global / Base
    2.  Navigation (Nav, MenuOverlay)
    3.  Hero
+   3.5 About
    4.  Collections
    5.  Products (LightDark)
    6.  WhyChooseUs
@@ -219,10 +220,29 @@ body {
 @media (max-width: 480px) {}
 
 /* ------------------------------------------------------------
-   4. COLLECTIONS
+   3.5 ABOUT
    ------------------------------------------------------------ */
 
 @media (max-width: 767px) {
+  .lux-about-left {
+    align-items: center !important;
+    text-align: center !important;
+  }
+  
+  .lux-about-title {
+    text-align: center !important;
+  }
+  
+  .lux-about-title span {
+    margin-left: 0 !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   4. COLLECTIONS
+   ------------------------------------------------------------ */
+
+@media (max-width: 1023px) {
   .pin-spacer:has(.scroll-container) {
     width: 100% !important;
     height: auto !important;
@@ -232,9 +252,7 @@ body {
     overflow: visible !important;
   }
 
-  /* Disable the sophisticated GSAP-pin scroll container on mobile
-     (GSAP logic already kills scrollTl on mobile, but we also
-     reset the container height so it doesn't create a dead scroll zone) */
+  /* Disable the sophisticated GSAP-pin scroll container on mobile/tablet */
   .scroll-container {
     height: auto !important;
     overflow: visible !important;
@@ -250,50 +268,36 @@ body {
     transform: none !important;
   }
 
-  /* Mobile showcase card — slightly larger on phones */
-  .scroll-container>.sticky-scene>div:first-child {
-    min-height: auto !important;
-    padding-top: 2vh !important;
-    padding-bottom: 4vh !important;
-  }
-
   .scroll-container .center-card-inner,
   .scroll-container .lux-place-tile,
   .scroll-container [data-static="true"] {
     display: none !important;
   }
 
-  .scroll-container>.sticky-scene>div:first-child>div {
-    width: min(360px, 92vw) !important;
-    max-width: 360px !important;
-    aspect-ratio: 3 / 4 !important;
-    border-radius: 72px 72px 0 0 !important;
+  /* Mobile/Tablet Cover-Flow Carousel (Swiper) */
+  .lux-swiper-slide {
+    transition: opacity 0.5s ease, filter 0.5s ease !important;
+    will-change: transform, opacity;
   }
-
-  .scroll-container>.sticky-scene>div:first-child>div>img {
-    z-index: 1 !important;
-    border-radius: 72px 72px 0 0 !important;
+  
+  .lux-swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.5 !important;
+    pointer-events: none !important;
   }
-
-  .scroll-container>.sticky-scene>div:first-child>div>.pointer-events-none.absolute.inset-0 {
-    z-index: 2 !important;
-    background: transparent !important;
-  }
-
-  .scroll-container>.sticky-scene>div:first-child>div>.absolute {
-    z-index: 3 !important;
+  
+  .lux-swiper-slide.swiper-slide-active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
   .lux-places-caption {
-    font-size: clamp(16px, 5vw, 26px) !important;
-    margin-top: 1.5rem !important;
+    font-size: clamp(18px, 3vw, 32px) !important;
+    margin-top: 2rem !important;
   }
-}
 
-/* Tablet (768–1023px): headline sizing */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .lux-places-headline h2 .text-\[10vw\] {
-    font-size: 13vw !important;
+  /* Tablet headline adjustment */
+  .lux-places-headline h2 {
+    font-size: 1.2em !important;
   }
 }
 

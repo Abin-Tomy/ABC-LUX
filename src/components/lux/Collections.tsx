@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/utils/gsap-setup";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectCoverflow } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
 import dc1 from "@/assets/Designer-Chandeliers-1.webp";
 import dc2 from "@/assets/Designer-Chandeliers-2.webp";
 import dc3 from "@/assets/Designer-Chandeliers-3.webp";
@@ -36,7 +40,7 @@ export function Places() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (window.matchMedia("(max-width: 767px)").matches) return;
+    if (window.matchMedia("(max-width: 1023px)").matches) return;
 
 
 
@@ -237,7 +241,7 @@ export function Places() {
 
       {/* Decorative SVG path */}
       <svg
-        className="pointer-events-none absolute inset-x-0 z-[1] w-full -top-24 md:-top-32"
+        className="pointer-events-none absolute inset-x-0 z-[1] w-full -top-4 lg:-top-32"
         style={{ aspectRatio: '1440 / 1080' }}
         viewBox="0 0 1440 1080"
         preserveAspectRatio="none"
@@ -258,19 +262,19 @@ export function Places() {
       </svg>
 
       {/* Headline block */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col px-6 pt-[12vh] md:pt-[22vh] md:px-12">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col px-6 pt-[12vh] lg:pt-[22vh] lg:px-12">
         <div className="lux-places-headline relative">
           <h2 className="text-center leading-[0.88] tracking-[-0.045em]" style={{ fontFamily: "'Runalto', serif" }}>
             <span className="block overflow-hidden">
               <TitleReveal
                 text="Explore"
-                className="block text-[12vw] font-medium text-[#F1EBDD] md:text-[10vw] justify-center"
+                className="block text-[12vw] font-medium text-[#F1EBDD] lg:text-[10vw] justify-center"
               />
             </span>
             <span className="block overflow-hidden">
               <TitleReveal
                 text="Collections"
-                className="block text-[14vw] font-medium md:text-[12vw] justify-center"
+                className="block text-[14vw] font-medium lg:text-[12vw] justify-center"
                 style={{
                   backgroundImage:
                     "linear-gradient(180deg, #F1EBDD 0%, #C9C0B0 35%, #5A5550 70%, #1A1819 100%)",
@@ -284,9 +288,17 @@ export function Places() {
           </h2>
 
           <div className="lux-places-caption font-serif mt-8 text-center text-[clamp(20px,2.4vw,40px)] leading-[1.05] text-[#E8E1D2]">
-            <span className="block">Where</span>
-            <span className="block">Light Defines</span>
-            <span className="block">Space</span>
+            {/* Mobile/Tablet: Two lines */}
+            <div className="lg:hidden">
+              <span className="block md:inline">Where Light </span>
+              <span className="block md:inline">Defines Space</span>
+            </div>
+            {/* Desktop: Three lines */}
+            <div className="hidden lg:block">
+              <span className="block">Where</span>
+              <span className="block">Light Defines</span>
+              <span className="block">Space</span>
+            </div>
           </div>
         </div>
       </div>
@@ -294,61 +306,66 @@ export function Places() {
       {/* Scroll Container for sophisticated animation */}
       <div ref={scrollContainerRef} className="scroll-container relative z-20 h-screen overflow-hidden">
         <div className="sticky-scene relative h-full">
-          {/* MOBILE VIEW: Single grave-shaped image (Hidden on desktop) */}
-          <div className="flex md:hidden flex-col items-center justify-center px-4 pt-[4vh] pb-[12vh] w-full">
-            <div
-              className="relative w-full max-w-[380px] aspect-[2/3] overflow-hidden"
-              style={{ borderRadius: '250px 250px 0 0' }}
+          {/* MOBILE/TABLET VIEW: Swiper Cover-flow Carousel (Hidden on desktop) */}
+          <div className="flex lg:hidden flex-col items-center justify-center px-0 pt-[4vh] pb-[8vh] w-full overflow-hidden relative">
+            <Swiper
+              modules={[Autoplay, EffectCoverflow]}
+              effect="coverflow"
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView="auto"
+              loop={true}
+              speed={1200}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              watchSlidesProgress={true}
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: false,
+              }}
+              className="w-full h-[53vh] max-h-[440px] min-h-[350px] mt-[2vh]"
             >
-              <img
-                key={current.img}
-                src={current.img}
-                alt={current.title}
-                width={4320}
-                height={5400}
-                className="lux-showcase-img absolute inset-0 h-full w-full object-cover"
-              />
-
-
-              {/* Title Over Image */}
-              <div className="absolute inset-0 flex items-center justify-center p-8">
-                <h3
-                  key={`mt-${idx}`}
-                  className="lux-showcase-title text-center text-[8vw] leading-tight text-white"
-                  style={{ fontFamily: "'Runalto', serif" }}
-                >
-                  {current.title}
-                </h3>
-              </div>
-
-              {/* Navigation Buttons Over Image (mobile) */}
-              <div className="absolute inset-x-0 bottom-12 flex items-center justify-center gap-8">
-                <button
-                  type="button"
-                  onClick={prev}
-                  className="grid h-16 w-16 place-items-center rounded-full bg-black text-white transition-transform active:scale-90"
-                >
-                  <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
-                    <path d="M21 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                </button>
-                <div style={{ position: "relative", display: "inline-flex" }}>
-                  <button
-                    type="button"
-                    onClick={next}
-                    className="grid h-16 w-16 place-items-center rounded-full bg-black text-white transition-transform active:scale-90"
-                  >
-                    <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
-                      <path d="M1 7H21M21 7L15 1M21 7L15 13" stroke="currentColor" strokeWidth="2" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
+              {SHOWCASE.map((item, index) => (
+                <SwiperSlide key={index} className="!w-[64vw] md:!w-[45vw] max-w-[295px] md:max-w-[400px] h-full lux-swiper-slide">
+                  {({ isActive }) => (
+                    <div
+                      className="relative w-full h-full aspect-[2/3] overflow-hidden"
+                      style={{ borderRadius: '250px 250px 0 0' }}
+                    >
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        width={4320}
+                        height={5400}
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                      {/* Title Over Image */}
+                      <div 
+                        className="lux-swiper-title absolute inset-0 flex items-end justify-center px-6 pb-2 pt-6 transition-opacity duration-500"
+                        style={{ opacity: isActive ? 1 : 0 }}
+                      >
+                        <h3
+                          className="text-center text-[7vw] md:text-[5vw] leading-tight text-white mb-[1vh]"
+                          style={{ fontFamily: "'Runalto', serif" }}
+                        >
+                          {item.title}
+                        </h3>
+                      </div>
+                    </div>
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
 
-          {/* DESKTOP VIEW: Original Masonry Grid Layout (Hidden on mobile) */}
-          <div ref={gridContainerRef} className="hidden md:block relative z-10 mx-auto pt-[16vh] w-full max-w-[1600px] px-4 md:px-8">
+
+          {/* DESKTOP VIEW: Original Masonry Grid Layout (Hidden on mobile/tablet) */}
+          <div ref={gridContainerRef} className="hidden lg:block relative z-10 mx-auto pt-[16vh] w-full max-w-[1600px] px-4 md:px-8">
             <div
               className="grid w-full gap-4 md:gap-8"
               style={{
