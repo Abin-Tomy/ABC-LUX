@@ -10,18 +10,41 @@
 import { useState, useEffect, useRef } from "react";
 import TitleReveal from "../ui/TitleReveal";
 
-
 const CARDS = [
-  { id: "01", name: "Wide Range",       description: "Explore a wide range of lighting solutions designed for both homes & businesses with style & quality.", accent: "#C9A962" },
-  { id: "02", name: "Expert Guidance",  description: "Get professional assistance to select the perfect lighting that enhances your space with style & efficiency.", accent: "#A87C50" },
-  { id: "03", name: "Trusted Brands",    description: "We offer high-quality lighting from trusted brands known for innovation, durability, reliability, & excellent performance.", accent: "#8B9E8E" },
-  { id: "04", name: "Warranty Assurance", description: "Enjoy worry-free lighting with assured quality, dependable support, and durable solutions for every space.", accent: "#7A8090" },
+  {
+    id: "01",
+    name: "Wide Range",
+    description:
+      "Explore a wide range of lighting solutions designed for both homes & businesses with style & quality.",
+    accent: "#C9A962",
+  },
+  {
+    id: "02",
+    name: "Expert Guidance",
+    description:
+      "Get professional assistance to select the perfect lighting that enhances your space with style & efficiency.",
+    accent: "#A87C50",
+  },
+  {
+    id: "03",
+    name: "Trusted Brands",
+    description:
+      "We offer high-quality lighting from trusted brands known for innovation, durability, reliability, & excellent performance.",
+    accent: "#8B9E8E",
+  },
+  {
+    id: "04",
+    name: "Warranty Assurance",
+    description:
+      "Enjoy worry-free lighting with assured quality, dependable support, and durable solutions for every space.",
+    accent: "#7A8090",
+  },
 ];
 
 const N = CARDS.length;
 
-const lerp  = (a: number, b: number, t: number) => a + (b - a) * t;
-const eio   = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const eio = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 const clamp = (v: number, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
 const remap = (t: number, s: number, e: number) => clamp((t - s) / (e - s));
 const phase = (raw: number, s: number, e: number) => eio(remap(raw, s, e));
@@ -32,8 +55,8 @@ const CH = 440;
 const ROLES = [
   { y: -80, scale: 0.88, opacity: 0.55, z: 10 },
   { y: -40, scale: 0.94, opacity: 0.75, z: 20 },
-  { y:   0, scale: 1.00, opacity: 1.00, z: 30 },
-  { y:  50, scale: 0.94, opacity: 0.75, z: 20 },
+  { y: 0, scale: 1.0, opacity: 1.0, z: 30 },
+  { y: 50, scale: 0.94, opacity: 0.75, z: 20 },
 ];
 
 const ROLE_BY_DIFF = [ROLES[2], ROLES[3], ROLES[0], ROLES[1]];
@@ -82,80 +105,87 @@ export function WhyChooseUs() {
 
   const raw = useScrollProgress(containerRef);
 
-  const splitP    = phase(raw, 0.08, 0.30);
+  const splitP = phase(raw, 0.08, 0.3);
   const textFadeP = phase(raw, 0.08, 0.26);
-  const diagP     = phase(raw, 0.38, 0.54);
+  const diagP = phase(raw, 0.38, 0.54);
   const convergeP = phase(raw, 0.48, 0.68);
 
-  const whyPush    = lerp(0, -36, splitP) + lerp(0, -16, textFadeP);
+  const whyPush = lerp(0, -36, splitP) + lerp(0, -16, textFadeP);
   const choosePush = lerp(0, 36, splitP) + lerp(0, 16, textFadeP);
   const textOpacity = 1 - textFadeP;
-  const textScale   = lerp(1, 0.4, textFadeP);
+  const textScale = lerp(1, 0.4, textFadeP);
 
   const INITIAL_SCALE = isMobile ? 0.7 : 0.5;
 
   const GAP = 12;
   const effectiveCW = cardW * INITIAL_SCALE;
   const totalW = N * effectiveCW + (N - 1) * GAP;
-  const flatX = [0, 1, 2, 3].map(i => isMobile ? 0 : (-totalW / 2 + i * (effectiveCW + GAP) + effectiveCW / 2));
+  const flatX = [0, 1, 2, 3].map((i) =>
+    isMobile ? 0 : -totalW / 2 + i * (effectiveCW + GAP) + effectiveCW / 2,
+  );
   const STEP = isMobile ? 40 : 60;
   const stairY = [-1.5 * STEP, -0.5 * STEP, 0.5 * STEP, 1.5 * STEP];
-  
+
   const deckStart = isMobile ? 0.32 : 0.68;
-  const deckRaw = remap(raw, deckStart, 1.00);
+  const deckRaw = remap(raw, deckStart, 1.0);
   const inDeck = deckRaw > 0;
   const deckIndex = Math.min(N - 1, Math.floor(deckRaw * N));
 
-  const panelStart = isMobile ? 0.30 : 0.60;
+  const panelStart = isMobile ? 0.3 : 0.6;
   const panelEnd = isMobile ? 0.38 : 0.68;
   const panelOp = eio(remap(raw, panelStart, panelEnd));
   const heroCard = CARDS[deckIndex];
 
   const getRoleForCard = (i: number) => {
-    const diff = ((i - deckIndex) % N + N) % N;
+    const diff = (((i - deckIndex) % N) + N) % N;
     return ROLE_BY_DIFF[diff];
   };
 
-  const CONVERGE_TARGETS = [
-    ROLE_BY_DIFF[0],
-    ROLE_BY_DIFF[1],
-    ROLE_BY_DIFF[2],
-    ROLE_BY_DIFF[3],
-  ];
+  const CONVERGE_TARGETS = [ROLE_BY_DIFF[0], ROLE_BY_DIFF[1], ROLE_BY_DIFF[2], ROLE_BY_DIFF[3]];
 
   const getCardProps = (i: number) => {
     // On mobile, start appearance immediately as the title begins splitting (0.08)
-    const appearStarts = isMobile ? [0.08, 0.12, 0.16, 0.20] : [0.08, 0.14, 0.20, 0.26];
-    const appearEnds   = isMobile ? [0.20, 0.24, 0.28, 0.32] : [0.17, 0.23, 0.29, 0.35];
+    const appearStarts = isMobile ? [0.08, 0.12, 0.16, 0.2] : [0.08, 0.14, 0.2, 0.26];
+    const appearEnds = isMobile ? [0.2, 0.24, 0.28, 0.32] : [0.17, 0.23, 0.29, 0.35];
     const appear = phase(raw, appearStarts[i], appearEnds[i]);
 
     if (inDeck || (isMobile && raw > 0.08)) {
       const role = getRoleForCard(i);
       // On mobile, use appear as a scale/opacity multiplier so they fade/scale in gracefully into the stack
-      const finalOp = isMobile ? (role.opacity * appear) : role.opacity;
-      const finalScale = isMobile ? (role.scale * lerp(0.8, 1, appear)) : role.scale;
-      
-      return { tx: 0, ty: role.y, scale: finalScale, opacity: finalOp, zIndex: role.z, useTransition: true };
+      const finalOp = isMobile ? role.opacity * appear : role.opacity;
+      const finalScale = isMobile ? role.scale * lerp(0.8, 1, appear) : role.scale;
+
+      return {
+        tx: 0,
+        ty: role.y,
+        scale: finalScale,
+        opacity: finalOp,
+        zIndex: role.z,
+        useTransition: true,
+      };
     }
 
     const target = CONVERGE_TARGETS[i];
     const preX = flatX[i];
     const preY = lerp(40, 0, appear) + lerp(0, stairY[i], diagP);
 
-    const tx    = lerp(preX, 0, convergeP);
-    const ty    = lerp(preY, target.y, convergeP);
+    const tx = lerp(preX, 0, convergeP);
+    const ty = lerp(preY, target.y, convergeP);
     const scale = lerp(INITIAL_SCALE, target.scale, convergeP);
-    const op    = lerp(appear * 0.85, target.opacity, convergeP);
-    const z     = convergeP > 0.3 ? target.z : (i + 1);
+    const op = lerp(appear * 0.85, target.opacity, convergeP);
+    const z = convergeP > 0.3 ? target.z : i + 1;
 
     return { tx, ty, scale, opacity: op, zIndex: z, useTransition: false };
   };
 
   return (
-    <section id="why-choose-us" className="relative" style={{ background: "#D3C8B6", color: "#1A1819" }}>
-
+    <section
+      id="why-choose-us"
+      className="relative"
+      style={{ background: "#D3C8B6", color: "#1A1819" }}
+    >
       {/* Star Mask at the junction with the previous section */}
-      
+
       <style>{`
         .wcu-stage{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
         .wcu-title-wrapper{position:absolute;display:flex;flex-direction:column;align-items:center;gap:24px;z-index:4;pointer-events:none}
@@ -244,12 +274,15 @@ export function WhyChooseUs() {
         }
       `}</style>
 
-      <div ref={containerRef} style={{ height: isMobile ? "450vh" : "900vh", position: "relative" }}>
+      <div
+        ref={containerRef}
+        style={{ height: isMobile ? "450vh" : "900vh", position: "relative" }}
+      >
         <div className="wcu-stage">
           {/* Decorative SVG path inside sticky stage */}
           <svg
             className="pointer-events-none absolute inset-x-0 z-[1] w-full top-0"
-            style={{ aspectRatio: '1440 / 1080', opacity: 0.25 }}
+            style={{ aspectRatio: "1440 / 1080", opacity: 0.25 }}
             viewBox="0 0 1440 1080"
             preserveAspectRatio="none"
             aria-hidden
@@ -266,19 +299,29 @@ export function WhyChooseUs() {
               d="M517.1,0c246,127,804.3,132.3,752,234-27.9,54.4-412.5,84.1-649,16-228.9-65.9-467.4-48.1-462-27,15.1,59.1,394-184,527-73C924.7,350,14.1,621,250.1,1000"
               vectorEffect="non-scaling-stroke"
             />
-          </svg>          <div className="wcu-title-wrapper">
-            <div className="wcu-text-row" style={{ opacity: textOpacity, transform: `scale(${textScale})` }}>
-              <span className="wcu-word-container" style={{ transform: `translateX(${whyPush}vw)` }}>
-                <TitleReveal 
-                  text="Why" 
-                  className="wcu-word" 
+          </svg>{" "}
+          <div className="wcu-title-wrapper">
+            <div
+              className="wcu-text-row"
+              style={{ opacity: textOpacity, transform: `scale(${textScale})` }}
+            >
+              <span
+                className="wcu-word-container"
+                style={{ transform: `translateX(${whyPush}vw)` }}
+              >
+                <TitleReveal
+                  text="Why"
+                  className="wcu-word"
                   style={{ color: "#1A1819" }}
                   waitForPreloader={false}
                 />
               </span>
-              <span className="wcu-word-container" style={{ transform: `translateX(${choosePush}vw)` }}>
-                <TitleReveal 
-                  text="Choose Us" 
+              <span
+                className="wcu-word-container"
+                style={{ transform: `translateX(${choosePush}vw)` }}
+              >
+                <TitleReveal
+                  text="Choose Us"
                   className="wcu-word"
                   style={{ color: "#1A1819" }}
                   waitForPreloader={false}
@@ -289,7 +332,6 @@ export function WhyChooseUs() {
               Driven by Excellence, Powered by Trust
             </div>
           </div>
-
           {CARDS.map((card, i) => {
             const { tx, ty, scale, opacity, zIndex, useTransition } = getCardProps(i);
             return (
@@ -304,7 +346,9 @@ export function WhyChooseUs() {
                   boxShadow: `0 16px 56px rgba(0,0,0,${opacity > 0.9 ? 0.3 : 0.15})`,
                 }}
               >
-                <div style={{ position: "absolute", inset: 0, background: card.accent, opacity: 0.12 }} />
+                <div
+                  style={{ position: "absolute", inset: 0, background: card.accent, opacity: 0.12 }}
+                />
                 <div className="wcu-card-bg-numeral">{card.id}</div>
                 <div className="wcu-card-inner" style={{ color: "#1A1819", zIndex: 2 }}>
                   <span className="wcu-card-numeral">— {card.id}</span>
@@ -316,27 +360,39 @@ export function WhyChooseUs() {
               </div>
             );
           })}
-
-          <div className="wcu-label" style={{ top: `calc(50% + ${ROLES[3].y + CH / 2 + 18}px)`, opacity: panelOp }}>
+          <div
+            className="wcu-label"
+            style={{ top: `calc(50% + ${ROLES[3].y + CH / 2 + 18}px)`, opacity: panelOp }}
+          >
             ({heroCard.id})&ensp;{heroCard.name}
           </div>
-
           <div className="wcu-panel-left" style={{ opacity: panelOp }}>
-            <p className="wcu-eyebrow">Lighting as architecture.<br />Crafted for distinction.</p>
+            <p className="wcu-eyebrow">
+              Lighting as architecture.
+              <br />
+              Crafted for distinction.
+            </p>
             <p className="wcu-body">{heroCard.description}</p>
           </div>
           <div className="wcu-panel-right" style={{ opacity: panelOp }}>
-            <p className="wcu-eyebrow" style={{ textAlign: "right" }}>Form meets illumination.<br />Designed to define spaces.</p>
+            <p className="wcu-eyebrow" style={{ textAlign: "right" }}>
+              Form meets illumination.
+              <br />
+              Designed to define spaces.
+            </p>
             <div className="wcu-counter-wrap">
-              <div className="wcu-counter">{deckIndex + 1}/{N}</div>
+              <div className="wcu-counter">
+                {deckIndex + 1}/{N}
+              </div>
               <a href="#collections" className="wcu-cta">
                 <span>Explore Collection</span>
                 <span style={{ opacity: 0.35, fontSize: 18 }}>→</span>
               </a>
             </div>
           </div>
-
-          <div className="wcu-ticker" style={{ opacity: panelOp }}>Why Choose Us</div>
+          <div className="wcu-ticker" style={{ opacity: panelOp }}>
+            Why Choose Us
+          </div>
         </div>
       </div>
     </section>

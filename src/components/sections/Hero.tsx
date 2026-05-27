@@ -28,8 +28,7 @@ export function Hero() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-
-    const { gsap } = getAnimationContext('hero');
+    const { gsap } = getAnimationContext("hero");
     const ctx = gsap.context(() => {
       // Subtle pendulum sway on the chandelier - runs always
       gsap.to(".lux-hero-rock", {
@@ -53,12 +52,15 @@ export function Hero() {
         },
       }) as gsap.core.Timeline;
 
-      tl
-        .to(".lux-hero-floor", {
+      tl.to(
+        ".lux-hero-floor",
+        {
           yPercent: -72,
           ease: "none",
           duration: 1,
-        }, 0)
+        },
+        0,
+      )
         .to(".lux-hero-rock", { scale: 1.25, ease: "none", duration: 1 }, 0)
         .to(".lux-hero-headline", { y: "-45vh", opacity: 0, ease: "none", duration: 0.4 }, 0)
         .to(".lux-hero-cta", { y: "-120vh", ease: "none", duration: 1 }, 0)
@@ -76,7 +78,7 @@ export function Hero() {
 
     // Force a ScrollTrigger recalculation once the preloader is fully gone
     // to ensure the Hero pin spacer height is 100% correct
-    const { ScrollTrigger } = getAnimationContext('hero');
+    const { ScrollTrigger } = getAnimationContext("hero");
     setTimeout(() => {
       ScrollTrigger.refresh();
     }, 100);
@@ -115,7 +117,7 @@ export function Hero() {
       {/* SVG decorative path line */}
       <svg
         className="pointer-events-none absolute inset-0 z-30 h-full w-full"
-        style={{ aspectRatio: '1440 / 1080', transform: 'translateZ(0)' }}
+        style={{ aspectRatio: "1440 / 1080", transform: "translateZ(0)" }}
         viewBox="0 0 1440 1080"
         preserveAspectRatio="none"
       >
@@ -133,28 +135,30 @@ export function Hero() {
         />
       </svg>
 
-
-
       {/* Periphery utility text */}
       <div className="lux-hero-meta pointer-events-none absolute inset-0 z-30 text-obsidian">
         <div className="absolute left-8 top-[38%] hidden max-w-[160px] md:block">
           <p className="font-serif text-[13px] leading-snug">
-            Crafted Illumination<br />for Interiors
+            Crafted Illumination
+            <br />
+            for Interiors
           </p>
         </div>
         <div className="absolute right-8 top-[28%] hidden max-w-[160px] text-right md:block">
           <p className="font-serif text-[13px] leading-snug">
-            Designed to<br />Transform Spaces
+            Designed to
+            <br />
+            Transform Spaces
           </p>
         </div>
-
       </div>
-
-
 
       {/* Massive serif headline — Character Reveal applied with z-layering preserved */}
       <div className="lux-hero-headline pointer-events-none absolute inset-x-0 top-[15vh] md:top-[20vh] z-50 flex flex-col items-center text-white">
-        <h1 className="text-center leading-[0.86] tracking-[-0.045em]" style={{ fontFamily: "'Runalto', serif" }}>
+        <h1
+          className="text-center leading-[0.86] tracking-[-0.045em]"
+          style={{ fontFamily: "'Runalto', serif" }}
+        >
           <TitleReveal
             text="Illuminate"
             className="translate-x-[4vw] text-[14vw] md:text-[12vw] font-medium lg:text-[11vw] justify-center"
@@ -163,8 +167,13 @@ export function Hero() {
         </h1>
       </div>
       <div className="lux-hero-headline pointer-events-none absolute inset-x-0 top-[15vh] md:top-[20vh] z-30 flex flex-col items-center text-white">
-        <h1 className="text-center leading-[0.86] tracking-[-0.045em]" style={{ fontFamily: "'Runalto', serif" }}>
-          <span className="block invisible text-[14vw] md:text-[12vw] font-medium lg:text-[11vw]">Illuminate</span>
+        <h1
+          className="text-center leading-[0.86] tracking-[-0.045em]"
+          style={{ fontFamily: "'Runalto', serif" }}
+        >
+          <span className="block invisible text-[14vw] md:text-[12vw] font-medium lg:text-[11vw]">
+            Illuminate
+          </span>
           <TitleReveal
             text="Every"
             className="-mt-[0.5vw] block translate-x-[-18vw] text-[14vw] md:text-[12vw] font-light italic lg:text-[11vw] justify-center"
@@ -173,9 +182,16 @@ export function Hero() {
         </h1>
       </div>
       <div className="lux-hero-headline pointer-events-none absolute inset-x-0 top-[15vh] md:top-[20vh] z-30 flex flex-col items-center text-white">
-        <h1 className="text-center leading-[0.86] tracking-[-0.045em]" style={{ fontFamily: "'Runalto', serif" }}>
-          <span className="block invisible text-[14vw] md:text-[12vw] font-medium lg:text-[11vw]">Illuminate</span>
-          <span className="-mt-[0.5vw] block invisible text-[14vw] md:text-[12vw] font-light italic lg:text-[11vw]">Every</span>
+        <h1
+          className="text-center leading-[0.86] tracking-[-0.045em]"
+          style={{ fontFamily: "'Runalto', serif" }}
+        >
+          <span className="block invisible text-[14vw] md:text-[12vw] font-medium lg:text-[11vw]">
+            Illuminate
+          </span>
+          <span className="-mt-[0.5vw] block invisible text-[14vw] md:text-[12vw] font-light italic lg:text-[11vw]">
+            Every
+          </span>
           <TitleReveal
             text="Space"
             className="-mt-[1.5vw] block translate-x-[12vw] text-[14vw] md:text-[12vw] font-medium lg:text-[11vw] justify-center"
@@ -225,7 +241,6 @@ export function Hero() {
           willChange: "transform",
         }}
       />
-
     </section>
   );
 }

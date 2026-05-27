@@ -8,7 +8,6 @@
                with real assets as needed.
    ============================================================= */
 
-
 export interface ProductImage {
   src: string;
   alt: string;
@@ -44,32 +43,28 @@ const ph = (w: number, h: number, bg: string, id: number, n: number) =>
  *  Total = 3 + 2 + 3 = 8 images
  */
 const GRID: { gridColumn: string; gridRow: string; aspect: string; minH?: string }[] = [
-  { gridColumn: "1 / 4",   gridRow: "1",     aspect: "3/4"  },
-  { gridColumn: "4 / 10",  gridRow: "1 / 3", aspect: "4/3", minH: "40vh" },
-  { gridColumn: "10 / 13", gridRow: "1",     aspect: "4/3"  },
-  { gridColumn: "1 / 4",   gridRow: "2",     aspect: "16/9" },
-  { gridColumn: "10 / 13", gridRow: "2",     aspect: "16/9" },
-  { gridColumn: "1 / 5",   gridRow: "3",     aspect: "16/9" },
-  { gridColumn: "5 / 9",   gridRow: "3",     aspect: "4/3"  },
-  { gridColumn: "9 / 13",  gridRow: "3",     aspect: "16/9" },
+  { gridColumn: "1 / 4", gridRow: "1", aspect: "3/4" },
+  { gridColumn: "4 / 10", gridRow: "1 / 3", aspect: "4/3", minH: "40vh" },
+  { gridColumn: "10 / 13", gridRow: "1", aspect: "4/3" },
+  { gridColumn: "1 / 4", gridRow: "2", aspect: "16/9" },
+  { gridColumn: "10 / 13", gridRow: "2", aspect: "16/9" },
+  { gridColumn: "1 / 5", gridRow: "3", aspect: "16/9" },
+  { gridColumn: "5 / 9", gridRow: "3", aspect: "4/3" },
+  { gridColumn: "9 / 13", gridRow: "3", aspect: "16/9" },
 ];
 
 /** Merges a product's image src/alt with the shared grid layout */
-function makeImages(
-  bg: string,
-  id: number,
-  alts: string[],
-): ProductImage[] {
+function makeImages(bg: string, id: number, alts: string[]): ProductImage[] {
   // Pixel sizes matching each grid slot's aspect ratio
   const sizes: [number, number][] = [
-    [600, 800],   // 3/4
-    [800, 600],   // 4/3 hero
-    [800, 600],   // 4/3
-    [960, 540],   // 16/9
-    [960, 540],   // 16/9
-    [960, 540],   // 16/9
-    [800, 600],   // 4/3
-    [960, 540],   // 16/9
+    [600, 800], // 3/4
+    [800, 600], // 4/3 hero
+    [800, 600], // 4/3
+    [960, 540], // 16/9
+    [960, 540], // 16/9
+    [960, 540], // 16/9
+    [800, 600], // 4/3
+    [960, 540], // 16/9
   ];
 
   return GRID.map((g, i) => ({
@@ -82,7 +77,7 @@ function makeImages(
   }));
 }
 
-/** 
+/**
  * Helper — maps your REAL imported images to the masonry grid layout.
  * You pass an array of 8 { src, alt } objects.
  */
@@ -226,8 +221,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Professional Illumination",
     description:
       "Bring your imagination to life with ABC Lights’ premium LED Strip Lights — the ultimate solution for stylish, energy-efficient, and flexible illumination. Whether you want to create a cozy ambiance in your living room, vibrant accent lighting in your bedroom, or modern backlighting for your ceilings and furniture, our LED strip lights deliver endless possibilities. ",
-    highlights: ['Ultra-Bright & Energy Efficient', 'Flexible & Easy to Install', 'Customizable Colors & Modes', 'Durable & Long-lasting'],
-    spaces: ['Bedrooms & Living Rooms', 'Kitchens & Cabinets', 'Entertainment Areas', 'Commercial & Decorative Installations'],
+    highlights: [
+      "Ultra-Bright & Energy Efficient",
+      "Flexible & Easy to Install",
+      "Customizable Colors & Modes",
+      "Durable & Long-lasting",
+    ],
+    spaces: [
+      "Bedrooms & Living Rooms",
+      "Kitchens & Cabinets",
+      "Entertainment Areas",
+      "Commercial & Decorative Installations",
+    ],
 
     images: buildRealImages([
       { src: lsl1, alt: "LED Strip 1" },
@@ -249,8 +254,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Modular Flexibility",
     description:
       "Discover next-generation lighting design with ABC Lights’ Magnetic Profile Lights — the smart, flexible solution that combines modern aesthetics with endless customization. Whether it’s for your home, office, retail, or gallery, these modular lights give you the freedom to design and adjust your lighting just the way you want.",
-    highlights: ['Seamless Magnetic System', 'Modular & Customizable', 'Efficient & Reliable Performance', 'Sleek, Minimalist Design'],
-    spaces: ['Residential Interiors', 'Retail Stores & Showrooms', 'Offices & Workspaces', 'Gallaries & Hospitality Spaces'],
+    highlights: [
+      "Seamless Magnetic System",
+      "Modular & Customizable",
+      "Efficient & Reliable Performance",
+      "Sleek, Minimalist Design",
+    ],
+    spaces: [
+      "Residential Interiors",
+      "Retail Stores & Showrooms",
+      "Offices & Workspaces",
+      "Gallaries & Hospitality Spaces",
+    ],
 
     images: buildRealImages([
       { src: mpl1, alt: "Magnetic Profile 1" },
@@ -272,8 +287,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Artistic Elegance",
     description:
       "Add a touch of modern sophistication to your interiors with ABC Lights’ exclusive collection of Modern Pendant Lights. Designed to captivate and inspire, our pendant lights effortlessly combine artistic form with functional brilliance, turning ordinary spaces into extraordinary experiences. ",
-    highlights: ['Contemporary Designs for Every Taste', 'Premium Craftsmanship', 'Warm, Inviting Glow', 'Height-Adjustable & Versatile'],
-    spaces: ['Dining Rooms & Kitchens', 'Living Areas & Bedrooms', 'Entryways & Stairwells', 'Commercial Spaces'],
+    highlights: [
+      "Contemporary Designs for Every Taste",
+      "Premium Craftsmanship",
+      "Warm, Inviting Glow",
+      "Height-Adjustable & Versatile",
+    ],
+    spaces: [
+      "Dining Rooms & Kitchens",
+      "Living Areas & Bedrooms",
+      "Entryways & Stairwells",
+      "Commercial Spaces",
+    ],
 
     images: buildRealImages([
       { src: mopl1, alt: "Modern Light 1" },
@@ -295,8 +320,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Ambient Sophistication",
     description:
       "Discover the perfect blend of style and functionality with ABC Lights’ versatile range of Ceiling Lights. Designed to suit every interior, our ceiling fixtures provide brilliant, glare-free illumination while adding a touch of modern elegance to your living spaces.",
-    highlights: ['Contemporary Designs for Every Room', 'Soft, Ambient Illumination', 'Space-Saving & Practical', 'Energy-Efficient LED Technology'],
-    spaces: ['Bedrooms & Living Rooms', 'Dining Rooms & Kitchens', 'Hallways & Entrances', 'Commercial Interiors'],
+    highlights: [
+      "Contemporary Designs for Every Room",
+      "Soft, Ambient Illumination",
+      "Space-Saving & Practical",
+      "Energy-Efficient LED Technology",
+    ],
+    spaces: [
+      "Bedrooms & Living Rooms",
+      "Dining Rooms & Kitchens",
+      "Hallways & Entrances",
+      "Commercial Interiors",
+    ],
 
     images: buildRealImages([
       { src: cl1, alt: "Ceiling Light 1" },
@@ -318,8 +353,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Grand Installations",
     description:
       "At ABC Lights, we believe every space deserves a masterpiece that’s as unique as you are. Our Customized Chandeliers service transforms your ideas into breathtaking, one-of-a-kind installations that elevate luxury homes, hotels, and statement spaces with unmatched elegance and individuality. ",
-    highlights: ['Designed Just for You', 'Perfectly Tailored for Any Spacr', 'Endless Material & Finish Options', 'Expert Craftmanship'],
-    spaces: ['Hotel Lobbies & Reception Areas', 'Residential Living & Dining Rooms', 'Corporate & Commercial Spaces', 'Event Venues & Showpieces'],
+    highlights: [
+      "Designed Just for You",
+      "Perfectly Tailored for Any Spacr",
+      "Endless Material & Finish Options",
+      "Expert Craftmanship",
+    ],
+    spaces: [
+      "Hotel Lobbies & Reception Areas",
+      "Residential Living & Dining Rooms",
+      "Corporate & Commercial Spaces",
+      "Event Venues & Showpieces",
+    ],
 
     images: buildRealImages([
       { src: dc1, alt: "Designer Chandelier 1" },
@@ -341,8 +386,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Exterior Excellence",
     description:
       "Transform your exterior spaces into inviting, functional, and secure areas with ABC Lights’ curated range of Outdoor Lights. Designed to withstand the elements while enhancing the beauty of your home or commercial property, our outdoor lighting solutions bring together durability, style, and efficiency.",
-    highlights: ['Versatile Designs for Every Exterior', 'Enhanced Ambience & Safety', 'Weather-Resistant & Durable', 'Flexible Installation Options'],
-    spaces: ['Entrances & Facades', 'Pathways & Driveways', 'Patios & Decks', 'Gardens & Landscapes'],
+    highlights: [
+      "Versatile Designs for Every Exterior",
+      "Enhanced Ambience & Safety",
+      "Weather-Resistant & Durable",
+      "Flexible Installation Options",
+    ],
+    spaces: [
+      "Entrances & Facades",
+      "Pathways & Driveways",
+      "Patios & Decks",
+      "Gardens & Landscapes",
+    ],
 
     images: buildRealImages([
       { src: ol1, alt: "Outdoor Light 1" },
@@ -364,8 +419,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Sculpted Illumination",
     description:
       "Add layers of warmth, style, and functionality to your interiors with ABC Lights’ stunning collection of Wall Lights. Perfect for accentuating architectural features, creating cozy nooks, or adding practical task lighting, our wall fixtures combine beautiful design with exceptional performance.",
-    highlights: ['Designer Styles for Every Space', 'Ambient & Accent Lighting', 'Space-Saving Elegance', 'Premium Materials & Craftsmanship'],
-    spaces: ['Living Rooms & Bedrooms', 'Hallways & Staircases', 'Bathrooms & Vanity Areas', 'Hospitality & Commercial Spaces'],
+    highlights: [
+      "Designer Styles for Every Space",
+      "Ambient & Accent Lighting",
+      "Space-Saving Elegance",
+      "Premium Materials & Craftsmanship",
+    ],
+    spaces: [
+      "Living Rooms & Bedrooms",
+      "Hallways & Staircases",
+      "Bathrooms & Vanity Areas",
+      "Hospitality & Commercial Spaces",
+    ],
 
     images: buildRealImages([
       { src: wl1, alt: "Wall Light 1" },
@@ -387,8 +452,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Vertical Presence",
     description:
       "Discover the perfect way to brighten pathways, gardens, and public areas with ABC Lights’ stylish range of Pole Lights. Combining practical illumination with beautiful design, our pole lighting solutions enhance safety while adding timeless charm to any exterior setting.",
-    highlights: ['Versatile Styles for Every Landscape', 'Reliable, Even Illumination', 'Weather-Resistant Durability', 'Easy Installation & Maintenance'],
-    spaces: ['Pathways & Walkways', 'Gardens & Lawns', 'Public Parks & Streets', 'Commercial & Residential Entrances'],
+    highlights: [
+      "Versatile Styles for Every Landscape",
+      "Reliable, Even Illumination",
+      "Weather-Resistant Durability",
+      "Easy Installation & Maintenance",
+    ],
+    spaces: [
+      "Pathways & Walkways",
+      "Gardens & Lawns",
+      "Public Parks & Streets",
+      "Commercial & Residential Entrances",
+    ],
 
     images: buildRealImages([
       { src: pl1, alt: "Pole Light 1" },
@@ -410,8 +485,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Raw Sophistication",
     description:
       "ABC Lights brings you a robust range of Industrial Lighting solutions designed to deliver unmatched performance, safety, and energy savings in warehouses, factories, workshops, and large commercial facilities. Built to handle the toughest environments, our industrial fixtures combine superior illumination with rugged durability. ",
-    highlights: ['Powerful & Uniform Illumination', 'Durable, Industrial-Grade Build', 'Easy Installation & Versatility', 'Low Maintenance & Long Lifespan'],
-    spaces: ['Warehouses & Distribution Centers', 'Factories & Manufacturing Plants', 'Workshops & Garages', 'Outdoor Yards & Loading Bays'],
+    highlights: [
+      "Powerful & Uniform Illumination",
+      "Durable, Industrial-Grade Build",
+      "Easy Installation & Versatility",
+      "Low Maintenance & Long Lifespan",
+    ],
+    spaces: [
+      "Warehouses & Distribution Centers",
+      "Factories & Manufacturing Plants",
+      "Workshops & Garages",
+      "Outdoor Yards & Loading Bays",
+    ],
 
     images: buildRealImages([
       { src: il1, alt: "Industrial Light 1" },
@@ -433,8 +518,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Intimate Glow",
     description:
       "Brighten up your living spaces with ABC Lights’ exquisite collection of Table and Floor Lamps. Designed for modern homes, our lamps are the ideal blend of timeless elegance, practical lighting, and distinctive design. From cozy bedside tables to spacious living rooms, find the perfect piece that complements your décor and enhances your everyday moments.",
-    highlights: ['Elegant Designs for Every Interior', 'Soft, Ambient Illumination', 'Easy to Position & Use', 'Premium Build & Materials'],
-    spaces: ['Bedrooms & Bedside Tables', 'Living Rooms & Lounges', 'Home Offices & Study Areas', 'Reading Corners & Hallways'],
+    highlights: [
+      "Elegant Designs for Every Interior",
+      "Soft, Ambient Illumination",
+      "Easy to Position & Use",
+      "Premium Build & Materials",
+    ],
+    spaces: [
+      "Bedrooms & Bedside Tables",
+      "Living Rooms & Lounges",
+      "Home Offices & Study Areas",
+      "Reading Corners & Hallways",
+    ],
 
     images: buildRealImages([
       { src: tfl1, alt: "Table & Floor Lamp 1" },
@@ -456,8 +551,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Heritage Reimagined",
     description:
       "Bring a touch of timeless luxury and refined artistry into your interiors with ABC Lights’ Neo Classic Chandeliers. These stunning centerpieces fuse classic design elements with modern craftsmanship, delivering unmatched elegance that transforms any room into a statement of sophistication.",
-    highlights: ['Elegant Classic Designs with Modern Details', 'Premium Materials & Artisan Craftsmanship', 'Brilliant Illumination', 'Versatile Sizes & Styles'],
-    spaces: ['Grand Foyers & Entrances', 'Dining Rooms & Living Spaces', 'Hotel Lobbies & Banquet Halls', 'Traditional & Transitional Interiors'],
+    highlights: [
+      "Elegant Classic Designs with Modern Details",
+      "Premium Materials & Artisan Craftsmanship",
+      "Brilliant Illumination",
+      "Versatile Sizes & Styles",
+    ],
+    spaces: [
+      "Grand Foyers & Entrances",
+      "Dining Rooms & Living Spaces",
+      "Hotel Lobbies & Banquet Halls",
+      "Traditional & Transitional Interiors",
+    ],
 
     images: buildRealImages([
       { src: ncc1, alt: "Neo Classic Chandeliers 1" },
@@ -479,8 +584,18 @@ export const PRODUCT_CATALOG: ProductData[] = [
     tagline: "Integrated Precision",
     description:
       "Upgrade your interiors with the perfect combination of style, functionality, and energy efficiency through ABC Lights’ premium LED Spot and Panel Lights. Designed to deliver flawless illumination for residential, commercial, or office settings, these fixtures are your go-to solution for modern lighting that performs beautifully every day. ",
-    highlights: ['Focused Illumination with LED Spot Lights', 'Smooth, Even Lighting with LED Panels', 'Sleek, Versatile Designs', 'Long-Lasting & Low Maintenance'],
-    spaces: ['Residential Spaces', 'Offices & Workspaces', 'Retail & Commercial Areas', 'Hospitals, Schools & Meeting Rooms'],
+    highlights: [
+      "Focused Illumination with LED Spot Lights",
+      "Smooth, Even Lighting with LED Panels",
+      "Sleek, Versatile Designs",
+      "Long-Lasting & Low Maintenance",
+    ],
+    spaces: [
+      "Residential Spaces",
+      "Offices & Workspaces",
+      "Retail & Commercial Areas",
+      "Hospitals, Schools & Meeting Rooms",
+    ],
 
     images: buildRealImages([
       { src: al1, alt: "Architectural Light 1" },

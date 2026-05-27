@@ -15,14 +15,14 @@ import TitleReveal from "../ui/TitleReveal";
 import "swiper/css";
 import "swiper/css/pagination";
 import imgAjmal from "@/assets/ajmal-roshan-k.webp";
-import imgUmer  from "@/assets/umer-hayat.webp";
+import imgUmer from "@/assets/umer-hayat.webp";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
-const BG   = "#D3C8B6";   // warm sand
-const FG   = "#1A1819";   // near-black
-const ACC  = "#C9A962";   // gold accent
-const SUB  = "rgba(26,24,25,.6)";   // muted label text
-const STAR = "#C9A962";   // star gold
+const BG = "#D3C8B6"; // warm sand
+const FG = "#1A1819"; // near-black
+const ACC = "#C9A962"; // gold accent
+const SUB = "rgba(26,24,25,.6)"; // muted label text
+const STAR = "#C9A962"; // star gold
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 interface TestimonialItem {
@@ -35,7 +35,7 @@ interface TestimonialItem {
   position: { top: string; left: string };
   bg: string;
   textColor: string;
-  img?: string;  // optional real photo
+  img?: string; // optional real photo
 }
 
 const ITEMS: TestimonialItem[] = [
@@ -47,7 +47,8 @@ const ITEMS: TestimonialItem[] = [
     stars: 5,
     size: "large",
     position: { top: "50%", left: "50%" },
-    bg: "#1A2436", textColor: "#C9A962",
+    bg: "#1A2436",
+    textColor: "#C9A962",
     img: imgAjmal,
   },
   {
@@ -58,7 +59,8 @@ const ITEMS: TestimonialItem[] = [
     stars: 5,
     size: "medium",
     position: { top: "15%", left: "32%" },
-    bg: "#4A1525", textColor: "#F5F0E8",
+    bg: "#4A1525",
+    textColor: "#F5F0E8",
     img: imgUmer,
   },
   {
@@ -69,7 +71,8 @@ const ITEMS: TestimonialItem[] = [
     stars: 5,
     size: "small",
     position: { top: "20%", left: "60%" },
-    bg: "#1B3B36", textColor: "#C9A962", // Emerald
+    bg: "#1B3B36",
+    textColor: "#C9A962", // Emerald
   },
   {
     initial: "M",
@@ -79,7 +82,8 @@ const ITEMS: TestimonialItem[] = [
     stars: 5,
     size: "medium",
     position: { top: "70%", left: "22%" },
-    bg: "#1A1819", textColor: "#C9A962", // Obsidian
+    bg: "#1A1819",
+    textColor: "#C9A962", // Obsidian
   },
   {
     initial: "J",
@@ -89,20 +93,21 @@ const ITEMS: TestimonialItem[] = [
     stars: 5,
     size: "small",
     position: { top: "65%", left: "72%" },
-    bg: "#5A4D41", textColor: "#F5F0E8", // Bronze
+    bg: "#5A4D41",
+    textColor: "#F5F0E8", // Bronze
   },
 ];
 
 // Orbiting avatars for background decoration (not center)
 const ORBIT_AVATARS = [
-  { initial: "A", size: 56, top: "12%",  left: "8%",  bg: "#1A2436", color: "#C9A962" }, // Midnight Navy
-  { initial: "M", size: 76, top: "30%",  left: "14%", bg: "#4A1525", color: "#F5F0E8" }, // Deep Burgundy
-  { initial: "S", size: 44, top: "68%",  left: "6%",  bg: "#1B3B36", color: "#C9A962" }, // Emerald
-  { initial: "J", size: 52, top: "80%",  left: "22%", bg: "#A68A56", color: "#1A1819" }, // Ochre
-  { initial: "R", size: 48, top: "10%",  left: "70%", bg: "#3D4044", color: "#F5F0E8" }, // Slate
-  { initial: "T", size: 68, top: "18%",  left: "84%", bg: "#3E273A", color: "#C9A962" }, // Plum
-  { initial: "K", size: 44, top: "58%",  left: "88%", bg: "#1A1819", color: "#C9A962" }, // Obsidian
-  { initial: "L", size: 56, top: "78%",  left: "78%", bg: "#5A4D41", color: "#F5F0E8" }, // Bronze
+  { initial: "A", size: 56, top: "12%", left: "8%", bg: "#1A2436", color: "#C9A962" }, // Midnight Navy
+  { initial: "M", size: 76, top: "30%", left: "14%", bg: "#4A1525", color: "#F5F0E8" }, // Deep Burgundy
+  { initial: "S", size: 44, top: "68%", left: "6%", bg: "#1B3B36", color: "#C9A962" }, // Emerald
+  { initial: "J", size: 52, top: "80%", left: "22%", bg: "#A68A56", color: "#1A1819" }, // Ochre
+  { initial: "R", size: 48, top: "10%", left: "70%", bg: "#3D4044", color: "#F5F0E8" }, // Slate
+  { initial: "T", size: 68, top: "18%", left: "84%", bg: "#3E273A", color: "#C9A962" }, // Plum
+  { initial: "K", size: 44, top: "58%", left: "88%", bg: "#1A1819", color: "#C9A962" }, // Obsidian
+  { initial: "L", size: 56, top: "78%", left: "78%", bg: "#5A4D41", color: "#F5F0E8" }, // Bronze
 ];
 
 // ─── Stars ─────────────────────────────────────────────────────────────────────
@@ -116,10 +121,15 @@ function Stars({ count }: { count: number }) {
   return (
     <div style={{ display: "flex", gap: 3, justifyContent: "center" }}>
       {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="13" height="13" viewBox="0 0 24 24"
+        <svg
+          key={i}
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
           fill={i < count ? STAR : "rgba(26,24,25,0.1)"}
           stroke={i < count ? STAR : "rgba(26,24,25,0.15)"}
-          strokeWidth="1">
+          strokeWidth="1"
+        >
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
         </svg>
       ))}
@@ -180,7 +190,14 @@ function Avatar({
       }}
     >
       {img ? (
-        <img src={img} alt={initial} width={75} height={75} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }} />
+        <img
+          src={img}
+          alt={initial}
+          width={75}
+          height={75}
+          loading="lazy"
+          style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }}
+        />
       ) : (
         initial
       )}
@@ -213,7 +230,7 @@ export function Feedback() {
       {/* Decorative SVG path */}
       <svg
         className="pointer-events-none absolute inset-x-0 z-[1] w-full top-0"
-        style={{ aspectRatio: '1440 / 1080', opacity: 0.35 }}
+        style={{ aspectRatio: "1440 / 1080", opacity: 0.35 }}
         viewBox="0 0 1440 1080"
         preserveAspectRatio="none"
         aria-hidden
@@ -364,8 +381,21 @@ export function Feedback() {
       `}</style>
 
       {/* ── Decorative orbit rings ─────────────────────────────────────── */}
-      <div className="ts-center-ring" style={{ width: 320, height: 320, top: "50%", left: "50%", animationDuration: "28s" }} />
-      <div className="ts-center-ring" style={{ width: 480, height: 480, top: "50%", left: "50%", animationDuration: "40s", animationDirection: "reverse" }} />
+      <div
+        className="ts-center-ring"
+        style={{ width: 320, height: 320, top: "50%", left: "50%", animationDuration: "28s" }}
+      />
+      <div
+        className="ts-center-ring"
+        style={{
+          width: 480,
+          height: 480,
+          top: "50%",
+          left: "50%",
+          animationDuration: "40s",
+          animationDirection: "reverse",
+        }}
+      />
 
       {/* ── Orbiting avatar decorations ───────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
@@ -380,7 +410,13 @@ export function Feedback() {
               height: av.size,
             }}
           >
-            <Avatar initial={av.initial} size={av.size} bg={av.bg} color={av.color} border="1.5px solid rgba(201,169,98,0.3)" />
+            <Avatar
+              initial={av.initial}
+              size={av.size}
+              bg={av.bg}
+              color={av.color}
+              border="1.5px solid rgba(201,169,98,0.3)"
+            />
           </div>
         ))}
       </div>
@@ -418,7 +454,15 @@ export function Feedback() {
               color: FG,
             }}
           >
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: ACC, display: "inline-block" }} />
+            <span
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                background: ACC,
+                display: "inline-block",
+              }}
+            />
             Testimonials
           </span>
 
@@ -433,9 +477,24 @@ export function Feedback() {
               margin: "0 0 20px",
             }}
           >
-            <TitleReveal text="What" className="inline-block" style={{ color: FG }} waitForPreloader={false} />{" "}
-            <TitleReveal text="Our Clients" className="inline-block italic" style={{ color: FG }} waitForPreloader={false} />{" "}
-            <TitleReveal text="Say" className="inline-block" style={{ color: FG }} waitForPreloader={false} />
+            <TitleReveal
+              text="What"
+              className="inline-block"
+              style={{ color: FG }}
+              waitForPreloader={false}
+            />{" "}
+            <TitleReveal
+              text="Our Clients"
+              className="inline-block italic"
+              style={{ color: FG }}
+              waitForPreloader={false}
+            />{" "}
+            <TitleReveal
+              text="Say"
+              className="inline-block"
+              style={{ color: FG }}
+              waitForPreloader={false}
+            />
           </h2>
 
           <div
@@ -494,7 +553,14 @@ export function Feedback() {
             aria-label="Previous"
             onClick={() => swiperRef.current?.slidePrev()}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </button>
@@ -507,7 +573,9 @@ export function Feedback() {
               speed={550}
               autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
               pagination={{ el: ".ts-pagination", clickable: true }}
-              onSwiper={(s) => { swiperRef.current = s; }}
+              onSwiper={(s) => {
+                swiperRef.current = s;
+              }}
               onSlideChange={(s) => setActiveIdx(s.realIndex)}
             >
               {ITEMS.map((item, i) => (
@@ -534,7 +602,14 @@ export function Feedback() {
             aria-label="Next"
             onClick={() => swiperRef.current?.slideNext()}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>

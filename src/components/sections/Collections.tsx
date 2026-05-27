@@ -9,10 +9,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/utils/gsap-setup";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectCoverflow } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectCoverflow } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
 import dc1 from "@/assets/Designer-Chandeliers-1.webp";
 import dc2 from "@/assets/Designer-Chandeliers-2.webp";
 import dc3 from "@/assets/Designer-Chandeliers-3.webp";
@@ -31,7 +31,6 @@ const SHOWCASE = [
   { img: dc6, title: "Designer Chandeliers" },
   { img: dc7, title: "Designer Chandeliers" },
 ];
-
 
 /**
  * Places
@@ -53,13 +52,10 @@ export function Places() {
   const centerBottomRef = useRef<HTMLElement | null>(null);
   const [idx, setIdx] = useState(0);
 
-
   // Effect: Desktop-only scroll animations (masonry grid into tombstone center card)
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (window.matchMedia("(max-width: 1023px)").matches) return;
-
-
 
     const ctx = gsap.context(() => {
       // Headline reveal
@@ -118,7 +114,6 @@ export function Places() {
           ease: "none",
           scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: true },
         });
-
       });
 
       // Warm cap
@@ -144,11 +139,11 @@ export function Places() {
       // Phase 3: Objects section emerges
 
       const showcase = showcaseRef.current;
-      const centerCard = showcase?.querySelector('.center-card-inner') as HTMLElement;
+      const centerCard = showcase?.querySelector(".center-card-inner") as HTMLElement;
 
       if (showcase && centerCard && scrollContainerRef.current) {
         // Set transform origin to center for proper expansion
-        gsap.set(centerCard, { transformOrigin: 'center center' });
+        gsap.set(centerCard, { transformOrigin: "center center" });
 
         // Compute scale that fills the viewport with a 35px gap on every side
         const gap = 35;
@@ -182,32 +177,70 @@ export function Places() {
         });
 
         // Phase 1 (0%–45%): card scales up to fill viewport, centered
-        scrollTl.to(centerCard, {
-          scale: fillScale,
-          y: yOffset,
-          borderRadius: '16px',
-          ease: 'power2.inOut',
-          duration: 45,
-        }, 0);
+        scrollTl.to(
+          centerCard,
+          {
+            scale: fillScale,
+            y: yOffset,
+            borderRadius: "16px",
+            ease: "power2.inOut",
+            duration: 45,
+          },
+          0,
+        );
 
         // Side images exit in their directions
-        if (leftTopRef.current) scrollTl.to(leftTopRef.current, { x: -400, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
-        if (leftBottomRef.current) scrollTl.to(leftBottomRef.current, { x: -400, y: 200, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
-        if (rightTop1Ref.current) scrollTl.to(rightTop1Ref.current, { y: -400, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
-        if (rightTop2Ref.current) scrollTl.to(rightTop2Ref.current, { x: 400, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
-        if (centerBottomRef.current) scrollTl.to(centerBottomRef.current, { y: 400, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
-        if (rightBottomRef.current) scrollTl.to(rightBottomRef.current, { y: 400, x: 200, opacity: 0, ease: 'power2.inOut', duration: 45 }, 0);
+        if (leftTopRef.current)
+          scrollTl.to(
+            leftTopRef.current,
+            { x: -400, opacity: 0, ease: "power2.inOut", duration: 45 },
+            0,
+          );
+        if (leftBottomRef.current)
+          scrollTl.to(
+            leftBottomRef.current,
+            { x: -400, y: 200, opacity: 0, ease: "power2.inOut", duration: 45 },
+            0,
+          );
+        if (rightTop1Ref.current)
+          scrollTl.to(
+            rightTop1Ref.current,
+            { y: -400, opacity: 0, ease: "power2.inOut", duration: 45 },
+            0,
+          );
+        if (rightTop2Ref.current)
+          scrollTl.to(
+            rightTop2Ref.current,
+            { x: 400, opacity: 0, ease: "power2.inOut", duration: 45 },
+            0,
+          );
+        if (centerBottomRef.current)
+          scrollTl.to(
+            centerBottomRef.current,
+            { y: 400, opacity: 0, ease: "power2.inOut", duration: 45 },
+            0,
+          );
+        if (rightBottomRef.current)
+          scrollTl.to(
+            rightBottomRef.current,
+            { y: 400, x: 200, opacity: 0, ease: "power2.inOut", duration: 45 },
+            0,
+          );
 
         // Phase 2 (45%–100%): shrink to tombstone portrait shape
-        scrollTl.to(centerCard, {
-          scale: 1,
-          width: '22vw',
-          height: '60vh',
-          y: yOffset + window.innerHeight * 0.06,
-          borderRadius: '999px 999px 12px 12px',
-          ease: 'power2.inOut',
-          duration: 55,
-        }, 45);
+        scrollTl.to(
+          centerCard,
+          {
+            scale: 1,
+            width: "22vw",
+            height: "60vh",
+            y: yOffset + window.innerHeight * 0.06,
+            borderRadius: "999px 999px 12px 12px",
+            ease: "power2.inOut",
+            duration: 55,
+          },
+          45,
+        );
       }
     }, root);
 
@@ -233,11 +266,13 @@ export function Places() {
     return () => ctx.revert();
   }, [idx]);
 
-  const next = () => { setIdx((i) => (i + 1) % SHOWCASE.length); };
-  const prev = () => { setIdx((i) => (i - 1 + SHOWCASE.length) % SHOWCASE.length); };
+  const next = () => {
+    setIdx((i) => (i + 1) % SHOWCASE.length);
+  };
+  const prev = () => {
+    setIdx((i) => (i - 1 + SHOWCASE.length) % SHOWCASE.length);
+  };
   const current = SHOWCASE[idx];
-
-
 
   return (
     <section
@@ -245,18 +280,13 @@ export function Places() {
       id="collections"
       className="relative z-10 w-full overflow-visible bg-[#0E0D0E]"
     >
-      
       {/* Solid background */}
-      <div
-        className="absolute inset-0 z-0 bg-[#0E0D0E]"
-      />
-
-
+      <div className="absolute inset-0 z-0 bg-[#0E0D0E]" />
 
       {/* Decorative SVG path */}
       <svg
         className="pointer-events-none absolute inset-x-0 z-1 w-full -top-4 lg:-top-32"
-        style={{ aspectRatio: '1440 / 1080' }}
+        style={{ aspectRatio: "1440 / 1080" }}
         viewBox="0 0 1440 1080"
         preserveAspectRatio="none"
         aria-hidden
@@ -278,7 +308,10 @@ export function Places() {
       {/* Headline block */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col px-6 pt-[12vh] lg:pt-[22vh] lg:px-12">
         <div className="lux-places-headline relative">
-          <h2 className="text-center leading-[0.88] tracking-[-0.045em]" style={{ fontFamily: "'Runalto', serif" }}>
+          <h2
+            className="text-center leading-[0.88] tracking-[-0.045em]"
+            style={{ fontFamily: "'Runalto', serif" }}
+          >
             <span className="block overflow-hidden">
               <TitleReveal
                 text="Explore"
@@ -320,7 +353,10 @@ export function Places() {
       </div>
 
       {/* Scroll Container for sophisticated animation */}
-      <div ref={scrollContainerRef} className="scroll-container relative z-20 h-screen overflow-hidden">
+      <div
+        ref={scrollContainerRef}
+        className="scroll-container relative z-20 h-screen overflow-hidden"
+      >
         <div className="sticky-scene relative h-full">
           {/* MOBILE/TABLET VIEW: Swiper Cover-flow Carousel (Hidden on desktop) */}
           <div className="flex lg:hidden flex-col items-center justify-center px-0 pt-[4vh] pb-[8vh] w-full overflow-hidden relative">
@@ -348,11 +384,14 @@ export function Places() {
               className="w-full h-[53vh] max-h-[440px] min-h-[350px] mt-[2vh]"
             >
               {SHOWCASE.map((item, index) => (
-                <SwiperSlide key={index} className="w-[64vw]! md:w-[45vw]! max-w-[295px] md:max-w-[400px] h-full lux-swiper-slide">
+                <SwiperSlide
+                  key={index}
+                  className="w-[64vw]! md:w-[45vw]! max-w-[295px] md:max-w-[400px] h-full lux-swiper-slide"
+                >
                   {({ isActive }) => (
                     <div
                       className="relative w-full h-full aspect-2/3 overflow-hidden"
-                      style={{ borderRadius: '250px 250px 0 0' }}
+                      style={{ borderRadius: "250px 250px 0 0" }}
                     >
                       <img
                         src={item.img}
@@ -362,7 +401,7 @@ export function Places() {
                         className="absolute inset-0 h-full w-full object-cover"
                       />
                       {/* Title Over Image */}
-                      <div 
+                      <div
                         className="lux-swiper-title absolute inset-0 flex items-end justify-center px-6 pb-2 pt-6 transition-opacity duration-500"
                         style={{ opacity: isActive ? 1 : 0 }}
                       >
@@ -380,14 +419,16 @@ export function Places() {
             </Swiper>
           </div>
 
-
           {/* DESKTOP VIEW: Original Masonry Grid Layout (Hidden on mobile/tablet) */}
-          <div ref={gridContainerRef} className="hidden lg:block relative z-10 mx-auto pt-[16vh] w-full max-w-[1600px] px-4 md:px-8">
+          <div
+            ref={gridContainerRef}
+            className="hidden lg:block relative z-10 mx-auto pt-[16vh] w-full max-w-[1600px] px-4 md:px-8"
+          >
             <div
               className="grid w-full gap-4 md:gap-8"
               style={{
-                gridTemplateColumns: 'repeat(12, 1fr)',
-                gridTemplateRows: 'auto auto auto',
+                gridTemplateColumns: "repeat(12, 1fr)",
+                gridTemplateRows: "auto auto auto",
               }}
             >
               {/* === LEFT COLUMN === */}
@@ -397,9 +438,12 @@ export function Places() {
                 className="lux-place-tile relative z-10"
                 data-cursor="VIEW"
                 data-static="true"
-                style={{ gridColumn: '1 / 4', gridRow: '1', marginTop: '-7vh' }}
+                style={{ gridColumn: "1 / 4", gridRow: "1", marginTop: "-7vh" }}
               >
-                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '3/4', maxHeight: '280px' }}>
+                <div
+                  className="relative w-full overflow-hidden rounded-lg"
+                  style={{ aspectRatio: "3/4", maxHeight: "280px" }}
+                >
                   <img
                     src={dc1}
                     alt="Designer Chandeliers"
@@ -418,9 +462,12 @@ export function Places() {
                 className="lux-place-tile relative z-10"
                 data-cursor="VIEW"
                 data-static="true"
-                style={{ gridColumn: '1 / 4', gridRow: '3', marginTop: '-2vh' }}
+                style={{ gridColumn: "1 / 4", gridRow: "3", marginTop: "-2vh" }}
               >
-                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '16/9' }}>
+                <div
+                  className="relative w-full overflow-hidden rounded-lg"
+                  style={{ aspectRatio: "16/9" }}
+                >
                   <img
                     src={dc7}
                     alt="Designer Chandeliers"
@@ -439,15 +486,15 @@ export function Places() {
                 ref={showcaseRef}
                 data-static="true"
                 className="relative z-20"
-                style={{ gridColumn: '4 / 10', gridRow: '1 / 4', marginTop: '4vh' }}
+                style={{ gridColumn: "4 / 10", gridRow: "1 / 4", marginTop: "4vh" }}
               >
                 {/* Wrapper to hold the grid space so animating the card doesn't reflow the DOM and break the pin-spacer */}
-                <div className="relative w-full" style={{ aspectRatio: '21/9', minHeight: '40vh' }}>
-                  <div 
+                <div className="relative w-full" style={{ aspectRatio: "21/9", minHeight: "40vh" }}>
+                  <div
                     className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden rounded-lg bg-black origin-center"
-                    style={{ willChange: 'transform, border-radius' }}
+                    style={{ willChange: "transform, border-radius" }}
                   >
-                    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+                    <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
                       <img
                         key={current.img}
                         src={current.img}
@@ -456,19 +503,18 @@ export function Places() {
                         height={5400}
                         className="lux-showcase-img"
                         style={{
-                          position: 'absolute',
-                          top: '50%',
-                          left: '50%',
-                          transform: 'translate(-50%, -50%)',
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          objectPosition: 'center',
-                          willChange: 'transform',
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          objectPosition: "center",
+                          willChange: "transform",
                         }}
                       />
                     </div>
-
 
                     {/* Title */}
                     <div className="absolute left-8 top-1/2 -translate-y-1/2 md:left-12">
@@ -497,7 +543,11 @@ export function Places() {
                         className="grid h-14 w-14 place-items-center rounded-full bg-black/80 text-white transition-transform hover:scale-105 md:h-16 md:w-16"
                       >
                         <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
-                          <path d="M21 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" strokeWidth="1.5" />
+                          <path
+                            d="M21 7H1M1 7L7 1M1 7L7 13"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                          />
                         </svg>
                       </button>
                       <div style={{ position: "relative", display: "inline-flex" }}>
@@ -509,7 +559,11 @@ export function Places() {
                           className="grid h-14 w-14 place-items-center rounded-full bg-black/80 text-white transition-transform hover:scale-105 md:h-16 md:w-16"
                         >
                           <svg width="24" height="14" viewBox="0 0 22 14" fill="none">
-                            <path d="M1 7H21M21 7L15 1M21 7L15 13" stroke="currentColor" strokeWidth="1.5" />
+                            <path
+                              d="M1 7H21M21 7L15 1M21 7L15 13"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                            />
                           </svg>
                         </button>
                       </div>
@@ -525,9 +579,17 @@ export function Places() {
                 className="lux-place-tile relative z-10"
                 data-cursor="VIEW"
                 data-static="true"
-                style={{ gridColumn: '8 / 10', gridRow: '1', marginLeft: '2vw', marginTop: '-18vh' }}
+                style={{
+                  gridColumn: "8 / 10",
+                  gridRow: "1",
+                  marginLeft: "2vw",
+                  marginTop: "-18vh",
+                }}
               >
-                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '4/3' }}>
+                <div
+                  className="relative w-full overflow-hidden rounded-lg"
+                  style={{ aspectRatio: "4/3" }}
+                >
                   <img
                     src={dc2}
                     alt="Designer Chandeliers"
@@ -546,9 +608,12 @@ export function Places() {
                 className="lux-place-tile relative z-10"
                 data-cursor="VIEW"
                 data-static="true"
-                style={{ gridColumn: '10 / 13', gridRow: '1', marginLeft: '1vw' }}
+                style={{ gridColumn: "10 / 13", gridRow: "1", marginLeft: "1vw" }}
               >
-                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '16/9', minHeight: '170px' }}>
+                <div
+                  className="relative w-full overflow-hidden rounded-lg"
+                  style={{ aspectRatio: "16/9", minHeight: "170px" }}
+                >
                   <img
                     src={dc4}
                     alt="Designer Chandeliers"
@@ -567,9 +632,17 @@ export function Places() {
                 className="lux-place-tile relative z-10"
                 data-cursor="VIEW"
                 data-static="true"
-                style={{ gridColumn: '5 / 9', gridRow: '3', marginTop: '12vh', marginLeft: '-120px' }}
+                style={{
+                  gridColumn: "5 / 9",
+                  gridRow: "3",
+                  marginTop: "12vh",
+                  marginLeft: "-120px",
+                }}
               >
-                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '16/9', minHeight: '140px', maxWidth: '320px' }}>
+                <div
+                  className="relative w-full overflow-hidden rounded-lg"
+                  style={{ aspectRatio: "16/9", minHeight: "140px", maxWidth: "320px" }}
+                >
                   <img
                     src={dc3}
                     alt="Designer Chandeliers"
@@ -588,9 +661,17 @@ export function Places() {
                 className="lux-place-tile relative z-10"
                 data-cursor="VIEW"
                 data-static="true"
-                style={{ gridColumn: '10 / 13', gridRow: '3', marginTop: '-8vh', marginLeft: '2vw' }}
+                style={{
+                  gridColumn: "10 / 13",
+                  gridRow: "3",
+                  marginTop: "-8vh",
+                  marginLeft: "2vw",
+                }}
               >
-                <div className="relative w-full overflow-hidden rounded-lg" style={{ aspectRatio: '4/3', minHeight: '200px' }}>
+                <div
+                  className="relative w-full overflow-hidden rounded-lg"
+                  style={{ aspectRatio: "4/3", minHeight: "200px" }}
+                >
                   <img
                     src={dc5}
                     alt="Designer Chandeliers"
@@ -606,13 +687,12 @@ export function Places() {
         </div>
       </div>
 
-        {/* Star mask at bottom-center of Places (division line above Testimonials) */}
-        <div className="absolute bottom-0 left-1/2 z-10 w-24 h-24 -translate-x-1/2 translate-y-1/2 pointer-events-none text-[#0E0D0E]">
-          <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full">
-            <path d="M50,0c0,27.6,22.4,50,50,50-27.6,0-50,22.4-50,50,0-27.6-22.4-50-50-50,27.6,0,50-22.4,50-50Z" />
-          </svg>
-        </div>
-
-      </section>
+      {/* Star mask at bottom-center of Places (division line above Testimonials) */}
+      <div className="absolute bottom-0 left-1/2 z-10 w-24 h-24 -translate-x-1/2 translate-y-1/2 pointer-events-none text-[#0E0D0E]">
+        <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full">
+          <path d="M50,0c0,27.6,22.4,50,50,50-27.6,0-50,22.4-50,50,0-27.6-22.4-50-50-50,27.6,0,50-22.4,50-50Z" />
+        </svg>
+      </div>
+    </section>
   );
 }

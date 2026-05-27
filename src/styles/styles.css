@@ -5,9 +5,10 @@
 
 /* ── FONT FACES ── */
 @font-face {
-  font-family: 'Runalto';
-  src: url('../assets/fonts/Runalto.woff2') format('woff2'),
-       url('../assets/fonts/Runalto.woff') format('woff');
+  font-family: "Runalto";
+  src:
+    url("../assets/fonts/Runalto.woff2") format("woff2"),
+    url("../assets/fonts/Runalto.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -48,9 +49,9 @@
   --radius: 0.25rem;
 
   /* ABC LUX brand */
-  --bone: oklch(0.85 0.025 80);     /* warm beige #D1C6B4 */
+  --bone: oklch(0.85 0.025 80); /* warm beige #D1C6B4 */
   --obsidian: oklch(0.18 0.005 60); /* deep charcoal #151415 */
-  --ember: oklch(0.72 0.13 65);     /* warm amber accent */
+  --ember: oklch(0.72 0.13 65); /* warm amber accent */
 
   --background: var(--obsidian);
   --foreground: oklch(0.92 0.01 80);
@@ -117,7 +118,10 @@
 }
 
 /* Utility */
-.font-serif { font-family: var(--font-serif); letter-spacing: -0.02em; }
+.font-serif {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+}
 
 .lux-eyebrow {
   font-family: var(--font-sans);
@@ -153,14 +157,11 @@
   filter: blur(0.05em);
   opacity: 0;
 
-  transform: translateZ(0)
-    translate(0, 0.5em)
-    skew(15deg, 30deg)
-    scale(1.2);
+  transform: translateZ(0) translate(0, 0.5em) skew(15deg, 30deg) scale(1.2);
 
-  transition: 
-    opacity 1.5s cubic-bezier(0.35, 0.35, 0, 1), 
-    transform 1.5s cubic-bezier(0.35, 0.35, 0, 1), 
+  transition:
+    opacity 1.5s cubic-bezier(0.35, 0.35, 0, 1),
+    transform 1.5s cubic-bezier(0.35, 0.35, 0, 1),
     filter 1.5s cubic-bezier(0.35, 0.35, 0, 1);
 
   transition-delay: calc(var(--char-index, 0) * 35ms);
@@ -170,10 +171,7 @@
   filter: blur(0);
   opacity: 1;
 
-  transform: translateZ(0)
-    translate(0, 0)
-    skew(0deg, 0deg)
-    scale(1);
+  transform: translateZ(0) translate(0, 0) skew(0deg, 0deg) scale(1);
 }
 
 /* --- Menu Overlay Animations --- */
@@ -197,7 +195,7 @@
   left: 0;
   width: 100%;
   text-align: center;
-  color: #C9A962;
+  color: #c9a962;
 }
 .lux-rollup:hover .lux-rollup-text {
   transform: translateY(-110%);
@@ -205,21 +203,45 @@
 
 /* Cross Icon Animations */
 @keyframes cross-in-1 {
-  0% { transform: translate(-50%, -50%) rotate(0deg) scaleX(0); opacity: 0; }
-  100% { transform: translate(-50%, -50%) rotate(45deg) scaleX(1); opacity: 1; }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(45deg) scaleX(1);
+    opacity: 1;
+  }
 }
 @keyframes cross-in-2 {
-  0% { transform: translate(-50%, -50%) rotate(0deg) scaleX(0); opacity: 0; }
-  100% { transform: translate(-50%, -50%) rotate(-45deg) scaleX(1); opacity: 1; }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-45deg) scaleX(1);
+    opacity: 1;
+  }
 }
 
 @keyframes cross-out-1 {
-  0% { transform: translate(-50%, -50%) rotate(45deg) scaleX(1); opacity: 1; }
-  100% { transform: translate(-50%, -50%) rotate(0deg) scaleX(0); opacity: 0; }
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg) scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scaleX(0);
+    opacity: 0;
+  }
 }
 @keyframes cross-out-2 {
-  0% { transform: translate(-50%, -50%) rotate(-45deg) scaleX(1); opacity: 1; }
-  100% { transform: translate(-50%, -50%) rotate(0deg) scaleX(0); opacity: 0; }
+  0% {
+    transform: translate(-50%, -50%) rotate(-45deg) scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scaleX(0);
+    opacity: 0;
+  }
 }
 
 .cross-line-1.open {

@@ -8,27 +8,34 @@
                on devices <= 1024px, unless the section is explicitly allowed.
    ============================================================= */
 
-import gsapLib from 'gsap';
-import { ScrollTrigger as ScrollTriggerLib } from 'gsap/ScrollTrigger';
+import gsapLib from "gsap";
+import { ScrollTrigger as ScrollTriggerLib } from "gsap/ScrollTrigger";
 
 import { isMobileOrTablet } from "./device";
 
-const ALLOW_SECTIONS = ['hero', 'about', 'hero-about'];
+const ALLOW_SECTIONS = ["hero", "about", "hero-about"];
 
-const noop = () => { };
+const noop = () => {};
 const noopTicker = { add: noop, remove: noop, lagSmoothing: noop };
 const noopTimeline = () => ({ to: noop, from: noop, kill: noop, eventCallback: noop });
 const noopGsap = {
-	context(cb: any) { try { cb && cb(); } catch (e) { } return { revert: noop }; },
-	quickTo() { return noop; },
-	set: noop,
-	to: noop,
-	fromTo: noop,
-	from: noop,
-	killTweensOf: noop,
-	timeline: noopTimeline,
-	ticker: noopTicker,
-	registerPlugin: noop,
+  context(cb: any) {
+    try {
+      cb && cb();
+    } catch (e) {}
+    return { revert: noop };
+  },
+  quickTo() {
+    return noop;
+  },
+  set: noop,
+  to: noop,
+  fromTo: noop,
+  from: noop,
+  killTweensOf: noop,
+  timeline: noopTimeline,
+  ticker: noopTicker,
+  registerPlugin: noop,
 };
 const noopScrollTrigger = { config: noop, refresh: noop, update: noop };
 
@@ -45,16 +52,16 @@ let defaultScrollTrigger = defaultIsEnabled ? ScrollTriggerLib : noopScrollTrigg
  * @returns An object containing the appropriate `gsap` and `ScrollTrigger` references.
  */
 export function getAnimationContext(section?: string) {
-	const enabled = !isMobileOrTablet() || (section ? ALLOW_SECTIONS.includes(section) : false);
-	if (enabled) {
-		try {
-			gsapLib.registerPlugin(ScrollTriggerLib);
-		} catch (e) {
-			// ignore
-		}
-		return { gsap: gsapLib, ScrollTrigger: ScrollTriggerLib };
-	}
-	return { gsap: noopGsap, ScrollTrigger: noopScrollTrigger };
+  const enabled = !isMobileOrTablet() || (section ? ALLOW_SECTIONS.includes(section) : false);
+  if (enabled) {
+    try {
+      gsapLib.registerPlugin(ScrollTriggerLib);
+    } catch (e) {
+      // ignore
+    }
+    return { gsap: gsapLib, ScrollTrigger: ScrollTriggerLib };
+  }
+  return { gsap: noopGsap, ScrollTrigger: noopScrollTrigger };
 }
 
 /**
@@ -64,7 +71,7 @@ export function getAnimationContext(section?: string) {
  * @returns {boolean} True if animations should run, false otherwise.
  */
 export function allowAnimationsFor(section?: string) {
-	return !isMobileOrTablet() || (section ? ALLOW_SECTIONS.includes(section) : false);
+  return !isMobileOrTablet() || (section ? ALLOW_SECTIONS.includes(section) : false);
 }
 
 export { defaultGsap as gsap, defaultScrollTrigger as ScrollTrigger };

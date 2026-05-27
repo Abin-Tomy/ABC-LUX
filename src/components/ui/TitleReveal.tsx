@@ -7,8 +7,8 @@
    Notes     : Automatically splits text into individual spans and waits for the preloader to finish.
    ============================================================= */
 
-import React, { useEffect, useRef, useState } from 'react';
-import { usePreloader } from '@/hooks/usePreloader';
+import React, { useEffect, useRef, useState } from "react";
+import { usePreloader } from "@/hooks/usePreloader";
 
 interface TitleRevealProps {
   text: string;
@@ -31,13 +31,13 @@ interface TitleRevealProps {
  *   - once (boolean): Whether the animation should only play once.
  *   - waitForPreloader (boolean): Whether to delay animation until the global preloader is done.
  */
-const TitleReveal: React.FC<TitleRevealProps> = ({ 
-  text, 
-  className = '', 
-  style, 
+const TitleReveal: React.FC<TitleRevealProps> = ({
+  text,
+  className = "",
+  style,
   threshold = 0.1,
   once = true,
-  waitForPreloader = true
+  waitForPreloader = true,
 }) => {
   const [inView, setInView] = useState(false);
   const [hasBeenInView, setHasBeenInView] = useState(false);
@@ -59,7 +59,7 @@ const TitleReveal: React.FC<TitleRevealProps> = ({
           setInView(false);
         }
       },
-      { threshold }
+      { threshold },
     );
 
     if (ref.current) {
@@ -70,33 +70,47 @@ const TitleReveal: React.FC<TitleRevealProps> = ({
   }, [threshold, once, text, isLoaded, waitForPreloader]); // Re-run if text changes or preloader completes
 
   // Determine if we should propagate styles to characters (e.g. for gradients)
-  const isGradient = style && (style.WebkitBackgroundClip === 'text' || (style as any).backgroundClip === 'text');
+  const isGradient =
+    style && (style.WebkitBackgroundClip === "text" || (style as any).backgroundClip === "text");
 
   return (
-    <span 
+    <span
       ref={ref}
-      className={`title-reveal-splitted ${inView ? '-inview' : ''} ${className}`}
-      style={isGradient ? { ...style, backgroundImage: 'none', WebkitBackgroundClip: 'initial', backgroundClip: 'initial' } : style}
+      className={`title-reveal-splitted ${inView ? "-inview" : ""} ${className}`}
+      style={
+        isGradient
+          ? {
+              ...style,
+              backgroundImage: "none",
+              WebkitBackgroundClip: "initial",
+              backgroundClip: "initial",
+            }
+          : style
+      }
       aria-hidden="true"
     >
-      {text.split('').map((char, i) => (
+      {text.split("").map((char, i) => (
         <span
           key={`${text}-${i}`}
           className="-s-char"
-          style={{
-            ...(isGradient ? {
-              backgroundImage: style.backgroundImage,
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              color: 'transparent',
-              display: 'inline-block' // needed for background-clip in some cases
-            } : {}),
-            '--char-index': i,
-            '--char-random': Math.floor(Math.random() * 10),
-          } as React.CSSProperties}
+          style={
+            {
+              ...(isGradient
+                ? {
+                    backgroundImage: style.backgroundImage,
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    color: "transparent",
+                    display: "inline-block", // needed for background-clip in some cases
+                  }
+                : {}),
+              "--char-index": i,
+              "--char-random": Math.floor(Math.random() * 10),
+            } as React.CSSProperties
+          }
         >
-          {char === ' ' ? '\u00A0' : char}
+          {char === " " ? "\u00A0" : char}
         </span>
       ))}
     </span>

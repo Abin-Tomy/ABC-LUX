@@ -12,9 +12,9 @@ import CursorTrail from "../components/ui/CursorTrail";
 import Preloader from "../components/ui/Preloader";
 import { PreloaderProvider } from "../hooks/usePreloader";
 
-/** 
+/**
  * RootLayout
- * The main layout wrapper for the application. Injects global context providers 
+ * The main layout wrapper for the application. Injects global context providers
  * and persistent components like the preloader and cursor trail around the page outlet.
  * Props: None
  */

@@ -5,6 +5,14 @@ import tailwindcss from "@tailwindcss/vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 
 export default defineConfig({
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+      },
+    },
+  },
   plugins: [
     react(),
     tsconfigPaths(),

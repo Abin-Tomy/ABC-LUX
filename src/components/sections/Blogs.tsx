@@ -17,8 +17,8 @@ import img2 from "@/assets/Outdoor-Lights-in-Qatar.webp";
 import img3 from "@/assets/modern-lights-in-qatar.webp";
 
 // ─── Brand colours (same as WhyChooseUs) ─────────────────────────────────────
-const BG   = "#D3C8B6";
-const FG   = "#1A1819";
+const BG = "#D3C8B6";
+const FG = "#1A1819";
 const GOLD = "#C9A962";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -64,8 +64,8 @@ const ANIM_MS = 750;
 const N = SLIDES.length;
 
 const tintGradient: Record<CardSlot, string> = {
-  left:   "linear-gradient(to right,  rgba(26,24,25,0.22) 0%, transparent 60%)",
-  right:  "linear-gradient(to left,   rgba(26,24,25,0.22) 0%, transparent 60%)",
+  left: "linear-gradient(to right,  rgba(26,24,25,0.22) 0%, transparent 60%)",
+  right: "linear-gradient(to left,   rgba(26,24,25,0.22) 0%, transparent 60%)",
   center: "transparent",
 };
 
@@ -80,9 +80,9 @@ const tintGradient: Record<CardSlot, string> = {
 export function Blogs() {
   const [hovered, setHovered] = useState<CardSlot | null>(null);
   const [cards, setCards] = useState<Record<CardSlot, CardState>>({
-    left:   { slideIdx: 0, incomingIdx: null, wipeDir: null, wipeOpen: false },
+    left: { slideIdx: 0, incomingIdx: null, wipeDir: null, wipeOpen: false },
     center: { slideIdx: 1, incomingIdx: null, wipeDir: null, wipeOpen: false },
-    right:  { slideIdx: 2, incomingIdx: null, wipeDir: null, wipeOpen: false },
+    right: { slideIdx: 2, incomingIdx: null, wipeDir: null, wipeOpen: false },
   });
   const animating = useRef(false);
 
@@ -91,13 +91,13 @@ export function Blogs() {
     if (animating.current) return;
     animating.current = true;
 
-    const delta    = direction === "right" ? 1 : -1;
+    const delta = direction === "right" ? 1 : -1;
     const wipeDir: "ltr" | "rtl" = direction === "right" ? "rtl" : "ltr";
     const slots: CardSlot[] = ["left", "center", "right"];
 
-    setCards(prev => {
+    setCards((prev) => {
       const next = { ...prev };
-      slots.forEach(slot => {
+      slots.forEach((slot) => {
         const incoming = (prev[slot].slideIdx + delta + N) % N;
         next[slot] = { ...prev[slot], incomingIdx: incoming, wipeDir, wipeOpen: false };
       });
@@ -106,16 +106,18 @@ export function Blogs() {
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        setCards(prev => {
+        setCards((prev) => {
           const next = { ...prev };
-          slots.forEach(slot => { next[slot] = { ...prev[slot], wipeOpen: true }; });
+          slots.forEach((slot) => {
+            next[slot] = { ...prev[slot], wipeOpen: true };
+          });
           return next;
         });
 
         setTimeout(() => {
-          setCards(prev => {
+          setCards((prev) => {
             const next = { ...prev };
-            slots.forEach(slot => {
+            slots.forEach((slot) => {
               next[slot] = {
                 slideIdx: prev[slot].incomingIdx!,
                 incomingIdx: null,
@@ -135,24 +137,22 @@ export function Blogs() {
   const getClipPath = (card: CardState) => {
     if (card.incomingIdx === null) return undefined;
     const closed =
-      card.wipeDir === "ltr"
-        ? "inset(0 100% 0 0 round 12px)"
-        : "inset(0 0 0 100% round 12px)";
+      card.wipeDir === "ltr" ? "inset(0 100% 0 0 round 12px)" : "inset(0 0 0 100% round 12px)";
     return card.wipeOpen ? "inset(0 0% 0 0% round 12px)" : closed;
   };
 
   const slots: { slot: CardSlot; isCenter: boolean }[] = [
-    { slot: "left",   isCenter: false },
-    { slot: "center", isCenter: true  },
-    { slot: "right",  isCenter: false },
+    { slot: "left", isCenter: false },
+    { slot: "center", isCenter: true },
+    { slot: "right", isCenter: false },
   ];
 
   return (
     <section id="blogs" style={{ background: BG, color: FG, position: "relative" }}>
       {/* Decorative SVG path */}
       <svg
-        className="pointer-events-none absolute inset-x-0 z-[1] w-full top-0"
-        style={{ aspectRatio: '1440 / 1080', opacity: 0.35 }}
+        className="pointer-events-none absolute inset-x-0 z-1 w-full top-0"
+        style={{ aspectRatio: "1440 / 1080", opacity: 0.35 }}
         viewBox="0 0 1440 1080"
         preserveAspectRatio="none"
         aria-hidden
@@ -297,48 +297,79 @@ export function Blogs() {
         }
       `}</style>
 
-      <div style={{ maxWidth: 1300, margin: "0 auto", padding: "90px 60px", position: "relative", zIndex: 10 }}>
-
+      <div
+        style={{
+          maxWidth: 1300,
+          margin: "0 auto",
+          padding: "90px 60px",
+          position: "relative",
+          zIndex: 10,
+        }}
+      >
         {/* ── Header (same pattern as the rest of the site) ─────────────── */}
-        <div style={{
-          display: "flex",
-          flexDirection: "column" as const,
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 32,
-          marginBottom: 56,
-        }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column" as const,
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 32,
+            marginBottom: 56,
+          }}
+        >
           <div style={{ textAlign: "center" }}>
-            <span style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              marginBottom: "1rem",
-              padding: "0.375rem 1rem",
-              borderRadius: "9999px",
-              border: "0.5px solid rgba(201,169,98,0.4)",
-              background: "rgba(201,169,98,0.07)",
-              fontSize: "0.65rem",
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontWeight: 300,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase" as const,
-              color: FG,
-            }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: GOLD, display: "inline-block" }} />
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                marginBottom: "1rem",
+                padding: "0.375rem 1rem",
+                borderRadius: "9999px",
+                border: "0.5px solid rgba(201,169,98,0.4)",
+                background: "rgba(201,169,98,0.07)",
+                fontSize: "0.65rem",
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontWeight: 300,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase" as const,
+                color: FG,
+              }}
+            >
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: "50%",
+                  background: GOLD,
+                  display: "inline-block",
+                }}
+              />
               Blog & News
             </span>
-            <h2 style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
-              fontWeight: 400,
-              lineHeight: 0.95,
-              letterSpacing: "-0.03em",
-              color: FG,
-              margin: 0,
-            }}>
-              <TitleReveal text="Latest" className="inline-block" style={{ color: FG }} waitForPreloader={false} />{" "}
-              <TitleReveal text="Insights" className="inline-block italic" style={{ color: FG }} waitForPreloader={false} />
+            <h2
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
+                fontWeight: 400,
+                lineHeight: 0.95,
+                letterSpacing: "-0.03em",
+                color: FG,
+                margin: 0,
+              }}
+            >
+              <TitleReveal
+                text="Latest"
+                className="inline-block"
+                style={{ color: FG }}
+                waitForPreloader={false}
+              />{" "}
+              <TitleReveal
+                text="Insights"
+                className="inline-block italic"
+                style={{ color: FG }}
+                waitForPreloader={false}
+              />
             </h2>
           </div>
 
@@ -347,17 +378,20 @@ export function Blogs() {
         </div>
 
         {/* ── Gallery row ───────────────────────────────────────────────── */}
-        <div className="blg-gallery-row" style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 56,
-        }}>
+        <div
+          className="blg-gallery-row"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 56,
+          }}
+        >
           {slots.map(({ slot, isCenter }) => {
-            const card          = cards[slot];
-            const currentSlide  = SLIDES[card.slideIdx];
+            const card = cards[slot];
+            const currentSlide = SLIDES[card.slideIdx];
             const incomingSlide = card.incomingIdx !== null ? SLIDES[card.incomingIdx] : null;
-            const isHov         = hovered === slot;
+            const isHov = hovered === slot;
 
             return (
               <div
@@ -461,13 +495,16 @@ export function Blogs() {
         </div>
 
         {/* ── Meta labels row ─────────────────────────────────────────────── */}
-        <div className="blg-meta-row" style={{
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "center",
-          gap: 56,
-          marginTop: 20,
-        }}>
+        <div
+          className="blg-meta-row"
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            gap: 56,
+            marginTop: 20,
+          }}
+        >
           {slots.map(({ slot, isCenter }) => {
             const slide = SLIDES[cards[slot].slideIdx];
             const parts = slide.label.split(":");
@@ -486,14 +523,17 @@ export function Blogs() {
                   {parts[0]}:<br />
                   {parts[1]}
                 </span>
-                <Link className="blg-read-more" to={slide.href} aria-label={`Read more about ${slide.label}`}>
+                <Link
+                  className="blg-read-more"
+                  to={slide.href}
+                  aria-label={`Read more about ${slide.label}`}
+                >
                   Read More
                 </Link>
               </div>
             );
           })}
         </div>
-
       </div>
     </section>
   );

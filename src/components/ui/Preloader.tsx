@@ -74,56 +74,54 @@ export default function Preloader({ children }: PreloaderProps) {
   return (
     <>
       {/* ── Main Application Content ── */}
-      <div className="relative z-0">
-        {children}
-      </div>
+      <div className="relative z-0">{children}</div>
 
       {!isDone && (
         <div className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none">
-        {/* 4 cream bars - each exactly 25% */}
-        {Array.from({ length: BAR_COUNT }).map((_, i) => {
-          const isOut = barsOut.includes(i);
-          return (
-            <div
-              key={i}
-              className="absolute left-0 right-0 will-change-transform"
-              style={{
-                top: `${i * 25}%`,
-                height: "25%",
-                background: "#f5f0e8",
-                transform: isOut ? "translateX(100%)" : "translateX(0)",
-                transition: isOut
-                  ? `transform ${SLIDE_DURATION} cubic-bezier(0.76, 0, 0.24, 1)`
-                  : "none",
-              }}
-            />
-          );
-        })}
+          {/* 4 cream bars - each exactly 25% */}
+          {Array.from({ length: BAR_COUNT }).map((_, i) => {
+            const isOut = barsOut.includes(i);
+            return (
+              <div
+                key={i}
+                className="absolute left-0 right-0 will-change-transform"
+                style={{
+                  top: `${i * 25}%`,
+                  height: "25%",
+                  background: "#f5f0e8",
+                  transform: isOut ? "translateX(100%)" : "translateX(0)",
+                  transition: isOut
+                    ? `transform ${SLIDE_DURATION} cubic-bezier(0.76, 0, 0.24, 1)`
+                    : "none",
+                }}
+              />
+            );
+          })}
 
-        {/* Logo - centered over entire overlay */}
-        {phase === "splash" && (
-          <div className="absolute inset-0 flex items-center justify-center z-[10000] pointer-events-none">
-            <img
-              src={abcLuxLogo}
-              alt="ABC LUX"
-              width={1920}
-              height={1920}
-              className="w-[200px] h-auto select-none opacity-[0.88]"
-              style={{
-                filter: "invert(1)",
-              }}
-              draggable={false}
-            />
-          </div>
-        )}
+          {/* Logo - centered over entire overlay */}
+          {phase === "splash" && (
+            <div className="absolute inset-0 flex items-center justify-center z-[10000] pointer-events-none">
+              <img
+                src={abcLuxLogo}
+                alt="ABC LUX"
+                width={1920}
+                height={1920}
+                className="w-[200px] h-auto select-none opacity-[0.88]"
+                style={{
+                  filter: "invert(1)",
+                }}
+                draggable={false}
+              />
+            </div>
+          )}
 
-        {/* Pulsing dots */}
-        {phase === "splash" && (
-          <div className="absolute bottom-8 left-0 right-0 flex justify-center z-[10000]">
-            <PulseDots />
-          </div>
-        )}
-      </div>
+          {/* Pulsing dots */}
+          {phase === "splash" && (
+            <div className="absolute bottom-8 left-0 right-0 flex justify-center z-[10000]">
+              <PulseDots />
+            </div>
+          )}
+        </div>
       )}
     </>
   );

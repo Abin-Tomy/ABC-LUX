@@ -78,11 +78,17 @@ export function useLenis() {
       scrollToHash();
     };
     window.addEventListener("load", handleLoad);
-    
+
     // Staggered refreshes to catch late-loading images / layout reflows
     // Fire after preloader finishes (~2600ms total) not during it
-    const timer1 = setTimeout(() => { ScrollTrigger.refresh(); scrollToHash(); }, 2400);
-    const timer2 = setTimeout(() => { ScrollTrigger.refresh(); scrollToHash(); }, 3200);
+    const timer1 = setTimeout(() => {
+      ScrollTrigger.refresh();
+      scrollToHash();
+    }, 2400);
+    const timer2 = setTimeout(() => {
+      ScrollTrigger.refresh();
+      scrollToHash();
+    }, 3200);
 
     // Run once quickly for client-side navigation
     setTimeout(() => {
