@@ -9,7 +9,7 @@
                Trail color matches ABC LUX gold palette.
    ============================================================= */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 /** Configuration for the cursor trail physics and appearance */
 const PARAMS = {
@@ -29,11 +29,11 @@ export default function CursorTrail() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     // Don't run on touch-only devices
-    if (window.matchMedia('(pointer: coarse)').matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     // Pointer position — starts at center
     const pointer = {
@@ -55,14 +55,14 @@ export default function CursorTrail() {
       canvas.height = window.innerHeight;
     };
     setupCanvas();
-    window.addEventListener('resize', setupCanvas, { passive: true });
+    window.addEventListener("resize", setupCanvas, { passive: true });
 
     // Track mouse position
     const onMouseMove = (e: MouseEvent) => {
       pointer.x = e.clientX;
       pointer.y = e.clientY;
     };
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
 
     // Animation loop
     let rafId: number;
@@ -82,8 +82,8 @@ export default function CursorTrail() {
       });
 
       // Draw the curly trail with quadratic bezier curves
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = 'rgba(198, 167, 106, 0.6)';
+      ctx.lineCap = "round";
+      ctx.strokeStyle = "rgba(198, 167, 106, 0.6)";
       ctx.beginPath();
       ctx.moveTo(trail[0].x, trail[0].y);
 
@@ -107,8 +107,8 @@ export default function CursorTrail() {
     // Cleanup on unmount
     return () => {
       cancelAnimationFrame(rafId);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('resize', setupCanvas);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("resize", setupCanvas);
     };
   }, []);
 
@@ -116,12 +116,12 @@ export default function CursorTrail() {
     <canvas
       ref={canvasRef}
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
-        width: '100vw',
-        height: '100vh',
-        pointerEvents: 'none',
+        width: "100vw",
+        height: "100vh",
+        pointerEvents: "none",
         zIndex: 9999,
       }}
     />

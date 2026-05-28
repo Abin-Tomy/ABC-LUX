@@ -38,7 +38,8 @@ function LazyImage({ src, alt }: { src: string; alt: string }) {
             position: "absolute",
             inset: 0,
             borderRadius: "inherit",
-            background: "linear-gradient(90deg, rgba(26,24,25,0.06) 25%, rgba(201,169,98,0.08) 50%, rgba(26,24,25,0.06) 75%)",
+            background:
+              "linear-gradient(90deg, rgba(26,24,25,0.06) 25%, rgba(201,169,98,0.08) 50%, rgba(26,24,25,0.06) 75%)",
             backgroundSize: "200% 100%",
             animation: "shimmer 1.8s ease-in-out infinite",
           }}
@@ -65,7 +66,7 @@ function LazyImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-/** 
+/**
  * ProductDetail
  * Renders the detail view for a specific lighting product, querying the local product catalog by ID.
  * Props: None (uses URL parameters)
@@ -85,10 +86,12 @@ export default function ProductDetail() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
-  
+
   const product = PRODUCT_CATALOG.find((p) => p.id === parseInt(id ?? ""));
   const pageTitle = product ? product.name : "Product Not Found";
-  const pageDesc = product ? product.description : "We could not find the details for this specific product.";
+  const pageDesc = product
+    ? product.description
+    : "We could not find the details for this specific product.";
   const pageTagline = product?.tagline ?? "";
   const pageCategory = product?.category ?? "Product";
 
@@ -119,7 +122,7 @@ export default function ProductDetail() {
           start: "top top",
           end: "bottom bottom",
           scrub: 1,
-        }
+        },
       });
     }, containerRef);
     return () => ctx.revert();
@@ -149,8 +152,7 @@ export default function ProductDetail() {
 
           requestAnimationFrame(() => {
             setTimeout(() => {
-              tile.style.transition =
-                "clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1)";
+              tile.style.transition = "clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1)";
               tile.style.clipPath = "polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)";
             }, staggerDelay);
           });
@@ -161,7 +163,7 @@ export default function ProductDetail() {
       {
         rootMargin: "80px 0px -20px 0px",
         threshold: 0.0,
-      }
+      },
     );
 
     tiles.forEach((tile) => observer.observe(tile));
@@ -196,18 +198,23 @@ export default function ProductDetail() {
   const spaces = product?.spaces ?? [];
 
   return (
-    <main style={{ background: BG, color: FG, minHeight: "100vh", position: "relative" }} ref={containerRef}>
+    <main
+      style={{ background: BG, color: FG, minHeight: "100vh", position: "relative" }}
+      ref={containerRef}
+    >
       {/* ── Background SVG Line ── */}
-      <div style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        overflow: "hidden",
-        pointerEvents: "none",
-        zIndex: 0,
-      }}>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
         <svg
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
@@ -314,66 +321,85 @@ export default function ProductDetail() {
         }
       `}</style>
 
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "120px 24px", position: "relative", zIndex: 10 }}>
-        
+      <div
+        style={{
+          maxWidth: 1400,
+          margin: "0 auto",
+          padding: "120px 24px",
+          position: "relative",
+          zIndex: 10,
+        }}
+      >
         {/* ── Category Badge ── */}
-        <span className="prod-title" style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          marginBottom: "1rem",
-          padding: "0.375rem 1rem",
-          borderRadius: "9999px",
-          border: "0.5px solid rgba(201,169,98,0.4)",
-          background: "rgba(201,169,98,0.07)",
-          fontSize: "0.65rem",
-          fontFamily: "'Cormorant Garamond', Georgia, serif",
-          fontWeight: 300,
-          letterSpacing: "0.22em",
-          textTransform: "uppercase",
-          color: GOLD,
-        }}>
+        <span
+          className="prod-title"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            marginBottom: "1rem",
+            padding: "0.375rem 1rem",
+            borderRadius: "9999px",
+            border: "0.5px solid rgba(201,169,98,0.4)",
+            background: "rgba(201,169,98,0.07)",
+            fontSize: "0.65rem",
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontWeight: 300,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: GOLD,
+          }}
+        >
           {pageCategory}
         </span>
-        
+
         {/* ── Product Name Heading ── */}
-        <h1 className="prod-title" style={{
-          fontFamily: "'Playfair Display', Georgia, serif",
-          fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-          fontWeight: 400,
-          lineHeight: 1.05,
-          letterSpacing: "-0.02em",
-          margin: 0,
-        }}>
+        <h1
+          className="prod-title"
+          style={{
+            fontFamily: "'Playfair Display', Georgia, serif",
+            fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+            fontWeight: 400,
+            lineHeight: 1.05,
+            letterSpacing: "-0.02em",
+            margin: 0,
+          }}
+        >
           {pageTitle}
         </h1>
 
         {/* ── Product Tagline ── */}
         {pageTagline && (
-          <p className="prod-title" style={{
-            marginTop: 12,
-            fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
-            fontStyle: "italic",
-            fontWeight: 300,
-            lineHeight: 1.4,
-            color: GOLD,
-            letterSpacing: "0.02em",
-          }}>
+          <p
+            className="prod-title"
+            style={{
+              marginTop: 12,
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
+              fontStyle: "italic",
+              fontWeight: 300,
+              lineHeight: 1.4,
+              color: GOLD,
+              letterSpacing: "0.02em",
+            }}
+          >
             {pageTagline}
           </p>
         )}
-        
+
         {/* ── Product Description ── */}
-        <p className="prod-title" style={{
-          marginTop: 24,
-          fontFamily: "'Cormorant Garamond', Georgia, serif",
-          fontSize: "1.05rem",
-          lineHeight: 1.8,
-          color: "rgba(26,24,25,0.75)",
-          maxWidth: 800,
-          marginBottom: 48
-        }}>
+        <p
+          className="prod-title"
+          style={{
+            marginTop: 24,
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontSize: "1.05rem",
+            lineHeight: 1.8,
+            color: "rgba(26,24,25,0.75)",
+            maxWidth: 800,
+            marginBottom: 48,
+          }}
+        >
           {pageDesc}
         </p>
 
@@ -438,16 +464,17 @@ export default function ProductDetail() {
 
         {/* ── Product Specifications / Highlights ── */}
         <div className="prod-specs-container" style={{ marginTop: "8rem" }}>
-          
-          <h3 style={{
-            fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: "2.2rem",
-            color: FG,
-            marginBottom: "3rem",
-            fontWeight: 400,
-            textAlign: "center",
-            letterSpacing: "0.02em"
-          }}>
+          <h3
+            style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "2.2rem",
+              color: FG,
+              marginBottom: "3rem",
+              fontWeight: 400,
+              textAlign: "center",
+              letterSpacing: "0.02em",
+            }}
+          >
             Highlights
           </h3>
           <div className="specs-grid" style={{ marginBottom: "5rem" }}>
@@ -459,15 +486,17 @@ export default function ProductDetail() {
             ))}
           </div>
 
-          <h3 style={{
-            fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: "2.2rem",
-            color: FG,
-            marginBottom: "3rem",
-            fontWeight: 400,
-            textAlign: "center",
-            letterSpacing: "0.02em"
-          }}>
+          <h3
+            style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "2.2rem",
+              color: FG,
+              marginBottom: "3rem",
+              fontWeight: 400,
+              textAlign: "center",
+              letterSpacing: "0.02em",
+            }}
+          >
             Perfect for any space
           </h3>
           <div className="specs-grid">
@@ -494,7 +523,7 @@ export default function ProductDetail() {
             Back to Products
           </button>
         </div>
-        
+
         {/* ── Lightbox Overlay ── */}
         {zoomedImg && (
           <div

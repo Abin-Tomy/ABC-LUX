@@ -50,7 +50,7 @@ interface RealLamp {
   kind: "image";
   id: number;
   lightSrc: string; // e.g. "/lamps/pendant-01-light.jpg"
-  darkSrc: string;  // e.g. "/lamps/pendant-01-dark.jpg"
+  darkSrc: string; // e.g. "/lamps/pendant-01-dark.jpg"
   alt: string;
   scale?: number;
 }
@@ -154,16 +154,16 @@ function getSvgBody(shape: SvgShape, color: string): string {
  * - lit: Boolean indicating if the lamp is "on"
  */
 function SvgLampIcon({ lamp, lit }: { lamp: SvgLamp; lit: boolean }) {
-  const cord   = `<line x1="50" y1="0" x2="50" y2="20" stroke="${lit ? "#555" : "#888"}" stroke-width="1.5"/>`;
-  const body   = getSvgBody(lamp.shape, lamp.color);
-  const g      = lamp.glowColor;
-  const bulb   = lit
+  const cord = `<line x1="50" y1="0" x2="50" y2="20" stroke="${lit ? "#555" : "#888"}" stroke-width="1.5"/>`;
+  const body = getSvgBody(lamp.shape, lamp.color);
+  const g = lamp.glowColor;
+  const bulb = lit
     ? `<circle cx="50" cy="52" r="7" fill="${g}" opacity="0.95"/>
        <circle cx="50" cy="52" r="12" fill="${g}" opacity="0.25"/>
        <circle cx="50" cy="52" r="20" fill="${g}" opacity="0.1"/>`
     : "";
-  const glow   = lit ? `<ellipse cx="50" cy="78" rx="36" ry="14" fill="${g}" opacity="0.15"/>` : "";
-  const svg    = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:60%;height:60%">${cord}${body}${bulb}${glow}</svg>`;
+  const glow = lit ? `<ellipse cx="50" cy="78" rx="36" ry="14" fill="${g}" opacity="0.15"/>` : "";
+  const svg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:60%;height:60%">${cord}${body}${bulb}${glow}</svg>`;
 
   return (
     <div
@@ -245,8 +245,8 @@ function ImageLayer({
             stroke={dark ? "#666" : "#aaa"}
             strokeWidth="1.5"
           >
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-            <circle cx="12" cy="13" r="4"/>
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+            <circle cx="12" cy="13" r="4" />
           </svg>
           <span
             style={{
@@ -267,12 +267,12 @@ function ImageLayer({
           width={1536}
           height={1536}
           loading="lazy"
-          style={{ 
-            width: "100%", 
-            height: "100%", 
-            objectFit: scale ? "contain" : "cover", 
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: scale ? "contain" : "cover",
             display: "block",
-            transform: scale ? `scale(${scale})` : undefined
+            transform: scale ? `scale(${scale})` : undefined,
           }}
         />
       )}
@@ -422,29 +422,33 @@ function Toggle({ dark, onToggle }: { dark: boolean; onToggle: () => void }) {
  */
 function AmberLighting({ dark }: { dark: boolean }) {
   return (
-      <div
-        style={{
-          background: "transparent",
-          transition: "background 0.7s ease",
-          minHeight: "100vh",
-          position: "relative",
-          zIndex: 10,
-        }}
-      >
+    <div
+      style={{
+        background: "transparent",
+        transition: "background 0.7s ease",
+        minHeight: "100vh",
+        position: "relative",
+        zIndex: 10,
+      }}
+    >
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(4, minmax(140px, 1fr))",
           gap: 12,
           padding: 24,
-          maxWidth: '1100px',
-          margin: '0 auto',
-          background: 'transparent',
+          maxWidth: "1100px",
+          margin: "0 auto",
+          background: "transparent",
         }}
       >
-        {LAMPS.map((lamp) => (
-          lamp.kind === "empty" ? <div key={lamp.id} /> : <LampCell key={lamp.id} lamp={lamp} dark={dark} />
-        ))}
+        {LAMPS.map((lamp) =>
+          lamp.kind === "empty" ? (
+            <div key={lamp.id} />
+          ) : (
+            <LampCell key={lamp.id} lamp={lamp} dark={dark} />
+          ),
+        )}
       </div>
     </div>
   );
@@ -460,11 +464,11 @@ export default function LightDark() {
   const [dark, setDark] = useState(false);
 
   return (
-    <section id="products" className="relative" style={{ background: '#D3C8B6', color: '#1A1819' }}>
+    <section id="products" className="relative" style={{ background: "#D3C8B6", color: "#1A1819" }}>
       {/* Decorative SVG path */}
       <svg
         className="pointer-events-none absolute inset-x-0 z-1 w-full top-0"
-        style={{ aspectRatio: '1440 / 1080', opacity: 0.25 }}
+        style={{ aspectRatio: "1440 / 1080", opacity: 0.25 }}
         viewBox="0 0 1440 1080"
         preserveAspectRatio="none"
         aria-hidden
@@ -482,33 +486,45 @@ export default function LightDark() {
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '3rem 1.5rem', background: 'transparent', textAlign: 'center', position: 'relative', zIndex: 10 }}>
-        <h2 style={{ margin: 0, background: 'transparent' }}>
+      <div
+        style={{
+          maxWidth: "72rem",
+          margin: "0 auto",
+          padding: "3rem 1.5rem",
+          background: "transparent",
+          textAlign: "center",
+          position: "relative",
+          zIndex: 10,
+        }}
+      >
+        <h2 style={{ margin: 0, background: "transparent" }}>
           <TitleReveal
             text="Lighting Experience"
             className="block"
             waitForPreloader={false}
-            style={{ 
-              color: '#1A1819', 
-              fontFamily: "'Runalto', 'Playfair Display', Georgia, serif", 
-              fontSize: 'clamp(2rem, 5vw, 4rem)',
+            style={{
+              color: "#1A1819",
+              fontFamily: "'Runalto', 'Playfair Display', Georgia, serif",
+              fontSize: "clamp(2rem, 5vw, 4rem)",
               fontWeight: 400,
               lineHeight: 0.95,
-              letterSpacing: '-0.03em'
+              letterSpacing: "-0.03em",
             }}
           />
         </h2>
-        <p style={{
-          fontFamily: "'Cormorant Garamond', Georgia, serif",
-          fontSize: '1.125rem',
-          color: '#1A1819',
-          opacity: 0.8,
-          margin: '1.5rem auto 0',
-          maxWidth: '500px',
-        }}>
+        <p
+          style={{
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontSize: "1.125rem",
+            color: "#1A1819",
+            opacity: 0.8,
+            margin: "1.5rem auto 0",
+            maxWidth: "500px",
+          }}
+        >
           Experience how our pieces transform spaces through the interplay of light and shadow.
         </p>
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}>
           <Toggle dark={dark} onToggle={() => setDark((d) => !d)} />
         </div>
       </div>

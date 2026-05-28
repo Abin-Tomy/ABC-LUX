@@ -13,18 +13,18 @@ import { gsap } from "@/utils/gsap-setup";
 import { getLenis } from "@/hooks/useLenis";
 import TitleReveal from "../ui/TitleReveal";
 
-import imgLedStrip        from "@/assets/led-strip-lights.webp";
+import imgLedStrip from "@/assets/led-strip-lights.webp";
 import imgMagneticProfile from "@/assets/magnetic-profile-light.webp";
-import imgModernPendant   from "@/assets/modern-pendant-light.webp";
-import imgCeilingLights   from "@/assets/ceiling-lights.webp";
-import imgDesignerChand   from "@/assets/designer-chandeliers.webp";
-import imgOutdoorLights   from "@/assets/outdoor-lights.webp";
-import imgWallLights      from "@/assets/wall-lights.webp";
-import imgPoleLights      from "@/assets/pole-lights.webp";
+import imgModernPendant from "@/assets/modern-pendant-light.webp";
+import imgCeilingLights from "@/assets/ceiling-lights.webp";
+import imgDesignerChand from "@/assets/designer-chandeliers.webp";
+import imgOutdoorLights from "@/assets/outdoor-lights.webp";
+import imgWallLights from "@/assets/wall-lights.webp";
+import imgPoleLights from "@/assets/pole-lights.webp";
 import imgIndustrialLights from "@/assets/industrial-lights.webp";
-import imgTableFloor      from "@/assets/table-floor-lamp.webp";
-import imgNeoClassic      from "@/assets/meo-classic-chandeliers.webp";
-import imgArchitectural   from "@/assets/architectural-lights.webp";
+import imgTableFloor from "@/assets/table-floor-lamp.webp";
+import imgNeoClassic from "@/assets/meo-classic-chandeliers.webp";
+import imgArchitectural from "@/assets/architectural-lights.webp";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -42,76 +42,148 @@ export type Testimonial = {
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    id: 1, name: "LED Strip Lights", role: "", company: "",
+    id: 1,
+    name: "LED Strip Lights",
+    role: "",
+    company: "",
     excerpt: "Professional Illumination",
-    quote: "Professional grade LED strips designed for seamless architectural integration. High CRI, uniform brightness, and exceptional longevity for premium residential and commercial spaces.",
-    hue: 38, initials: "LS", img: imgLedStrip,
+    quote:
+      "Professional grade LED strips designed for seamless architectural integration. High CRI, uniform brightness, and exceptional longevity for premium residential and commercial spaces.",
+    hue: 38,
+    initials: "LS",
+    img: imgLedStrip,
   },
   {
-    id: 2, name: "Magnetic Profile Lights", role: "", company: "",
+    id: 2,
+    name: "Magnetic Profile Lights",
+    role: "",
+    company: "",
     excerpt: "Modular Flexibility",
-    quote: "Our magnetic track system offers ultimate flexibility. Easily move, swap, and adjust lighting modules without tools, creating a dynamic lighting environment that evolves with your space.",
-    hue: 200, initials: "MP", img: imgMagneticProfile,
+    quote:
+      "Our magnetic track system offers ultimate flexibility. Easily move, swap, and adjust lighting modules without tools, creating a dynamic lighting environment that evolves with your space.",
+    hue: 200,
+    initials: "MP",
+    img: imgMagneticProfile,
   },
   {
-    id: 3, name: "Modern Pendant Light", role: "", company: "",
+    id: 3,
+    name: "Modern Pendant Light",
+    role: "",
+    company: "",
     excerpt: "Artistic Elegance",
-    quote: "A statement of elegance. Our modern pendants combine hand-blown glass with precision-machined metals to create a focal point that is both a light source and a work of art.",
-    hue: 280, initials: "PL", img: imgModernPendant,
+    quote:
+      "A statement of elegance. Our modern pendants combine hand-blown glass with precision-machined metals to create a focal point that is both a light source and a work of art.",
+    hue: 280,
+    initials: "PL",
+    img: imgModernPendant,
   },
   {
-    id: 4, name: "Ceiling Lights", role: "", company: "",
+    id: 4,
+    name: "Ceiling Lights",
+    role: "",
+    company: "",
     excerpt: "Ambient Sophistication",
-    quote: "Sophisticated surface and recessed ceiling solutions. Designed to provide beautiful ambient light while maintaining a clean, minimalist aesthetic across any interior architecture.",
-    hue: 140, initials: "CL", img: imgCeilingLights,
+    quote:
+      "Sophisticated surface and recessed ceiling solutions. Designed to provide beautiful ambient light while maintaining a clean, minimalist aesthetic across any interior architecture.",
+    hue: 140,
+    initials: "CL",
+    img: imgCeilingLights,
   },
   {
-    id: 5, name: "Designer Chandeliers", role: "", company: "",
+    id: 5,
+    name: "Designer Chandeliers",
+    role: "",
+    company: "",
     excerpt: "Grand Installations",
-    quote: "The pinnacle of luxury illumination. Our bespoke chandeliers are engineered to transform grand spaces with breathtaking light patterns and timeless craftsmanship.",
-    hue: 18, initials: "DC", img: imgDesignerChand,
+    quote:
+      "The pinnacle of luxury illumination. Our bespoke chandeliers are engineered to transform grand spaces with breathtaking light patterns and timeless craftsmanship.",
+    hue: 18,
+    initials: "DC",
+    img: imgDesignerChand,
   },
   {
-    id: 6, name: "Outdoor Lights", role: "", company: "",
+    id: 6,
+    name: "Outdoor Lights",
+    role: "",
+    company: "",
     excerpt: "Exterior Excellence",
-    quote: "Weather-resistant elegance. Our outdoor series brings the same level of design sophistication to your exterior spaces, combining durability with premium light quality.",
-    hue: 260, initials: "OL", img: imgOutdoorLights,
+    quote:
+      "Weather-resistant elegance. Our outdoor series brings the same level of design sophistication to your exterior spaces, combining durability with premium light quality.",
+    hue: 260,
+    initials: "OL",
+    img: imgOutdoorLights,
   },
   {
-    id: 7, name: "Wall Lights", role: "", company: "",
+    id: 7,
+    name: "Wall Lights",
+    role: "",
+    company: "",
     excerpt: "Sculpted Illumination",
-    quote: "Our wall lights are crafted to enhance vertical surfaces with warmth and precision. From minimalist sconces to statement fixtures, every design creates an atmosphere of curated elegance.",
-    hue: 45, initials: "WL", img: imgWallLights,
+    quote:
+      "Our wall lights are crafted to enhance vertical surfaces with warmth and precision. From minimalist sconces to statement fixtures, every design creates an atmosphere of curated elegance.",
+    hue: 45,
+    initials: "WL",
+    img: imgWallLights,
   },
   {
-    id: 8, name: "Pole Lights", role: "", company: "",
+    id: 8,
+    name: "Pole Lights",
+    role: "",
+    company: "",
     excerpt: "Vertical Presence",
-    quote: "Commanding and graceful, our pole lights define pathways and open spaces with a strong architectural presence. Built for endurance and designed with timeless proportion.",
-    hue: 210, initials: "PO", img: imgPoleLights,
+    quote:
+      "Commanding and graceful, our pole lights define pathways and open spaces with a strong architectural presence. Built for endurance and designed with timeless proportion.",
+    hue: 210,
+    initials: "PO",
+    img: imgPoleLights,
   },
   {
-    id: 9, name: "Industrial Lights", role: "", company: "",
+    id: 9,
+    name: "Industrial Lights",
+    role: "",
+    company: "",
     excerpt: "Raw Sophistication",
-    quote: "Where function meets character. Our industrial lighting collection brings bold, stripped-back aesthetics to warehouses, studios, and modern commercial interiors.",
-    hue: 25, initials: "IL", img: imgIndustrialLights,
+    quote:
+      "Where function meets character. Our industrial lighting collection brings bold, stripped-back aesthetics to warehouses, studios, and modern commercial interiors.",
+    hue: 25,
+    initials: "IL",
+    img: imgIndustrialLights,
   },
   {
-    id: 10, name: "Table & Floor Lamp", role: "", company: "",
+    id: 10,
+    name: "Table & Floor Lamp",
+    role: "",
+    company: "",
     excerpt: "Intimate Glow",
-    quote: "Portable elegance for every corner. Our table and floor lamps bring focused warmth and sculptural beauty to living rooms, studies, and hospitality environments.",
-    hue: 32, initials: "TF", img: imgTableFloor,
+    quote:
+      "Portable elegance for every corner. Our table and floor lamps bring focused warmth and sculptural beauty to living rooms, studies, and hospitality environments.",
+    hue: 32,
+    initials: "TF",
+    img: imgTableFloor,
   },
   {
-    id: 11, name: "Neo Classic Chandeliers", role: "", company: "",
+    id: 11,
+    name: "Neo Classic Chandeliers",
+    role: "",
+    company: "",
     excerpt: "Heritage Reimagined",
-    quote: "A dialogue between tradition and contemporary design. Our Neo Classic Chandeliers reinterpret timeless crystal craftsmanship through a refined modern lens for today's grand interiors.",
-    hue: 50, initials: "NC", img: imgNeoClassic,
+    quote:
+      "A dialogue between tradition and contemporary design. Our Neo Classic Chandeliers reinterpret timeless crystal craftsmanship through a refined modern lens for today's grand interiors.",
+    hue: 50,
+    initials: "NC",
+    img: imgNeoClassic,
   },
   {
-    id: 12, name: "Architectural Light", role: "", company: "",
+    id: 12,
+    name: "Architectural Light",
+    role: "",
+    company: "",
     excerpt: "Integrated Precision",
-    quote: "Designed to disappear into the structure while defining the space. Our architectural lighting solutions work in harmony with the building fabric, producing seamless, breathtaking effects.",
-    hue: 190, initials: "AL", img: imgArchitectural,
+    quote:
+      "Designed to disappear into the structure while defining the space. Our architectural lighting solutions work in harmony with the building fabric, producing seamless, breathtaking effects.",
+    hue: 190,
+    initials: "AL",
+    img: imgArchitectural,
   },
 ];
 
@@ -178,17 +250,17 @@ export function Testimonials() {
   const wrapAutoScroll = () => {
     const firstCard = cardsRef.current[0];
     const middleCard = cardsRef.current[TESTIMONIALS.length];
-    
+
     if (firstCard && middleCard) {
       const firstLeft = firstCard.offsetLeft;
       const middleLeft = middleCard.offsetLeft;
       const cycleWidth = middleLeft - firstLeft;
-      
+
       while (autoScrollX.current <= -cycleWidth) {
-         autoScrollX.current += cycleWidth;
+        autoScrollX.current += cycleWidth;
       }
       while (autoScrollX.current > 0) {
-         autoScrollX.current -= cycleWidth;
+        autoScrollX.current -= cycleWidth;
       }
     }
   };
@@ -209,11 +281,12 @@ export function Testimonials() {
 
       if (delta < 100 && !isDraggingRef.current) {
         // Decay velocity back to targetSpeed
-        velocityRef.current += (targetSpeed - velocityRef.current) * (1 - Math.pow(0.9, delta / 16.66));
-        
+        velocityRef.current +=
+          (targetSpeed - velocityRef.current) * (1 - Math.pow(0.9, delta / 16.66));
+
         autoScrollX.current += (velocityRef.current * delta) / 1000;
         wrapAutoScroll();
-        
+
         if (trackRef.current) {
           trackRef.current.style.transform = `translateX(${autoScrollX.current}px)`;
         }
@@ -236,7 +309,7 @@ export function Testimonials() {
     lastXRef.current = e.clientX;
     lastTouchTimeRef.current = performance.now();
     velocityRef.current = 0;
-    
+
     if (trackRef.current) {
       trackRef.current.setPointerCapture(e.pointerId);
     }
@@ -244,27 +317,27 @@ export function Testimonials() {
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (!isMobileMode || !isDraggingRef.current || !e.isPrimary) return;
-    
+
     const clientX = e.clientX;
     const deltaX = clientX - lastXRef.current;
     lastXRef.current = clientX;
-    
+
     if (Math.abs(clientX - startXRef.current) > 5) {
       hasDraggedRef.current = true;
     }
-    
+
     const now = performance.now();
     const dt = now - lastTouchTimeRef.current;
     lastTouchTimeRef.current = now;
-    
+
     if (dt > 0) {
       const instantV = (deltaX / dt) * 1000;
       velocityRef.current = velocityRef.current * 0.5 + instantV * 0.5;
     }
-    
+
     autoScrollX.current += deltaX;
     wrapAutoScroll();
-    
+
     if (trackRef.current) {
       trackRef.current.style.transform = `translateX(${autoScrollX.current}px)`;
     }
@@ -283,9 +356,7 @@ export function Testimonials() {
       // Read all DOM measurements in one batch before any state updates
       // to avoid forced reflow (layout thrash)
       const isMobile = window.innerWidth <= 1024;
-      const scrollW = trackRef.current
-        ? trackRef.current.scrollWidth
-        : 0;
+      const scrollW = trackRef.current ? trackRef.current.scrollWidth : 0;
       const trackScrollVal = Math.max(0, scrollW - window.innerWidth + 120);
 
       // Write state once after all reads are done
@@ -304,7 +375,9 @@ export function Testimonials() {
 
   // Section height: viewport + horizontal travel distance (multiplier applied for slower scroll)
   const SCROLL_SPEED_MULTIPLIER = 2.5; // Greater than 1 slows it down
-  const sectionH = isMobileMode ? "100vh" : `calc(100vh + ${trackScroll * SCROLL_SPEED_MULTIPLIER}px)`;
+  const sectionH = isMobileMode
+    ? "100vh"
+    : `calc(100vh + ${trackScroll * SCROLL_SPEED_MULTIPLIER}px)`;
 
   // Scroll progress drives horizontal translation
   const progress = useScrollProgress(containerRef);
@@ -316,16 +389,13 @@ export function Testimonials() {
   // Revealed-card set — each index added once when it enters the visual viewport
   const revealedRef = useRef(new Set<number>());
 
-
   // ── Card Initialization (runs once after trackScroll is known) ──
   useEffect(() => {
     if (trackScroll === 0) return;
     const cards = cardsRef.current.filter(Boolean) as HTMLButtonElement[];
     const firstCard = cardsRef.current.find(Boolean) as HTMLButtonElement | null;
     // Use offsetWidth instead of getBoundingClientRect to avoid forced reflow
-    const CARD_STEP = firstCard
-      ? firstCard.offsetWidth + 32
-      : 412;
+    const CARD_STEP = firstCard ? firstCard.offsetWidth + 32 : 412;
     const trackEl = trackRef.current;
     const PAD_LEFT = trackEl
       ? parseFloat(getComputedStyle(trackEl).paddingLeft)
@@ -334,7 +404,7 @@ export function Testimonials() {
     cards.forEach((card, i) => {
       // Only hide cards that start fully off-screen to the right.
       const cardLeft = PAD_LEFT + i * CARD_STEP;
-      const startsVisible = isMobileMode ? true : (cardLeft < window.innerWidth);
+      const startsVisible = isMobileMode ? true : cardLeft < window.innerWidth;
       const alreadyRevealed = revealedRef.current.has(i);
 
       if (!startsVisible && !alreadyRevealed) {
@@ -358,9 +428,7 @@ export function Testimonials() {
     const cards = cardsRef.current.filter(Boolean) as HTMLButtonElement[];
     const firstCard = cardsRef.current.find(Boolean) as HTMLButtonElement | null;
     // Use offsetWidth instead of getBoundingClientRect to avoid forced reflow
-    const CARD_STEP = firstCard
-      ? firstCard.offsetWidth + 32
-      : 412;
+    const CARD_STEP = firstCard ? firstCard.offsetWidth + 32 : 412;
     const trackEl = trackRef.current;
     const PAD_LEFT = trackEl
       ? parseFloat(getComputedStyle(trackEl).paddingLeft)
@@ -369,7 +437,7 @@ export function Testimonials() {
 
     cards.forEach((card, i) => {
       if (revealedRef.current.has(i)) return;
-      const cardLeft   = PAD_LEFT + i * CARD_STEP;
+      const cardLeft = PAD_LEFT + i * CARD_STEP;
       const visualLeft = curTrackX + cardLeft; // pixel position of card's left edge on screen
       // Trigger when the card's left edge is within half a card-width of the right viewport edge
       if (visualLeft < window.innerWidth + CARD_STEP * 0.5) {
@@ -388,28 +456,23 @@ export function Testimonials() {
     });
   }, [progress, trackScroll, batchBShown, isMobileMode]);
 
-
   // GSAP overlay removed. We now navigate to product details instead.
 
   // No overlay GSAP needed here anymore.
 
   // Build the visible list: batch A always shown; batch B appended progressively
-  const baseTestimonials = [
-    ...BATCH_A,
-    ...BATCH_B.slice(0, batchBShown),
-  ];
+  const baseTestimonials = [...BATCH_A, ...BATCH_B.slice(0, batchBShown)];
   // On mobile we show all testimonials duplicated to create an infinite ribbon
-  const visibleTestimonials = isMobileMode 
-    ? [...TESTIMONIALS, ...TESTIMONIALS] 
-    : baseTestimonials;
+  const visibleTestimonials = isMobileMode ? [...TESTIMONIALS, ...TESTIMONIALS] : baseTestimonials;
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <section id="our-products" style={{ position: "relative", background: "#D3C8B6", color: "#1A1819" }}>
-
+    <section
+      id="our-products"
+      style={{ position: "relative", background: "#D3C8B6", color: "#1A1819" }}
+    >
       {/* ── Outer scrollable container — height = 100vh + trackScroll ────── */}
       <div ref={containerRef} style={{ height: sectionH, position: "relative" }}>
-
         {/* ── Sticky stage (same technique as WhyChooseUs) ─────────────── */}
         <div
           style={{
@@ -425,7 +488,7 @@ export function Testimonials() {
           {/* Decorative SVG path inside sticky stage */}
           <svg
             className="pointer-events-none absolute inset-x-0 z-1 w-full top-0"
-            style={{ aspectRatio: '1440 / 1080', opacity: 0.25 }}
+            style={{ aspectRatio: "1440 / 1080", opacity: 0.25 }}
             viewBox="0 0 1440 1080"
             preserveAspectRatio="none"
             aria-hidden
@@ -495,7 +558,7 @@ export function Testimonials() {
                 margin: 0,
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <TitleReveal text="Light Styles to Match" waitForPreloader={false} />
@@ -568,108 +631,113 @@ export function Testimonials() {
                         height: "100%",
                       }}
                     >
-                    <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        height: "100%",
-                        overflow: "hidden",
-                        borderRadius: "1.5rem",
-                        border: "0.5px solid rgba(245,240,232,0.1)",
-                        backgroundImage: `url(${t.img})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-
-                      }}
-                    >
-                      {/* Dark scrim for text legibility removed */}
-                      {/* Sheen layer */}
                       <div
-                        className="card-sheen"
                         style={{
-                          position: "absolute",
-                          inset: 0,
+                          position: "relative",
+                          width: "100%",
+                          height: "100%",
+                          overflow: "hidden",
                           borderRadius: "1.5rem",
-                          zIndex: 5,
-                          pointerEvents: "none",
-                          opacity: 0,
-                        }}
-                      />
-                      {/* Number */}
-                        {/* Counter removed */}
-
-                      {/* Quote mark removed */}
-
-                      {/* Soft gradient blur behind text (no rigid box) */}
-                      <div
-                        style={{
-                          position: "absolute",
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          height: "140px", zIndex: 1, pointerEvents: "none" }} /> <div style={{ position: "absolute",
-                          left: "1.5rem",
-                          right: "1.5rem",
-                          bottom: "1.5rem",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "1rem",
-                          color: "#F5F0E8",
-                          zIndex: 2,
+                          border: "0.5px solid rgba(245,240,232,0.1)",
+                          backgroundImage: `url(${t.img})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
                         }}
                       >
-                        {/* Excerpt removed */}
+                        {/* Dark scrim for text legibility removed */}
+                        {/* Sheen layer */}
+                        <div
+                          className="card-sheen"
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            borderRadius: "1.5rem",
+                            zIndex: 5,
+                            pointerEvents: "none",
+                            opacity: 0,
+                          }}
+                        />
+                        {/* Number */}
+                        {/* Counter removed */}
+                        {/* Quote mark removed */}
+                        {/* Soft gradient blur behind text (no rigid box) */}
                         <div
                           style={{
+                            position: "absolute",
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            height: "140px",
+                            zIndex: 1,
+                            pointerEvents: "none",
+                          }}
+                        />{" "}
+                        <div
+                          style={{
+                            position: "absolute",
+                            left: "1.5rem",
+                            right: "1.5rem",
+                            bottom: "1.5rem",
                             display: "flex",
-                            alignItems: "center",
-                            gap: "0.75rem",
-                            borderTop: "0.5px solid rgba(245,240,232,0.2)",
-                            paddingTop: "0.875rem",
+                            flexDirection: "column",
+                            gap: "1rem",
+                            color: "#F5F0E8",
+                            zIndex: 2,
                           }}
                         >
-                          <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-                            <span
-                              style={{
-                                fontSize: "1.2rem",
-                                fontWeight: 500,
-                                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                color: "#F5F0E8",
-                              }}
-                            >
-                              {t.name}
-                            </span>
-                          </div>
+                          {/* Excerpt removed */}
                           <div
                             style={{
                               display: "flex",
                               alignItems: "center",
-                              justifyContent: "center",
-                              width: "1.75rem",
-                              height: "1.75rem",
-                              borderRadius: "50%",
-                              background: "rgba(245,240,232,0.07)",
-                              border: "1px solid rgba(245,240,232,0.3)",
-                              flexShrink: 0,
+                              gap: "0.75rem",
+                              borderTop: "0.5px solid rgba(245,240,232,0.2)",
+                              paddingTop: "0.875rem",
                             }}
                           >
-                            <svg
-                              width="11"
-                              height="11"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
+                            <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+                              <span
+                                style={{
+                                  fontSize: "1.2rem",
+                                  fontWeight: 500,
+                                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                                  letterSpacing: "0.08em",
+                                  textTransform: "uppercase",
+                                  color: "#F5F0E8",
+                                }}
+                              >
+                                {t.name}
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "1.75rem",
+                                height: "1.75rem",
+                                borderRadius: "50%",
+                                background: "rgba(245,240,232,0.07)",
+                                border: "1px solid rgba(245,240,232,0.3)",
+                                flexShrink: 0,
+                              }}
                             >
-                              <path d="M7 17L17 7M9 7h8v8" />
-                            </svg>
+                              <svg
+                                width="11"
+                                height="11"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                              >
+                                <path d="M7 17L17 7M9 7h8v8" />
+                              </svg>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    </div>{/* end card-inner */}
+                    {/* end card-inner */}
                   </Link>
                 );
               })}
@@ -696,7 +764,8 @@ export function Testimonials() {
                       }
 
                       // Capture current trackX position in pixels before adding cards
-                      const currentSectionTop = container.getBoundingClientRect().top + window.scrollY;
+                      const currentSectionTop =
+                        container.getBoundingClientRect().top + window.scrollY;
                       const currentTrackX = trackX; // current pixel offset of the track
 
                       setBatchBShown(BATCH_B.length);
@@ -705,18 +774,26 @@ export function Testimonials() {
                         requestAnimationFrame(() => {
                           // New section is taller — find the scrollY that produces the same trackX
                           const newSectionHeight = container.offsetHeight;
-                          const newTrackScroll = Math.max(0, track.scrollWidth - window.innerWidth + 120);
+                          const newTrackScroll = Math.max(
+                            0,
+                            track.scrollWidth - window.innerWidth + 120,
+                          );
                           if (newTrackScroll === 0) return;
 
                           // trackX = -(progress * newTrackScroll)
                           // so progress = -trackX / newTrackScroll
-                          const targetProgress = Math.min(1, Math.max(0, -currentTrackX / newTrackScroll));
-                          const targetScrollY = currentSectionTop + targetProgress * (newSectionHeight - window.innerHeight);
+                          const targetProgress = Math.min(
+                            1,
+                            Math.max(0, -currentTrackX / newTrackScroll),
+                          );
+                          const targetScrollY =
+                            currentSectionTop +
+                            targetProgress * (newSectionHeight - window.innerHeight);
                           const lenis = getLenis();
                           if (lenis) {
                             lenis.scrollTo(targetScrollY, { immediate: true });
                           } else {
-                            window.scrollTo({ top: targetScrollY, behavior: 'instant' });
+                            window.scrollTo({ top: targetScrollY, behavior: "instant" });
                           }
                         });
                       });
@@ -746,9 +823,6 @@ export function Testimonials() {
       {/* end outer container */}
 
       {/* Overlay removed */}
-      
     </section>
   );
 }
-
-

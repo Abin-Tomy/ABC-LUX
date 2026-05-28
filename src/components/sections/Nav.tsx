@@ -34,8 +34,12 @@ export function Nav() {
 
   useEffect(() => {
     const sectionMap: Record<string, boolean> = {};
-    DARK_SECTIONS.forEach((id) => { sectionMap[id] = false; });
-    LIGHT_SECTIONS.forEach((id) => { sectionMap[id] = true; });
+    DARK_SECTIONS.forEach((id) => {
+      sectionMap[id] = false;
+    });
+    LIGHT_SECTIONS.forEach((id) => {
+      sectionMap[id] = true;
+    });
 
     const checkOrder = [
       "top",
@@ -51,7 +55,7 @@ export function Nav() {
       "footer",
     ];
 
-    // We check from bottom-most section to top-most. 
+    // We check from bottom-most section to top-most.
     // The first one whose top has crossed the trigger line is the active one.
     const reversedOrder = [...checkOrder].reverse();
 
@@ -134,12 +138,11 @@ export function Nav() {
             </a>
             <span className="h-10 w-px bg-[#1a1a1a]/60" />
             <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
+              href="/about"
               data-cursor="VIEW"
               className="lux-eyebrow rounded-[10px] bg-white/10 px-20 py-2.5 text-white/95 text-[13px] font-bold tracking-widest backdrop-blur-md transition-all hover:bg-white/20"
             >
-              BRANDS
+              ABOUT
             </a>
           </nav>
 

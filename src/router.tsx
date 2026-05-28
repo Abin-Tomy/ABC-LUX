@@ -7,10 +7,10 @@
    Notes     : Exported as a named component to be used as an ErrorBoundary in the router.
    ============================================================= */
 
-/** 
+/**
  * DefaultErrorComponent
  * Displays a friendly error message and provides actions to retry or return home.
- * Props: 
+ * Props:
  *   - error (Error): The error object caught by the router.
  *   - reset (() => void): Function to reset the error boundary.
  */

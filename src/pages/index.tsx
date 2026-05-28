@@ -23,9 +23,9 @@ import { useEffect, useState } from "react";
 import { getLenis } from "@/hooks/useLenis";
 import { gsap, ScrollTrigger } from "@/utils/gsap-setup";
 
-/** 
+/**
  * Index
- * The home page component that orchestrates all marketing sections. Handles initialization 
+ * The home page component that orchestrates all marketing sections. Handles initialization
  * of smooth scrolling and restoring scroll position if returning from a product detail page.
  * Props: None
  */
@@ -42,24 +42,24 @@ export default function Index() {
     if (shouldReturnProducts || shouldReturnBlogs) {
       // Prioritize the most recent intent
       const targetId = shouldReturnBlogs ? "blogs" : "our-products";
-      
+
       // Clear flags immediately to prevent repeated triggers on refresh
       sessionStorage.removeItem("returnToProducts");
       sessionStorage.removeItem("returnToBlogs");
-      
+
       // Allow components to mount and layout to stabilize
       // 500ms is safer for heavy components like WhyChooseUs
       setTimeout(() => {
         ScrollTrigger.refresh();
         const el = document.getElementById(targetId);
-        
+
         if (el) {
           const lenis = getLenis();
           if (lenis) {
             // Smooth transition as requested
-            lenis.scrollTo(el, { 
+            lenis.scrollTo(el, {
               duration: 1.8,
-              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             });
           } else {
             el.scrollIntoView({ behavior: "smooth" });
@@ -73,7 +73,7 @@ export default function Index() {
   }, []);
 
   return (
-    <main 
+    <main
       className="relative bg-obsidian text-foreground transition-opacity duration-300"
       style={{ opacity: ready ? 1 : 0 }}
     >
