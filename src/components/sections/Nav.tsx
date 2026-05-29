@@ -8,6 +8,7 @@
    ============================================================= */
 
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { gsap } from "@/utils/gsap-setup";
 import { MenuOverlay } from "./MenuOverlay";
 import logoWhite from "@/assets/ABC-LUX-Logo_White.webp";
@@ -29,10 +30,18 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [logoDark, setLogoDark] = useState(true); // false = use white logo, true = use black logo
   const ref = useRef<HTMLElement | null>(null);
+  
+  const location = useLocation();
+  const isAboutPage = location.pathname === "/about";
 
   const logoDarkRef = useRef(true);
 
   useEffect(() => {
+    if (isAboutPage) {
+      setLogoDark(false);
+      return;
+    }
+
     const sectionMap: Record<string, boolean> = {};
     DARK_SECTIONS.forEach((id) => {
       sectionMap[id] = false;
@@ -99,7 +108,10 @@ export function Nav() {
       window.removeEventListener("scroll", checkLogoColor);
       window.removeEventListener("resize", checkLogoColor);
     };
-  }, []);
+  }, [isAboutPage]);
+
+  // Determine actual logo dark state based on page
+  const actualLogoDark = isAboutPage ? false : logoDark;
 
   return (
     <>
@@ -110,13 +122,13 @@ export function Nav() {
         <div className="lux-nav-inner mx-auto flex w-full max-w-[1600px] items-start justify-between gap-4">
           {/* Logo */}
           <a
-            href="#top"
+            href="/"
             data-cursor="HOME"
             aria-label="ABC LUX — Home"
             className="pointer-events-auto inline-flex items-center transition-opacity hover:opacity-80"
           >
             <img
-              src={logoDark ? logoBlack : logoWhite}
+              src={actualLogoDark ? logoBlack : logoWhite}
               alt="ABC LUX"
               width={600}
               height={180}
@@ -127,10 +139,10 @@ export function Nav() {
             />
           </a>
 
-          {/* Center nav — unchanged from original */}
+          {/* Center nav */}
           <nav className="lux-center-nav pointer-events-auto absolute left-1/2 top-5 hidden -translate-x-1/2 items-center gap-6 md:flex">
             <a
-              href="#products"
+              href={isAboutPage ? "/#products" : "#products"}
               data-cursor="VIEW"
               className="lux-eyebrow rounded-[10px] bg-white/10 px-20 py-2.5 text-white/95 text-[13px] font-bold tracking-widest backdrop-blur-md transition-all hover:bg-white/20"
             >
@@ -146,7 +158,7 @@ export function Nav() {
             </a>
           </nav>
 
-          {/* Right cluster — unchanged from original */}
+          {/* Right cluster */}
           <div className="pointer-events-auto flex items-center gap-3">
             <button
               type="button"
@@ -155,9 +167,9 @@ export function Nav() {
               aria-label="Open menu"
               className="lux-menu-btn lux-eyebrow group flex w-[160px] md:w-[220px] items-center justify-between rounded-[10px] border px-4 md:px-6 py-2.5 backdrop-blur-md transition-colors pointer-events-auto cursor-pointer relative z-50 shrink-0"
               style={{
-                borderColor: logoDark ? "rgba(26,24,25,0.15)" : "rgba(244,238,224,0.15)",
-                backgroundColor: logoDark ? "rgba(244,238,224,0.5)" : "rgba(26,24,25,0.2)",
-                color: logoDark ? "#1A1819" : "#F4EEE0",
+                borderColor: actualLogoDark ? "rgba(26,24,25,0.15)" : "rgba(244,238,224,0.15)",
+                backgroundColor: actualLogoDark ? "rgba(244,238,224,0.5)" : "rgba(26,24,25,0.2)",
+                color: actualLogoDark ? "#1A1819" : "#F4EEE0",
                 touchAction: "manipulation",
               }}
             >
