@@ -137,14 +137,14 @@ export function Hero() {
 
       {/* Periphery utility text */}
       <div className="lux-hero-meta pointer-events-none absolute inset-0 z-30 text-obsidian">
-        <div className="absolute left-8 top-[38%] hidden max-w-[160px] md:block">
+        <div className="absolute left-60 bottom-[14%] hidden max-w-[160px] md:block">
           <p className="font-serif text-[13px] leading-snug">
             Crafted Illumination
             <br />
             for Interiors
           </p>
         </div>
-        <div className="absolute right-8 top-[28%] hidden max-w-[160px] text-right md:block">
+        <div className="absolute right-52 top-[14%] hidden max-w-[160px] text-right md:block">
           <p className="font-serif text-[13px] leading-snug">
             Designed to
             <br />

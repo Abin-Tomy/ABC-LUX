@@ -77,17 +77,18 @@ export default function Preloader({ children }: PreloaderProps) {
       <div className="relative z-0">{children}</div>
 
       {!isDone && (
-        <div className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none">
-          {/* 4 cream bars - each exactly 25% */}
+        <div
+            className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none"
+            style={{ display: "grid", gridTemplateRows: "repeat(4, 1fr)" }}
+          >
+          {/* 4 cream bars — laid out by CSS Grid, eliminating sub-pixel gaps */}
           {Array.from({ length: BAR_COUNT }).map((_, i) => {
             const isOut = barsOut.includes(i);
             return (
               <div
                 key={i}
-                className="absolute left-0 right-0 will-change-transform"
+                className="will-change-transform"
                 style={{
-                  top: `${i * 25}%`,
-                  height: "25%",
                   background: "#f5f0e8",
                   transform: isOut ? "translateX(100%)" : "translateX(0)",
                   transition: isOut
