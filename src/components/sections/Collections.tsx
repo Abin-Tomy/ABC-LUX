@@ -13,12 +13,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import dc1 from "@/assets/Designer-Chandeliers-1.webp";
+import dc1 from "@/assets/Designer-Chandeliers-2.webp";
 import dc2 from "@/assets/AL_1.webp";
-import dc3 from "@/assets/CL_1.webp";
+import dc3 from "@/assets/CL_3.webp";
 import dc4 from "@/assets/IL_1.webp";
-import dc5 from "@/assets/LSL_1.webp";
-import dc6 from "@/assets/MoPL_1.webp";
+import dc5 from "@/assets/LSL_3.webp";
+import dc6 from "@/assets/MoPL_2.webp";
 import dc7 from "@/assets/MPL_1.webp";
 import TitleReveal from "../ui/TitleReveal";
 
@@ -492,7 +492,6 @@ export function Places() {
                 <div className="relative w-full" style={{ aspectRatio: "21/9", minHeight: "40vh" }}>
                   <div
                     className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden rounded-lg bg-black origin-center"
-                    style={{ willChange: "transform, border-radius" }}
                   >
                     <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
                       <img
@@ -511,7 +510,6 @@ export function Places() {
                           height: "100%",
                           objectFit: "cover",
                           objectPosition: "center",
-                          willChange: "transform",
                         }}
                       />
                     </div>
