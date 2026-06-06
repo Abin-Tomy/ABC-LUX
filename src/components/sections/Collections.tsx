@@ -14,22 +14,22 @@ import { Autoplay, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import dc1 from "@/assets/Designer-Chandeliers-1.webp";
-import dc2 from "@/assets/Designer-Chandeliers-2.webp";
-import dc3 from "@/assets/Designer-Chandeliers-3.webp";
-import dc4 from "@/assets/Designer-Chandeliers-4.webp";
-import dc5 from "@/assets/Designer-Chandeliers-5.webp";
-import dc6 from "@/assets/Designer-Chandeliers-6.webp";
-import dc7 from "@/assets/Designer-Chandeliers-7.webp";
+import dc2 from "@/assets/AL_1.webp";
+import dc3 from "@/assets/CL_1.webp";
+import dc4 from "@/assets/IL_1.webp";
+import dc5 from "@/assets/LSL_1.webp";
+import dc6 from "@/assets/MoPL_1.webp";
+import dc7 from "@/assets/MPL_1.webp";
 import TitleReveal from "../ui/TitleReveal";
 
 const SHOWCASE = [
   { img: dc1, title: "Designer Chandeliers" },
-  { img: dc2, title: "Designer Chandeliers" },
-  { img: dc3, title: "Designer Chandeliers" },
-  { img: dc4, title: "Designer Chandeliers" },
-  { img: dc5, title: "Designer Chandeliers" },
-  { img: dc6, title: "Designer Chandeliers" },
-  { img: dc7, title: "Designer Chandeliers" },
+  { img: dc2, title: "Architectural Lighting" },
+  { img: dc3, title: "Commercial Lighting" },
+  { img: dc4, title: "Industrial Lighting" },
+  { img: dc5, title: "Landscape & Street Lighting" },
+  { img: dc6, title: "Motive Power Lighting" },
+  { img: dc7, title: "Marine & Ports Lighting" },
 ];
 
 /**
