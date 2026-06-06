@@ -52,6 +52,26 @@ export function Places() {
   const centerBottomRef = useRef<HTMLElement | null>(null);
   const [idx, setIdx] = useState(0);
 
+  // Effect: Desktop autoplay for the center card
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 1023px)").matches) return;
+    
+    gsap.fromTo(
+      ".lux-autoplay-progress",
+      { strokeDashoffset: 100 },
+      { strokeDashoffset: 0, duration: 4.5, ease: "none" }
+    );
+
+    const timer = setTimeout(() => {
+      setIdx((i) => (i + 1) % SHOWCASE.length);
+    }, 4500);
+
+    return () => {
+      clearTimeout(timer);
+      gsap.killTweensOf(".lux-autoplay-progress");
+    };
+  }, [idx]);
+
   // Effect: Desktop-only scroll animations (masonry grid into tombstone center card)
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -241,22 +261,27 @@ export function Places() {
           },
           45,
         );
+
+        const titleWrap = showcase?.querySelector(".lux-showcase-title-wrap") as HTMLElement;
+        const counterWrap = showcase?.querySelector(".lux-showcase-counter") as HTMLElement;
+
+        if (titleWrap) {
+          scrollTl.to(titleWrap, { x: "-28vw", ease: "power2.inOut", duration: 55 }, 45);
+        }
+        if (counterWrap) {
+          scrollTl.to(counterWrap, { x: "8vw", ease: "power2.inOut", duration: 55 }, 45);
+        }
       }
     }, root);
 
     return () => ctx.revert();
   }, []);
 
-  // Animate showcase image swap
+  // Animate showcase text swap
   // Effect: Animates the text content of the center card when navigating between slides
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".lux-showcase-img",
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, ease: "expo.out" },
-      );
       gsap.fromTo(
         ".lux-showcase-title",
         { yPercent: 80, opacity: 0 },
@@ -491,31 +516,34 @@ export function Places() {
                 {/* Wrapper to hold the grid space so animating the card doesn't reflow the DOM and break the pin-spacer */}
                 <div className="relative w-full" style={{ aspectRatio: "21/9", minHeight: "40vh" }}>
                   <div
-                    className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden rounded-lg bg-black origin-center"
+                    className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full rounded-lg origin-center"
                   >
-                    <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
-                      <img
-                        key={current.img}
-                        src={current.img}
-                        alt={current.title}
-                        width={4320}
-                        height={5400}
-                        className="lux-showcase-img"
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          objectPosition: "center",
-                        }}
-                      />
+                    <div style={{ position: "absolute", inset: 0, overflow: "hidden", borderRadius: "inherit", backgroundColor: "black" }}>
+                      {SHOWCASE.map((item, i) => (
+                        <img
+                          key={item.img}
+                          src={item.img}
+                          alt={item.title}
+                          className="lux-showcase-img"
+                          style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            objectPosition: "center",
+                            opacity: i === idx ? 1 : 0,
+                            zIndex: i === idx ? 1 : 0,
+                            transition: "opacity 1s ease-in-out",
+                          }}
+                        />
+                      ))}
                     </div>
 
                     {/* Title */}
-                    <div className="absolute left-8 top-1/2 -translate-y-1/2 md:left-12">
+                    <div className="lux-showcase-title-wrap absolute left-8 top-1/2 -translate-y-1/2 md:left-12 whitespace-nowrap z-10">
                       <h3
                         key={`t-${idx}`}
                         className="lux-showcase-title text-[4vw] md:text-[1.8vw] leading-none text-white"
@@ -526,13 +554,13 @@ export function Places() {
                     </div>
 
                     {/* Counter */}
-                    <div className="absolute bottom-8 right-8 text-white text-xl md:text-2xl">
+                    <div className="lux-showcase-counter absolute bottom-8 right-8 text-white text-xl md:text-2xl z-10">
                       <span>{String(idx + 1).padStart(1, "0")}</span>
                       <span className="opacity-50">/{SHOWCASE.length}</span>
                     </div>
 
                     {/* Navigation (desktop) */}
-                    <div className="absolute inset-x-0 bottom-8 flex items-center justify-center gap-6">
+                    <div className="absolute inset-x-0 bottom-8 flex items-center justify-center gap-6 z-10">
                       <button
                         type="button"
                         onClick={prev}
@@ -564,6 +592,32 @@ export function Places() {
                             />
                           </svg>
                         </button>
+                        <svg 
+                          className="absolute inset-0 h-full w-full pointer-events-none" 
+                          viewBox="0 0 100 100"
+                          style={{ transform: "rotate(-90deg) scale(1.2)" }}
+                        >
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="48"
+                            fill="none"
+                            stroke="rgba(255,255,255,0.2)"
+                            strokeWidth="2"
+                          />
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="48"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeDasharray="100 100"
+                            strokeDashoffset="100"
+                            className="lux-autoplay-progress"
+                            pathLength="100"
+                          />
+                        </svg>
                       </div>
                     </div>
                   </div>
