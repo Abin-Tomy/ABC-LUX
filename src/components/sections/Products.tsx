@@ -13,10 +13,10 @@ import { gsap } from "@/utils/gsap-setup";
 import { getLenis } from "@/hooks/useLenis";
 import TitleReveal from "../ui/TitleReveal";
 
-import imgLedStrip from "@/assets/led-strip-lights.webp";
-import imgMagneticProfile from "@/assets/magnetic-profile-light.webp";
-import imgModernPendant from "@/assets/modern-pendant-light.webp";
-import imgCeilingLights from "@/assets/ceiling-lights.webp";
+import imgTableFloorLamp from "@/assets/table-floor-lamp.webp";
+
+import imgSculpture from "@/assets/SCULPTURES/sc-8.webp";
+import imgModernPendant from "@/assets/MODERN PENDANT LIGHTS/wp-5.webp";
 import imgDesignerChand from "@/assets/designer-chandeliers.webp";
 import imgOutdoorLights from "@/assets/outdoor-lights.webp";
 import imgWallLights from "@/assets/wall-lights.webp";
@@ -39,98 +39,98 @@ export type Testimonial = {
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
-    name: "LED Strip Lights",
+    name: "Wall Lights",
     role: "",
     company: "",
     excerpt: "Professional Illumination",
     quote:
       "Professional grade LED strips designed for seamless architectural integration. High CRI, uniform brightness, and exceptional longevity for premium residential and commercial spaces.",
     hue: 38,
-    initials: "LS",
-    img: imgLedStrip,
+    initials: "WL",
+    img: imgWallLights,
   },
   {
     id: 2,
-    name: "Magnetic Profile Lights",
+    name: "Table & Floor Lamps",
     role: "",
     company: "",
     excerpt: "Modular Flexibility",
     quote:
       "Our magnetic track system offers ultimate flexibility. Easily move, swap, and adjust lighting modules without tools, creating a dynamic lighting environment that evolves with your space.",
     hue: 200,
-    initials: "MP",
-    img: imgMagneticProfile,
+    initials: "TF",
+    img: imgTableFloorLamp,
   },
   {
     id: 3,
-    name: "Modern Pendant Light",
+    name: "Sculptures",
     role: "",
     company: "",
     excerpt: "Artistic Elegance",
     quote:
       "A statement of elegance. Our modern pendants combine hand-blown glass with precision-machined metals to create a focal point that is both a light source and a work of art.",
     hue: 280,
-    initials: "PL",
-    img: imgModernPendant,
+    initials: "SC",
+    img: imgSculpture,
   },
   {
     id: 4,
-    name: "Ceiling Lights",
+    name: "Modern Pendant Lights",
     role: "",
     company: "",
     excerpt: "Ambient Sophistication",
     quote:
       "Sophisticated surface and recessed ceiling solutions. Designed to provide beautiful ambient light while maintaining a clean, minimalist aesthetic across any interior architecture.",
     hue: 140,
-    initials: "CL",
-    img: imgCeilingLights,
+    initials: "MP",
+    img: imgModernPendant,
   },
   {
     id: 5,
-    name: "Designer Chandeliers",
+    name: "Home Decor",
     role: "",
     company: "",
     excerpt: "Grand Installations",
     quote:
       "The pinnacle of luxury illumination. Our bespoke chandeliers are engineered to transform grand spaces with breathtaking light patterns and timeless craftsmanship.",
     hue: 18,
-    initials: "DC",
+    initials: "HD",
     img: imgDesignerChand,
   },
   {
     id: 6,
-    name: "Outdoor Lights",
+    name: "Classic",
     role: "",
     company: "",
     excerpt: "Exterior Excellence",
     quote:
       "Weather-resistant elegance. Our outdoor series brings the same level of design sophistication to your exterior spaces, combining durability with premium light quality.",
     hue: 260,
-    initials: "OL",
+    initials: "CL",
     img: imgOutdoorLights,
   },
   {
     id: 7,
-    name: "Wall Lights",
+    name: "Chandeliers",
     role: "",
     company: "",
     excerpt: "Sculpted Illumination",
     quote:
       "Our wall lights are crafted to enhance vertical surfaces with warmth and precision. From minimalist sconces to statement fixtures, every design creates an atmosphere of curated elegance.",
     hue: 45,
-    initials: "WL",
+    initials: "CH",
     img: imgWallLights,
   },
   {
     id: 8,
-    name: "Pole Lights",
+    name: "Ceiling Mounted",
     role: "",
     company: "",
     excerpt: "Vertical Presence",
     quote:
       "Commanding and graceful, our pole lights define pathways and open spaces with a strong architectural presence. Built for endurance and designed with timeless proportion.",
     hue: 210,
-    initials: "PO",
+    initials: "CM",
     img: imgPoleLights,
   },
 ];

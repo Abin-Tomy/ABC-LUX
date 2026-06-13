@@ -27,6 +27,10 @@ export interface ProductData {
   highlights: string[];
   spaces: string[];
   images: ProductImage[];
+  subCategories?: {
+    label: string;
+    images: ProductImage[];
+  }[];
 }
 
 /* helper — builds a placehold.co URL with product-specific colour */
@@ -92,45 +96,56 @@ export function buildRealImages(items: { src: string; alt: string }[]): ProductI
   }));
 }
 
-// Imports for Product 1
-import lsl1 from "../assets/LSL_1.webp";
-import lsl2 from "../assets/LSL_2.webp";
-import lsl3 from "../assets/LSL_3.webp";
-import lsl4 from "../assets/LSL_4.webp";
-import lsl5 from "../assets/LSL_5.webp";
-import lsl6 from "../assets/LSL_6.webp";
-import lsl7 from "../assets/LSL_7.webp";
-import lsl8 from "../assets/LSL_8.webp";
-
+// Imports for Product 1 (Wall Lights)
+import wlnew1 from "../assets/Wall Lights/wl-1.webp";
+import wlnew2 from "../assets/Wall Lights/wl-2.webp";
+import wlnew3 from "../assets/Wall Lights/wl-3.webp";
+import wlnew4 from "../assets/Wall Lights/wl-4.webp";
+import wlnew5 from "../assets/Wall Lights/wl-5.webp";
+import wlnew6 from "../assets/Wall Lights/wl-6.webp";
+import wlnew7 from "../assets/Wall Lights/wl-7.webp";
+import wlnew8 from "../assets/Wall Lights/wl-8.webp";
 // Imports for Product 2
-import mpl1 from "../assets/MPL_1.webp";
-import mpl2 from "../assets/MPL_2.webp";
-import mpl3 from "../assets/MPL_3.webp";
-import mpl4 from "../assets/MPL_4.webp";
-import mpl5 from "../assets/MPL_5.webp";
-import mpl6 from "../assets/MPL_6.webp";
-import mpl7 from "../assets/MPL_7.webp";
-import mpl8 from "../assets/MPL_8.webp";
 
-// Imports for Product 3
-import mopl1 from "../assets/MoPL_1.webp";
-import mopl2 from "../assets/MoPL_2.webp";
-import mopl3 from "../assets/MoPL_3.webp";
-import mopl4 from "../assets/MoPL_4.webp";
-import mopl5 from "../assets/MoPL_5.webp";
-import mopl6 from "../assets/MoPL_6.webp";
-import mopl7 from "../assets/MoPL_7.webp";
-import mopl8 from "../assets/MoPL_8.webp";
+// Imports for Product 2 — Table Lamp sub-category
+import tb1 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-1.webp";
+import tb2 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-2.webp";
+import tb3 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-3.webp";
+import tb4 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-4.webp";
+import tb5 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-5.webp";
+import tb6 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-6.webp";
+import tb7 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-7.webp";
+import tb8 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-8.webp";
+
+// Imports for Product 2 — Floor Lamp sub-category
+import fl1 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-1.webp";
+import fl2 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-2.webp";
+import fl3 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-3.webp";
+import fl4 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-4.webp";
+import fl5 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-5.webp";
+import fl6 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-6.webp";
+import fl7 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-7.webp";
+import fl8 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-8.webp";
+
+// Imports for Product 3 (Sculptures)
+import sc1 from "../assets/SCULPTURES/sc-1.webp";
+import sc2 from "../assets/SCULPTURES/sc-2.webp";
+import sc3 from "../assets/SCULPTURES/sc-3.webp";
+import sc4 from "../assets/SCULPTURES/sc-4.webp";
+import sc5 from "../assets/SCULPTURES/sc-5.webp";
+import sc6 from "../assets/SCULPTURES/sc-6.webp";
+import sc7 from "../assets/SCULPTURES/sc-7.webp";
+import sc8 from "../assets/SCULPTURES/sc-8.webp";
 
 // Imports for Product 4
-import cl1 from "../assets/CL_1.webp";
-import cl2 from "../assets/CL_2.webp";
-import cl3 from "../assets/CL_3.webp";
-import cl4 from "../assets/CL_4.webp";
-import cl5 from "../assets/CL_5.webp";
-import cl6 from "../assets/CL_6.webp";
-import cl7 from "../assets/CL_7.webp";
-import cl8 from "../assets/CL_8.webp";
+import wp1 from "../assets/MODERN PENDANT LIGHTS/wp-1.webp";
+import wp2 from "../assets/MODERN PENDANT LIGHTS/wp-2.webp";
+import wp3 from "../assets/MODERN PENDANT LIGHTS/wp-3.webp";
+import wp4 from "../assets/MODERN PENDANT LIGHTS/wp-4.webp";
+import wp5 from "../assets/MODERN PENDANT LIGHTS/wp-5.webp";
+import wp6 from "../assets/MODERN PENDANT LIGHTS/wp-6.webp";
+import wp7 from "../assets/MODERN PENDANT LIGHTS/wp-7.webp";
+import wp8 from "../assets/MODERN PENDANT LIGHTS/wp-8.webp";
 
 // Imports for Product 5
 import dc1 from "../assets/DC_1.webp";
@@ -177,7 +192,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
   /* ─── 1  LED Strip Lights ─────────────────────────────────── */
   {
     id: 1,
-    name: "LED Strip Lights",
+    name: "Wall Lights",
     category: "Linear Lighting",
     tagline: "Professional Illumination",
     description:
@@ -196,25 +211,25 @@ export const PRODUCT_CATALOG: ProductData[] = [
     ],
 
     images: buildRealImages([
-      { src: lsl1, alt: "LED Strip 1" },
-      { src: lsl2, alt: "LED Strip 2" },
-      { src: lsl3, alt: "LED Strip 3" },
-      { src: lsl4, alt: "LED Strip 4" },
-      { src: lsl5, alt: "LED Strip 5" },
-      { src: lsl6, alt: "LED Strip 6" },
-      { src: lsl7, alt: "LED Strip 7" },
-      { src: lsl8, alt: "LED Strip 8" },
+      { src: wlnew1, alt: "Wall Light 1" },
+      { src: wlnew2, alt: "Wall Light 2" },
+      { src: wlnew3, alt: "Wall Light 3" },
+      { src: wlnew4, alt: "Wall Light 4" },
+      { src: wlnew5, alt: "Wall Light 5" },
+      { src: wlnew6, alt: "Wall Light 6" },
+      { src: wlnew7, alt: "Wall Light 7" },
+      { src: wlnew8, alt: "Wall Light 8" },
     ]),
   },
 
-  /* ─── 2  Magnetic Profile Lights ──────────────────────────── */
+  /* ─── 2  Table & Floor Lamps ───────────────────────────────── */
   {
     id: 2,
-    name: "Magnetic Profile Lights",
-    category: "Track Systems",
+    name: "Table & Floor Lamps",
+    category: "Table & Floor Lamps",
     tagline: "Modular Flexibility",
     description:
-      "Discover next-generation lighting design with ABC Lights’ Magnetic Profile Lights — the smart, flexible solution that combines modern aesthetics with endless customization. Whether it’s for your home, office, retail, or gallery, these modular lights give you the freedom to design and adjust your lighting just the way you want.",
+      "Discover next-generation lighting design with ABC Lights' Magnetic Profile Lights — the smart, flexible solution that combines modern aesthetics with endless customization. Whether it's for your home, office, retail, or gallery, these modular lights give you the freedom to design and adjust your lighting just the way you want.",
     highlights: [
       "Seamless Magnetic System",
       "Modular & Customizable",
@@ -229,21 +244,50 @@ export const PRODUCT_CATALOG: ProductData[] = [
     ],
 
     images: buildRealImages([
-      { src: mpl1, alt: "Magnetic Profile 1" },
-      { src: mpl2, alt: "Magnetic Profile 2" },
-      { src: mpl3, alt: "Magnetic Profile 3" },
-      { src: mpl4, alt: "Magnetic Profile 4" },
-      { src: mpl5, alt: "Magnetic Profile 5" },
-      { src: mpl6, alt: "Magnetic Profile 6" },
-      { src: mpl7, alt: "Magnetic Profile 7" },
-      { src: mpl8, alt: "Magnetic Profile 8" },
+      { src: tb1, alt: "Table Lamp 1" },
+      { src: tb2, alt: "Table Lamp 2" },
+      { src: tb3, alt: "Table Lamp 3" },
+      { src: tb4, alt: "Table Lamp 4" },
+      { src: tb5, alt: "Table Lamp 5" },
+      { src: tb6, alt: "Table Lamp 6" },
+      { src: tb7, alt: "Table Lamp 7" },
+      { src: tb8, alt: "Table Lamp 8" },
     ]),
+
+    subCategories: [
+      {
+        label: "Table Lamp",
+        images: buildRealImages([
+          { src: tb1, alt: "Table Lamp 1" },
+          { src: tb2, alt: "Table Lamp 2" },
+          { src: tb3, alt: "Table Lamp 3" },
+          { src: tb4, alt: "Table Lamp 4" },
+          { src: tb5, alt: "Table Lamp 5" },
+          { src: tb6, alt: "Table Lamp 6" },
+          { src: tb7, alt: "Table Lamp 7" },
+          { src: tb8, alt: "Table Lamp 8" },
+        ]),
+      },
+      {
+        label: "Floor Lamp",
+        images: buildRealImages([
+          { src: fl1, alt: "Floor Lamp 1" },
+          { src: fl2, alt: "Floor Lamp 2" },
+          { src: fl3, alt: "Floor Lamp 3" },
+          { src: fl4, alt: "Floor Lamp 4" },
+          { src: fl5, alt: "Floor Lamp 5" },
+          { src: fl6, alt: "Floor Lamp 6" },
+          { src: fl7, alt: "Floor Lamp 7" },
+          { src: fl8, alt: "Floor Lamp 8" },
+        ]),
+      },
+    ],
   },
 
   /* ─── 3  Modern Pendant Light ─────────────────────────────── */
   {
     id: 3,
-    name: "Modern Pendant Light",
+    name: "Sculptures",
     category: "Pendants",
     tagline: "Artistic Elegance",
     description:
@@ -262,21 +306,21 @@ export const PRODUCT_CATALOG: ProductData[] = [
     ],
 
     images: buildRealImages([
-      { src: mopl1, alt: "Modern Light 1" },
-      { src: mopl2, alt: "Modern Light 2" },
-      { src: mopl3, alt: "Modern Light 3" },
-      { src: mopl4, alt: "Modern Light 4" },
-      { src: mopl5, alt: "Modern Light 5" },
-      { src: mopl6, alt: "Modern Light 6" },
-      { src: mopl7, alt: "Modern Light 7" },
-      { src: mopl8, alt: "Modern Light 8" },
+      { src: sc1, alt: "Sculpture 1" },
+      { src: sc2, alt: "Sculpture 2" },
+      { src: sc3, alt: "Sculpture 3" },
+      { src: sc4, alt: "Sculpture 4" },
+      { src: sc5, alt: "Sculpture 5" },
+      { src: sc6, alt: "Sculpture 6" },
+      { src: sc7, alt: "Sculpture 7" },
+      { src: sc8, alt: "Sculpture 8" },
     ]),
   },
 
   /* ─── 4  Ceiling Lights ───────────────────────────────────── */
   {
     id: 4,
-    name: "Ceiling Lights",
+    name: "Modern Pendant Lights",
     category: "Ambient Lighting",
     tagline: "Ambient Sophistication",
     description:
@@ -295,21 +339,21 @@ export const PRODUCT_CATALOG: ProductData[] = [
     ],
 
     images: buildRealImages([
-      { src: cl1, alt: "Ceiling Light 1" },
-      { src: cl2, alt: "Ceiling Light 2" },
-      { src: cl3, alt: "Ceiling Light 3" },
-      { src: cl4, alt: "Ceiling Light 4" },
-      { src: cl5, alt: "Ceiling Light 5" },
-      { src: cl6, alt: "Ceiling Light 6" },
-      { src: cl7, alt: "Ceiling Light 7" },
-      { src: cl8, alt: "Ceiling Light 8" },
+      { src: wp1, alt: "Modern Pendant Light 1" },
+      { src: wp2, alt: "Modern Pendant Light 2" },
+      { src: wp3, alt: "Modern Pendant Light 3" },
+      { src: wp4, alt: "Modern Pendant Light 4" },
+      { src: wp5, alt: "Modern Pendant Light 5" },
+      { src: wp6, alt: "Modern Pendant Light 6" },
+      { src: wp7, alt: "Modern Pendant Light 7" },
+      { src: wp8, alt: "Modern Pendant Light 8" },
     ]),
   },
 
   /* ─── 5  Designer Chandeliers ─────────────────────────────── */
   {
     id: 5,
-    name: "Designer Chandeliers",
+    name: "Home Decor",
     category: "Chandeliers",
     tagline: "Grand Installations",
     description:
@@ -342,7 +386,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
   /* ─── 6  Outdoor Lights ───────────────────────────────────── */
   {
     id: 6,
-    name: "Outdoor Lights",
+    name: "Classic",
     category: "Exterior Lighting",
     tagline: "Exterior Excellence",
     description:
@@ -375,7 +419,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
   /* ─── 7  Wall Lights ──────────────────────────────────────── */
   {
     id: 7,
-    name: "Wall Lights",
+    name: "Chandeliers",
     category: "Sconces & Wall",
     tagline: "Sculpted Illumination",
     description:
@@ -408,7 +452,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
   /* ─── 8  Pole Lights ──────────────────────────────────────── */
   {
     id: 8,
-    name: "Pole Lights",
+    name: "Ceiling Mounted",
     category: "Outdoor Poles",
     tagline: "Vertical Presence",
     description:

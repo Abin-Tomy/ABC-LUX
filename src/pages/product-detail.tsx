@@ -77,6 +77,10 @@ export default function ProductDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tileRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
+  const [activeSubCat, setActiveSubCat] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Close zoomed image on escape key
   useEffect(() => {
@@ -103,6 +107,7 @@ export default function ProductDetail() {
   // Effect: Resets scroll and orchestrates initial entrance animations for the product page
   useEffect(() => {
     window.scrollTo(0, 0);
+    setActiveSubCat(0);
     const ctx = gsap.context(() => {
       // Staggered entrance for text elements
       gsap.from(".prod-title", {
@@ -192,8 +197,40 @@ export default function ProductDetail() {
     });
   };
 
+  // Smooth sub-category switch: fade out → swap → fade in
+  const handleSubCatSwitch = (i: number) => {
+    if (i === activeSubCat || isTransitioning) return;
+    if (transitionTimer.current) clearTimeout(transitionTimer.current);
+
+    setIsTransitioning(true);
+    const grid = gridRef.current;
+    if (grid) {
+      grid.style.transition = "opacity 0.32s ease, transform 0.32s cubic-bezier(0.4,0,0.2,1)";
+      grid.style.opacity = "0";
+      grid.style.transform = "translateY(12px)";
+    }
+
+    transitionTimer.current = setTimeout(() => {
+      setActiveSubCat(i);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (grid) {
+            grid.style.opacity = "1";
+            grid.style.transform = "translateY(0px)";
+          }
+          setIsTransitioning(false);
+        });
+      });
+    }, 340);
+  };
+
   // Resolve images and data for the current product
-  const images = product?.images ?? [];
+  const subCategories = product?.subCategories;
+  const activeImages =
+    subCategories && subCategories.length > 0
+      ? subCategories[activeSubCat].images
+      : product?.images ?? [];
+  const images = activeImages;
   const highlights = product?.highlights ?? [];
   const spaces = product?.spaces ?? [];
 
@@ -403,8 +440,83 @@ export default function ProductDetail() {
           {pageDesc}
         </p>
 
+        {/* ── Sub-Category Toggle — sliding pill indicator ── */}
+        {subCategories && subCategories.length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "2.5rem",
+            }}
+          >
+            {/* Outer track */}
+            <div
+              style={{
+                position: "relative",
+                display: "inline-flex",
+                alignItems: "center",
+                background: "rgba(26,24,25,0.07)",
+                border: "0.5px solid rgba(201,169,98,0.25)",
+                borderRadius: "9999px",
+                padding: "5px",
+              }}
+            >
+              {/* Sliding pill — absolutely positioned behind the buttons */}
+              <div
+                aria-hidden
+                style={{
+                  position: "absolute",
+                  top: "5px",
+                  left: "5px",
+                  height: "calc(100% - 10px)",
+                  width: `calc(${100 / subCategories.length}% - 5px)`,
+                  borderRadius: "9999px",
+                  background: "linear-gradient(135deg, #1A1819 0%, #2d2a2b 100%)",
+                  boxShadow: "0 2px 14px rgba(26,24,25,0.22)",
+                  transform: `translateX(calc(${activeSubCat * 100}% + ${activeSubCat * 4}px))`,
+                  transition: "transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                  pointerEvents: "none",
+                  zIndex: 0,
+                }}
+              />
+
+              {/* Buttons — sit above the sliding pill */}
+              {subCategories.map((cat, i) => (
+                <button
+                  key={cat.label}
+                  type="button"
+                  onClick={() => handleSubCatSwitch(i)}
+                  style={{
+                    position: "relative",
+                    zIndex: 1,
+                    padding: "0.55rem 1.8rem",
+                    borderRadius: "9999px",
+                    border: "none",
+                    cursor: isTransitioning ? "default" : "pointer",
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontSize: "0.8rem",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    fontWeight: 500,
+                    background: "transparent",
+                    color: activeSubCat === i ? "#D3C8B6" : "rgba(26,24,25,0.5)",
+                    transition: "color 0.38s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                    userSelect: "none",
+                    minWidth: "130px",
+                    textAlign: "center",
+                  }}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+
         {/* ── Masonry Image Grid — uniform layout per product ── */}
         <div
+          ref={gridRef}
           className="prod-masonry-grid"
           style={{
             display: "grid",
@@ -414,6 +526,8 @@ export default function ProductDetail() {
             gridTemplateColumns: "repeat(12, 1fr)",
             gridTemplateRows: "2fr 1fr 1.2fr",
             gridAutoFlow: "dense",
+            opacity: 1,
+            transform: "translateY(0px)",
           }}
         >
           {images.map((img, i) => (

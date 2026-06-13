@@ -23,13 +23,13 @@ import dc7 from "@/assets/MPL_1.webp";
 import TitleReveal from "../ui/TitleReveal";
 
 const SHOWCASE = [
-  { img: dc1, title: "Designer Chandeliers" },
-  { img: dc2, title: "Architectural Lighting" },
-  { img: dc3, title: "Commercial Lighting" },
-  { img: dc4, title: "Industrial Lighting" },
-  { img: dc5, title: "Landscape & Street Lighting" },
-  { img: dc6, title: "Motive Power Lighting" },
-  { img: dc7, title: "Marine & Ports Lighting" },
+  { img: dc1, title: "Wall Lights" },
+  { img: dc2, title: "Table & Floor Lamps" },
+  { img: dc3, title: "Sculptures" },
+  { img: dc4, title: "Modern Pendant Lights" },
+  { img: dc5, title: "Home Decor" },
+  { img: dc6, title: "Classic" },
+  { img: dc7, title: "Chandeliers" },
 ];
 
 /**
