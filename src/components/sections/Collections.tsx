@@ -15,11 +15,11 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import dc1 from "@/assets/Designer-Chandeliers-2.webp";
 import dc2 from "@/assets/AL_1.webp";
-import dc3 from "@/assets/CL_3.webp";
+import dc3 from "@/assets/collection-cl-3.webp";
 import dc4 from "@/assets/IL_1.webp";
-import dc5 from "@/assets/LSL_3.webp";
-import dc6 from "@/assets/MoPL_2.webp";
-import dc7 from "@/assets/MPL_1.webp";
+import dc5 from "@/assets/collection-lsl-3.webp";
+import dc6 from "@/assets/collection-mopl-2.webp";
+import dc7 from "@/assets/collection-mpl-1.webp";
 import TitleReveal from "../ui/TitleReveal";
 
 const SHOWCASE = [

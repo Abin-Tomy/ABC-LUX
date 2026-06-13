@@ -9,30 +9,30 @@
 
 import { useState } from "react";
 import TitleReveal from "../ui/TitleReveal";
-import on1 from "../../assets/1-ON.webp";
-import on2 from "../../assets/2-ON.webp";
-import on3 from "../../assets/3-ON.webp";
-import on4 from "../../assets/4-ON.webp";
-import on5 from "../../assets/5-ON.webp";
-import on6 from "../../assets/6-ON.webp";
-import on7 from "../../assets/7-ON.webp";
-import on8 from "../../assets/8-ON.webp";
-import on9 from "../../assets/9-ON.webp";
-import on10 from "../../assets/10-ON.webp";
-import on11 from "../../assets/11-ON.webp";
-import on12 from "../../assets/12-ON.webp";
-import off1 from "../../assets/1-OFF.webp";
-import off2 from "../../assets/2-OFF.webp";
-import off3 from "../../assets/3-OFF.webp";
-import off4 from "../../assets/4-OFF.webp";
-import off5 from "../../assets/5-OFF.webp";
-import off6 from "../../assets/6-OFF.webp";
-import off7 from "../../assets/7-OFF.webp";
-import off8 from "../../assets/8-OFF.webp";
-import off9 from "../../assets/9-OFF.webp";
-import off10 from "../../assets/10-OFF.webp";
-import off11 from "../../assets/11-OFF.webp";
-import off12 from "../../assets/12-OFF.webp";
+import on1 from "../../assets/EXPERIENCE/1-ON.webp";
+import on2 from "../../assets/EXPERIENCE/2-ON.webp";
+import on3 from "../../assets/EXPERIENCE/3-ON.webp";
+import on4 from "../../assets/EXPERIENCE/4-ON.webp";
+import on5 from "../../assets/EXPERIENCE/5-ON.webp";
+import on6 from "../../assets/EXPERIENCE/6-ON.webp";
+import on7 from "../../assets/EXPERIENCE/7-ON.webp";
+import on8 from "../../assets/EXPERIENCE/8-ON.webp";
+import on9 from "../../assets/EXPERIENCE/9-ON.webp";
+import on10 from "../../assets/EXPERIENCE/10-ON.webp";
+import on11 from "../../assets/EXPERIENCE/11-ON.webp";
+import on12 from "../../assets/EXPERIENCE/12-ON.webp";
+import off1 from "../../assets/EXPERIENCE/1-OFF.webp";
+import off2 from "../../assets/EXPERIENCE/2-OFF.webp";
+import off3 from "../../assets/EXPERIENCE/3-OFF.webp";
+import off4 from "../../assets/EXPERIENCE/4-OFF.webp";
+import off5 from "../../assets/EXPERIENCE/5-OFF.webp";
+import off6 from "../../assets/EXPERIENCE/6-OFF.webp";
+import off7 from "../../assets/EXPERIENCE/7-OFF.webp";
+import off8 from "../../assets/EXPERIENCE/8-OFF.webp";
+import off9 from "../../assets/EXPERIENCE/9-OFF.webp";
+import off10 from "../../assets/EXPERIENCE/10-OFF.webp";
+import off11 from "../../assets/EXPERIENCE/11-OFF.webp";
+import off12 from "../../assets/EXPERIENCE/12-OFF.webp";
 
 // ─────────────────────────────────────────────
 //  REPLACE THESE PATHS WITH YOUR LOCAL IMAGES
