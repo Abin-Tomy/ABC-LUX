@@ -13,14 +13,15 @@ import { gsap } from "@/utils/gsap-setup";
 import { getLenis } from "@/hooks/useLenis";
 import TitleReveal from "../ui/TitleReveal";
 
+import imgWallLights from "@/assets/Wall Lights/wl-1.webp";
 import imgTableFloorLamp from "@/assets/table-floor-lamp.webp";
 
 import imgSculpture from "@/assets/SCULPTURES/sc-8.webp";
 import imgModernPendant from "@/assets/MODERN PENDANT LIGHTS/wp-5.webp";
-import imgDesignerChand from "@/assets/designer-chandeliers.webp";
-import imgOutdoorLights from "@/assets/outdoor-lights.webp";
-import imgWallLights from "@/assets/wall-lights.webp";
-import imgPoleLights from "@/assets/pole-lights.webp";
+import imgHomeDecor from "@/assets/HOME DECOR/WALL ART/WA8.webp";
+import imgClassic from "@/assets/CLASSIC/C1.webp";
+import imgChandelier from "@/assets/CHANDELIERS/CH3.webp";
+import imgCeilingMounted from "@/assets/CEILING MOUNTED/CL1.webp";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -90,36 +91,36 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Home Decor",
     role: "",
     company: "",
-    excerpt: "Grand Installations",
+    excerpt: "Artistic Embellishments",
     quote:
-      "The pinnacle of luxury illumination. Our bespoke chandeliers are engineered to transform grand spaces with breathtaking light patterns and timeless craftsmanship.",
+      "At ABC Lights, we believe every space deserves a masterpiece that’s as unique as you are. Our Home Decor collection includes elegant Wall Art and striking Ornaments that transform your ideas into breathtaking, one-of-a-kind installations.",
     hue: 18,
     initials: "HD",
-    img: imgDesignerChand,
+    img: imgHomeDecor,
   },
   {
     id: 6,
     name: "Classic",
     role: "",
     company: "",
-    excerpt: "Exterior Excellence",
+    excerpt: "Timeless Elegance",
     quote:
-      "Weather-resistant elegance. Our outdoor series brings the same level of design sophistication to your exterior spaces, combining durability with premium light quality.",
+      "Transform your spaces into inviting, functional, and secure areas with ABC Lights’ curated range of Classic Lights. Our classic lighting solutions bring together timeless charm, style, and efficiency.",
     hue: 260,
     initials: "CL",
-    img: imgOutdoorLights,
+    img: imgClassic,
   },
   {
     id: 7,
     name: "Chandeliers",
     role: "",
     company: "",
-    excerpt: "Sculpted Illumination",
+    excerpt: "Grand Installations",
     quote:
-      "Our wall lights are crafted to enhance vertical surfaces with warmth and precision. From minimalist sconces to statement fixtures, every design creates an atmosphere of curated elegance.",
+      "Add layers of warmth, style, and functionality to your interiors with ABC Lights’ stunning collection of Chandeliers. Perfect for accentuating architectural features or adding a grand centerpiece.",
     hue: 45,
     initials: "CH",
-    img: imgWallLights,
+    img: imgChandelier,
   },
   {
     id: 8,
@@ -131,7 +132,7 @@ export const TESTIMONIALS: Testimonial[] = [
       "Commanding and graceful, our pole lights define pathways and open spaces with a strong architectural presence. Built for endurance and designed with timeless proportion.",
     hue: 210,
     initials: "CM",
-    img: imgPoleLights,
+    img: imgCeilingMounted,
   },
 ];
 

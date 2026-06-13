@@ -147,45 +147,56 @@ import wp6 from "../assets/MODERN PENDANT LIGHTS/wp-6.webp";
 import wp7 from "../assets/MODERN PENDANT LIGHTS/wp-7.webp";
 import wp8 from "../assets/MODERN PENDANT LIGHTS/wp-8.webp";
 
-// Imports for Product 5
-import dc1 from "../assets/DC_1.webp";
-import dc2 from "../assets/DC_2.webp";
-import dc3 from "../assets/DC_3.webp";
-import dc4 from "../assets/DC_4.webp";
-import dc5 from "../assets/DC_5.webp";
-import dc6 from "../assets/DC_6.webp";
-import dc7 from "../assets/DC_7.webp";
-import dc8 from "../assets/DC_8.webp";
+// Imports for Product 5 (Home Decor)
+// Imports for Product 5 — Wall Art sub-category
+import wa1 from "../assets/HOME DECOR/WALL ART/WA1.webp";
+import wa2 from "../assets/HOME DECOR/WALL ART/WA2.webp";
+import wa3 from "../assets/HOME DECOR/WALL ART/WA3.webp";
+import wa4 from "../assets/HOME DECOR/WALL ART/WA4.webp";
+import wa5 from "../assets/HOME DECOR/WALL ART/WA5.webp";
+import wa6 from "../assets/HOME DECOR/WALL ART/WA6.webp";
+import wa7 from "../assets/HOME DECOR/WALL ART/WA7.webp";
+import wa8 from "../assets/HOME DECOR/WALL ART/WA8.webp";
 
-// Imports for Product 6
-import ol1 from "../assets/OL_1.webp";
-import ol2 from "../assets/OL_2.webp";
-import ol3 from "../assets/OL_3.webp";
-import ol4 from "../assets/OL_4.webp";
-import ol5 from "../assets/OL_5.webp";
-import ol6 from "../assets/OL_6.webp";
-import ol7 from "../assets/OL_7.webp";
-import ol8 from "../assets/OL_8.webp";
+// Imports for Product 5 — Ornaments sub-category
+import or1 from "../assets/HOME DECOR/ORNAMENTS/O1.webp";
+import or2 from "../assets/HOME DECOR/ORNAMENTS/O2.webp";
+import or3 from "../assets/HOME DECOR/ORNAMENTS/O3.webp";
+import or4 from "../assets/HOME DECOR/ORNAMENTS/O4.webp";
+import or5 from "../assets/HOME DECOR/ORNAMENTS/O5.webp";
+import or6 from "../assets/HOME DECOR/ORNAMENTS/O6.webp";
+import or7 from "../assets/HOME DECOR/ORNAMENTS/O7.webp";
+import or8 from "../assets/HOME DECOR/ORNAMENTS/O8.webp";
 
-// Imports for Product 7
-import wl1 from "../assets/WL_1.webp";
-import wl2 from "../assets/WL_2.webp";
-import wl3 from "../assets/WL_3.webp";
-import wl4 from "../assets/WL_4.webp";
-import wl5 from "../assets/WL_5.webp";
-import wl6 from "../assets/WL_6.webp";
-import wl7 from "../assets/WL_7.webp";
-import wl8 from "../assets/WL_8.webp";
+// Imports for Product 6 (Classic)
+import cl1 from "../assets/CLASSIC/C1.webp";
+import cl2 from "../assets/CLASSIC/C2.webp";
+import cl3 from "../assets/CLASSIC/C3.webp";
+import cl4 from "../assets/CLASSIC/C4.webp";
+import cl5 from "../assets/CLASSIC/C5.webp";
+import cl6 from "../assets/CLASSIC/C6.webp";
+import cl7 from "../assets/CLASSIC/C7.webp";
+import cl8 from "../assets/CLASSIC/C8.webp";
 
-// Imports for Product 8
-import pl1 from "../assets/PL_1.webp";
-import pl2 from "../assets/PL_2.webp";
-import pl3 from "../assets/PL_3.webp";
-import pl4 from "../assets/PL_4.webp";
-import pl5 from "../assets/PL_5.webp";
-import pl6 from "../assets/PL_6.webp";
-import pl7 from "../assets/PL_7.webp";
-import pl8 from "../assets/PL_8.webp";
+// Imports for Product 7 (Chandeliers)
+import ch1 from "../assets/CHANDELIERS/CH1.webp";
+import ch2 from "../assets/CHANDELIERS/CH2.webp";
+import ch3 from "../assets/CHANDELIERS/CH3.webp";
+import ch4 from "../assets/CHANDELIERS/CH4.webp";
+import ch5 from "../assets/CHANDELIERS/CH5.webp";
+import ch6 from "../assets/CHANDELIERS/CH6.webp";
+import ch7 from "../assets/CHANDELIERS/CH7.webp";
+import ch8 from "../assets/CHANDELIERS/CH8.webp";
+
+// Imports for Product 8 (Ceiling Mounted)
+import cm1 from "../assets/CEILING MOUNTED/CL1.webp";
+import cm2 from "../assets/CEILING MOUNTED/CL2.webp";
+import cm3 from "../assets/CEILING MOUNTED/CL3.webp";
+import cm4 from "../assets/CEILING MOUNTED/CL4.webp";
+import cm5 from "../assets/CEILING MOUNTED/CL5.webp";
+import cm6 from "../assets/CEILING MOUNTED/CL6.webp";
+import cm7 from "../assets/CEILING MOUNTED/CL7.webp";
+import cm8 from "../assets/CEILING MOUNTED/CL8.webp";
 
 
 export const PRODUCT_CATALOG: ProductData[] = [
@@ -350,19 +361,19 @@ export const PRODUCT_CATALOG: ProductData[] = [
     ]),
   },
 
-  /* ─── 5  Designer Chandeliers ─────────────────────────────── */
+     /* ─── 5  Home Decor ─────────────────────────────── */
   {
     id: 5,
     name: "Home Decor",
-    category: "Chandeliers",
-    tagline: "Grand Installations",
+    category: "Decor",
+    tagline: "Artistic Embellishments",
     description:
-      "At ABC Lights, we believe every space deserves a masterpiece that’s as unique as you are. Our Customized Chandeliers service transforms your ideas into breathtaking, one-of-a-kind installations that elevate luxury homes, hotels, and statement spaces with unmatched elegance and individuality. ",
+      "At ABC Lights, we believe every space deserves a masterpiece that’s as unique as you are. Our Home Decor collection includes elegant Wall Art and striking Ornaments that transform your ideas into breathtaking, one-of-a-kind installations that elevate luxury homes, hotels, and statement spaces with unmatched elegance and individuality. ",
     highlights: [
       "Designed Just for You",
-      "Perfectly Tailored for Any Spacr",
+      "Perfectly Tailored for Any Space",
       "Endless Material & Finish Options",
-      "Expert Craftmanship",
+      "Expert Craftsmanship",
     ],
     spaces: [
       "Hotel Lobbies & Reception Areas",
@@ -372,113 +383,142 @@ export const PRODUCT_CATALOG: ProductData[] = [
     ],
 
     images: buildRealImages([
-      { src: dc1, alt: "Designer Chandelier 1" },
-      { src: dc2, alt: "Designer Chandelier 2" },
-      { src: dc3, alt: "Designer Chandelier 3" },
-      { src: dc4, alt: "Designer Chandelier 4" },
-      { src: dc5, alt: "Designer Chandelier 5" },
-      { src: dc6, alt: "Designer Chandelier 6" },
-      { src: dc7, alt: "Designer Chandelier 7" },
-      { src: dc8, alt: "Designer Chandelier 8" },
+      { src: wa1, alt: "Wall Art 1" },
+      { src: wa2, alt: "Wall Art 2" },
+      { src: wa3, alt: "Wall Art 3" },
+      { src: wa4, alt: "Wall Art 4" },
+      { src: wa5, alt: "Wall Art 5" },
+      { src: wa6, alt: "Wall Art 6" },
+      { src: wa7, alt: "Wall Art 7" },
+      { src: wa8, alt: "Wall Art 8" },
     ]),
+
+    subCategories: [
+      {
+        label: "Wall Art",
+        images: buildRealImages([
+          { src: wa1, alt: "Wall Art 1" },
+          { src: wa2, alt: "Wall Art 2" },
+          { src: wa3, alt: "Wall Art 3" },
+          { src: wa4, alt: "Wall Art 4" },
+          { src: wa5, alt: "Wall Art 5" },
+          { src: wa6, alt: "Wall Art 6" },
+          { src: wa7, alt: "Wall Art 7" },
+          { src: wa8, alt: "Wall Art 8" },
+        ]),
+      },
+      {
+        label: "Ornaments",
+        images: buildRealImages([
+          { src: or1, alt: "Ornament 1" },
+          { src: or2, alt: "Ornament 2" },
+          { src: or3, alt: "Ornament 3" },
+          { src: or4, alt: "Ornament 4" },
+          { src: or5, alt: "Ornament 5" },
+          { src: or6, alt: "Ornament 6" },
+          { src: or7, alt: "Ornament 7" },
+          { src: or8, alt: "Ornament 8" },
+        ]),
+      },
+    ],
   },
 
-  /* ─── 6  Outdoor Lights ───────────────────────────────────── */
+  /* ─── 6  Classic ───────────────────────────────────── */
   {
     id: 6,
     name: "Classic",
-    category: "Exterior Lighting",
-    tagline: "Exterior Excellence",
+    category: "Classic Lighting",
+    tagline: "Timeless Elegance",
     description:
-      "Transform your exterior spaces into inviting, functional, and secure areas with ABC Lights’ curated range of Outdoor Lights. Designed to withstand the elements while enhancing the beauty of your home or commercial property, our outdoor lighting solutions bring together durability, style, and efficiency.",
+      "Transform your spaces into inviting, functional, and secure areas with ABC Lights’ curated range of Classic Lights. Designed to withstand the test of time while enhancing the beauty of your home or commercial property, our classic lighting solutions bring together timeless charm, style, and efficiency.",
     highlights: [
-      "Versatile Designs for Every Exterior",
-      "Enhanced Ambience & Safety",
-      "Weather-Resistant & Durable",
+      "Versatile Designs for Every Space",
+      "Enhanced Ambience & Charm",
+      "Enduring & Durable",
       "Flexible Installation Options",
     ],
     spaces: [
       "Entrances & Facades",
-      "Pathways & Driveways",
+      "Living Rooms",
       "Patios & Decks",
       "Gardens & Landscapes",
     ],
 
     images: buildRealImages([
-      { src: ol1, alt: "Outdoor Light 1" },
-      { src: ol2, alt: "Outdoor Light 2" },
-      { src: ol3, alt: "Outdoor Light 3" },
-      { src: ol4, alt: "Outdoor Light 4" },
-      { src: ol5, alt: "Outdoor Light 5" },
-      { src: ol6, alt: "Outdoor Light 6" },
-      { src: ol7, alt: "Outdoor Light 7" },
-      { src: ol8, alt: "Outdoor Light 8" },
+      { src: cl1, alt: "Classic Light 1" },
+      { src: cl2, alt: "Classic Light 2" },
+      { src: cl3, alt: "Classic Light 3" },
+      { src: cl4, alt: "Classic Light 4" },
+      { src: cl5, alt: "Classic Light 5" },
+      { src: cl6, alt: "Classic Light 6" },
+      { src: cl7, alt: "Classic Light 7" },
+      { src: cl8, alt: "Classic Light 8" },
     ]),
   },
 
-  /* ─── 7  Wall Lights ──────────────────────────────────────── */
+  /* ─── 7  Chandeliers ──────────────────────────────────────── */
   {
     id: 7,
     name: "Chandeliers",
-    category: "Sconces & Wall",
+    category: "Chandeliers",
     tagline: "Sculpted Illumination",
     description:
-      "Add layers of warmth, style, and functionality to your interiors with ABC Lights’ stunning collection of Wall Lights. Perfect for accentuating architectural features, creating cozy nooks, or adding practical task lighting, our wall fixtures combine beautiful design with exceptional performance.",
+      "Add layers of warmth, style, and functionality to your interiors with ABC Lights’ stunning collection of Chandeliers. Perfect for accentuating architectural features, creating cozy nooks, or adding a grand centerpiece, our chandeliers combine beautiful design with exceptional performance.",
     highlights: [
       "Designer Styles for Every Space",
       "Ambient & Accent Lighting",
-      "Space-Saving Elegance",
+      "Grand Elegance",
       "Premium Materials & Craftsmanship",
     ],
     spaces: [
       "Living Rooms & Bedrooms",
       "Hallways & Staircases",
-      "Bathrooms & Vanity Areas",
+      "Grand Entrances",
       "Hospitality & Commercial Spaces",
     ],
 
     images: buildRealImages([
-      { src: wl1, alt: "Wall Light 1" },
-      { src: wl2, alt: "Wall Light 2" },
-      { src: wl3, alt: "Wall Light 3" },
-      { src: wl4, alt: "Wall Light 4" },
-      { src: wl5, alt: "Wall Light 5" },
-      { src: wl6, alt: "Wall Light 6" },
-      { src: wl7, alt: "Wall Light 7" },
-      { src: wl8, alt: "Wall Light 8" },
+      { src: ch1, alt: "Chandelier 1" },
+      { src: ch2, alt: "Chandelier 2" },
+      { src: ch3, alt: "Chandelier 3" },
+      { src: ch4, alt: "Chandelier 4" },
+      { src: ch5, alt: "Chandelier 5" },
+      { src: ch6, alt: "Chandelier 6" },
+      { src: ch7, alt: "Chandelier 7" },
+      { src: ch8, alt: "Chandelier 8" },
     ]),
   },
 
-  /* ─── 8  Pole Lights ──────────────────────────────────────── */
+  /* ─── 8  Ceiling Mounted ──────────────────────────────────────── */
   {
     id: 8,
     name: "Ceiling Mounted",
-    category: "Outdoor Poles",
+    category: "Ceiling Mounted",
     tagline: "Vertical Presence",
     description:
-      "Discover the perfect way to brighten pathways, gardens, and public areas with ABC Lights’ stylish range of Pole Lights. Combining practical illumination with beautiful design, our pole lighting solutions enhance safety while adding timeless charm to any exterior setting.",
+      "Discover the perfect way to brighten any room with ABC Lights’ stylish range of Ceiling Mounted Lights. Combining practical illumination with beautiful design, our lighting solutions enhance visibility while adding timeless charm to your spaces.",
     highlights: [
-      "Versatile Styles for Every Landscape",
+      "Versatile Styles for Every Room",
       "Reliable, Even Illumination",
-      "Weather-Resistant Durability",
+      "Sleek and Modern Designs",
       "Easy Installation & Maintenance",
     ],
     spaces: [
-      "Pathways & Walkways",
-      "Gardens & Lawns",
-      "Public Parks & Streets",
-      "Commercial & Residential Entrances",
+      "Living Rooms & Bedrooms",
+      "Hallways & Corridors",
+      "Kitchens & Dining Areas",
+      "Commercial & Office Spaces",
     ],
 
     images: buildRealImages([
-      { src: pl1, alt: "Pole Light 1" },
-      { src: pl2, alt: "Pole Light 2" },
-      { src: pl3, alt: "Pole Light 3" },
-      { src: pl4, alt: "Pole Light 4" },
-      { src: pl5, alt: "Pole Light 5" },
-      { src: pl6, alt: "Pole Light 6" },
-      { src: pl7, alt: "Pole Light 7" },
-      { src: pl8, alt: "Pole Light 8" },
+      { src: cm1, alt: "Ceiling Mounted 1" },
+      { src: cm2, alt: "Ceiling Mounted 2" },
+      { src: cm3, alt: "Ceiling Mounted 3" },
+      { src: cm4, alt: "Ceiling Mounted 4" },
+      { src: cm5, alt: "Ceiling Mounted 5" },
+      { src: cm6, alt: "Ceiling Mounted 6" },
+      { src: cm7, alt: "Ceiling Mounted 7" },
+      { src: cm8, alt: "Ceiling Mounted 8" },
     ]),
   },
 ];
