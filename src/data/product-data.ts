@@ -1,7 +1,7 @@
 /* =============================================================
    product-data.ts — Per-Product Image & Content Catalog
    =============================================================
-   Purpose   : Centralised data for all 12 product detail pages.
+   Purpose   : Centralised data for all 8 product detail pages.
    Used by   : pages/product-detail.tsx
    Notes     : Each product has 8 placeholder images with a uniform
                masonry grid layout. Replace placeholder src URLs
@@ -172,45 +172,6 @@ import pl6 from "../assets/PL_6.webp";
 import pl7 from "../assets/PL_7.webp";
 import pl8 from "../assets/PL_8.webp";
 
-// Imports for Product 9
-import il1 from "../assets/IL_1.webp";
-import il2 from "../assets/IL_2.webp";
-import il3 from "../assets/IL_3.webp";
-import il4 from "../assets/IL_4.webp";
-import il5 from "../assets/IL_5.webp";
-import il6 from "../assets/IL_6.webp";
-import il7 from "../assets/IL_7.webp";
-import il8 from "../assets/IL_8.webp";
-
-// Imports for Product 10
-import tfl1 from "../assets/TFL_1.webp";
-import tfl2 from "../assets/TFL_2.webp";
-import tfl3 from "../assets/TFL_3.webp";
-import tfl4 from "../assets/TFL_4.webp";
-import tfl5 from "../assets/TFL_5.webp";
-import tfl6 from "../assets/TFL_6.webp";
-import tfl7 from "../assets/TFL_7.webp";
-import tfl8 from "../assets/TFL_8.webp";
-
-// Imports for Product 11
-import ncc1 from "../assets/NCC_1.webp";
-import ncc2 from "../assets/NCC_2.webp";
-import ncc3 from "../assets/NCC_3.webp";
-import ncc4 from "../assets/NCC_4.webp";
-import ncc5 from "../assets/NCC_5.webp";
-import ncc6 from "../assets/NCC_6.webp";
-import ncc7 from "../assets/NCC_7.webp";
-import ncc8 from "../assets/NCC_8.webp";
-
-// Imports for Product 12
-import al1 from "../assets/AL_1.webp";
-import al2 from "../assets/AL_2.webp";
-import al3 from "../assets/AL_3.webp";
-import al4 from "../assets/AL_4.webp";
-import al5 from "../assets/AL_5.webp";
-import al6 from "../assets/AL_6.webp";
-import al7 from "../assets/AL_7.webp";
-import al8 from "../assets/AL_8.webp";
 
 export const PRODUCT_CATALOG: ProductData[] = [
   /* ─── 1  LED Strip Lights ─────────────────────────────────── */
@@ -474,138 +435,6 @@ export const PRODUCT_CATALOG: ProductData[] = [
       { src: pl6, alt: "Pole Light 6" },
       { src: pl7, alt: "Pole Light 7" },
       { src: pl8, alt: "Pole Light 8" },
-    ]),
-  },
-
-  /* ─── 9  Industrial Lights ────────────────────────────────── */
-  {
-    id: 9,
-    name: "Industrial Lights",
-    category: "Industrial",
-    tagline: "Raw Sophistication",
-    description:
-      "ABC Lights brings you a robust range of Industrial Lighting solutions designed to deliver unmatched performance, safety, and energy savings in warehouses, factories, workshops, and large commercial facilities. Built to handle the toughest environments, our industrial fixtures combine superior illumination with rugged durability. ",
-    highlights: [
-      "Powerful & Uniform Illumination",
-      "Durable, Industrial-Grade Build",
-      "Easy Installation & Versatility",
-      "Low Maintenance & Long Lifespan",
-    ],
-    spaces: [
-      "Warehouses & Distribution Centers",
-      "Factories & Manufacturing Plants",
-      "Workshops & Garages",
-      "Outdoor Yards & Loading Bays",
-    ],
-
-    images: buildRealImages([
-      { src: il1, alt: "Industrial Light 1" },
-      { src: il2, alt: "Industrial Light 2" },
-      { src: il3, alt: "Industrial Light 3" },
-      { src: il4, alt: "Industrial Light 4" },
-      { src: il5, alt: "Industrial Light 5" },
-      { src: il6, alt: "Industrial Light 6" },
-      { src: il7, alt: "Industrial Light 7" },
-      { src: il8, alt: "Industrial Light 8" },
-    ]),
-  },
-
-  /* ─── 10  Table & Floor Lamp ──────────────────────────────── */
-  {
-    id: 10,
-    name: "Table & Floor Lamp",
-    category: "Portable Luminaires",
-    tagline: "Intimate Glow",
-    description:
-      "Brighten up your living spaces with ABC Lights’ exquisite collection of Table and Floor Lamps. Designed for modern homes, our lamps are the ideal blend of timeless elegance, practical lighting, and distinctive design. From cozy bedside tables to spacious living rooms, find the perfect piece that complements your décor and enhances your everyday moments.",
-    highlights: [
-      "Elegant Designs for Every Interior",
-      "Soft, Ambient Illumination",
-      "Easy to Position & Use",
-      "Premium Build & Materials",
-    ],
-    spaces: [
-      "Bedrooms & Bedside Tables",
-      "Living Rooms & Lounges",
-      "Home Offices & Study Areas",
-      "Reading Corners & Hallways",
-    ],
-
-    images: buildRealImages([
-      { src: tfl1, alt: "Table & Floor Lamp 1" },
-      { src: tfl2, alt: "Table & Floor Lamp 2" },
-      { src: tfl3, alt: "Table & Floor Lamp 3" },
-      { src: tfl4, alt: "Table & Floor Lamp 4" },
-      { src: tfl5, alt: "Table & Floor Lamp 5" },
-      { src: tfl6, alt: "Table & Floor Lamp 6" },
-      { src: tfl7, alt: "Table & Floor Lamp 7" },
-      { src: tfl8, alt: "Table & Floor Lamp 8" },
-    ]),
-  },
-
-  /* ─── 11  Neo Classic Chandeliers ─────────────────────────── */
-  {
-    id: 11,
-    name: "Neo Classic Chandeliers",
-    category: "Heritage Collection",
-    tagline: "Heritage Reimagined",
-    description:
-      "Bring a touch of timeless luxury and refined artistry into your interiors with ABC Lights’ Neo Classic Chandeliers. These stunning centerpieces fuse classic design elements with modern craftsmanship, delivering unmatched elegance that transforms any room into a statement of sophistication.",
-    highlights: [
-      "Elegant Classic Designs with Modern Details",
-      "Premium Materials & Artisan Craftsmanship",
-      "Brilliant Illumination",
-      "Versatile Sizes & Styles",
-    ],
-    spaces: [
-      "Grand Foyers & Entrances",
-      "Dining Rooms & Living Spaces",
-      "Hotel Lobbies & Banquet Halls",
-      "Traditional & Transitional Interiors",
-    ],
-
-    images: buildRealImages([
-      { src: ncc1, alt: "Neo Classic Chandeliers 1" },
-      { src: ncc2, alt: "Neo Classic Chandeliers 2" },
-      { src: ncc3, alt: "Neo Classic Chandeliers 3" },
-      { src: ncc4, alt: "Neo Classic Chandeliers 4" },
-      { src: ncc5, alt: "Neo Classic Chandeliers 5" },
-      { src: ncc6, alt: "Neo Classic Chandeliers 6" },
-      { src: ncc7, alt: "Neo Classic Chandeliers 7" },
-      { src: ncc8, alt: "Neo Classic Chandeliers 8" },
-    ]),
-  },
-
-  /* ─── 12  Architectural Light ─────────────────────────────── */
-  {
-    id: 12,
-    name: "Architectural Light",
-    category: "Architectural",
-    tagline: "Integrated Precision",
-    description:
-      "Upgrade your interiors with the perfect combination of style, functionality, and energy efficiency through ABC Lights’ premium LED Spot and Panel Lights. Designed to deliver flawless illumination for residential, commercial, or office settings, these fixtures are your go-to solution for modern lighting that performs beautifully every day. ",
-    highlights: [
-      "Focused Illumination with LED Spot Lights",
-      "Smooth, Even Lighting with LED Panels",
-      "Sleek, Versatile Designs",
-      "Long-Lasting & Low Maintenance",
-    ],
-    spaces: [
-      "Residential Spaces",
-      "Offices & Workspaces",
-      "Retail & Commercial Areas",
-      "Hospitals, Schools & Meeting Rooms",
-    ],
-
-    images: buildRealImages([
-      { src: al1, alt: "Architectural Light 1" },
-      { src: al2, alt: "Architectural Light 2" },
-      { src: al3, alt: "Architectural Light 3" },
-      { src: al4, alt: "Architectural Light 4" },
-      { src: al5, alt: "Architectural Light 5" },
-      { src: al6, alt: "Architectural Light 6" },
-      { src: al7, alt: "Architectural Light 7" },
-      { src: al8, alt: "Architectural Light 8" },
     ]),
   },
 ];

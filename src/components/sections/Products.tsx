@@ -21,10 +21,6 @@ import imgDesignerChand from "@/assets/designer-chandeliers.webp";
 import imgOutdoorLights from "@/assets/outdoor-lights.webp";
 import imgWallLights from "@/assets/wall-lights.webp";
 import imgPoleLights from "@/assets/pole-lights.webp";
-import imgIndustrialLights from "@/assets/industrial-lights.webp";
-import imgTableFloor from "@/assets/table-floor-lamp.webp";
-import imgNeoClassic from "@/assets/meo-classic-chandeliers.webp";
-import imgArchitectural from "@/assets/architectural-lights.webp";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -136,54 +132,6 @@ export const TESTIMONIALS: Testimonial[] = [
     hue: 210,
     initials: "PO",
     img: imgPoleLights,
-  },
-  {
-    id: 9,
-    name: "Industrial Lights",
-    role: "",
-    company: "",
-    excerpt: "Raw Sophistication",
-    quote:
-      "Where function meets character. Our industrial lighting collection brings bold, stripped-back aesthetics to warehouses, studios, and modern commercial interiors.",
-    hue: 25,
-    initials: "IL",
-    img: imgIndustrialLights,
-  },
-  {
-    id: 10,
-    name: "Table & Floor Lamp",
-    role: "",
-    company: "",
-    excerpt: "Intimate Glow",
-    quote:
-      "Portable elegance for every corner. Our table and floor lamps bring focused warmth and sculptural beauty to living rooms, studies, and hospitality environments.",
-    hue: 32,
-    initials: "TF",
-    img: imgTableFloor,
-  },
-  {
-    id: 11,
-    name: "Neo Classic Chandeliers",
-    role: "",
-    company: "",
-    excerpt: "Heritage Reimagined",
-    quote:
-      "A dialogue between tradition and contemporary design. Our Neo Classic Chandeliers reinterpret timeless crystal craftsmanship through a refined modern lens for today's grand interiors.",
-    hue: 50,
-    initials: "NC",
-    img: imgNeoClassic,
-  },
-  {
-    id: 12,
-    name: "Architectural Light",
-    role: "",
-    company: "",
-    excerpt: "Integrated Precision",
-    quote:
-      "Designed to disappear into the structure while defining the space. Our architectural lighting solutions work in harmony with the building fabric, producing seamless, breathtaking effects.",
-    hue: 190,
-    initials: "AL",
-    img: imgArchitectural,
   },
 ];
 
