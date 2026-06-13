@@ -7,7 +7,7 @@
    Notes     : Handles graceful exit animations if JS routing allows.
                Images are lazy-loaded and revealed with clipPath wipe animations.
                Layout mirrors the Explore Collections masonry grid.
-               Each of the 12 products has unique content and 8 images
+               Each of the 8 products has unique content and 8 images
                with a distinct masonry layout.
    ============================================================= */
 
