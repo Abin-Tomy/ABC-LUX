@@ -1,5 +1,5 @@
-import { useState, ImgHTMLAttributes, useEffect } from "react";
-import { twMerge } from "tailwind-merge";
+import { useState, ImgHTMLAttributes } from "react";
+
 
 interface LazyImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   // If true, forces loading="eager" instead of lazy
@@ -29,11 +29,11 @@ export function LazyImage({ className, priority, loading, decoding, ...props }: 
         setIsLoaded(true);
         if (props.onLoad) props.onLoad(e);
       }}
-      className={twMerge(
+      className={[
         "transition-all duration-700 ease-out",
         isLoaded ? "opacity-100 blur-none" : "opacity-0 blur-sm scale-[1.02]",
         className
-      )}
+      ].filter(Boolean).join(" ")}
       {...props}
     />
   );

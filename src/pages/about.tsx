@@ -8,8 +8,8 @@
    Notes     : Separate from the homepage About section which remains untouched.
    ============================================================= */
 
-import { useEffect, useRef, useState, useCallback } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { getAnimationContext } from "@/utils/gsap-setup";
 import { useLenis } from "@/hooks/useLenis";
 import { Nav } from "@/components/sections/Nav";
@@ -101,10 +101,10 @@ function useScrollReveal(): React.RefObject<HTMLDivElement | null> {
 
 /* ── Statistics Data ── */
 const STATS = [
-  { value: 7, suffix: "+", label: "Years of\nExperience", icon: "🏆" },
-  { value: 2000, suffix: "+", label: "Products\nAvailable", icon: "💡" },
-  { value: 12000, suffix: "+", label: "Projects\nCompleted", icon: "🏗️" },
-  { value: 100000, suffix: "+", label: "Happy\nCustomers", icon: "😊" },
+  { label: "Years of\nExperience" },
+  { label: "Products\nAvailable" },
+  { label: "Projects\nCompleted" },
+  { label: "Happy\nCustomers" },
 ];
 
 /* ── Differentiators Data ── */
@@ -165,7 +165,6 @@ const DIFFERENTIATORS = [
  */
 export default function AboutPage() {
   useLenis();
-  const navigate = useNavigate();
 
   const heroRef = useScrollReveal();
   const storyRef = useScrollReveal();
