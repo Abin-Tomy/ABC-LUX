@@ -200,25 +200,25 @@ import cm8 from "../assets/CEILING MOUNTED/CL8.webp";
 
 
 export const PRODUCT_CATALOG: ProductData[] = [
-  /* ─── 1  LED Strip Lights ─────────────────────────────────── */
+  /* ─── 1  Wall Lights ─────────────────────────────────── */
   {
     id: 1,
     name: "Wall Lights",
-    category: "Linear Lighting",
-    tagline: "Professional Illumination",
+    category: "Wall Lighting",
+    tagline: "Elegant Wall Illuminations",
     description:
-      "Bring your imagination to life with ABC Lights’ premium LED Strip Lights — the ultimate solution for stylish, energy-efficient, and flexible illumination. Whether you want to create a cozy ambiance in your living room, vibrant accent lighting in your bedroom, or modern backlighting for your ceilings and furniture, our LED strip lights deliver endless possibilities. ",
+      "Enhance the ambiance of any room with ABC Lights' premium Wall Lights. Designed to provide both functional lighting and a decorative touch, our wall fixtures seamlessly blend with modern and classic interiors. Illuminate hallways, frame your bed, or create a warm, inviting atmosphere in your living areas with these stunning pieces.",
     highlights: [
-      "Ultra-Bright & Energy Efficient",
-      "Flexible & Easy to Install",
-      "Customizable Colors & Modes",
-      "Durable & Long-lasting",
+      "Sleek & Modern Designs",
+      "Warm & Inviting Glow",
+      "Space-Saving Illumination",
+      "Easy to Install & Maintain",
     ],
     spaces: [
+      "Hallways & Corridors",
       "Bedrooms & Living Rooms",
-      "Kitchens & Cabinets",
-      "Entertainment Areas",
-      "Commercial & Decorative Installations",
+      "Bathroom Vanities",
+      "Exterior Patios & Walkways",
     ],
 
     images: buildRealImages([
@@ -237,21 +237,21 @@ export const PRODUCT_CATALOG: ProductData[] = [
   {
     id: 2,
     name: "Table & Floor Lamps",
-    category: "Table & Floor Lamps",
-    tagline: "Modular Flexibility",
+    category: "Freestanding Lamps",
+    tagline: "Versatile & Stylish Illumination",
     description:
-      "Discover next-generation lighting design with ABC Lights' Magnetic Profile Lights — the smart, flexible solution that combines modern aesthetics with endless customization. Whether it's for your home, office, retail, or gallery, these modular lights give you the freedom to design and adjust your lighting just the way you want.",
+      "Add flexibility and charm to your lighting design with our collection of Table & Floor Lamps. Perfect for reading nooks, bedside tables, or as a statement piece in your living room, these lamps offer portable and stylish illumination. Choose from a variety of contemporary and classic designs to match your unique decor.",
     highlights: [
-      "Seamless Magnetic System",
-      "Modular & Customizable",
-      "Efficient & Reliable Performance",
-      "Sleek, Minimalist Design",
+      "Portable & Versatile",
+      "Targeted Task Lighting",
+      "Statement-Making Designs",
+      "Adjustable Brightness Options",
     ],
     spaces: [
-      "Residential Interiors",
-      "Retail Stores & Showrooms",
-      "Offices & Workspaces",
-      "Gallaries & Hospitality Spaces",
+      "Living Rooms & Dens",
+      "Bedrooms & Nurseries",
+      "Home Offices & Studies",
+      "Reading Nooks",
     ],
 
     images: buildRealImages([
@@ -295,25 +295,25 @@ export const PRODUCT_CATALOG: ProductData[] = [
     ],
   },
 
-  /* ─── 3  Modern Pendant Light ─────────────────────────────── */
+  /* ─── 3  Sculptures ─────────────────────────────── */
   {
     id: 3,
     name: "Sculptures",
-    category: "Pendants",
-    tagline: "Artistic Elegance",
+    category: "Sculptural Art",
+    tagline: "Artistic Focal Points",
     description:
-      "Add a touch of modern sophistication to your interiors with ABC Lights’ exclusive collection of Modern Pendant Lights. Designed to captivate and inspire, our pendant lights effortlessly combine artistic form with functional brilliance, turning ordinary spaces into extraordinary experiences. ",
+      "Elevate your interior design with our striking collection of Sculptures. These exquisite art pieces are crafted to inspire and captivate, serving as the perfect centerpiece for any room. Whether you prefer modern minimalism or intricate classic designs, our sculptures add a profound sense of sophistication and personality to your space.",
     highlights: [
-      "Contemporary Designs for Every Taste",
-      "Premium Craftsmanship",
-      "Warm, Inviting Glow",
-      "Height-Adjustable & Versatile",
+      "Unique Artistic Expressions",
+      "Premium Quality Materials",
+      "Captivating Focal Points",
+      "Diverse Styles & Finishes",
     ],
     spaces: [
-      "Dining Rooms & Kitchens",
-      "Living Areas & Bedrooms",
-      "Entryways & Stairwells",
-      "Commercial Spaces",
+      "Living Room Mantels",
+      "Entryway Consoles",
+      "Corporate Lobbies",
+      "Art Galleries & Displays",
     ],
 
     images: buildRealImages([
@@ -328,25 +328,25 @@ export const PRODUCT_CATALOG: ProductData[] = [
     ]),
   },
 
-  /* ─── 4  Ceiling Lights ───────────────────────────────────── */
+  /* ─── 4  Modern Pendant Lights ───────────────────────────────────── */
   {
     id: 4,
     name: "Modern Pendant Lights",
-    category: "Ambient Lighting",
-    tagline: "Ambient Sophistication",
+    category: "Pendant Lighting",
+    tagline: "Contemporary Suspended Elegance",
     description:
-      "Discover the perfect blend of style and functionality with ABC Lights’ versatile range of Ceiling Lights. Designed to suit every interior, our ceiling fixtures provide brilliant, glare-free illumination while adding a touch of modern elegance to your living spaces.",
+      "Redefine your ceilings with the sleek and stylish Modern Pendant Lights from ABC Lights. Hanging gracefully from above, these fixtures provide excellent task and ambient lighting while acting as a modern work of art. Perfect for kitchen islands, dining tables, or double-height living areas, they bring a sophisticated contemporary edge.",
     highlights: [
-      "Contemporary Designs for Every Room",
-      "Soft, Ambient Illumination",
-      "Space-Saving & Practical",
-      "Energy-Efficient LED Technology",
+      "Eye-Catching Modern Aesthetics",
+      "Adjustable Hanging Heights",
+      "Focused Task Illumination",
+      "High-Quality Finishes",
     ],
     spaces: [
-      "Bedrooms & Living Rooms",
-      "Dining Rooms & Kitchens",
-      "Hallways & Entrances",
-      "Commercial Interiors",
+      "Kitchen Islands & Counters",
+      "Dining Room Tables",
+      "Stairwells & Foyers",
+      "Trendy Cafes & Restaurants",
     ],
 
     images: buildRealImages([
@@ -365,21 +365,21 @@ export const PRODUCT_CATALOG: ProductData[] = [
   {
     id: 5,
     name: "Home Decor",
-    category: "Decor",
-    tagline: "Artistic Embellishments",
+    category: "Home Accessories",
+    tagline: "Curated Accents for Your Space",
     description:
-      "At ABC Lights, we believe every space deserves a masterpiece that’s as unique as you are. Our Home Decor collection includes elegant Wall Art and striking Ornaments that transform your ideas into breathtaking, one-of-a-kind installations that elevate luxury homes, hotels, and statement spaces with unmatched elegance and individuality. ",
+      "Complete your interior vision with ABC Lights' curated Home Decor collection. From captivating wall art that transforms blank spaces to delicate ornaments that add personality to your shelves, our decor pieces are carefully selected to complement any aesthetic. Make every corner of your home feel thoughtfully designed.",
     highlights: [
-      "Designed Just for You",
-      "Perfectly Tailored for Any Space",
-      "Endless Material & Finish Options",
-      "Expert Craftsmanship",
+      "Handpicked Artistic Pieces",
+      "Complements Any Interior Style",
+      "High-Quality Craftsmanship",
+      "Distinctive & Elegant Textures",
     ],
     spaces: [
-      "Hotel Lobbies & Reception Areas",
-      "Residential Living & Dining Rooms",
-      "Corporate & Commercial Spaces",
-      "Event Venues & Showpieces",
+      "Living Room Walls & Shelves",
+      "Bedroom Nightstands",
+      "Office Desks & Bookcases",
+      "Console Tables",
     ],
 
     images: buildRealImages([
@@ -427,21 +427,21 @@ export const PRODUCT_CATALOG: ProductData[] = [
   {
     id: 6,
     name: "Classic",
-    category: "Classic Lighting",
-    tagline: "Timeless Elegance",
+    category: "Traditional Lighting",
+    tagline: "Timeless Elegance & Charm",
     description:
-      "Transform your spaces into inviting, functional, and secure areas with ABC Lights’ curated range of Classic Lights. Designed to withstand the test of time while enhancing the beauty of your home or commercial property, our classic lighting solutions bring together timeless charm, style, and efficiency.",
+      "Bring a sense of enduring beauty to your home with our Classic lighting collection. Featuring ornate details, rich finishes, and traditional silhouettes, these fixtures evoke a sense of history and grace. Perfect for traditional, transitional, or vintage-inspired spaces that require a touch of sophisticated nostalgia.",
     highlights: [
-      "Versatile Designs for Every Space",
-      "Enhanced Ambience & Charm",
-      "Enduring & Durable",
-      "Flexible Installation Options",
+      "Ornate Traditional Details",
+      "Rich & Durable Finishes",
+      "Warm, Nostalgic Glow",
+      "Timeless Silhouettes",
     ],
     spaces: [
-      "Entrances & Facades",
-      "Living Rooms",
-      "Patios & Decks",
-      "Gardens & Landscapes",
+      "Formal Dining Rooms",
+      "Grand Entryways",
+      "Traditional Living Spaces",
+      "Heritage Properties",
     ],
 
     images: buildRealImages([
@@ -460,21 +460,21 @@ export const PRODUCT_CATALOG: ProductData[] = [
   {
     id: 7,
     name: "Chandeliers",
-    category: "Chandeliers",
-    tagline: "Sculpted Illumination",
+    category: "Statement Lighting",
+    tagline: "Grand & Luxurious Illumination",
     description:
-      "Add layers of warmth, style, and functionality to your interiors with ABC Lights’ stunning collection of Chandeliers. Perfect for accentuating architectural features, creating cozy nooks, or adding a grand centerpiece, our chandeliers combine beautiful design with exceptional performance.",
+      "Make a breathtaking statement with ABC Lights' luxurious Chandeliers. Designed to be the crown jewel of any room, our chandeliers combine shimmering crystals, elegant metals, and masterful craftsmanship to create spectacular light displays. Elevate your grandest spaces with these dazzling centerpieces.",
     highlights: [
-      "Designer Styles for Every Space",
-      "Ambient & Accent Lighting",
-      "Grand Elegance",
-      "Premium Materials & Craftsmanship",
+      "Dazzling Centerpiece Designs",
+      "Intricate Craftsmanship",
+      "Superior Ambient Lighting",
+      "Luxurious Materials",
     ],
     spaces: [
-      "Living Rooms & Bedrooms",
-      "Hallways & Staircases",
-      "Grand Entrances",
-      "Hospitality & Commercial Spaces",
+      "Grand Foyers & Staircases",
+      "Formal Dining Rooms",
+      "Luxury Master Bedrooms",
+      "Ballrooms & Banquet Halls",
     ],
 
     images: buildRealImages([
@@ -493,21 +493,21 @@ export const PRODUCT_CATALOG: ProductData[] = [
   {
     id: 8,
     name: "Ceiling Mounted",
-    category: "Ceiling Mounted",
-    tagline: "Vertical Presence",
+    category: "Flush Mounts",
+    tagline: "Sleek Overhead Brilliance",
     description:
-      "Discover the perfect way to brighten any room with ABC Lights’ stylish range of Ceiling Mounted Lights. Combining practical illumination with beautiful design, our lighting solutions enhance visibility while adding timeless charm to your spaces.",
+      "Maximize your room's potential with our low-profile Ceiling Mounted lights. Ideal for rooms with lower ceilings or areas where you need unobtrusive yet powerful illumination, these flush and semi-flush fixtures provide a clean, modern look without compromising on brightness or style.",
     highlights: [
-      "Versatile Styles for Every Room",
-      "Reliable, Even Illumination",
-      "Sleek and Modern Designs",
-      "Easy Installation & Maintenance",
+      "Space-Saving Low Profile",
+      "Clean & Unobtrusive Look",
+      "Broad & Even Light Distribution",
+      "Ideal for Low Ceilings",
     ],
     spaces: [
-      "Living Rooms & Bedrooms",
       "Hallways & Corridors",
-      "Kitchens & Dining Areas",
-      "Commercial & Office Spaces",
+      "Bedrooms & Closets",
+      "Kitchens & Pantries",
+      "Bathrooms & Utility Rooms",
     ],
 
     images: buildRealImages([
