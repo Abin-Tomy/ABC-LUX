@@ -13,6 +13,7 @@ import TitleReveal from "../ui/TitleReveal";
 import { usePreloader } from "@/hooks/usePreloader";
 import chandelierUrl from "@/assets/Pendant-Light-33212-25-D800xH780-Gold.webp";
 import wBg from "@/assets/w-bg.webp";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 /**
  * Hero
@@ -207,7 +208,7 @@ export function Hero() {
           style={{ willChange: "transform", transformOrigin: "50% 0%" }}
         >
           {/* Extended CSS Chain — removed */}
-          <img
+          <LazyImage 
             src={chandelierUrl}
             alt="ABC LUX Pendant Light"
             fetchPriority="high"

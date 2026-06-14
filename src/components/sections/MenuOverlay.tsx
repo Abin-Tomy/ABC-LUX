@@ -10,6 +10,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import logoUrl from "@/assets/abc-lux-logo.webp";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 const ITEMS = [
   { label: "Home", href: "#top", pos: { left: "35%", top: "15%" } },
@@ -121,7 +122,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         <div className="flex items-start justify-end">
           {/* Brand Logo inside Absolute Container */}
           <div className="lux-menu-logo-wrap absolute left-6 -top-12 z-20 pointer-events-none">
-            <img
+            <LazyImage 
               src={logoUrl}
               alt="ABC LUX"
               width={1920}

@@ -17,6 +17,7 @@ import { Footer } from "@/components/sections/Footer";
 import heroImg from "@/assets/about-hero.png";
 import storyImg from "@/assets/about-story.png";
 import showroomImg from "@/assets/Abc-Lights-Qatar.webp";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 /* ── Counter Animation Hook ── */
 function useCountUp(
@@ -198,7 +199,7 @@ export default function AboutPage() {
         className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden"
       >
         {/* Background Image */}
-        <img
+        <LazyImage 
           src={heroImg}
           alt="ABC Lights luxury showroom interior"
           loading="lazy"
@@ -227,7 +228,7 @@ export default function AboutPage() {
           </h1>
 
           <p className="about-reveal text-[clamp(14px,1.2vw,18px)] leading-relaxed text-[#F5F0E8]/70 max-w-[640px] mx-auto mb-10">
-            Since 2018, ABC Lights has been Qatar's premier destination for
+            Since 2018, ABC LUX has been Qatar's premier destination for
             innovative, high-quality lighting solutions that transform ordinary
             spaces into extraordinary experiences.
           </p>
@@ -278,23 +279,23 @@ export default function AboutPage() {
                 world-class lighting solutions to every corner of Qatar.
               </p>
               <p className="about-reveal text-[clamp(14px,1.1vw,17px)] leading-[1.85] text-[#F5F0E8]/65 mb-6">
-                From intimate residential spaces to grand commercial projects,
-                we've illuminated thousands of spaces with products that marry
-                innovation with elegance. Our curated selection spans
-                architectural, decorative, and functional lighting from the
-                world's most trusted brands.
+                Building on the success of ABC Lights, we introduced ABC LUX to
+                cater to the growing demand for premium, high-end lighting. From
+                intimate residential spaces to grand commercial projects, ABC LUX
+                illuminates spaces with products that marry innovation with elegance.
               </p>
               <p className="about-reveal text-[clamp(14px,1.1vw,17px)] leading-[1.85] text-[#F5F0E8]/65">
-                Today, with over 2,000 products and a team of lighting experts,
-                we continue to push boundaries — transforming the way Qatar
-                experiences light.
+                Today, our curated selection spans architectural, decorative, and
+                functional lighting from the world's most trusted brands. With
+                over 2,000 products, we continue to push boundaries — transforming
+                the way Qatar experiences luxury light.
               </p>
             </div>
 
             {/* Image Column */}
             <div className="order-1 lg:order-2 relative group">
               <div className="about-reveal relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] aspect-[4/5] border border-[#F5F0E8]/10">
-                <img
+                <LazyImage 
                   src={storyImg}
                   alt="ABC Lights team in design studio"
                   loading="lazy"
@@ -484,7 +485,7 @@ export default function AboutPage() {
       <section className="relative py-24 md:py-36 px-6 md:px-16 lg:px-24 overflow-hidden">
         {/* Background image with overlay */}
         <div className="absolute inset-0">
-          <img
+          <LazyImage 
             src={showroomImg}
             alt=""
             loading="lazy"
