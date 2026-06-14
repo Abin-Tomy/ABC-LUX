@@ -33,6 +33,7 @@ import off9 from "../../assets/EXPERIENCE/9-OFF.webp";
 import off10 from "../../assets/EXPERIENCE/10-OFF.webp";
 import off11 from "../../assets/EXPERIENCE/11-OFF.webp";
 import off12 from "../../assets/EXPERIENCE/12-OFF.webp";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 // ─────────────────────────────────────────────
 //  REPLACE THESE PATHS WITH YOUR LOCAL IMAGES
@@ -261,7 +262,7 @@ function ImageLayer({
           </span>
         </div>
       ) : (
-        <img
+        <LazyImage 
           src={src}
           alt={alt}
           width={1536}

@@ -21,6 +21,7 @@ import dc5 from "@/assets/collection-lsl-3.webp";
 import dc6 from "@/assets/collection-mopl-2.webp";
 import dc7 from "@/assets/collection-mpl-1.webp";
 import TitleReveal from "../ui/TitleReveal";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 const SHOWCASE = [
   { img: dc1, title: "Wall Lights" },
@@ -266,10 +267,31 @@ export function Places() {
         const counterWrap = showcase?.querySelector(".lux-showcase-counter") as HTMLElement;
 
         if (titleWrap) {
-          scrollTl.to(titleWrap, { x: "-28vw", ease: "power2.inOut", duration: 55 }, 45);
+          gsap.set(titleWrap, { yPercent: -50 });
+          scrollTl.to(titleWrap, { 
+            x: -100,
+            ease: "power2.inOut", 
+            duration: 55,
+            modifiers: {
+              x: function(x) {
+                const val = parseFloat(x as string);
+                return "calc(" + val + "% - " + (-val * 0.04) + "vw)";
+              }
+            }
+          }, 45);
         }
         if (counterWrap) {
-          scrollTl.to(counterWrap, { x: "8vw", ease: "power2.inOut", duration: 55 }, 45);
+          scrollTl.to(counterWrap, { 
+            x: 100,
+            ease: "power2.inOut", 
+            duration: 55,
+            modifiers: {
+              x: function(x) {
+                const val = parseFloat(x as string);
+                return "calc(" + val + "% + " + (val * 0.04) + "vw)";
+              }
+            }
+          }, 45);
         }
       }
     }, root);
@@ -418,7 +440,7 @@ export function Places() {
                       className="relative w-full h-full aspect-2/3 overflow-hidden"
                       style={{ borderRadius: "250px 250px 0 0" }}
                     >
-                      <img
+                      <LazyImage 
                         src={item.img}
                         alt={item.title}
                         width={4320}
@@ -469,7 +491,7 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "3/4", maxHeight: "280px" }}
                 >
-                  <img
+                  <LazyImage 
                     src={dc1}
                     alt="Designer Chandeliers"
                     width={4320}
@@ -493,7 +515,7 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "16/9" }}
                 >
-                  <img
+                  <LazyImage 
                     src={dc7}
                     alt="Designer Chandeliers"
                     width={4320}
@@ -520,7 +542,7 @@ export function Places() {
                   >
                     <div style={{ position: "absolute", inset: 0, overflow: "hidden", borderRadius: "inherit", backgroundColor: "black" }}>
                       {SHOWCASE.map((item, i) => (
-                        <img
+                        <LazyImage 
                           key={item.img}
                           src={item.img}
                           alt={item.title}
@@ -543,7 +565,7 @@ export function Places() {
                     </div>
 
                     {/* Title */}
-                    <div className="lux-showcase-title-wrap absolute left-8 top-1/2 -translate-y-1/2 md:left-12 whitespace-nowrap z-10">
+                    <div className="lux-showcase-title-wrap absolute left-8 top-1/2 md:left-12 whitespace-nowrap z-10">
                       <h3
                         key={`t-${idx}`}
                         className="lux-showcase-title text-[4vw] md:text-[1.8vw] leading-none text-white"
@@ -642,7 +664,7 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "4/3" }}
                 >
-                  <img
+                  <LazyImage 
                     src={dc2}
                     alt="Designer Chandeliers"
                     width={4320}
@@ -666,7 +688,7 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "16/9", minHeight: "170px" }}
                 >
-                  <img
+                  <LazyImage 
                     src={dc4}
                     alt="Designer Chandeliers"
                     width={4320}
@@ -695,7 +717,7 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "16/9", minHeight: "140px", maxWidth: "320px" }}
                 >
-                  <img
+                  <LazyImage 
                     src={dc3}
                     alt="Designer Chandeliers"
                     width={4320}
@@ -724,7 +746,7 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "4/3", minHeight: "200px" }}
                 >
-                  <img
+                  <LazyImage 
                     src={dc5}
                     alt="Designer Chandeliers"
                     width={4320}

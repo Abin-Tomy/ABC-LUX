@@ -12,6 +12,7 @@ import { getAnimationContext } from "@/utils/gsap-setup";
 import aboutImg from "@/assets/Abc-Lights-Qatar.webp";
 
 import TitleReveal from "../ui/TitleReveal";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 /**
  * About
@@ -75,7 +76,7 @@ export function About() {
               <div className="reveal-text inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 rounded-full border border-[#C9A962]/30 bg-[#C9A962]/10 mb-5 md:mb-8 mx-auto lg:mx-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#C9A962]" />
                 <span className="text-[10px] md:text-[11px] uppercase tracking-[0.22em] font-medium text-[#C9A962]">
-                  About ABC Lights
+                  About ABC LUX
                 </span>
               </div>
 
@@ -99,7 +100,7 @@ export function About() {
               </h2>
 
               <p className="reveal-text text-[clamp(15px,1.2vw,18px)] leading-relaxed text-[#F5F0E8]/70 max-w-[640px] mx-auto lg:mx-0">
-                ABC Lights, part of ABC Group Qatar, has been serving customers in Qatar since 2018.
+                ABC LUX a luxury division of ABC Lights, part of ABC Group Qatar, has been serving customers in Qatar since 2018.
                 We offer high-quality, modern lighting solutions at competitive prices. Our products
                 are innovative, stylish, and designed to meet various needs. With a focus on
                 customer satisfaction, we provide full support and assistance, ensuring the best
@@ -170,7 +171,7 @@ export function About() {
           {/* Right Column: Brand Image & Stats */}
           <div className="relative group w-full mt-12 lg:mt-0 flex justify-center lg:justify-end order-2">
             <div className="reveal-text relative overflow-hidden rounded-[2.5rem] md:rounded-[3rem] aspect-4/5 md:aspect-square lg:aspect-4/5 border border-[#F5F0E8]/10 w-full max-w-[480px]">
-              <img
+              <LazyImage 
                 src={aboutImg}
                 alt="ABC Lights Qatar Showroom"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"

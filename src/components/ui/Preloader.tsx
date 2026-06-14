@@ -10,6 +10,7 @@
 import { useEffect, useState, useRef } from "react";
 import abcLuxLogo from "../../assets/abc-lux-logo.webp";
 import { usePreloader } from "../../hooks/usePreloader";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 // Static configuration for the preloader animation timing and shape
 const BAR_COUNT = 4;
@@ -102,7 +103,7 @@ export default function Preloader({ children }: PreloaderProps) {
           {/* Logo - centered over entire overlay */}
           {phase === "splash" && (
             <div className="absolute inset-0 flex items-center justify-center z-[10000] pointer-events-none">
-              <img
+              <LazyImage 
                 src={abcLuxLogo}
                 alt="ABC LUX"
                 width={1920}

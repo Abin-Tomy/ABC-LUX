@@ -16,6 +16,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import imgAjmal from "@/assets/ajmal-roshan-k.webp";
 import imgUmer from "@/assets/umer-hayat.webp";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 const BG = "#D3C8B6"; // warm sand
@@ -190,7 +191,7 @@ function Avatar({
       }}
     >
       {img ? (
-        <img
+        <LazyImage 
           src={img}
           alt={initial}
           width={75}

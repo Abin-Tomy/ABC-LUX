@@ -13,6 +13,7 @@ import { gsap } from "@/utils/gsap-setup";
 import { MenuOverlay } from "./MenuOverlay";
 import logoWhite from "@/assets/ABC-LUX-Logo_White.webp";
 import logoBlack from "@/assets/ABC-LUX-Logo_Black.webp";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 // Sections that have a dark background — logo should be white here
 const DARK_SECTIONS = ["hero-curve", "about", "collections", "contact", "footer"];
@@ -127,7 +128,7 @@ export function Nav() {
             aria-label="ABC LUX — Home"
             className="pointer-events-auto inline-flex items-center transition-opacity hover:opacity-80"
           >
-            <img
+            <LazyImage 
               src={actualLogoDark ? logoBlack : logoWhite}
               alt="ABC LUX"
               width={600}
