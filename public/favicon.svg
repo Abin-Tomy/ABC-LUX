@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" viewBox="0 0 512 512" width="512" height="512"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><defs>
+    <style>
+      .st0 {
+        fill: #fff;
+      }
+    </style>
+  </defs><rect width="512" height="512" rx="55.03" ry="55.03"></rect><g>
+    <path class="st0" d="M258.29,87.49h-4.59c-81.58,0-147.71,66.15-147.71,147.75v168.55c0,4.82,3.91,8.73,8.73,8.73h282.54c4.82,0,8.73-3.91,8.73-8.73v-168.55c0-81.58-66.12-147.75-147.71-147.75h0ZM116.95,235.23c0-75.42,61.34-136.79,136.75-136.79h4.59c75.42,0,136.75,61.37,136.75,136.79l.08,166.34-278.17.08v-166.4h0Z"></path>
+    <path class="st0" d="M256.4,362.52h-.78c0-55.02-44.59-99.61-99.61-99.61v-.78c55.02,0,99.61-44.59,99.61-99.61h.78c0,55.02,44.59,99.61,99.61,99.61v.78c-55.02,0-99.61,44.59-99.61,99.61Z"></path>
+  </g></svg>
