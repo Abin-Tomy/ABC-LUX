@@ -15,56 +15,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useCallback, useState } from "react";
 import { gsap, allowAnimationsFor } from "@/utils/gsap-setup";
 import { PRODUCT_CATALOG } from "@/data/product-data";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 // Static color definitions for consistent theming across dynamic products
 const BG = "#D3C8B6";
 const FG = "#1A1819";
 const GOLD = "#C9A962";
-
-/* ── Lazy Image Component ───────────────────────────────────────────────────
-   Uses native loading="lazy" for browser-level deferred loading.
-   Shows a skeleton shimmer until the image has fully decoded.
-   ─────────────────────────────────────────────────────────────────────────── */
-
-function LazyImage({ src, alt }: { src: string; alt: string }) {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  return (
-    <>
-      {/* Skeleton placeholder — visible until image loads */}
-      {!isLoaded && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: "inherit",
-            background:
-              "linear-gradient(90deg, rgba(26,24,25,0.06) 25%, rgba(201,169,98,0.08) 50%, rgba(26,24,25,0.06) 75%)",
-            backgroundSize: "200% 100%",
-            animation: "shimmer 1.8s ease-in-out infinite",
-          }}
-        />
-      )}
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        onLoad={() => setIsLoaded(true)}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          display: "block",
-          transition: "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease",
-          opacity: isLoaded ? 1 : 0,
-        }}
-      />
-    </>
-  );
-}
 
 /**
  * ProductDetail
@@ -281,10 +237,6 @@ export default function ProductDetail() {
       </div>
       {/* Shimmer keyframe for skeleton placeholders */}
       <style>{`
-        @keyframes shimmer {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
         @keyframes drawPremiumLine {
           to { stroke-dashoffset: 0; }
         }
@@ -558,7 +510,7 @@ export default function ProductDetail() {
                   cursor: "zoom-in",
                 }}
               >
-                <LazyImage src={img.src} alt={img.alt} />
+                <LazyImage src={img.src} alt={img.alt} className="absolute inset-0 w-full h-full object-cover" />
 
                 {/* Subtle inner border for premium frame effect */}
                 <div

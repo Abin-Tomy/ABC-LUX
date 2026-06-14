@@ -215,6 +215,12 @@ export function Blogs() {
           width: calc(100% - 28px);
           white-space: normal;
           line-height: 1.35;
+          transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .blg-card:hover .blg-slide-label {
+          opacity: 1;
+          transform: translateY(0);
         }
 
         /* Dark bottom gradient for label legibility */

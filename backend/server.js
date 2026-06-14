@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { Resend } from 'resend';
 import sanitizeHtml from 'sanitize-html';
 import * as emailValidator from 'email-validator';
+import rateLimit from 'express-rate-limit';
 
 // Load environment variables from the root .env file
 dotenv.config();
@@ -11,8 +12,22 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors()); // Allow frontend requests
+// Configure allowed origins for CORS
+const allowedOrigins = [
+  'http://localhost:5173',
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+})); // Allow specific frontend requests
 app.use(express.json()); // Parse JSON payloads
 
 // Initialize Resend with the API key from environment variables
@@ -23,8 +38,17 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
+// Rate limiter for contact endpoint to prevent abuse and quota exhaustion
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 5 requests per 15 minutes
+  message: { error: 'Too many contact requests from this IP, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // Contact form endpoint
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', contactLimiter, async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;
 
