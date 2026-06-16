@@ -195,7 +195,7 @@ export function Hero() {
           </span>
           <TitleReveal
             text="Space"
-            className="-mt-[1.5vw] block translate-x-[12vw] text-[14vw] md:text-[12vw] font-medium lg:text-[11vw] justify-center"
+            className="mt-[2vw] md:-mt-[1.5vw] block translate-x-[12vw] text-[14vw] md:text-[12vw] font-medium lg:text-[11vw] justify-center"
             waitForPreloader={false}
           />
         </h1>
