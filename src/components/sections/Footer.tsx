@@ -122,6 +122,11 @@ export function Footer() {
             </ul>
           </div>
         </div>
+
+        {/* Rights / Copyright */}
+        <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-[#F1EBDD]/60">
+          <p>&copy; {new Date().getFullYear()} ABC LUX. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   );

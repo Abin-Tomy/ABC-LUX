@@ -15,7 +15,7 @@ import { useLenis } from "@/hooks/useLenis";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/sections/Footer";
 import heroImg from "@/assets/about-hero.png";
-import storyImg from "@/assets/about-story.png";
+import storyImg from "@/assets/About_replacement_image.png";
 import showroomImg from "@/assets/Abc-Lights-Qatar.webp";
 import { LazyImage } from "@/components/ui/LazyImage";
 
