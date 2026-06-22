@@ -85,8 +85,8 @@ export function Footer() {
           <div>
             <div className="lux-eyebrow mb-6 text-muted-foreground">Contact</div>
             <ul className="space-y-2 font-serif text-lg text-[#F1EBDD]">
-              <li>(974) 4468 3471 / 5013 7888</li>
-              <li>info@abclights.qa</li>
+              <li>(974) 5116 3300</li>
+              <li>info@abclux.qa</li>
             </ul>
           </div>
 

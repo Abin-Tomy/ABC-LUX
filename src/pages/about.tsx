@@ -609,11 +609,8 @@ export default function AboutPage() {
               <h4 className="text-[11px] uppercase tracking-[0.22em] font-medium text-[#C9A962]/70 mb-3">
                 Call Us
               </h4>
-              <a href="tel:+97450137888" className="font-serif text-base text-[#F5F0E8]/80 hover:text-[#C9A962] transition-colors block mb-1">
-                +974 5013 7888
-              </a>
-              <a href="tel:+97444683471" className="font-serif text-base text-[#F5F0E8]/80 hover:text-[#C9A962] transition-colors block">
-                +974 4468 3471
+              <a href="tel:+97451163300" className="font-serif text-base text-[#F5F0E8]/80 hover:text-[#C9A962] transition-colors block">
+                +974 5116 3300
               </a>
             </div>
 
@@ -627,8 +624,8 @@ export default function AboutPage() {
               <h4 className="text-[11px] uppercase tracking-[0.22em] font-medium text-[#C9A962]/70 mb-3">
                 Email Us
               </h4>
-              <a href="mailto:info@abclights.qa" className="font-serif text-base text-[#F5F0E8]/80 hover:text-[#C9A962] transition-colors block">
-                info@abclights.qa
+              <a href="mailto:info@abclux.qa" className="font-serif text-base text-[#F5F0E8]/80 hover:text-[#C9A962] transition-colors block">
+                info@abclux.qa
               </a>
             </div>
 

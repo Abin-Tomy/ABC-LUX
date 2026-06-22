@@ -182,10 +182,10 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
               Direct Line
             </p>
             <a
-              href="tel:+97450137888"
+              href="tel:+97451163300"
               className="font-serif mt-1 block text-base text-white/80 transition-colors hover:text-white"
             >
-              +974 5013 7888
+              +974 5116 3300
             </a>
           </div>
           <div>
@@ -193,10 +193,10 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
               General Inquiries
             </p>
             <a
-              href="mailto:info@abclights.qa"
+              href="mailto:info@abclux.qa"
               className="font-serif mt-1 block text-base text-white/80 transition-colors hover:text-white"
             >
-              info@abclights.qa
+              info@abclux.qa
             </a>
           </div>
         </div>
