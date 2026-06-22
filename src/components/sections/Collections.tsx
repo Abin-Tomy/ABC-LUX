@@ -15,7 +15,6 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import dc1 from "@/assets/Designer-Chandeliers-2.webp";
 import dc2 from "@/assets/AL_1.webp";
-import dc3 from "@/assets/collection-cl-3.webp";
 import dc4 from "@/assets/IL_1.webp";
 import dc5 from "@/assets/collection-lsl-3.webp";
 import dc6 from "@/assets/collection-mopl-2.webp";
@@ -26,7 +25,6 @@ import { LazyImage } from "@/components/ui/LazyImage";
 const SHOWCASE = [
   { img: dc1, title: "Wall Lights" },
   { img: dc2, title: "Table & Floor Lamps" },
-  { img: dc3, title: "Sculptures" },
   { img: dc4, title: "Modern Pendant Lights" },
   { img: dc5, title: "Home Decor" },
   { img: dc6, title: "Classic" },
@@ -713,7 +711,7 @@ export function Places() {
                   marginLeft: "-120px",
                 }}
               >
-                <div
+                {/* <div
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "16/9", minHeight: "140px", maxWidth: "320px" }}
                 >
@@ -726,7 +724,7 @@ export function Places() {
                     decoding="async"
                     className="lux-place-img absolute inset-0 h-full w-full object-cover"
                   />
-                </div>
+                </div> */}
               </figure>
 
               {/* RIGHT BOTTOM — Large card (cols 10-12, row 3) */}
