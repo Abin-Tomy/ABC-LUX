@@ -115,7 +115,16 @@ const DIFFERENTIATORS = [
     description:
       "Explore a wide range of lighting solutions designed for both homes & businesses with style & quality.",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
         <line x1="4" y1="22" x2="4" y2="15" />
       </svg>
@@ -127,7 +136,16 @@ const DIFFERENTIATORS = [
     description:
       "Get professional assistance to select the perfect lighting that enhances your space with style & efficiency.",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5" />
         <path d="M9 18h6" />
         <path d="M10 22h4" />
@@ -140,7 +158,16 @@ const DIFFERENTIATORS = [
     description:
       "We offer high-quality lighting from trusted brands known for innovation, durability, reliability, & excellent performance.",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
       </svg>
     ),
@@ -151,7 +178,16 @@ const DIFFERENTIATORS = [
     description:
       "Enjoy worry-free lighting with assured quality, dependable support, and durable solutions for every space.",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         <path d="m9 12 2 2 4-4" />
       </svg>
@@ -198,7 +234,7 @@ export default function AboutPage() {
         className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center overflow-hidden"
       >
         {/* Background Image */}
-        <LazyImage 
+        <LazyImage
           src={heroImg}
           alt="ABC Lights luxury showroom interior"
           loading="lazy"
@@ -222,14 +258,12 @@ export default function AboutPage() {
             className="about-reveal text-[clamp(36px,8vw,80px)] font-medium leading-[1.05] tracking-[-0.02em] mb-6"
             style={{ fontFamily: "'Runalto', serif" }}
           >
-            Illuminating Spaces,{" "}
-            <span className="italic text-[#C9A962]">Inspiring Lives</span>
+            Illuminating Spaces, <span className="italic text-[#C9A962]">Inspiring Lives</span>
           </h1>
 
           <p className="about-reveal text-[clamp(14px,1.2vw,18px)] leading-relaxed text-[#F5F0E8]/70 max-w-[640px] mx-auto mb-10">
-            Since 2018, ABC LUX has been Qatar's premier destination for
-            innovative, high-quality lighting solutions that transform ordinary
-            spaces into extraordinary experiences.
+            Since 2018, ABC LUX has been Qatar's premier destination for innovative, high-quality
+            lighting solutions that transform ordinary spaces into extraordinary experiences.
           </p>
 
           {/* Scroll indicator */}
@@ -245,10 +279,7 @@ export default function AboutPage() {
       {/* ════════════════════════════════════════════════════
           SECTION 2 — BRAND STORY
           ════════════════════════════════════════════════════ */}
-      <section
-        ref={storyRef}
-        className="relative py-24 md:py-36 lg:py-44 px-6 md:px-16 lg:px-24"
-      >
+      <section ref={storyRef} className="relative py-24 md:py-36 lg:py-44 px-6 md:px-16 lg:px-24">
         {/* Background texture */}
         <div className="absolute inset-0 opacity-[0.03] lux-grain" />
 
@@ -267,34 +298,31 @@ export default function AboutPage() {
                 className="about-reveal text-[clamp(28px,5vw,56px)] font-medium leading-[1.1] tracking-[-0.02em] mb-8"
                 style={{ fontFamily: "'Runalto', serif" }}
               >
-                A Legacy of{" "}
-                <span className="italic text-[#C9A962]">Brilliance</span>
+                A Legacy of <span className="italic text-[#C9A962]">Brilliance</span>
               </h2>
 
               <p className="about-reveal text-[clamp(14px,1.1vw,17px)] leading-[1.85] text-[#F5F0E8]/65 mb-6">
-                ABC Lights, a proud division of ABC Group Qatar, has been a
-                beacon of excellence in the lighting industry since 2018. Our
-                journey began with a simple yet ambitious vision: to bring
-                world-class lighting solutions to every corner of Qatar.
+                ABC Lights, a proud division of ABC Group Qatar, has been a beacon of excellence in
+                the lighting industry since 2018. Our journey began with a simple yet ambitious
+                vision: to bring world-class lighting solutions to every corner of Qatar.
               </p>
               <p className="about-reveal text-[clamp(14px,1.1vw,17px)] leading-[1.85] text-[#F5F0E8]/65 mb-6">
-                Building on the success of ABC Lights, we introduced ABC LUX to
-                cater to the growing demand for premium, high-end lighting. From
-                intimate residential spaces to grand commercial projects, ABC LUX
-                illuminates spaces with products that marry innovation with elegance.
+                Building on the success of ABC Lights, we introduced ABC LUX to cater to the growing
+                demand for premium, high-end lighting. From intimate residential spaces to grand
+                commercial projects, ABC LUX illuminates spaces with products that marry innovation
+                with elegance.
               </p>
               <p className="about-reveal text-[clamp(14px,1.1vw,17px)] leading-[1.85] text-[#F5F0E8]/65">
-                Today, our curated selection spans architectural, decorative, and
-                functional lighting from the world's most trusted brands. With
-                over 2,000 products, we continue to push boundaries — transforming
-                the way Qatar experiences luxury light.
+                Today, our curated selection spans architectural, decorative, and functional
+                lighting from the world's most trusted brands. With over 2,000 products, we continue
+                to push boundaries — transforming the way Qatar experiences luxury light.
               </p>
             </div>
 
             {/* Image Column */}
             <div className="order-1 lg:order-2 relative group">
               <div className="about-reveal relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] aspect-[4/5] border border-[#F5F0E8]/10">
-                <LazyImage 
+                <LazyImage
                   src={storyImg}
                   alt="ABC Lights team in design studio"
                   loading="lazy"
@@ -333,8 +361,7 @@ export default function AboutPage() {
               className="about-reveal text-[clamp(28px,5vw,52px)] font-medium leading-[1.1] tracking-[-0.02em]"
               style={{ fontFamily: "'Runalto', serif" }}
             >
-              Our Mission &{" "}
-              <span className="italic text-[#C9A962]">Vision</span>
+              Our Mission & <span className="italic text-[#C9A962]">Vision</span>
             </h2>
           </div>
 
@@ -347,7 +374,16 @@ export default function AboutPage() {
 
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-14 h-14 rounded-2xl bg-[#C9A962]/10 flex items-center justify-center text-[#C9A962] group-hover:bg-[#C9A962] group-hover:text-[#0E0D0E] transition-colors duration-500">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="26"
+                    height="26"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5" />
                     <path d="M9 18h6" />
                     <path d="M10 22h4" />
@@ -361,15 +397,16 @@ export default function AboutPage() {
                 </h3>
               </div>
               <p className="text-[15px] md:text-base leading-[1.85] text-[#F5F0E8]/55">
-                To provide high-quality, innovative, and affordable lighting
-                solutions that enhance homes and businesses while ensuring
-                customer satisfaction through excellent service and support. We
-                strive to make premium lighting accessible to everyone,
-                combining cutting-edge technology with timeless design
-                principles that stand the test of time.
+                To provide high-quality, innovative, and affordable lighting solutions that enhance
+                homes and businesses while ensuring customer satisfaction through excellent service
+                and support. We strive to make premium lighting accessible to everyone, combining
+                cutting-edge technology with timeless design principles that stand the test of time.
               </p>
               {/* Decorative number */}
-              <div className="absolute bottom-6 right-8 text-[120px] font-bold text-[#F5F0E8]/[0.02] leading-none pointer-events-none select-none" style={{ fontFamily: "Inter, system-ui" }}>
+              <div
+                className="absolute bottom-6 right-8 text-[120px] font-bold text-[#F5F0E8]/[0.02] leading-none pointer-events-none select-none"
+                style={{ fontFamily: "Inter, system-ui" }}
+              >
                 01
               </div>
             </div>
@@ -381,7 +418,16 @@ export default function AboutPage() {
 
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-14 h-14 rounded-2xl bg-[#C9A962]/10 flex items-center justify-center text-[#C9A962] group-hover:bg-[#C9A962] group-hover:text-[#0E0D0E] transition-colors duration-500">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="26"
+                    height="26"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
                     <circle cx="12" cy="12" r="3" />
                   </svg>
@@ -394,15 +440,17 @@ export default function AboutPage() {
                 </h3>
               </div>
               <p className="text-[15px] md:text-base leading-[1.85] text-[#F5F0E8]/55">
-                To be Qatar's leading lighting provider, known for innovation,
-                reliability, and excellence, offering cutting-edge lighting
-                solutions that brighten every space. We envision a future where
-                every environment — from intimate homes to iconic landmarks —
-                is elevated through thoughtful, sustainable illumination that
-                inspires and transforms.
+                To be Qatar's leading lighting provider, known for innovation, reliability, and
+                excellence, offering cutting-edge lighting solutions that brighten every space. We
+                envision a future where every environment — from intimate homes to iconic landmarks
+                — is elevated through thoughtful, sustainable illumination that inspires and
+                transforms.
               </p>
               {/* Decorative number */}
-              <div className="absolute bottom-6 right-8 text-[120px] font-bold text-[#F5F0E8]/[0.02] leading-none pointer-events-none select-none" style={{ fontFamily: "Inter, system-ui" }}>
+              <div
+                className="absolute bottom-6 right-8 text-[120px] font-bold text-[#F5F0E8]/[0.02] leading-none pointer-events-none select-none"
+                style={{ fontFamily: "Inter, system-ui" }}
+              >
                 02
               </div>
             </div>
@@ -413,10 +461,7 @@ export default function AboutPage() {
       {/* ════════════════════════════════════════════════════
           SECTION 4 — WHAT SETS US APART
           ════════════════════════════════════════════════════ */}
-      <section
-        ref={diffRef}
-        className="relative py-24 md:py-36 px-6 md:px-16 lg:px-24"
-      >
+      <section ref={diffRef} className="relative py-24 md:py-36 px-6 md:px-16 lg:px-24">
         <div className="mx-auto w-full max-w-[1400px] relative z-10">
           {/* Section Header */}
           <div className="text-center mb-16 md:mb-20">
@@ -430,8 +475,7 @@ export default function AboutPage() {
               className="about-reveal text-[clamp(28px,5vw,52px)] font-medium leading-[1.1] tracking-[-0.02em]"
               style={{ fontFamily: "'Runalto', serif" }}
             >
-              What Sets Us{" "}
-              <span className="italic text-[#C9A962]">Apart</span>
+              What Sets Us <span className="italic text-[#C9A962]">Apart</span>
             </h2>
           </div>
 
@@ -469,7 +513,10 @@ export default function AboutPage() {
                 </p>
 
                 {/* Background number */}
-                <div className="absolute bottom-4 right-6 text-[80px] font-bold text-[#F5F0E8]/[0.02] leading-none pointer-events-none select-none" style={{ fontFamily: "Inter, system-ui" }}>
+                <div
+                  className="absolute bottom-4 right-6 text-[80px] font-bold text-[#F5F0E8]/[0.02] leading-none pointer-events-none select-none"
+                  style={{ fontFamily: "Inter, system-ui" }}
+                >
                   {item.id}
                 </div>
               </div>
@@ -484,7 +531,7 @@ export default function AboutPage() {
       <section className="relative py-24 md:py-36 px-6 md:px-16 lg:px-24 overflow-hidden">
         {/* Background image with overlay */}
         <div className="absolute inset-0">
-          <LazyImage 
+          <LazyImage
             src={showroomImg}
             alt=""
             loading="lazy"
@@ -508,8 +555,7 @@ export default function AboutPage() {
               className="text-[clamp(28px,5vw,52px)] font-medium leading-[1.1] tracking-[-0.02em]"
               style={{ fontFamily: "'Runalto', serif" }}
             >
-              Numbers That{" "}
-              <span className="italic text-[#C9A962]">Speak</span>
+              Numbers That <span className="italic text-[#C9A962]">Speak</span>
             </h2>
           </div>
 
@@ -545,12 +591,12 @@ export default function AboutPage() {
       {/* ════════════════════════════════════════════════════
           SECTION 6 — CONTACT REDIRECT CTA
           ════════════════════════════════════════════════════ */}
-      <section
-        ref={contactRef}
-        className="relative py-24 md:py-36 px-6 md:px-16 lg:px-24"
-      >
+      <section ref={contactRef} className="relative py-24 md:py-36 px-6 md:px-16 lg:px-24">
         {/* Star divider */}
-        <div className="absolute top-0 left-1/2 z-10 w-20 h-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "#C9A962" }}>
+        <div
+          className="absolute top-0 left-1/2 z-10 w-20 h-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          style={{ color: "#C9A962" }}
+        >
           <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full opacity-40">
             <path d="M50,0c0,27.6,22.4,50,50,50-27.6,0-50,22.4-50,50,0-27.6-22.4-50-50-50,27.6,0,50-22.4,50-50Z" />
           </svg>
@@ -569,12 +615,11 @@ export default function AboutPage() {
               className="about-reveal text-[clamp(28px,5vw,52px)] font-medium leading-[1.1] tracking-[-0.02em] mb-4"
               style={{ fontFamily: "'Runalto', serif" }}
             >
-              Let's Create Something{" "}
-              <span className="italic text-[#C9A962]">Beautiful</span>
+              Let's Create Something <span className="italic text-[#C9A962]">Beautiful</span>
             </h2>
             <p className="about-reveal text-[clamp(14px,1.1vw,17px)] leading-relaxed text-[#F5F0E8]/55 max-w-[600px] mx-auto">
-              Ready to transform your space? Our team of lighting experts is
-              here to help you find the perfect solution.
+              Ready to transform your space? Our team of lighting experts is here to help you find
+              the perfect solution.
             </p>
           </div>
 
@@ -609,7 +654,10 @@ export default function AboutPage() {
               <h4 className="text-[11px] uppercase tracking-[0.22em] font-medium text-[#C9A962]/70 mb-3">
                 Call Us
               </h4>
-              <a href="tel:+97451163300" className="font-serif text-base text-[#F5F0E8]/80 hover:text-[#C9A962] transition-colors block">
+              <a
+                href="tel:+97451163300"
+                className="font-serif text-base text-[#F5F0E8]/80 hover:text-[#C9A962] transition-colors block"
+              >
                 +974 5116 3300
               </a>
             </div>
@@ -624,7 +672,10 @@ export default function AboutPage() {
               <h4 className="text-[11px] uppercase tracking-[0.22em] font-medium text-[#C9A962]/70 mb-3">
                 Email Us
               </h4>
-              <a href="mailto:info@abclux.qa" className="font-serif text-base text-[#F5F0E8]/80 hover:text-[#C9A962] transition-colors block">
+              <a
+                href="mailto:info@abclux.qa"
+                className="font-serif text-base text-[#F5F0E8]/80 hover:text-[#C9A962] transition-colors block"
+              >
                 info@abclux.qa
               </a>
             </div>
@@ -658,7 +709,9 @@ export default function AboutPage() {
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5F0E8]/8 text-[#F5F0E8] transition-all duration-500 hover:bg-[#C9A962] hover:text-[#0E0D0E] hover:scale-110"
               >
                 <span className="sr-only">Facebook</span>
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" /></svg>
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                </svg>
               </a>
               <a
                 href="https://www.instagram.com/abclightsqa/"
@@ -667,7 +720,9 @@ export default function AboutPage() {
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5F0E8]/8 text-[#F5F0E8] transition-all duration-500 hover:bg-[#C9A962] hover:text-[#0E0D0E] hover:scale-110"
               >
                 <span className="sr-only">Instagram</span>
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4.01 4.01 0 110-8.019 4.01 4.01 0 010 8.019zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4.01 4.01 0 110-8.019 4.01 4.01 0 010 8.019zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                </svg>
               </a>
               <a
                 href="https://www.snapchat.com/@abclightsqa?share_id=4J8U7YbuJ9w&locale=en-IN"
@@ -676,7 +731,9 @@ export default function AboutPage() {
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5F0E8]/8 text-[#F5F0E8] transition-all duration-500 hover:bg-[#C9A962] hover:text-[#0E0D0E] hover:scale-110"
               >
                 <span className="sr-only">Snapchat</span>
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.09.401.09.3-.016.659-.12 1.033-.301.165-.088.344-.104.464-.104.182 0 .359.029.509.09.45.149.734.479.734.838.015.449-.39.839-1.213 1.168-.089.029-.209.075-.344.119-.45.135-1.139.36-1.333.81-.09.224-.061.524.12.868l.015.015c.06.136 1.526 3.475 4.791 4.014.255.044.435.27.42.509 0 .075-.015.149-.045.225-.24.569-1.273.988-3.146 1.271-.059.091-.12.375-.164.57-.029.179-.074.36-.134.553-.076.271-.27.405-.555.405h-.03c-.135 0-.313-.031-.538-.074-.36-.075-.765-.135-1.273-.135-.3 0-.599.015-.913.074-.6.104-1.123.464-1.723.884-.853.599-1.826 1.288-3.294 1.288-.06 0-.119-.015-.18-.015h-.149c-1.468 0-2.427-.675-3.279-1.288-.599-.42-1.107-.779-1.707-.884-.314-.045-.629-.074-.928-.074-.54 0-.958.089-1.272.149-.211.043-.391.074-.54.074-.374 0-.523-.224-.583-.42-.061-.192-.09-.389-.135-.567-.046-.181-.105-.494-.166-.57-1.918-.222-2.95-.642-3.189-1.226-.031-.063-.052-.15-.055-.225-.015-.243.165-.465.42-.509 3.264-.54 4.73-3.879 4.791-4.02l.016-.029c.18-.345.224-.645.119-.869-.195-.434-.884-.658-1.332-.809-.121-.029-.24-.074-.346-.119-1.107-.435-1.257-.93-1.197-1.273.09-.479.674-.793 1.168-.793.146 0 .27.029.383.074.42.194.789.3 1.104.3.234 0 .384-.06.465-.105l-.046-.569c-.098-1.626-.225-3.651.307-4.837C7.392 1.077 10.739.807 11.727.807l.419-.015h.06z" /></svg>
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.09.401.09.3-.016.659-.12 1.033-.301.165-.088.344-.104.464-.104.182 0 .359.029.509.09.45.149.734.479.734.838.015.449-.39.839-1.213 1.168-.089.029-.209.075-.344.119-.45.135-1.139.36-1.333.81-.09.224-.061.524.12.868l.015.015c.06.136 1.526 3.475 4.791 4.014.255.044.435.27.42.509 0 .075-.015.149-.045.225-.24.569-1.273.988-3.146 1.271-.059.091-.12.375-.164.57-.029.179-.074.36-.134.553-.076.271-.27.405-.555.405h-.03c-.135 0-.313-.031-.538-.074-.36-.075-.765-.135-1.273-.135-.3 0-.599.015-.913.074-.6.104-1.123.464-1.723.884-.853.599-1.826 1.288-3.294 1.288-.06 0-.119-.015-.18-.015h-.149c-1.468 0-2.427-.675-3.279-1.288-.599-.42-1.107-.779-1.707-.884-.314-.045-.629-.074-.928-.074-.54 0-.958.089-1.272.149-.211.043-.391.074-.54.074-.374 0-.523-.224-.583-.42-.061-.192-.09-.389-.135-.567-.046-.181-.105-.494-.166-.57-1.918-.222-2.95-.642-3.189-1.226-.031-.063-.052-.15-.055-.225-.015-.243.165-.465.42-.509 3.264-.54 4.73-3.879 4.791-4.02l.016-.029c.18-.345.224-.645.119-.869-.195-.434-.884-.658-1.332-.809-.121-.029-.24-.074-.346-.119-1.107-.435-1.257-.93-1.197-1.273.09-.479.674-.793 1.168-.793.146 0 .27.029.383.074.42.194.789.3 1.104.3.234 0 .384-.06.465-.105l-.046-.569c-.098-1.626-.225-3.651.307-4.837C7.392 1.077 10.739.807 11.727.807l.419-.015h.06z" />
+                </svg>
               </a>
               <a
                 href="https://www.tiktok.com/"
@@ -685,7 +742,9 @@ export default function AboutPage() {
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5F0E8]/8 text-[#F5F0E8] transition-all duration-500 hover:bg-[#C9A962] hover:text-[#0E0D0E] hover:scale-110"
               >
                 <span className="sr-only">TikTok</span>
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.3a3.1 3.1 0 00-1.25 1.54 3.13 3.13 0 00.32 2.66c.55.85 1.5 1.39 2.5 1.41.97.05 1.97-.33 2.63-1.03.62-.64.95-1.52.93-2.42V.02z" /></svg>
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.3a3.1 3.1 0 00-1.25 1.54 3.13 3.13 0 00.32 2.66c.55.85 1.5 1.39 2.5 1.41.97.05 1.97-.33 2.63-1.03.62-.64.95-1.52.93-2.42V.02z" />
+                </svg>
               </a>
             </div>
 
@@ -697,7 +756,13 @@ export default function AboutPage() {
               <span className="text-[12px] uppercase tracking-[0.22em] font-semibold">
                 Get In Touch
               </span>
-              <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <svg
+                className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>

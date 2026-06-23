@@ -1,10 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import { Resend } from 'resend';
-import sanitizeHtml from 'sanitize-html';
-import * as emailValidator from 'email-validator';
-import rateLimit from 'express-rate-limit';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { Resend } from "resend";
+import sanitizeHtml from "sanitize-html";
+import * as emailValidator from "email-validator";
+import rateLimit from "express-rate-limit";
 
 // Load environment variables from the root .env file
 dotenv.config();
@@ -13,53 +13,52 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Configure allowed origins for CORS
-const allowedOrigins = [
-  'http://localhost:5173',
-  process.env.FRONTEND_URL,
-].filter(Boolean);
+const allowedOrigins = ["http://localhost:5173", process.env.FRONTEND_URL].filter(Boolean);
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-})); // Allow specific frontend requests
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  }),
+); // Allow specific frontend requests
 app.use(express.json()); // Parse JSON payloads
 
 // Initialize Resend with the API key from environment variables
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'ok' });
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
 });
 
 // Rate limiter for contact endpoint to prevent abuse and quota exhaustion
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 5, // Limit each IP to 5 requests per 15 minutes
-  message: { error: 'Too many contact requests from this IP, please try again later.' },
+  message: { error: "Too many contact requests from this IP, please try again later." },
   standardHeaders: true,
   legacyHeaders: false,
 });
 
 // Contact form endpoint
-app.post('/api/contact', contactLimiter, async (req, res) => {
+app.post("/api/contact", contactLimiter, async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;
 
     // 1. Validate required fields
     if (!name || !email || !phone || !subject || !message) {
-      return res.status(400).json({ error: 'All fields are required.' });
+      return res.status(400).json({ error: "All fields are required." });
     }
 
     // 2. Validate email format
     if (!emailValidator.validate(email)) {
-      return res.status(400).json({ error: 'Please provide a valid email address.' });
+      return res.status(400).json({ error: "Please provide a valid email address." });
     }
 
     // 3. Sanitize inputs to prevent XSS (Cross-Site Scripting)
@@ -74,7 +73,7 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
     // 'onboarding@resend.dev' is a testing address provided by Resend.
     const { data, error } = await resend.emails.send({
       from: `${sanitizedName} <onboarding@resend.dev>`, // Client's name as display name; replace email with your verified domain
-      to: ['sales@abclux.qa'], // Replace with official mail address
+      to: ["sales@abclux.qa"], // Replace with official mail address
       replyTo: email,
       subject: `New Contact Form Submission: ${sanitizedSubject}`,
       html: `
@@ -107,15 +106,17 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
     });
 
     if (error) {
-      console.error('Resend API Error:', error);
-      return res.status(500).json({ error: 'Failed to send your message. Please try again later.' });
+      console.error("Resend API Error:", error);
+      return res
+        .status(500)
+        .json({ error: "Failed to send your message. Please try again later." });
     }
 
-    console.log('Email sent successfully, Resend ID:', data?.id);
-    return res.status(200).json({ message: 'Your message has been sent successfully!' });
+    console.log("Email sent successfully, Resend ID:", data?.id);
+    return res.status(200).json({ message: "Your message has been sent successfully!" });
   } catch (err) {
-    console.error('Server error:', err);
-    return res.status(500).json({ error: 'An unexpected error occurred. Please try again later.' });
+    console.error("Server error:", err);
+    return res.status(500).json({ error: "An unexpected error occurred. Please try again later." });
   }
 });
 

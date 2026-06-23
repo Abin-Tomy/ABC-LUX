@@ -1,6 +1,5 @@
 import { useState, ImgHTMLAttributes } from "react";
 
-
 interface LazyImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   // If true, forces loading="eager" instead of lazy
   priority?: boolean;
@@ -16,8 +15,8 @@ export function LazyImage({ className, priority, loading, decoding, ...props }: 
 
   // If priority is true, don't use lazy loading.
   const loadMode = priority ? "eager" : loading || "lazy";
-  
-  // By default we want async decoding for smoother rendering, 
+
+  // By default we want async decoding for smoother rendering,
   // but let props override.
   const decodeMode = decoding || "async";
 
@@ -32,8 +31,10 @@ export function LazyImage({ className, priority, loading, decoding, ...props }: 
       className={[
         "transition-all duration-700 ease-out",
         isLoaded ? "opacity-100 blur-none" : "opacity-0 blur-sm scale-[1.02]",
-        className
-      ].filter(Boolean).join(" ")}
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
       {...props}
     />
   );

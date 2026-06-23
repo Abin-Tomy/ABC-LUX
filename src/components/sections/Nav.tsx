@@ -31,7 +31,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [logoDark, setLogoDark] = useState(true); // false = use white logo, true = use black logo
   const ref = useRef<HTMLElement | null>(null);
-  
+
   const location = useLocation();
   const isAboutPage = location.pathname === "/about";
 
@@ -128,7 +128,7 @@ export function Nav() {
             aria-label="ABC LUX — Home"
             className="pointer-events-auto inline-flex items-center transition-opacity hover:opacity-80"
           >
-            <LazyImage 
+            <LazyImage
               src={actualLogoDark ? logoBlack : logoWhite}
               alt="ABC LUX"
               width={600}

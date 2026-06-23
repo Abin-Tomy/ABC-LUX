@@ -262,7 +262,7 @@ function ImageLayer({
           </span>
         </div>
       ) : (
-        <LazyImage 
+        <LazyImage
           src={src}
           alt={alt}
           width={1536}

@@ -185,7 +185,7 @@ export default function ProductDetail() {
   const activeImages =
     subCategories && subCategories.length > 0
       ? subCategories[activeSubCat].images
-      : product?.images ?? [];
+      : (product?.images ?? []);
   const images = activeImages;
   const highlights = product?.highlights ?? [];
   const spaces = product?.spaces ?? [];
@@ -465,7 +465,6 @@ export default function ProductDetail() {
           </div>
         )}
 
-
         {/* ── Masonry Image Grid — uniform layout per product ── */}
         <div
           ref={gridRef}
@@ -510,7 +509,11 @@ export default function ProductDetail() {
                   cursor: "zoom-in",
                 }}
               >
-                <LazyImage src={img.src} alt={img.alt} className="absolute inset-0 w-full h-full object-cover" />
+                <LazyImage
+                  src={img.src}
+                  alt={img.alt}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
 
                 {/* Subtle inner border for premium frame effect */}
                 <div

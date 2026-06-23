@@ -191,7 +191,7 @@ function Avatar({
       }}
     >
       {img ? (
-        <LazyImage 
+        <LazyImage
           src={img}
           alt={initial}
           width={75}

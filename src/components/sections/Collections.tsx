@@ -13,22 +13,29 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import dc1 from "@/assets/Designer-Chandeliers-2.webp";
-import dc2 from "@/assets/AL_1.webp";
-import dc4 from "@/assets/IL_1.webp";
-import dc5 from "@/assets/collection-lsl-3.webp";
-import dc6 from "@/assets/collection-mopl-2.webp";
-import dc7 from "@/assets/collection-mpl-1.webp";
+
+// Import category images for SHOWCASE
+import wl1 from "@/assets/Wall Lights/wl-1.webp";
+import tb1 from "@/assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-1.webp";
+import sc1 from "@/assets/SCULPTURES/sc-1.webp";
+import wp1 from "@/assets/MODERN PENDANT LIGHTS/wp-1.webp";
+import wa1 from "@/assets/HOME DECOR/WALL ART/WA1.webp";
+import cl1 from "@/assets/CLASSIC/C1.webp";
+import ch1 from "@/assets/CHANDELIERS/CH1.webp";
+import cm1 from "@/assets/CEILING MOUNTED/CL1.webp";
+
 import TitleReveal from "../ui/TitleReveal";
 import { LazyImage } from "@/components/ui/LazyImage";
 
 const SHOWCASE = [
-  { img: dc1, title: "Wall Lights" },
-  { img: dc2, title: "Table & Floor Lamps" },
-  { img: dc4, title: "Modern Pendant Lights" },
-  { img: dc5, title: "Home Decor" },
-  { img: dc6, title: "Classic" },
-  { img: dc7, title: "Chandeliers" },
+  { img: wl1, title: "Wall Lights" },
+  { img: tb1, title: "Table & Floor Lamps" },
+  { img: sc1, title: "Sculptures" },
+  { img: wp1, title: "Modern Pendants" },
+  { img: wa1, title: "Home Decor" },
+  { img: cl1, title: "Classic" },
+  { img: ch1, title: "Chandeliers" },
+  { img: cm1, title: "Ceiling Mounted" },
 ];
 
 /**
@@ -54,11 +61,11 @@ export function Places() {
   // Effect: Desktop autoplay for the center card
   useEffect(() => {
     if (window.matchMedia("(max-width: 1023px)").matches) return;
-    
+
     gsap.fromTo(
       ".lux-autoplay-progress",
       { strokeDashoffset: 100 },
-      { strokeDashoffset: 0, duration: 4.5, ease: "none" }
+      { strokeDashoffset: 0, duration: 4.5, ease: "none" },
     );
 
     const timer = setTimeout(() => {
@@ -105,7 +112,7 @@ export function Places() {
       );
 
       // Tile reveals (clipPath) - all tiles
-      (gsap as any).utils.toArray(".lux-place-tile").forEach((tile: HTMLElement) => {
+      Array.from(document.querySelectorAll<HTMLElement>(".lux-place-tile")).forEach((tile) => {
         gsap.set(tile, { willChange: "transform, clip-path" });
         gsap.fromTo(
           tile,
@@ -120,20 +127,22 @@ export function Places() {
       });
 
       // Parallax effect ONLY for center tiles (not side tiles)
-      (gsap as any).utils.toArray(".lux-place-tile[data-parallax]").forEach((tile: HTMLElement) => {
-        const speed = Number(tile.dataset.speed || -10);
-        const inner = tile.querySelector(".lux-place-img") as HTMLElement;
+      Array.from(document.querySelectorAll<HTMLElement>(".lux-place-tile[data-parallax]")).forEach(
+        (tile) => {
+          const speed = Number(tile.dataset.speed || -10);
+          const inner = tile.querySelector(".lux-place-img") as HTMLElement;
 
-        if (inner) {
-          gsap.set(inner, { willChange: "transform" });
-        }
+          if (inner) {
+            gsap.set(inner, { willChange: "transform" });
+          }
 
-        gsap.to(tile, {
-          yPercent: speed,
-          ease: "none",
-          scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: true },
-        });
-      });
+          gsap.to(tile, {
+            yPercent: speed,
+            ease: "none",
+            scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: true },
+          });
+        },
+      );
 
       // Warm cap
       gsap.fromTo(
@@ -265,31 +274,32 @@ export function Places() {
         const counterWrap = showcase?.querySelector(".lux-showcase-counter") as HTMLElement;
 
         if (titleWrap) {
-          gsap.set(titleWrap, { yPercent: -50 });
-          scrollTl.to(titleWrap, { 
-            x: -100,
-            ease: "power2.inOut", 
-            duration: 55,
-            modifiers: {
-              x: function(x) {
-                const val = parseFloat(x as string);
-                return "calc(" + val + "% - " + (-val * 0.04) + "vw)";
-              }
-            }
-          }, 45);
+          gsap.set(titleWrap, { yPercent: -50, xPercent: 0, x: 0 });
+          scrollTl.to(
+            titleWrap,
+            {
+              xPercent: -100,
+              x: "-4vw",
+              ease: "power2.inOut",
+              duration: 55,
+              startAt: { xPercent: 0, x: 0 },
+            },
+            45,
+          );
         }
         if (counterWrap) {
-          scrollTl.to(counterWrap, { 
-            x: 100,
-            ease: "power2.inOut", 
-            duration: 55,
-            modifiers: {
-              x: function(x) {
-                const val = parseFloat(x as string);
-                return "calc(" + val + "% + " + (val * 0.04) + "vw)";
-              }
-            }
-          }, 45);
+          gsap.set(counterWrap, { xPercent: 0, x: 0 });
+          scrollTl.to(
+            counterWrap,
+            {
+              xPercent: 100,
+              x: "4vw",
+              ease: "power2.inOut",
+              duration: 55,
+              startAt: { xPercent: 0, x: 0 },
+            },
+            45,
+          );
         }
       }
     }, root);
@@ -438,7 +448,7 @@ export function Places() {
                       className="relative w-full h-full aspect-2/3 overflow-hidden"
                       style={{ borderRadius: "250px 250px 0 0" }}
                     >
-                      <LazyImage 
+                      <LazyImage
                         src={item.img}
                         alt={item.title}
                         width={4320}
@@ -489,9 +499,9 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "3/4", maxHeight: "280px" }}
                 >
-                  <LazyImage 
-                    src={dc1}
-                    alt="Designer Chandeliers"
+                  <LazyImage
+                    src={ch1}
+                    alt="Chandeliers"
                     width={4320}
                     height={5400}
                     loading="lazy"
@@ -513,9 +523,9 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "16/9" }}
                 >
-                  <LazyImage 
-                    src={dc7}
-                    alt="Designer Chandeliers"
+                  <LazyImage
+                    src={wl1}
+                    alt="Wall Lights"
                     width={4320}
                     height={5400}
                     loading="lazy"
@@ -535,12 +545,18 @@ export function Places() {
               >
                 {/* Wrapper to hold the grid space so animating the card doesn't reflow the DOM and break the pin-spacer */}
                 <div className="relative w-full" style={{ aspectRatio: "21/9", minHeight: "40vh" }}>
-                  <div
-                    className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full rounded-lg origin-center"
-                  >
-                    <div style={{ position: "absolute", inset: 0, overflow: "hidden", borderRadius: "inherit", backgroundColor: "black" }}>
+                  <div className="center-card-inner absolute top-0 left-1/2 -translate-x-1/2 w-full h-full rounded-lg origin-center">
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        overflow: "hidden",
+                        borderRadius: "inherit",
+                        backgroundColor: "black",
+                      }}
+                    >
                       {SHOWCASE.map((item, i) => (
-                        <LazyImage 
+                        <LazyImage
                           key={item.img}
                           src={item.img}
                           alt={item.title}
@@ -612,8 +628,8 @@ export function Places() {
                             />
                           </svg>
                         </button>
-                        <svg 
-                          className="absolute inset-0 h-full w-full pointer-events-none" 
+                        <svg
+                          className="absolute inset-0 h-full w-full pointer-events-none"
                           viewBox="0 0 100 100"
                           style={{ transform: "rotate(-90deg) scale(1.2)" }}
                         >
@@ -662,9 +678,9 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "4/3" }}
                 >
-                  <LazyImage 
-                    src={dc2}
-                    alt="Designer Chandeliers"
+                  <LazyImage
+                    src={tb1}
+                    alt="Table & Floor Lamps"
                     width={4320}
                     height={5400}
                     loading="lazy"
@@ -686,9 +702,9 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "16/9", minHeight: "170px" }}
                 >
-                  <LazyImage 
-                    src={dc4}
-                    alt="Designer Chandeliers"
+                  <LazyImage
+                    src={wp1}
+                    alt="Modern Pendants"
                     width={4320}
                     height={5400}
                     loading="lazy"
@@ -711,20 +727,20 @@ export function Places() {
                   marginLeft: "-120px",
                 }}
               >
-                {/* <div
+                <div
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "16/9", minHeight: "140px", maxWidth: "320px" }}
                 >
-                  <LazyImage 
-                    src={dc3}
-                    alt="Designer Chandeliers"
+                  <LazyImage
+                    src={cl1}
+                    alt="Classic Lighting"
                     width={4320}
                     height={5400}
                     loading="lazy"
                     decoding="async"
                     className="lux-place-img absolute inset-0 h-full w-full object-cover"
                   />
-                </div> */}
+                </div>
               </figure>
 
               {/* RIGHT BOTTOM — Large card (cols 10-12, row 3) */}
@@ -744,9 +760,9 @@ export function Places() {
                   className="relative w-full overflow-hidden rounded-lg"
                   style={{ aspectRatio: "4/3", minHeight: "200px" }}
                 >
-                  <LazyImage 
-                    src={dc5}
-                    alt="Designer Chandeliers"
+                  <LazyImage
+                    src={sc1}
+                    alt="Sculptures"
                     width={4320}
                     height={5400}
                     loading="lazy"

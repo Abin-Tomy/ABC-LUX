@@ -100,11 +100,11 @@ export function About() {
               </h2>
 
               <p className="reveal-text text-[clamp(15px,1.2vw,18px)] leading-relaxed text-[#F5F0E8]/70 max-w-[640px] mx-auto lg:mx-0">
-                ABC LUX a luxury division of ABC Lights, part of ABC Group Qatar, has been serving customers in Qatar since 2018.
-                We offer high-quality, modern lighting solutions at competitive prices. Our products
-                are innovative, stylish, and designed to meet various needs. With a focus on
-                customer satisfaction, we provide full support and assistance, ensuring the best
-                lighting experience for homes and businesses.
+                ABC LUX a luxury division of ABC Lights, part of ABC Group Qatar, has been serving
+                customers in Qatar since 2018. We offer high-quality, modern lighting solutions at
+                competitive prices. Our products are innovative, stylish, and designed to meet
+                various needs. With a focus on customer satisfaction, we provide full support and
+                assistance, ensuring the best lighting experience for homes and businesses.
               </p>
             </div>
 
@@ -171,7 +171,7 @@ export function About() {
           {/* Right Column: Brand Image & Stats */}
           <div className="relative group w-full mt-12 lg:mt-0 flex justify-center lg:justify-end order-2">
             <div className="reveal-text relative overflow-hidden rounded-[2.5rem] md:rounded-[3rem] aspect-4/5 md:aspect-square lg:aspect-4/5 border border-[#F5F0E8]/10 w-full max-w-[480px]">
-              <LazyImage 
+              <LazyImage
                 src={aboutImg}
                 alt="ABC Lights Qatar Showroom"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
