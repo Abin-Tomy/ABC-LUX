@@ -37,7 +37,7 @@ export type Testimonial = {
   img: string;
 };
 
-export const TESTIMONIALS: Testimonial[] = [
+const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
     name: "Wall Lights",
@@ -76,7 +76,7 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     id: 4,
-    name: "Modern Pendant Lights",
+    name: "Modern Pendants",
     role: "",
     company: "",
     excerpt: "Ambient Sophistication",
@@ -177,7 +177,7 @@ function useScrollProgress(ref: React.RefObject<HTMLDivElement | null>) {
 export function Testimonials() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const cardsRef = useRef<(HTMLAnchorElement | null)[]>([]);
   // batchBShown: how many of batch B are appended (0 = none shown yet)
   const [batchBShown, setBatchBShown] = useState(0);
   const batchBUnlocked = batchBShown > 0; // true once View More clicked
@@ -341,8 +341,8 @@ export function Testimonials() {
   // ── Card Initialization (runs once after trackScroll is known) ──
   useEffect(() => {
     if (trackScroll === 0) return;
-    const cards = cardsRef.current.filter(Boolean) as HTMLButtonElement[];
-    const firstCard = cardsRef.current.find(Boolean) as HTMLButtonElement | null;
+    const cards = cardsRef.current.filter(Boolean) as HTMLAnchorElement[];
+    const firstCard = cardsRef.current.find(Boolean) as HTMLAnchorElement | null;
     // Use offsetWidth instead of getBoundingClientRect to avoid forced reflow
     const CARD_STEP = firstCard ? firstCard.offsetWidth + 32 : 412;
     const trackEl = trackRef.current;
@@ -374,8 +374,8 @@ export function Testimonials() {
   // ── Scroll-progress reveal — fires each time progress changes ─────────────
   useEffect(() => {
     if (trackScroll === 0 || isMobileMode) return;
-    const cards = cardsRef.current.filter(Boolean) as HTMLButtonElement[];
-    const firstCard = cardsRef.current.find(Boolean) as HTMLButtonElement | null;
+    const cards = cardsRef.current.filter(Boolean) as HTMLAnchorElement[];
+    const firstCard = cardsRef.current.find(Boolean) as HTMLAnchorElement | null;
     // Use offsetWidth instead of getBoundingClientRect to avoid forced reflow
     const CARD_STEP = firstCard ? firstCard.offsetWidth + 32 : 412;
     const trackEl = trackRef.current;
@@ -553,7 +553,7 @@ export function Testimonials() {
                     to={`/product/${t.id}`}
                     key={`${t.id}-${i}`}
                     ref={(el) => {
-                      cardsRef.current[i] = el as any;
+                      cardsRef.current[i] = el;
                     }}
                     onClick={(e) => {
                       if (isMobileMode && hasDraggedRef.current) e.preventDefault();
@@ -638,49 +638,62 @@ export function Testimonials() {
                           <div
                             style={{
                               display: "flex",
-                              alignItems: "center",
-                              gap: "0.75rem",
+                              flexDirection: "column",
                               borderTop: "0.5px solid rgba(245,240,232,0.2)",
                               paddingTop: "0.875rem",
                             }}
                           >
-                            <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-                              <span
-                                style={{
-                                  fontSize: "1.2rem",
-                                  fontWeight: 500,
-                                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                                  letterSpacing: "0.08em",
-                                  textTransform: "uppercase",
-                                  color: "#F5F0E8",
-                                }}
-                              >
-                                {t.name}
-                              </span>
-                            </div>
                             <div
                               style={{
                                 display: "flex",
                                 alignItems: "center",
-                                justifyContent: "center",
-                                width: "1.75rem",
-                                height: "1.75rem",
-                                borderRadius: "50%",
-                                background: "rgba(245,240,232,0.07)",
-                                border: "1px solid rgba(245,240,232,0.3)",
-                                flexShrink: 0,
+                                gap: "0.75rem",
+                                backgroundColor: "rgba(0, 0, 0, 0.4)",
+                                padding: "0.75rem",
+                                borderRadius: "0.75rem",
+                                margin: "0 -0.75rem",
+                                backdropFilter: "blur(4px)",
+                                WebkitBackdropFilter: "blur(4px)",
                               }}
                             >
-                              <svg
-                                width="11"
-                                height="11"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
+                              <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+                                <span
+                                  style={{
+                                    fontSize: "1.2rem",
+                                    fontWeight: 500,
+                                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    color: "#F5F0E8",
+                                  }}
+                                >
+                                  {t.name}
+                                </span>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  width: "1.75rem",
+                                  height: "1.75rem",
+                                  borderRadius: "50%",
+                                  background: "rgba(245,240,232,0.07)",
+                                  border: "1px solid rgba(245,240,232,0.3)",
+                                  flexShrink: 0,
+                                }}
                               >
-                                <path d="M7 17L17 7M9 7h8v8" />
-                              </svg>
+                                <svg
+                                  width="11"
+                                  height="11"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                >
+                                  <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                              </div>
                             </div>
                           </div>
                         </div>

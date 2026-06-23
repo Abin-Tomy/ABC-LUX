@@ -208,7 +208,7 @@ export function Hero() {
           style={{ willChange: "transform", transformOrigin: "50% 0%" }}
         >
           {/* Extended CSS Chain — removed */}
-          <LazyImage 
+          <LazyImage
             src={chandelierUrl}
             alt="ABC LUX Pendant Light"
             fetchPriority="high"

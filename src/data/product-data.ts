@@ -198,7 +198,6 @@ import cm6 from "../assets/CEILING MOUNTED/CL6.webp";
 import cm7 from "../assets/CEILING MOUNTED/CL7.webp";
 import cm8 from "../assets/CEILING MOUNTED/CL8.webp";
 
-
 export const PRODUCT_CATALOG: ProductData[] = [
   /* ─── 1  Wall Lights ─────────────────────────────────── */
   {
@@ -331,7 +330,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
   /* ─── 4  Modern Pendant Lights ───────────────────────────────────── */
   {
     id: 4,
-    name: "Modern Pendant Lights",
+    name: "Modern Pendants",
     category: "Pendant Lighting",
     tagline: "Contemporary Suspended Elegance",
     description:
@@ -361,7 +360,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
     ]),
   },
 
-     /* ─── 5  Home Decor ─────────────────────────────── */
+  /* ─── 5  Home Decor ─────────────────────────────── */
   {
     id: 5,
     name: "Home Decor",

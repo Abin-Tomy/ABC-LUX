@@ -122,7 +122,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
         <div className="flex items-start justify-end">
           {/* Brand Logo inside Absolute Container */}
           <div className="lux-menu-logo-wrap absolute left-6 -top-12 z-20 pointer-events-none">
-            <LazyImage 
+            <LazyImage
               src={logoUrl}
               alt="ABC LUX"
               width={1920}

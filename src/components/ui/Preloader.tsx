@@ -79,9 +79,9 @@ export default function Preloader({ children }: PreloaderProps) {
 
       {!isDone && (
         <div
-            className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none"
-            style={{ display: "grid", gridTemplateRows: "repeat(4, 1fr)" }}
-          >
+          className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none"
+          style={{ display: "grid", gridTemplateRows: "repeat(4, 1fr)" }}
+        >
           {/* 4 cream bars — laid out by CSS Grid, eliminating sub-pixel gaps */}
           {Array.from({ length: BAR_COUNT }).map((_, i) => {
             const isOut = barsOut.includes(i);
@@ -103,7 +103,7 @@ export default function Preloader({ children }: PreloaderProps) {
           {/* Logo - centered over entire overlay */}
           {phase === "splash" && (
             <div className="absolute inset-0 flex items-center justify-center z-[10000] pointer-events-none">
-              <LazyImage 
+              <LazyImage
                 src={abcLuxLogo}
                 alt="ABC LUX"
                 width={1920}
