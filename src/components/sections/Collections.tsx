@@ -15,14 +15,14 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 
 // Import category images for SHOWCASE
-import wl1 from "@/assets/Wall Lights/wl-1.webp";
-import tb1 from "@/assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-1.webp";
-import sc1 from "@/assets/SCULPTURES/sc-1.webp";
-import wp1 from "@/assets/MODERN PENDANT LIGHTS/wp-1.webp";
-import wa1 from "@/assets/HOME DECOR/WALL ART/WA1.webp";
-import cl1 from "@/assets/CLASSIC/C1.webp";
-import ch1 from "@/assets/CHANDELIERS/CH1.webp";
-import cm1 from "@/assets/CEILING MOUNTED/CL1.webp";
+import wl1 from "@/assets/WALL LIGHTS/1.png";
+import tb1 from "@/assets/TABLE LAMPS/1.png";
+import sc1 from "@/assets/SCULPTURE/1.png";
+import wp1 from "@/assets/MODERN PENDENT LIGHTS/1.png";
+import wa1 from "@/assets/HOME DECOR ORNAMENTS/1.png";
+import cl1 from "@/assets/CLASSIC CHANDERLIERS/1.png";
+import ch1 from "@/assets/CHANDELIERS/1.png";
+import cm1 from "@/assets/CEILING LIGHTS/1.png";
 
 import TitleReveal from "../ui/TitleReveal";
 import { LazyImage } from "@/components/ui/LazyImage";
