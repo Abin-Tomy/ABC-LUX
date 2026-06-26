@@ -97,106 +97,106 @@ export function buildRealImages(items: { src: string; alt: string }[]): ProductI
 }
 
 // Imports for Product 1 (Wall Lights)
-import wlnew1 from "../assets/Wall Lights/wl-1.webp";
-import wlnew2 from "../assets/Wall Lights/wl-2.webp";
-import wlnew3 from "../assets/Wall Lights/wl-3.webp";
-import wlnew4 from "../assets/Wall Lights/wl-4.webp";
-import wlnew5 from "../assets/Wall Lights/wl-5.webp";
-import wlnew6 from "../assets/Wall Lights/wl-6.webp";
-import wlnew7 from "../assets/Wall Lights/wl-7.webp";
-import wlnew8 from "../assets/Wall Lights/wl-8.webp";
+import wlnew1 from "../assets/WALL LIGHTS/1.png";
+import wlnew2 from "../assets/WALL LIGHTS/2.png";
+import wlnew3 from "../assets/WALL LIGHTS/3.png";
+import wlnew4 from "../assets/WALL LIGHTS/4.png";
+import wlnew5 from "../assets/WALL LIGHTS/5.png";
+import wlnew6 from "../assets/WALL LIGHTS/6.png";
+import wlnew7 from "../assets/WALL LIGHTS/7.png";
+import wlnew8 from "../assets/WALL LIGHTS/8.png";
 // Imports for Product 2
 
 // Imports for Product 2 — Table Lamp sub-category
-import tb1 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-1.webp";
-import tb2 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-2.webp";
-import tb3 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-3.webp";
-import tb4 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-4.webp";
-import tb5 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-5.webp";
-import tb6 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-6.webp";
-import tb7 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-7.webp";
-import tb8 from "../assets/TABLE & FLOOR LAMPS/TABLE LAMP/tb-8.webp";
+import tb1 from "../assets/TABLE LAMPS/1.png";
+import tb2 from "../assets/TABLE LAMPS/2.png";
+import tb3 from "../assets/TABLE LAMPS/3.png";
+import tb4 from "../assets/TABLE LAMPS/4.png";
+import tb5 from "../assets/TABLE LAMPS/5.png";
+import tb6 from "../assets/TABLE LAMPS/6.png";
+import tb7 from "../assets/TABLE LAMPS/7.png";
+import tb8 from "../assets/TABLE LAMPS/8.png";
 
 // Imports for Product 2 — Floor Lamp sub-category
-import fl1 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-1.webp";
-import fl2 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-2.webp";
-import fl3 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-3.webp";
-import fl4 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-4.webp";
-import fl5 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-5.webp";
-import fl6 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-6.webp";
-import fl7 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-7.webp";
-import fl8 from "../assets/TABLE & FLOOR LAMPS/FLOOR LAMP/fl-8.webp";
+import fl1 from "../assets/FLOOR LAMPS/1.png";
+import fl2 from "../assets/FLOOR LAMPS/2.png";
+import fl3 from "../assets/FLOOR LAMPS/3.png";
+import fl4 from "../assets/FLOOR LAMPS/4.png";
+import fl5 from "../assets/FLOOR LAMPS/5.png";
+import fl6 from "../assets/FLOOR LAMPS/6.png";
+import fl7 from "../assets/FLOOR LAMPS/7.png";
+import fl8 from "../assets/FLOOR LAMPS/8.png";
 
 // Imports for Product 3 (Sculptures)
-import sc1 from "../assets/SCULPTURES/sc-1.webp";
-import sc2 from "../assets/SCULPTURES/sc-2.webp";
-import sc3 from "../assets/SCULPTURES/sc-3.webp";
-import sc4 from "../assets/SCULPTURES/sc-4.webp";
-import sc5 from "../assets/SCULPTURES/sc-5.webp";
-import sc6 from "../assets/SCULPTURES/sc-6.webp";
-import sc7 from "../assets/SCULPTURES/sc-7.webp";
-import sc8 from "../assets/SCULPTURES/sc-8.webp";
+import sc1 from "../assets/SCULPTURE/1.png";
+import sc2 from "../assets/SCULPTURE/2.png";
+import sc3 from "../assets/SCULPTURE/3.png";
+import sc4 from "../assets/SCULPTURE/4.png";
+import sc5 from "../assets/SCULPTURE/5.png";
+import sc6 from "../assets/SCULPTURE/6.png";
+import sc7 from "../assets/SCULPTURE/7.png";
+import sc8 from "../assets/SCULPTURE/8.png";
 
 // Imports for Product 4
-import wp1 from "../assets/MODERN PENDANT LIGHTS/wp-1.webp";
-import wp2 from "../assets/MODERN PENDANT LIGHTS/wp-2.webp";
-import wp3 from "../assets/MODERN PENDANT LIGHTS/wp-3.webp";
-import wp4 from "../assets/MODERN PENDANT LIGHTS/wp-4.webp";
-import wp5 from "../assets/MODERN PENDANT LIGHTS/wp-5.webp";
-import wp6 from "../assets/MODERN PENDANT LIGHTS/wp-6.webp";
-import wp7 from "../assets/MODERN PENDANT LIGHTS/wp-7.webp";
-import wp8 from "../assets/MODERN PENDANT LIGHTS/wp-8.webp";
+import wp1 from "../assets/MODERN PENDENT LIGHTS/1.png";
+import wp2 from "../assets/MODERN PENDENT LIGHTS/2.png";
+import wp3 from "../assets/MODERN PENDENT LIGHTS/3.png";
+import wp4 from "../assets/MODERN PENDENT LIGHTS/4.png";
+import wp5 from "../assets/MODERN PENDENT LIGHTS/5.png";
+import wp6 from "../assets/MODERN PENDENT LIGHTS/6.png";
+import wp7 from "../assets/MODERN PENDENT LIGHTS/7.png";
+import wp8 from "../assets/MODERN PENDENT LIGHTS/8.png";
 
 // Imports for Product 5 (Home Decor)
 // Imports for Product 5 — Wall Art sub-category
-import wa1 from "../assets/HOME DECOR/WALL ART/WA1.webp";
-import wa2 from "../assets/HOME DECOR/WALL ART/WA2.webp";
-import wa3 from "../assets/HOME DECOR/WALL ART/WA3.webp";
-import wa4 from "../assets/HOME DECOR/WALL ART/WA4.webp";
-import wa5 from "../assets/HOME DECOR/WALL ART/WA5.webp";
-import wa6 from "../assets/HOME DECOR/WALL ART/WA6.webp";
-import wa7 from "../assets/HOME DECOR/WALL ART/WA7.webp";
-import wa8 from "../assets/HOME DECOR/WALL ART/WA8.webp";
+import wa1 from "../assets/WALL ART/1.png";
+import wa2 from "../assets/WALL ART/2.png";
+import wa3 from "../assets/WALL ART/3.png";
+import wa4 from "../assets/WALL ART/4.png";
+import wa5 from "../assets/WALL ART/5.png";
+import wa6 from "../assets/WALL ART/6.png";
+import wa7 from "../assets/WALL ART/7.png";
+import wa8 from "../assets/WALL ART/8.png";
 
 // Imports for Product 5 — Ornaments sub-category
-import or1 from "../assets/HOME DECOR/ORNAMENTS/O1.webp";
-import or2 from "../assets/HOME DECOR/ORNAMENTS/O2.webp";
-import or3 from "../assets/HOME DECOR/ORNAMENTS/O3.webp";
-import or4 from "../assets/HOME DECOR/ORNAMENTS/O4.webp";
-import or5 from "../assets/HOME DECOR/ORNAMENTS/O5.webp";
-import or6 from "../assets/HOME DECOR/ORNAMENTS/O6.webp";
-import or7 from "../assets/HOME DECOR/ORNAMENTS/O7.webp";
-import or8 from "../assets/HOME DECOR/ORNAMENTS/O8.webp";
+import or1 from "../assets/HOME DECOR ORNAMENTS/1.png";
+import or2 from "../assets/HOME DECOR ORNAMENTS/2.png";
+import or3 from "../assets/HOME DECOR ORNAMENTS/3.png";
+import or4 from "../assets/HOME DECOR ORNAMENTS/4.png";
+import or5 from "../assets/HOME DECOR ORNAMENTS/5.png";
+import or6 from "../assets/HOME DECOR ORNAMENTS/6.png";
+import or7 from "../assets/HOME DECOR ORNAMENTS/7.png";
+import or8 from "../assets/HOME DECOR ORNAMENTS/8.png";
 
 // Imports for Product 6 (Classic)
-import cl1 from "../assets/CLASSIC/C1.webp";
-import cl2 from "../assets/CLASSIC/C2.webp";
-import cl3 from "../assets/CLASSIC/C3.webp";
-import cl4 from "../assets/CLASSIC/C4.webp";
-import cl5 from "../assets/CLASSIC/C5.webp";
-import cl6 from "../assets/CLASSIC/C6.webp";
-import cl7 from "../assets/CLASSIC/C7.webp";
-import cl8 from "../assets/CLASSIC/C8.webp";
+import cl1 from "../assets/CLASSIC CHANDERLIERS/1.png";
+import cl2 from "../assets/CLASSIC CHANDERLIERS/2.png";
+import cl3 from "../assets/CLASSIC CHANDERLIERS/3.png";
+import cl4 from "../assets/CLASSIC CHANDERLIERS/4.png";
+import cl5 from "../assets/CLASSIC CHANDERLIERS/5.png";
+import cl6 from "../assets/CLASSIC CHANDERLIERS/6.png";
+import cl7 from "../assets/CLASSIC CHANDERLIERS/7.png";
+import cl8 from "../assets/CLASSIC CHANDERLIERS/8.png";
 
 // Imports for Product 7 (Chandeliers)
-import ch1 from "../assets/CHANDELIERS/CH1.webp";
-import ch2 from "../assets/CHANDELIERS/CH2.webp";
-import ch3 from "../assets/CHANDELIERS/CH3.webp";
-import ch4 from "../assets/CHANDELIERS/CH4.webp";
-import ch5 from "../assets/CHANDELIERS/CH5.webp";
-import ch6 from "../assets/CHANDELIERS/CH6.webp";
-import ch7 from "../assets/CHANDELIERS/CH7.webp";
-import ch8 from "../assets/CHANDELIERS/CH8.webp";
+import ch1 from "../assets/CHANDELIERS/1.png";
+import ch2 from "../assets/CHANDELIERS/2.png";
+import ch3 from "../assets/CHANDELIERS/3.png";
+import ch4 from "../assets/CHANDELIERS/4.png";
+import ch5 from "../assets/CHANDELIERS/5.png";
+import ch6 from "../assets/CHANDELIERS/6.png";
+import ch7 from "../assets/CHANDELIERS/7.png";
+import ch8 from "../assets/CHANDELIERS/8.png";
 
 // Imports for Product 8 (Ceiling Mounted)
-import cm1 from "../assets/CEILING MOUNTED/CL1.webp";
-import cm2 from "../assets/CEILING MOUNTED/CL2.webp";
-import cm3 from "../assets/CEILING MOUNTED/CL3.webp";
-import cm4 from "../assets/CEILING MOUNTED/CL4.webp";
-import cm5 from "../assets/CEILING MOUNTED/CL5.webp";
-import cm6 from "../assets/CEILING MOUNTED/CL6.webp";
-import cm7 from "../assets/CEILING MOUNTED/CL7.webp";
-import cm8 from "../assets/CEILING MOUNTED/CL8.webp";
+import cm1 from "../assets/CEILING LIGHTS/1.png";
+import cm2 from "../assets/CEILING LIGHTS/2.png";
+import cm3 from "../assets/CEILING LIGHTS/3.png";
+import cm4 from "../assets/CEILING LIGHTS/4.png";
+import cm5 from "../assets/CEILING LIGHTS/5.png";
+import cm6 from "../assets/CEILING LIGHTS/6.png";
+import cm7 from "../assets/CEILING LIGHTS/7.png";
+import cm8 from "../assets/CEILING LIGHTS/8.png";
 
 export const PRODUCT_CATALOG: ProductData[] = [
   /* ─── 1  Wall Lights ─────────────────────────────────── */

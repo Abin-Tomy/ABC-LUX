@@ -13,15 +13,15 @@ import { gsap } from "@/utils/gsap-setup";
 import { getLenis } from "@/hooks/useLenis";
 import TitleReveal from "../ui/TitleReveal";
 
-import imgWallLights from "@/assets/Wall Lights/wl-1.webp";
-import imgTableFloorLamp from "@/assets/table-floor-lamp.webp";
+import imgWallLights from "@/assets/WALL LIGHTS/1.png";
+import imgTableFloorLamp from "@/assets/TABLE LAMPS/1.png";
 
-import imgSculpture from "@/assets/SCULPTURES/sc-8.webp";
-import imgModernPendant from "@/assets/MODERN PENDANT LIGHTS/wp-5.webp";
-import imgHomeDecor from "@/assets/HOME DECOR/WALL ART/WA8.webp";
-import imgClassic from "@/assets/CLASSIC/C1.webp";
-import imgChandelier from "@/assets/CHANDELIERS/CH3.webp";
-import imgCeilingMounted from "@/assets/CEILING MOUNTED/CL1.webp";
+import imgSculpture from "@/assets/SCULPTURE/1.png";
+import imgModernPendant from "@/assets/MODERN PENDENT LIGHTS/1.png";
+import imgHomeDecor from "@/assets/HOME DECOR ORNAMENTS/1.png";
+import imgClassic from "@/assets/CLASSIC CHANDERLIERS/1.png";
+import imgChandelier from "@/assets/CHANDELIERS/1.png";
+import imgCeilingMounted from "@/assets/CEILING LIGHTS/1.png";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
