@@ -126,6 +126,7 @@ export function Footer() {
         {/* Rights / Copyright */}
         <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-[#F1EBDD]/60">
           <p>&copy; {new Date().getFullYear()} ABC LUX. All rights reserved.</p>
+          <p className="mt-2">Developed by Zyvex Tech LLP</p>
         </div>
       </div>
     </footer>

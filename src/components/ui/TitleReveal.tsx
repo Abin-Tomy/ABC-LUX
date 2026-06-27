@@ -71,7 +71,9 @@ const TitleReveal: React.FC<TitleRevealProps> = ({
 
   // Determine if we should propagate styles to characters (e.g. for gradients)
   const isGradient =
-    style && (style.WebkitBackgroundClip === "text" || (style as any).backgroundClip === "text");
+    style &&
+    (style.WebkitBackgroundClip === "text" ||
+      (style as React.CSSProperties & { backgroundClip?: string }).backgroundClip === "text");
 
   return (
     <span
@@ -110,7 +112,7 @@ const TitleReveal: React.FC<TitleRevealProps> = ({
             } as React.CSSProperties
           }
         >
-          {char === " " ? "\u00A0" : char}
+          {char === " " ? " " : char}
         </span>
       ))}
     </span>
