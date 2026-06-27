@@ -8,7 +8,7 @@
    ============================================================= */
 
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 // Static color definitions for consistent theming
 const BG = "#D3C8B6";
@@ -23,7 +23,7 @@ const GOLD = "#C9A962";
 export default function ArticleTwo() {
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 

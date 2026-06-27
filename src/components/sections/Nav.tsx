@@ -143,7 +143,7 @@ export function Nav() {
           {/* Center nav */}
           <nav className="lux-center-nav pointer-events-auto absolute left-1/2 top-5 hidden -translate-x-1/2 items-center gap-6 md:flex">
             <a
-              href={isAboutPage ? "/#products" : "#products"}
+              href={isAboutPage ? "/#our-products" : "#our-products"}
               data-cursor="VIEW"
               className="lux-eyebrow rounded-[10px] bg-white/10 px-20 py-2.5 text-white/95 text-[13px] font-bold tracking-widest backdrop-blur-md transition-all hover:bg-white/20"
             >

@@ -8,7 +8,7 @@
    ============================================================= */
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { gsap } from "@/utils/gsap-setup";
 import { getLenis } from "@/hooks/useLenis";
 import TitleReveal from "../ui/TitleReveal";
@@ -175,6 +175,7 @@ function useScrollProgress(ref: React.RefObject<HTMLDivElement | null>) {
  * Props: None
  */
 export function Testimonials() {
+  const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -556,7 +557,21 @@ export function Testimonials() {
                       cardsRef.current[i] = el;
                     }}
                     onClick={(e) => {
-                      if (isMobileMode && hasDraggedRef.current) e.preventDefault();
+                      e.preventDefault();
+                      if (isMobileMode && hasDraggedRef.current) {
+                        return;
+                      }
+                      sessionStorage.setItem("returnToProducts", "true");
+                      const mainEl = document.querySelector("main");
+                      if (mainEl) {
+                        gsap.to(mainEl, {
+                          opacity: 0,
+                          duration: 0.3,
+                          onComplete: () => navigate(`/product/${t.id}`),
+                        });
+                      } else {
+                        navigate(`/product/${t.id}`);
+                      }
                     }}
                     style={{
                       flexShrink: 0,
