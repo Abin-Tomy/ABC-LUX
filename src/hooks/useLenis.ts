@@ -103,7 +103,6 @@ export function useLenis() {
       window.removeEventListener("load", handleLoad);
       clearTimeout(timer1);
       clearTimeout(timer2);
-      history.scrollRestoration = "auto";
     };
   }, []);
 }

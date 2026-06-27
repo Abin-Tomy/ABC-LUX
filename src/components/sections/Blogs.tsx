@@ -9,8 +9,9 @@
    ============================================================= */
 
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TitleReveal from "../ui/TitleReveal";
+import { gsap } from "@/utils/gsap-setup";
 
 import img1 from "@/assets/Abc-Lights-Qatar.webp";
 import img2 from "@/assets/Outdoor-Lights-in-Qatar.webp";
@@ -78,6 +79,7 @@ const tintGradient: Record<CardSlot, string> = {
  * Props: None
  */
 export function Blogs() {
+  const routerNavigate = useNavigate();
   const [hovered, setHovered] = useState<CardSlot | null>(null);
   const [cards, setCards] = useState<Record<CardSlot, CardState>>({
     left: { slideIdx: 0, incomingIdx: null, wipeDir: null, wipeOpen: false },
@@ -533,6 +535,20 @@ export function Blogs() {
                   className="blg-read-more"
                   to={slide.href}
                   aria-label={`Read more about ${slide.label}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    sessionStorage.setItem("returnToBlogs", "true");
+                    const mainEl = document.querySelector("main");
+                    if (mainEl) {
+                      gsap.to(mainEl, {
+                        opacity: 0,
+                        duration: 0.3,
+                        onComplete: () => routerNavigate(slide.href),
+                      });
+                    } else {
+                      routerNavigate(slide.href);
+                    }
+                  }}
                 >
                   Read More
                 </Link>

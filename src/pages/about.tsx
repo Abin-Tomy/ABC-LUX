@@ -8,7 +8,7 @@
    Notes     : Separate from the homepage About section which remains untouched.
    ============================================================= */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAnimationContext } from "@/utils/gsap-setup";
 import { useLenis } from "@/hooks/useLenis";
@@ -217,7 +217,7 @@ export default function AboutPage() {
   const statRefs = [statRef1, statRef2, statRef3, statRef4];
 
   // Scroll to top on mount
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 

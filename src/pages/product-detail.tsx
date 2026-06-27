@@ -12,7 +12,7 @@
    ============================================================= */
 
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useCallback, useState } from "react";
+import { useEffect, useRef, useCallback, useState, useLayoutEffect } from "react";
 import { gsap, allowAnimationsFor } from "@/utils/gsap-setup";
 import { PRODUCT_CATALOG } from "@/data/product-data";
 import { LazyImage } from "@/components/ui/LazyImage";
@@ -61,7 +61,7 @@ export default function ProductDetail() {
   }, []);
 
   // Effect: Resets scroll and orchestrates initial entrance animations for the product page
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
     setActiveSubCat(0);
     const ctx = gsap.context(() => {
@@ -92,7 +92,7 @@ export default function ProductDetail() {
   // Effect: IntersectionObserver-driven clipPath reveal on the INNER tile divs.
   // The figure (grid item) stays fully visible so the observer can detect it;
   // the inner div with the image is what gets the clipPath wipe animation.
-  useEffect(() => {
+  useLayoutEffect(() => {
     const tiles = tileRefs.current.filter(Boolean) as HTMLDivElement[];
     if (tiles.length === 0) return;
 
