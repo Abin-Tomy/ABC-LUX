@@ -81,22 +81,16 @@ export function About() {
               </div>
 
               <h2
-                className="text-[clamp(26px,7vw,64px)] md:text-[clamp(36px,5vw,72px)] font-medium leading-[1.2] md:leading-[1.1] tracking-[-0.02em] text-[#F5F0E8] mb-6 md:mb-8 mx-auto lg:mx-0 flex flex-col items-center lg:items-start"
+                className="text-[clamp(26px,7vw,64px)] md:text-[clamp(36px,5vw,72px)] font-medium leading-[1.2] md:leading-[1.1] tracking-[-0.02em] text-[#F5F0E8] mb-6 md:mb-8 text-center lg:text-left"
                 style={{ fontFamily: "'Runalto', serif" }}
               >
+                <TitleReveal text="Lighting Your Way to " waitForPreloader={false} />
+                <TitleReveal text="a " waitForPreloader={false} />
                 <TitleReveal
-                  text="Lighting Your Way to"
-                  className="justify-center lg:justify-start"
+                  text="Brighter Tomorrow"
+                  className="italic text-[#C9A962]"
                   waitForPreloader={false}
                 />
-                <div className="flex items-center justify-center lg:justify-start gap-[0.25em] flex-wrap">
-                  <TitleReveal text="a" waitForPreloader={false} />
-                  <TitleReveal
-                    text="Brighter Tomorrow"
-                    className="italic text-[#C9A962]"
-                    waitForPreloader={false}
-                  />
-                </div>
               </h2>
 
               <p className="reveal-text text-[clamp(15px,1.2vw,18px)] leading-relaxed text-[#F5F0E8]/70 max-w-[640px] mx-auto lg:mx-0">

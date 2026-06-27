@@ -98,7 +98,7 @@
 /* ── Character Title Reveal Animation (production-safe) ── */
 
 .title-reveal-splitted {
-  display: inline-block;
+  display: inline;
   white-space: pre-wrap;
 }
 
