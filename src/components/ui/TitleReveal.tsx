@@ -91,30 +91,46 @@ const TitleReveal: React.FC<TitleRevealProps> = ({
       }
       aria-hidden="true"
     >
-      {text.split("").map((char, i) => (
-        <span
-          key={`${text}-${i}`}
-          className="-s-char"
-          style={
-            {
-              ...(isGradient
-                ? {
-                    backgroundImage: style.backgroundImage,
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    color: "transparent",
-                    display: "inline-block", // needed for background-clip in some cases
-                  }
-                : {}),
-              "--char-index": i,
-              "--char-random": Math.floor(Math.random() * 10),
-            } as React.CSSProperties
-          }
-        >
-          {char === " " ? " " : char}
-        </span>
-      ))}
+      {text.split(" ").map((word, wordIndex, wordsArray) => {
+        const startIndex = wordsArray.slice(0, wordIndex).reduce((acc, w) => acc + w.length + 1, 0);
+
+        return (
+          <React.Fragment key={`${text}-word-${wordIndex}`}>
+            {word.length > 0 && (
+              <span className="inline-block whitespace-nowrap">
+                {word.split("").map((char, charIndex) => {
+                  const i = startIndex + charIndex;
+                  return (
+                    <span
+                      key={`${text}-char-${i}`}
+                      className="-s-char"
+                      style={
+                        {
+                          ...(isGradient
+                            ? {
+                                backgroundImage: style?.backgroundImage,
+                                WebkitBackgroundClip: "text",
+                                backgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                color: "transparent",
+                                display: "inline-block",
+                              }
+                            : {}),
+                          "--char-index": i,
+                          "--char-random": Math.floor(Math.random() * 10),
+                        } as React.CSSProperties
+                      }
+                    >
+                      {char}
+                    </span>
+                  );
+                })}
+              </span>
+            )}
+            {wordIndex !== wordsArray.length - 1 && " "}
+          </React.Fragment>
+        );
+      })}
     </span>
   );
 };
