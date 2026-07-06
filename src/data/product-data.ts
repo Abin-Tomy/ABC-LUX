@@ -206,7 +206,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
     category: "Wall Lighting",
     tagline: "Elegant Wall Illuminations",
     description:
-      "Enhance the ambiance of any room with ABC Lights' premium Wall Lights. Designed to provide both functional lighting and a decorative touch, our wall fixtures seamlessly blend with modern and classic interiors. Illuminate hallways, frame your bed, or create a warm, inviting atmosphere in your living areas with these stunning pieces.",
+      "Enhance the ambiance of any room with ABC LUX's premium Wall Lights. Designed to provide both functional lighting and a decorative touch, our wall fixtures seamlessly blend with modern and classic interiors. Illuminate hallways, frame your bed, or create a warm, inviting atmosphere in your living areas with these stunning pieces.",
     highlights: [
       "Sleek & Modern Designs",
       "Warm & Inviting Glow",
@@ -334,7 +334,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
     category: "Pendant Lighting",
     tagline: "Contemporary Suspended Elegance",
     description:
-      "Redefine your ceilings with the sleek and stylish Modern Pendant Lights from ABC Lights. Hanging gracefully from above, these fixtures provide excellent task and ambient lighting while acting as a modern work of art. Perfect for kitchen islands, dining tables, or double-height living areas, they bring a sophisticated contemporary edge.",
+      "Redefine your ceilings with the sleek and stylish Modern Pendant Lights from ABC LUX. Hanging gracefully from above, these fixtures provide excellent task and ambient lighting while acting as a modern work of art. Perfect for kitchen islands, dining tables, or double-height living areas, they bring a sophisticated contemporary edge.",
     highlights: [
       "Eye-Catching Modern Aesthetics",
       "Adjustable Hanging Heights",
@@ -367,7 +367,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
     category: "Home Accessories",
     tagline: "Curated Accents for Your Space",
     description:
-      "Complete your interior vision with ABC Lights' curated Home Decor collection. From captivating wall art that transforms blank spaces to delicate ornaments that add personality to your shelves, our decor pieces are carefully selected to complement any aesthetic. Make every corner of your home feel thoughtfully designed.",
+      "Complete your interior vision with ABC LUX's curated Home Decor collection. From captivating wall art that transforms blank spaces to delicate ornaments that add personality to your shelves, our decor pieces are carefully selected to complement any aesthetic. Make every corner of your home feel thoughtfully designed.",
     highlights: [
       "Handpicked Artistic Pieces",
       "Complements Any Interior Style",
@@ -462,7 +462,7 @@ export const PRODUCT_CATALOG: ProductData[] = [
     category: "Statement Lighting",
     tagline: "Grand & Luxurious Illumination",
     description:
-      "Make a breathtaking statement with ABC Lights' luxurious Chandeliers. Designed to be the crown jewel of any room, our chandeliers combine shimmering crystals, elegant metals, and masterful craftsmanship to create spectacular light displays. Elevate your grandest spaces with these dazzling centerpieces.",
+      "Make a breathtaking statement with ABC LUX's luxurious Chandeliers. Designed to be the crown jewel of any room, our chandeliers combine shimmering crystals, elegant metals, and masterful craftsmanship to create spectacular light displays. Elevate your grandest spaces with these dazzling centerpieces.",
     highlights: [
       "Dazzling Centerpiece Designs",
       "Intricate Craftsmanship",

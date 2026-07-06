@@ -93,7 +93,7 @@ const TESTIMONIALS: Testimonial[] = [
     company: "",
     excerpt: "Artistic Embellishments",
     quote:
-      "At ABC Lights, we believe every space deserves a masterpiece that’s as unique as you are. Our Home Decor collection includes elegant Wall Art and striking Ornaments that transform your ideas into breathtaking, one-of-a-kind installations.",
+      "At ABC LUX, we believe every space deserves a masterpiece that’s as unique as you are. Our Home Decor collection includes elegant Wall Art and striking Ornaments that transform your ideas into breathtaking, one-of-a-kind installations.",
     hue: 18,
     initials: "HD",
     img: imgHomeDecor,
@@ -105,7 +105,7 @@ const TESTIMONIALS: Testimonial[] = [
     company: "",
     excerpt: "Timeless Elegance",
     quote:
-      "Transform your spaces into inviting, functional, and secure areas with ABC Lights’ curated range of Classic Lights. Our classic lighting solutions bring together timeless charm, style, and efficiency.",
+      "Transform your spaces into inviting, functional, and secure areas with ABC LUX's curated range of Classic Lights. Our classic lighting solutions bring together timeless charm, style, and efficiency.",
     hue: 260,
     initials: "CL",
     img: imgClassic,
@@ -117,7 +117,7 @@ const TESTIMONIALS: Testimonial[] = [
     company: "",
     excerpt: "Grand Installations",
     quote:
-      "Add layers of warmth, style, and functionality to your interiors with ABC Lights’ stunning collection of Chandeliers. Perfect for accentuating architectural features or adding a grand centerpiece.",
+      "Add layers of warmth, style, and functionality to your interiors with ABC LUX's stunning collection of Chandeliers. Perfect for accentuating architectural features or adding a grand centerpiece.",
     hue: 45,
     initials: "CH",
     img: imgChandelier,

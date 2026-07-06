@@ -167,7 +167,7 @@ export function About() {
             <div className="reveal-text relative overflow-hidden rounded-[2.5rem] md:rounded-[3rem] aspect-4/5 md:aspect-square lg:aspect-4/5 border border-[#F5F0E8]/10 w-full max-w-[480px]">
               <LazyImage
                 src={aboutImg}
-                alt="ABC Lights Qatar Showroom"
+                alt="ABC LUX Qatar Showroom"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#0E0D0E]/80 via-transparent to-transparent opacity-60" />

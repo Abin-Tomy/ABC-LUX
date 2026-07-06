@@ -6,7 +6,8 @@ import sanitizeHtml from "sanitize-html";
 import * as emailValidator from "email-validator";
 import rateLimit from "express-rate-limit";
 
-// Load environment variables from the root .env file
+// Load environment variables from .env.local first, then fallback to .env
+dotenv.config({ path: '.env.local' });
 dotenv.config();
 
 const app = express();
@@ -72,8 +73,8 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
     // Note: The 'from' address must be verified in your Resend dashboard.
     // 'onboarding@resend.dev' is a testing address provided by Resend.
     const { data, error } = await resend.emails.send({
-      from: `${sanitizedName} <onboarding@resend.dev>`, // Client's name as display name; replace email with your verified domain
-      to: ["sales@abclux.qa"], // Replace with official mail address
+      from: process.env.EMAIL_FROM || `${sanitizedName} <onboarding@resend.dev>`, // Use verified domain from env
+      to: [process.env.EMAIL_TO || "sales@abclux.qa"], // Replace with official mail address
       replyTo: email,
       subject: `New Contact Form Submission: ${sanitizedSubject}`,
       html: `

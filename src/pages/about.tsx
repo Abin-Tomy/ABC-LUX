@@ -236,7 +236,7 @@ export default function AboutPage() {
         {/* Background Image */}
         <LazyImage
           src={heroImg}
-          alt="ABC Lights luxury showroom interior"
+          alt="ABC LUX luxury showroom interior"
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -315,7 +315,7 @@ export default function AboutPage() {
               <p className="about-reveal text-[clamp(14px,1.1vw,17px)] leading-[1.85] text-[#F5F0E8]/65">
                 Today, our curated selection spans architectural, decorative, and functional
                 lighting from the world's most trusted brands. With over 2,000 products, we continue
-                to push boundaries — transforming the way Qatar experiences luxury light.
+                to push boundaries, transforming the way Qatar experiences luxury light.
               </p>
             </div>
 
@@ -324,7 +324,7 @@ export default function AboutPage() {
               <div className="about-reveal relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] aspect-[4/5] border border-[#F5F0E8]/10">
                 <LazyImage
                   src={storyImg}
-                  alt="ABC Lights team in design studio"
+                  alt="ABC LUX team in design studio"
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
@@ -442,8 +442,8 @@ export default function AboutPage() {
               <p className="text-[15px] md:text-base leading-[1.85] text-[#F5F0E8]/55">
                 To be Qatar's leading lighting provider, known for innovation, reliability, and
                 excellence, offering cutting-edge lighting solutions that brighten every space. We
-                envision a future where every environment — from intimate homes to iconic landmarks
-                — is elevated through thoughtful, sustainable illumination that inspires and
+                envision a future where every environment, from intimate homes to iconic landmarks,
+                is elevated through thoughtful, sustainable illumination that inspires and
                 transforms.
               </p>
               {/* Decorative number */}

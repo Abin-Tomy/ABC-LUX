@@ -21,7 +21,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <p className="mb-8 text-sm leading-relaxed text-[#F1EBDD]/70 max-w-[300px]">
               We provide energy-efficient LED lighting solutions designed for durability,
-              performance, and sustainability—enhancing spaces while reducing energy costs and
+              performance, and sustainability, enhancing spaces while reducing energy costs and
               environmental impact.
             </p>
             <div className="flex gap-4">
