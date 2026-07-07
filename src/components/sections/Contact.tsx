@@ -204,13 +204,14 @@ export function Admission() {
           message: result.error || "Please make sure all fields are correctly filled.",
         });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Contact Form Error:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
       setDialog({
         isOpen: true,
         type: "error",
         title: "Connection Error",
-        message: `Could not connect to the server: ${error.message}. Please check your internet connection and try again.`,
+        message: `Could not connect to the server: ${errorMessage}. Please check your internet connection and try again.`,
       });
     } finally {
       setIsSubmitting(false);

@@ -7,7 +7,7 @@ import * as emailValidator from "email-validator";
 import rateLimit from "express-rate-limit";
 
 // Load environment variables from .env.local first, then fallback to .env
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: ".env.local" });
 dotenv.config();
 
 const app = express();
