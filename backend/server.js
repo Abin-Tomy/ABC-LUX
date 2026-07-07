@@ -13,6 +13,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.set("trust proxy", 1); // Trust first proxy (Vercel)
+
 // Configure allowed origins for CORS
 const allowedOrigins = ["http://localhost:5173", process.env.FRONTEND_URL].filter(Boolean);
 
@@ -31,7 +33,7 @@ app.use(
 app.use(express.json()); // Parse JSON payloads
 
 // Initialize Resend with the API key from environment variables
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
@@ -55,6 +57,13 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
     // 1. Validate required fields
     if (!name || !email || !phone || !subject || !message) {
       return res.status(400).json({ error: "All fields are required." });
+    }
+
+    // Check if Resend is initialized
+    if (!resend) {
+      return res
+        .status(500)
+        .json({ error: "Email service is not configured. Please contact the administrator." });
     }
 
     // 2. Validate email format
