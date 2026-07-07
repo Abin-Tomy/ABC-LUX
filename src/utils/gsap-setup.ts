@@ -19,10 +19,12 @@ const noop = () => {};
 const noopTicker = { add: noop, remove: noop, lagSmoothing: noop };
 const noopTimeline = () => ({ to: noop, from: noop, kill: noop, eventCallback: noop });
 const noopGsap = {
-  context(cb: any) {
+  context(cb?: () => void, scope?: unknown) {
     try {
-      cb && cb();
-    } catch (e) {}
+      if (cb) cb();
+    } catch (e) {
+      // ignore
+    }
     return { revert: noop };
   },
   quickTo() {
@@ -42,8 +44,8 @@ const noopScrollTrigger = { config: noop, refresh: noop, update: noop };
 // Default exports: for most modules we provide a safe default that is
 // real on desktop and no-op on mobile/tablet.
 const defaultIsEnabled = !isMobileOrTablet();
-let defaultGsap = defaultIsEnabled ? gsapLib : noopGsap;
-let defaultScrollTrigger = defaultIsEnabled ? ScrollTriggerLib : noopScrollTrigger;
+const defaultGsap = defaultIsEnabled ? gsapLib : noopGsap;
+const defaultScrollTrigger = defaultIsEnabled ? ScrollTriggerLib : noopScrollTrigger;
 
 /**
  * getAnimationContext
