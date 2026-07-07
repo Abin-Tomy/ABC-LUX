@@ -15,21 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 app.set("trust proxy", 1); // Trust first proxy (Vercel)
 
-// Configure allowed origins for CORS
-const allowedOrigins = ["http://localhost:5173", process.env.FRONTEND_URL].filter(Boolean);
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-  }),
-); // Allow specific frontend requests
+app.use(cors()); // Allow all origins for the public contact API
 app.use(express.json()); // Parse JSON payloads
 
 // Initialize Resend with the API key from environment variables
@@ -128,6 +114,12 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
     console.error("Server error:", err);
     return res.status(500).json({ error: "An unexpected error occurred. Please try again later." });
   }
+});
+
+// Generic error handler to catch any other errors (like JSON parsing errors) and return JSON
+app.use((err, req, res, next) => {
+  console.error("Unhandled Error:", err);
+  res.status(500).json({ error: "An unexpected internal server error occurred." });
 });
 
 if (process.env.NODE_ENV !== "production") {
