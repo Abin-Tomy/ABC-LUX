@@ -8,6 +8,7 @@
    ============================================================= */
 
 import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import gsap from "gsap";
 import logoUrl from "@/assets/abc-lux-logo.webp";
 import { LazyImage } from "@/components/ui/LazyImage";
@@ -15,7 +16,7 @@ import { LazyImage } from "@/components/ui/LazyImage";
 const ITEMS = [
   { label: "Home", href: "#top", pos: { left: "35%", top: "15%" } },
   { label: "About", href: "/about", pos: { left: "22%", top: "44%" } },
-  { label: "Brands", href: "#", pos: { left: "64%", top: "44%" } },
+  { label: "Brands", href: "/brands", pos: { left: "64%", top: "44%" } },
   { label: "Contact", href: "#contact", pos: { left: "76%", top: "68%" } },
   { label: "Products", href: "#our-products", pos: { left: "28%", top: "68%" } },
   { label: "Blog", href: "#blogs", pos: { left: "52%", top: "92%" } },
@@ -32,6 +33,16 @@ const ITEMS = [
 export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
   const root = useRef<HTMLDivElement | null>(null);
   const ctx = useRef<gsap.Context | null>(null);
+
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
+  const getHref = (href: string) => {
+    if (href.startsWith("#")) {
+      return isHomePage ? href : `/${href}`;
+    }
+    return href;
+  };
 
   useEffect(() => {
     if (!root.current) return;
@@ -160,7 +171,7 @@ export function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => v
                 style={{ left: it.pos.left, top: it.pos.top }}
               >
                 <a
-                  href={it.href}
+                  href={getHref(it.href)}
                   onClick={onClose}
                   data-cursor="ENTER"
                   className="lux-menu-item lux-rollup text-[8vw] leading-none tracking-tight text-white transition-opacity hover:opacity-80 md:text-[5vw]"
