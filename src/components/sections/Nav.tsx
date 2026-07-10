@@ -34,11 +34,13 @@ export function Nav() {
 
   const location = useLocation();
   const isAboutPage = location.pathname === "/about";
+  const isBrandsPage = location.pathname === "/brands";
+  const isHomePage = location.pathname === "/";
 
   const logoDarkRef = useRef(true);
 
   useEffect(() => {
-    if (isAboutPage) {
+    if (isAboutPage || isBrandsPage) {
       setLogoDark(false);
       return;
     }
@@ -109,10 +111,10 @@ export function Nav() {
       window.removeEventListener("scroll", checkLogoColor);
       window.removeEventListener("resize", checkLogoColor);
     };
-  }, [isAboutPage]);
+  }, [isAboutPage, isBrandsPage]);
 
   // Determine actual logo dark state based on page
-  const actualLogoDark = isAboutPage ? false : logoDark;
+  const actualLogoDark = isAboutPage || isBrandsPage ? false : logoDark;
 
   return (
     <>
@@ -143,7 +145,7 @@ export function Nav() {
           {/* Center nav */}
           <nav className="lux-center-nav pointer-events-auto absolute left-1/2 top-5 hidden -translate-x-1/2 items-center gap-6 md:flex">
             <a
-              href={isAboutPage ? "/#our-products" : "#our-products"}
+              href={isHomePage ? "#our-products" : "/#our-products"}
               data-cursor="VIEW"
               className="lux-eyebrow rounded-[10px] bg-white/10 px-20 py-2.5 text-white/95 text-[13px] font-bold tracking-widest backdrop-blur-md transition-all hover:bg-white/20"
             >
