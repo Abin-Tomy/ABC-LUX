@@ -7,12 +7,24 @@
    Notes     : Purely static presentation component.
    ============================================================= */
 
+import { useLocation } from "react-router-dom";
+
 /**
  * Footer
  * Global footer component.
  * Props: None
  */
 export function Footer() {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
+  const getHref = (href: string) => {
+    if (href.startsWith("#")) {
+      return isHomePage ? href : `/${href}`;
+    }
+    return href;
+  };
+
   return (
     <footer id="footer" className="relative w-full overflow-hidden bg-obsidian pt-24">
       <div className="mx-auto max-w-[1400px] px-8 pb-16">
@@ -95,7 +107,7 @@ export function Footer() {
             <div className="lux-eyebrow mb-6 text-muted-foreground">Quick Links</div>
             <ul className="space-y-2 font-serif text-lg">
               <li>
-                <a href="#top" className="hover:text-ember transition-colors">
+                <a href={getHref("#top")} className="hover:text-ember transition-colors">
                   Home
                 </a>
               </li>
@@ -105,17 +117,17 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#products" className="hover:text-ember transition-colors">
+                <a href={getHref("#our-products")} className="hover:text-ember transition-colors">
                   Products
                 </a>
               </li>
               <li>
-                <a href="#brands" className="hover:text-ember transition-colors">
+                <a href="/brands" className="hover:text-ember transition-colors">
                   Brands
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-ember transition-colors">
+                <a href={getHref("#contact")} className="hover:text-ember transition-colors">
                   Contact Us
                 </a>
               </li>
