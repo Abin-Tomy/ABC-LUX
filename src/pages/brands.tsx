@@ -14,7 +14,7 @@ const BRANDS = [
   {
     name: "HomeMate",
     logo: homeMateLogo,
-    description: "Smart Home & Automation Systems",
+    description: "Smart Home Appliances",
     imageClassName: "scale-[1.2]",
   },
   {
