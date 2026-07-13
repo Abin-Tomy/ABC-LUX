@@ -82,7 +82,7 @@ export default function Preloader({ children }: PreloaderProps) {
           className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none"
           style={{ display: "grid", gridTemplateRows: "repeat(4, 1fr)" }}
         >
-          {/* 4 cream bars — laid out by CSS Grid, eliminating sub-pixel gaps */}
+          {/* 4 cream bars — laid out by CSS Grid, but intentionally overlapped to eliminate sub-pixel gaps on Windows DPI scaling */}
           {Array.from({ length: BAR_COUNT }).map((_, i) => {
             const isOut = barsOut.includes(i);
             return (
@@ -91,6 +91,10 @@ export default function Preloader({ children }: PreloaderProps) {
                 className="will-change-transform"
                 style={{
                   background: "#f5f0e8",
+                  position: "relative",
+                  top: "-1px",
+                  height: "calc(100% + 2px)",
+                  transformOrigin: "50% 50%",
                   transform: isOut ? "translateX(100%)" : "translateX(0)",
                   transition: isOut
                     ? `transform ${SLIDE_DURATION} cubic-bezier(0.76, 0, 0.24, 1)`
