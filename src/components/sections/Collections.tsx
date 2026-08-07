@@ -3,8 +3,10 @@
    =============================================================
    Purpose   : Showcases product collections using a complex scroll-driven masonry-to-center animation on desktop, and a Swiper coverflow carousel on mobile.
    Used by   : Home page index.tsx
-   Depends on: gsap, ScrollTrigger, Swiper
+   Depends on: gsap, ScrollTrigger, Swiper, Sanity CMS
    Notes     : On desktop, the central card expands to fill the viewport and then shrinks into a "tombstone" shape via ScrollTrigger pinning.
+               Images are fetched live from Sanity CMS (productCategory.collectionImage).
+               Local assets act as fallbacks when a CMS image has not yet been uploaded for a slot.
    ============================================================= */
 
 import { useEffect, useRef, useState } from "react";
@@ -14,7 +16,10 @@ import { Autoplay, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 
-// Import category images for SHOWCASE
+// ─── Sanity ───────────────────────────────────────────────────────────────────
+import { sanityClient, collectionsQuery, type CollectionItem } from "@/lib/sanity";
+
+// ─── Local fallback images (used when CMS has no image for a slot) ────────────
 import wl1 from "@/assets/WALL LIGHTS/1.png";
 import tb1 from "@/assets/TABLE LAMPS/1.png";
 import sc1 from "@/assets/SCULPTURE/1.png";
@@ -27,16 +32,41 @@ import cm1 from "@/assets/CEILING LIGHTS/1.png";
 import TitleReveal from "../ui/TitleReveal";
 import { LazyImage } from "@/components/ui/LazyImage";
 
-const SHOWCASE = [
-  { img: wl1, title: "Wall Lights" },
-  { img: tb1, title: "Table & Floor Lamps" },
-  { img: sc1, title: "Sculptures" },
-  { img: wp1, title: "Modern Pendants" },
-  { img: wa1, title: "Home Decor" },
-  { img: cl1, title: "Classic" },
-  { img: ch1, title: "Chandeliers" },
-  { img: cm1, title: "Ceiling Mounted" },
+// ─── Fallback definitions (matches categoryId 1-8 ordering) ──────────────────
+// These are used for the static grid slots and carousel while Sanity loads,
+// or permanently if no collectionImage has been uploaded for that category.
+const FALLBACKS: { title: string; img: string }[] = [
+  { title: "Wall Lights",          img: wl1 },
+  { title: "Table & Floor Lamps",  img: tb1 },
+  { title: "Sculptures",           img: sc1 },
+  { title: "Modern Pendants",      img: wp1 },
+  { title: "Home Decor",           img: wa1 },
+  { title: "Classic",              img: cl1 },
+  { title: "Chandeliers",          img: ch1 },
+  { title: "Ceiling Mounted",      img: cm1 },
 ];
+
+// ─── Merged type used by the component internally ─────────────────────────────
+type ShowcaseItem = {
+  title: string;
+  /** Either a remote CDN URL from Sanity or a local bundled asset path */
+  img: string;
+};
+
+/**
+ * Merges fetched CMS data with local fallbacks.
+ * If Sanity returns a valid URL for a given index, it wins; otherwise the local
+ * asset is used so the grid never shows an empty slot.
+ */
+function buildShowcase(fetched: CollectionItem[]): ShowcaseItem[] {
+  return FALLBACKS.map((fallback, i) => {
+    const cms = fetched[i];
+    return {
+      title: cms?.label ?? fallback.title,
+      img: cms?.imageUrl ?? fallback.img,
+    };
+  });
+}
 
 /**
  * Places
@@ -58,6 +88,30 @@ export function Places() {
   const centerBottomRef = useRef<HTMLElement | null>(null);
   const [idx, setIdx] = useState(0);
 
+  // ─── CMS data state ───────────────────────────────────────────────────────
+  // Starts with fallback images so the grid is never blank on first paint.
+  const [showcase, setShowcase] = useState<ShowcaseItem[]>(
+    FALLBACKS.map((f) => ({ title: f.title, img: f.img })),
+  );
+
+  // Effect: Fetch collection images from Sanity on mount
+  useEffect(() => {
+    let cancelled = false;
+    sanityClient
+      .fetch<CollectionItem[]>(collectionsQuery)
+      .then((data) => {
+        if (cancelled || !data?.length) return;
+        setShowcase(buildShowcase(data));
+      })
+      .catch((err) => {
+        // Non-fatal: fallback images remain in place
+        console.warn("[Collections] Sanity fetch failed, using local fallbacks.", err);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   // Effect: Desktop autoplay for the center card
   useEffect(() => {
     if (window.matchMedia("(max-width: 1023px)").matches) return;
@@ -69,14 +123,14 @@ export function Places() {
     );
 
     const timer = setTimeout(() => {
-      setIdx((i) => (i + 1) % SHOWCASE.length);
+      setIdx((i) => (i + 1) % showcase.length);
     }, 4500);
 
     return () => {
       clearTimeout(timer);
       gsap.killTweensOf(".lux-autoplay-progress");
     };
-  }, [idx]);
+  }, [idx, showcase.length]);
 
   // Effect: Desktop-only scroll animations (masonry grid into tombstone center card)
   useEffect(() => {
@@ -322,12 +376,12 @@ export function Places() {
   }, [idx]);
 
   const next = () => {
-    setIdx((i) => (i + 1) % SHOWCASE.length);
+    setIdx((i) => (i + 1) % showcase.length);
   };
   const prev = () => {
-    setIdx((i) => (i - 1 + SHOWCASE.length) % SHOWCASE.length);
+    setIdx((i) => (i - 1 + showcase.length) % showcase.length);
   };
-  const current = SHOWCASE[idx];
+  const current = showcase[idx];
 
   return (
     <section
@@ -438,7 +492,7 @@ export function Places() {
               }}
               className="w-full h-[53vh] max-h-[440px] min-h-[350px] mt-[2vh]"
             >
-              {SHOWCASE.map((item, index) => (
+              {showcase.map((item, index) => (
                 <SwiperSlide
                   key={index}
                   className="w-[64vw]! md:w-[45vw]! max-w-[295px] md:max-w-[400px] h-full lux-swiper-slide"
@@ -487,7 +541,7 @@ export function Places() {
               }}
             >
               {/* === LEFT COLUMN === */}
-              {/* LEFT TOP — Large card (cols 1-3, row 1) */}
+              {/* LEFT TOP — Large card (cols 1-3, row 1) — categoryId slot 7: Chandeliers */}
               <figure
                 ref={leftTopRef}
                 className="lux-place-tile relative z-10"
@@ -500,8 +554,8 @@ export function Places() {
                   style={{ aspectRatio: "3/4", maxHeight: "280px" }}
                 >
                   <LazyImage
-                    src={ch1}
-                    alt="Chandeliers"
+                    src={showcase[6]?.img ?? ch1}
+                    alt={showcase[6]?.title ?? "Chandeliers"}
                     width={4320}
                     height={5400}
                     loading="lazy"
@@ -511,7 +565,7 @@ export function Places() {
                 </div>
               </figure>
 
-              {/* LEFT BOTTOM — Small card (cols 1-3, row 3) */}
+              {/* LEFT BOTTOM — Small card (cols 1-3, row 3) — categoryId slot 1: Wall Lights */}
               <figure
                 ref={leftBottomRef}
                 className="lux-place-tile relative z-10"
@@ -524,8 +578,8 @@ export function Places() {
                   style={{ aspectRatio: "16/9" }}
                 >
                   <LazyImage
-                    src={wl1}
-                    alt="Wall Lights"
+                    src={showcase[0]?.img ?? wl1}
+                    alt={showcase[0]?.title ?? "Wall Lights"}
                     width={4320}
                     height={5400}
                     loading="lazy"
@@ -555,9 +609,9 @@ export function Places() {
                         backgroundColor: "black",
                       }}
                     >
-                      {SHOWCASE.map((item, i) => (
+                      {showcase.map((item, i) => (
                         <LazyImage
-                          key={item.img}
+                          key={`${item.img}-${i}`}
                           src={item.img}
                           alt={item.title}
                           className="lux-showcase-img"
@@ -585,14 +639,14 @@ export function Places() {
                         className="lux-showcase-title text-[4vw] md:text-[1.8vw] leading-none text-white"
                         style={{ fontFamily: "'Runalto', serif" }}
                       >
-                        {current.title}
+                        {current?.title}
                       </h3>
                     </div>
 
                     {/* Counter */}
                     <div className="lux-showcase-counter absolute bottom-8 right-8 text-white text-xl md:text-2xl z-10">
                       <span>{String(idx + 1).padStart(1, "0")}</span>
-                      <span className="opacity-50">/{SHOWCASE.length}</span>
+                      <span className="opacity-50">/{showcase.length}</span>
                     </div>
 
                     {/* Navigation (desktop) */}
@@ -661,7 +715,7 @@ export function Places() {
               </div>
 
               {/* === RIGHT COLUMN === */}
-              {/* RIGHT TOP — Extra small card filling the gap (cols 8-10, row 1) */}
+              {/* RIGHT TOP — Extra small card filling the gap (cols 8-10, row 1) — slot 2: Table Lamps */}
               <figure
                 ref={rightTop1Ref}
                 className="lux-place-tile relative z-10"
@@ -679,8 +733,8 @@ export function Places() {
                   style={{ aspectRatio: "4/3" }}
                 >
                   <LazyImage
-                    src={tb1}
-                    alt="Table & Floor Lamps"
+                    src={showcase[1]?.img ?? tb1}
+                    alt={showcase[1]?.title ?? "Table & Floor Lamps"}
                     width={4320}
                     height={5400}
                     loading="lazy"
@@ -690,7 +744,7 @@ export function Places() {
                 </div>
               </figure>
 
-              {/* RIGHT TOP — Small wide card (cols 10-13, row 1) */}
+              {/* RIGHT TOP — Small wide card (cols 10-13, row 1) — slot 4: Modern Pendants */}
               <figure
                 ref={rightTop2Ref}
                 className="lux-place-tile relative z-10"
@@ -703,8 +757,8 @@ export function Places() {
                   style={{ aspectRatio: "16/9", minHeight: "170px" }}
                 >
                   <LazyImage
-                    src={wp1}
-                    alt="Modern Pendants"
+                    src={showcase[3]?.img ?? wp1}
+                    alt={showcase[3]?.title ?? "Modern Pendants"}
                     width={4320}
                     height={5400}
                     loading="lazy"
@@ -714,7 +768,7 @@ export function Places() {
                 </div>
               </figure>
 
-              {/* CENTER BOTTOM — New card in marked area (cols 5-9, row 3) */}
+              {/* CENTER BOTTOM — New card in marked area (cols 5-9, row 3) — slot 6: Classic */}
               <figure
                 ref={centerBottomRef}
                 className="lux-place-tile relative z-10"
@@ -732,8 +786,8 @@ export function Places() {
                   style={{ aspectRatio: "16/9", minHeight: "140px", maxWidth: "320px" }}
                 >
                   <LazyImage
-                    src={cl1}
-                    alt="Classic Lighting"
+                    src={showcase[5]?.img ?? cl1}
+                    alt={showcase[5]?.title ?? "Classic Lighting"}
                     width={4320}
                     height={5400}
                     loading="lazy"
@@ -743,7 +797,7 @@ export function Places() {
                 </div>
               </figure>
 
-              {/* RIGHT BOTTOM — Large card (cols 10-12, row 3) */}
+              {/* RIGHT BOTTOM — Large card (cols 10-12, row 3) — slot 3: Sculptures */}
               <figure
                 ref={rightBottomRef}
                 className="lux-place-tile relative z-10"
@@ -761,8 +815,8 @@ export function Places() {
                   style={{ aspectRatio: "4/3", minHeight: "200px" }}
                 >
                   <LazyImage
-                    src={sc1}
-                    alt="Sculptures"
+                    src={showcase[2]?.img ?? sc1}
+                    alt={showcase[2]?.title ?? "Sculptures"}
                     width={4320}
                     height={5400}
                     loading="lazy"

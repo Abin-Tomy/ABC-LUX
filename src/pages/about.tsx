@@ -321,14 +321,40 @@ export default function AboutPage() {
 
             {/* Image Column */}
             <div className="order-1 lg:order-2 relative group">
-              <div className="about-reveal relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] aspect-[4/5] border border-[#F5F0E8]/10">
-                <LazyImage
-                  src={storyImg}
-                  alt="ABC LUX team in design studio"
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0E0D0E]/60 via-transparent to-transparent" />
+              <div className="about-reveal relative rounded-[2rem] md:rounded-[2.5rem] aspect-[4/5] grid grid-cols-2 grid-rows-2 gap-2 md:gap-4 border border-[#F5F0E8]/10 bg-transparent">
+                <div className="overflow-hidden relative w-full h-full rounded-[1.5rem] md:rounded-[2rem]">
+                  <LazyImage
+                    src={storyImg}
+                    alt="ABC LUX team in design studio"
+                    loading="lazy"
+                    className="absolute top-0 left-0 w-[calc(200%+0.5rem)] h-[calc(200%+0.5rem)] md:w-[calc(200%+1rem)] md:h-[calc(200%+1rem)] max-w-none object-cover transition-transform duration-1000 group-hover:scale-105 origin-top-left"
+                  />
+                </div>
+                <div className="overflow-hidden relative w-full h-full rounded-[1.5rem] md:rounded-[2rem]">
+                  <LazyImage
+                    src={storyImg}
+                    alt=""
+                    loading="lazy"
+                    className="absolute top-0 right-0 w-[calc(200%+0.5rem)] h-[calc(200%+0.5rem)] md:w-[calc(200%+1rem)] md:h-[calc(200%+1rem)] max-w-none object-cover transition-transform duration-1000 group-hover:scale-105 origin-top-right"
+                  />
+                </div>
+                <div className="overflow-hidden relative w-full h-full rounded-[1.5rem] md:rounded-[2rem]">
+                  <LazyImage
+                    src={storyImg}
+                    alt=""
+                    loading="lazy"
+                    className="absolute bottom-0 left-0 w-[calc(200%+0.5rem)] h-[calc(200%+0.5rem)] md:w-[calc(200%+1rem)] md:h-[calc(200%+1rem)] max-w-none object-cover transition-transform duration-1000 group-hover:scale-105 origin-bottom-left"
+                  />
+                </div>
+                <div className="overflow-hidden relative w-full h-full rounded-[1.5rem] md:rounded-[2rem]">
+                  <LazyImage
+                    src={storyImg}
+                    alt=""
+                    loading="lazy"
+                    className="absolute bottom-0 right-0 w-[calc(200%+0.5rem)] h-[calc(200%+0.5rem)] md:w-[calc(200%+1rem)] md:h-[calc(200%+1rem)] max-w-none object-cover transition-transform duration-1000 group-hover:scale-105 origin-bottom-right"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0E0D0E]/60 via-transparent to-transparent pointer-events-none rounded-[2rem] md:rounded-[2.5rem]" />
               </div>
               {/* Decorative accent */}
               <div className="absolute -bottom-4 -right-4 w-32 h-32 border border-[#C9A962]/20 rounded-[1.5rem] -z-10" />
