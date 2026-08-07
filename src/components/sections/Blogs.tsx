@@ -3,15 +3,17 @@
    =============================================================
    Purpose   : Displays a custom 3-card sliding carousel for articles with clip-path wipe animations.
    Used by   : Home page index.tsx
-   Depends on: react, react-router-dom, TitleReveal
-   Notes     : Uses a custom React-state-based carousel rather than a third-party library to allow
+   Depends on: react, react-router-dom, TitleReveal, @sanity/client
+   Notes     : Fetches the latest 3 posts from Sanity. Falls back gracefully while loading.
+               Uses a custom React-state-based carousel rather than a third-party library to allow
                for the specific inset clip-path wipe effect.
    ============================================================= */
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import TitleReveal from "../ui/TitleReveal";
 import { gsap } from "@/utils/gsap-setup";
+import { sanityClient, urlFor } from "@/lib/sanity";
 
 import img1 from "@/assets/Abc-Lights-Qatar.webp";
 import img2 from "@/assets/Outdoor-Lights-in-Qatar.webp";
@@ -22,7 +24,21 @@ const BG = "#D3C8B6";
 const FG = "#1A1819";
 const GOLD = "#C9A962";
 
+// ─── Fallback images (shown while loading or if Sanity post has no cover) ─────
+const FALLBACK_IMGS = [img1, img2, img3];
+
 // ─── Types ────────────────────────────────────────────────────────────────────
+
+interface SanityPost {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+  mainImage?: {
+    _type: "image";
+    asset: { _ref: string; _type: "reference" };
+  };
+}
 
 interface Slide {
   img: string;
@@ -31,24 +47,50 @@ interface Slide {
   meta: { label: string; value: string };
 }
 
-const SLIDES: Slide[] = [
+// ─── GROQ query — latest 3 posts for the carousel ────────────────────────────
+const CAROUSEL_QUERY = `*[_type == "post"] | order(_createdAt desc) [0..2] {
+  _id,
+  title,
+  slug,
+  excerpt,
+  mainImage
+}`;
+
+// ─── Converts a SanityPost to the internal Slide shape ───────────────────────
+function postToSlide(post: SanityPost, fallbackImg: string): Slide {
+  const titleParts = post.title.split(":");
+  const metaValue = titleParts.length > 1 ? titleParts.slice(1).join(":").trim() : (post.excerpt ?? "");
+  // Build a 720×480 crop from the mainImage reference, falling back to local asset
+  const imgUrl = post.mainImage
+    ? urlFor(post.mainImage).width(720).height(480).fit("crop").auto("format").url()
+    : fallbackImg;
+  return {
+    img: imgUrl,
+    label: post.title,
+    href: `/blog/${post.slug.current}`,
+    meta: { label: "Article", value: metaValue },
+  };
+}
+
+// ─── Static placeholder slides shown while loading ───────────────────────────
+const PLACEHOLDER_SLIDES: Slide[] = [
   {
     img: img1,
-    label: "A Complete Guide to LED Lighting: Benefits, Types, & Applications",
-    href: "/article-1",
-    meta: { label: "Article", value: "Benefits, Types, & Applications" },
+    label: "Loading…",
+    href: "/blog",
+    meta: { label: "Article", value: "" },
   },
   {
     img: img2,
-    label: "Outdoor Lighting Essentials: Types, Features, and Installation Tips",
-    href: "/article-2",
-    meta: { label: "Article", value: "Types, Features, and Installation Tips" },
+    label: "Loading…",
+    href: "/blog",
+    meta: { label: "Article", value: "" },
   },
   {
     img: img3,
-    label: "Lighting for Modern Homes: Trends and Smart Solutions",
-    href: "/article-3",
-    meta: { label: "Article", value: "Trends and Smart Solutions" },
+    label: "Loading…",
+    href: "/blog",
+    meta: { label: "Article", value: "" },
   },
 ];
 
@@ -62,7 +104,6 @@ interface CardState {
 }
 
 const ANIM_MS = 750;
-const N = SLIDES.length;
 
 const tintGradient: Record<CardSlot, string> = {
   left: "linear-gradient(to right,  rgba(26,24,25,0.22) 0%, transparent 60%)",
@@ -88,6 +129,26 @@ export function Blogs() {
   });
   const animating = useRef(false);
 
+  // Fetch the latest 3 Sanity posts; fall back to placeholder slides while loading
+  const [slides, setSlides] = useState<Slide[]>(PLACEHOLDER_SLIDES);
+
+  useEffect(() => {
+    sanityClient
+      .fetch<SanityPost[]>(CAROUSEL_QUERY)
+      .then((posts) => {
+        if (posts && posts.length > 0) {
+          const mapped = posts.map((p, i) => postToSlide(p, FALLBACK_IMGS[i % 3]));
+          // Pad to exactly 3 slides if Sanity returns fewer
+          while (mapped.length < 3) mapped.push(PLACEHOLDER_SLIDES[mapped.length]);
+          setSlides(mapped);
+        }
+      })
+      .catch((err) => console.error("Blogs carousel fetch failed:", err));
+  }, []);
+
+  // Carousel length — always 3 (we always show 3 cards)
+  const N = slides.length;
+
   // Handles navigation logic and triggers the multi-step CSS wipe animation sequence
   const navigate = (direction: "left" | "right") => {
     if (animating.current) return;
@@ -96,11 +157,12 @@ export function Blogs() {
     const delta = direction === "right" ? 1 : -1;
     const wipeDir: "ltr" | "rtl" = direction === "right" ? "rtl" : "ltr";
     const slots: CardSlot[] = ["left", "center", "right"];
+    const n = slides.length;
 
     setCards((prev) => {
       const next = { ...prev };
       slots.forEach((slot) => {
-        const incoming = (prev[slot].slideIdx + delta + N) % N;
+        const incoming = (prev[slot].slideIdx + delta + n) % n;
         next[slot] = { ...prev[slot], incomingIdx: incoming, wipeDir, wipeOpen: false };
       });
       return next;
@@ -397,8 +459,8 @@ export function Blogs() {
         >
           {slots.map(({ slot, isCenter }) => {
             const card = cards[slot];
-            const currentSlide = SLIDES[card.slideIdx];
-            const incomingSlide = card.incomingIdx !== null ? SLIDES[card.incomingIdx] : null;
+            const currentSlide = slides[card.slideIdx];
+            const incomingSlide = card.incomingIdx !== null ? slides[card.incomingIdx] : null;
             const isHov = hovered === slot;
 
             return (
@@ -514,7 +576,7 @@ export function Blogs() {
           }}
         >
           {slots.map(({ slot, isCenter }) => {
-            const slide = SLIDES[cards[slot].slideIdx];
+            const slide = slides[cards[slot].slideIdx];
             const parts = slide.label.split(":");
             return (
               <div

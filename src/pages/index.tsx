@@ -72,6 +72,7 @@ export default function Index() {
     }
   }, []);
 
+
   return (
     <main
       className="relative bg-obsidian text-foreground transition-opacity duration-300"
