@@ -13,7 +13,7 @@ import { useEffect, useRef } from "react";
 
 /** Configuration for the cursor trail physics and appearance */
 const PARAMS = {
-  pointsNumber: 40,
+  pointsNumber: 20,
   widthFactor: 0.1,
   spring: 0.4,
   friction: 0.5,
